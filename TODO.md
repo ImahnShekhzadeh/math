@@ -6,4 +6,9 @@
 - also write down the definition of a tetrahedron: 
 > A tetrahedron is a three-dimensional geometric figure, also known as a triangular pyramid, consisting of four triangular faces, six straight edges, and four vertex corners. Each of the faces is a triangle, and they come together to form a single solid shape. In a regular tetrahedron, all four faces are equilateral triangles, and the shape is one of the five Platonic solids, which are convex polyhedra with faces composed of congruent, regular polygons and the same number of faces meeting at each vertex. 
 
-Wikipedia: The tetrahedron is an example of a convex polyhedra. To see why it is indeed only $6$ edges, take a look at [this figure](https://en.wikipedia.org/wiki/Tetrahedron#/media/File:Symmetries_of_the_tetrahedron.svg). 
+- Wikipedia: The tetrahedron is an example of a convex polyhedra. To see why it is indeed only $6$ edges, take a look at [this figure](https://en.wikipedia.org/wiki/Tetrahedron#/media/File:Symmetries_of_the_tetrahedron.svg). 
+
+- write down what a uniform categorical distribution is. LLM: 
+> A uniform categorical distribution is discrete and deals with a finite set of distinct categories where each outcome has an equal chance of occurring. For example, if you have a six-sided die, each side (each category) has an equal probability of 1/6 when rolled.
+>                                                                                   
+> A standard uniform distribution, often just called a uniform distribution, typically refers to a continuous distribution. The continuous uniform distribution is defined over an interval, say [a, b], and any point within this interval is equally likely to be drawn. If you're referring to "uniform distribution ten" as a uniform distribution between 0 and 10, any number between 0 and 10 is equally likely to be chosen, and the probability density function is constant over this interval.
