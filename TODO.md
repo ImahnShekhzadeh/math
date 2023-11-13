@@ -55,3 +55,5 @@
 > The Sinkhorn algorithm has been widely used in computational optimal transport, machine learning, and related fields
   due to its simplicity and efficiency, especially for large-scale problems where traditional optimal transport solvers
   are computationally infeasible.  
+
+In this context, it is worh mentioning Cuturi's 2013 paper "Sinkhorn Distances: Lightspeed Computation of Optimal Transport", which brought quite some attention to the Sinkhorn algorithm.
