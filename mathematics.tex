@@ -803,5 +803,28 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 \end{defn}
 
 \newpage 
+
+\section{Miscellaneous}
+
+\begin{lemma}[Chain rule for KL-divergences]
+	Let $p(x, y)$ and $q(x, y)$ be two arbitrary PDF's. Then the following hods:
+	
+	\begin{align}
+		D_{\text{KL}}(p(x, y) \vert\vert q(x, y)) = D_{\text{KL}}(p(x)\vert\vert q(x)) + D_{\text{KL}}(p(y\vert x) \vert\vert q(y\vert x))
+	\end{align}
+	
+	\begin{proof}
+		Brute-force calculation yields:
+		\begin{align}
+			D_{\text{KL}}(p(x, y) \vert\vert q(x, y)) &= \int\int p(x, y)\log\frac{p(x, y)}{q(x, y)}d\lambda(x)d\lambda(y)
+			\\[4pt] &= \int\int p(x, y)\log\frac{p(x)p(y\vert x)}{q(x)q(y\vert x)}d\lambda(x)d\lambda(y)
+			\\[4pt] &= \int\int p(x, y)\log\frac{p(x)}{q(x)}d\lambda(x)d\lambda(y) + \int\int p(x, y)\log\frac{p(y\vert x)}{q(y\vert x)}d\lambda(x)d\lambda(y)
+			\\[4pt] &= D_{\text{KL}}(p(x) \vert\vert q(x)) + \int p(x)d\lambda(x)\int p(y\vert x)\log\frac{p(y\vert x)}{q(y\vert x)}d\lambda(y)
+			\\[4pt] &= D_{\text{KL}}(p(x) \vert\vert q(x)) + D_{\text{KL}}(p(y\vert x) \vert\vert q(y\vert x))
+		\end{align}
+	
+	\end{proof}
+\end{lemma}
+
 \printbibliography
 \end{document} 
