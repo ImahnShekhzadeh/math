@@ -822,9 +822,20 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 			\\[4pt] &= D_{\text{KL}}(p(x) \vert\vert q(x)) + \int p(x)d\lambda(x)\int p(y\vert x)\log\frac{p(y\vert x)}{q(y\vert x)}d\lambda(y)
 			\\[4pt] &= D_{\text{KL}}(p(x) \vert\vert q(x)) + D_{\text{KL}}(p(y\vert x) \vert\vert q(y\vert x))
 		\end{align}
-	
 	\end{proof}
 \end{lemma}
+
+\begin{defn}[Mutual information]
+	Let $(X, Y)\sim P_{\left(X, Y\right)}\in \mathcal P(\mathcal X\times \mathcal Y)$, where $\mathcal P(\mathcal X\times \mathcal Y)$ is the space of all probability measures over the space $\mathcal X\times \mathcal Y$. The mutual information between the random variables $X$ and $Y$ is now defined as:
+	
+	\begin{align}
+		I(X; Y) := D_{\text{KL}}\left(P_{(X, Y)} \vert\vert P_{X} \otimes P_{Y}\right),
+	\end{align}
+
+	\noindent where $P_{X}$ and $P_{Y}$ are the marginal measures of the coupling measure $P_{(X, Y)}$ and $P_{X}\otimes P_{Y}$ is the induced \textbf{product measure}.
+	\\ \\
+	Reference:~\url{https://people.ece.cornell.edu/zivg/ECE_5630_Lectures10.pdf}, Def.~10.1
+\end{defn}
 
 \printbibliography
 \end{document} 
