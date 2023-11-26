@@ -756,12 +756,30 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 	\end{defn}	
 
 \section{Diffusion-Based Models}
+	
+	\begin{remark}[ELBO VAEs]
+		One can easily show that the (marginal) log-likelihood of the data is given as
+		\cite{cs_231n_lec_13}
+		\begin{align}\label{eq:elbo__marginal_LL}
+			\log p(x) = \text{ELBO} + D_{\text{KL}}\left[ q_{\phi}(z\vert x) \vert\vert p(z\vert x)\right], 
+		\end{align}
+		
+		\noindent where $p(z\vert x)$ is the true posterior and ELBO is the usual evidence lower bound, i.e.
+		\begin{align}
+			\text{ELBO} = \mathbb E_{q_{\phi}(z\vert x)}\left[ \log p_{\psi}(x\vert z) \right] - D_{\text{KL}}\left[ q_{\phi}(z\vert x) \vert\vert p(z) \right]
+		\end{align}
+		
+		\noindent Eq.~\eqref{eq:elbo__marginal_LL} shows that since the (marginal) log-likelihood is not parameterized by any NN parameters, maximizing the ELBO necessary leads to a lower $D_{\text{KL}}\left[ q_{\phi}(z\vert x) \vert\vert p(z\vert x)\right]$, which is the reverse KLD. 
+		
+	\end{remark}
+
 \begin{lemma}[ELBO]
 	Let $q(x_{0})$ denote the true (unknown) distribution of a real image $x_{0}$, and let $p_{\theta}(x_{0})$ be the model's approximation to $q(x_{0})$, then we have the following ELBO-like loss: 
 	\begin{align}\label{elbo_diffusion_models}
 		\mathbb E_{q(x_{0})}\left[\log p_{\theta}(x_{0})\right] \geq -\mathbb E_{q(x_{0}, \dots, x_{T})}\left[\log \frac{q(x_{1}, \dots, x_{T} \mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right].    
 	\end{align}
 \end{lemma}
+
 \begin{proof}
 \cite{lilian_weng}
 	\begin{align}
@@ -777,7 +795,6 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 	\end{align}
 \end{proof}
 
-\section{SDEs}
 \begin{defn}[Wiener process]
 	Let $W_{t}$ be a real-valued continuous-time stochastic process.\ It is said to be a \textit{Wiener process} if the following properties hold: 
 	\begin{itemize}
@@ -826,15 +843,14 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 \end{lemma}
 
 \begin{defn}[Mutual information]
-	Let $(X, Y)\sim P_{\left(X, Y\right)}\in \mathcal P(\mathcal X\times \mathcal Y)$, where $\mathcal P(\mathcal X\times \mathcal Y)$ is the space of all probability measures over the space $\mathcal X\times \mathcal Y$. The mutual information between the random variables $X$ and $Y$ is now defined as:
+	Let $(X, Y)\sim P_{\left(X, Y\right)}\in \mathcal P(\mathcal X\times \mathcal Y)$, where $\mathcal P(\mathcal X\times \mathcal Y)$ is the space of all probability measures over the space $\mathcal X\times \mathcal Y$. The mutual information between the random variables $X$ and $Y$ is now defined as 
+	\cite[Def.~10.1]{ece_ece_5630_lectures10}:
 	
 	\begin{align}
 		I(X; Y) := D_{\text{KL}}\left(P_{(X, Y)} \vert\vert P_{X} \otimes P_{Y}\right),
 	\end{align}
 
 	\noindent where $P_{X}$ and $P_{Y}$ are the marginal measures of the coupling measure $P_{(X, Y)}$ and $P_{X}\otimes P_{Y}$ is the induced \textbf{product measure}.
-	\\ \\
-	Reference:~\url{https://people.ece.cornell.edu/zivg/ECE_5630_Lectures10.pdf}, Def.~10.1
 \end{defn}
 
 \printbibliography
