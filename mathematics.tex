@@ -34,7 +34,7 @@
 	\maketitle
 	\newpage 
 	
-	\section{Groups}
+	\section{Algebra}
 	
 	\begin{defn}[Action]
 		Let $G$ be a group (where $e$ is the neutral element), and $X$ a set. Then a (left) group action $\alpha$ of $G$ on $X$ is a function
@@ -55,6 +55,14 @@
 			\alpha(x, e) &= x, 
 			\\ \alpha(\alpha(x, g), h) &= \alpha(x, gh)
 		\end{align}
+	\end{defn}
+		
+	\begin{defn}
+		Let $f:A\rightarrow B$ be a map between two sets $A$ and $B$ that are equipped with the same structure. Also assume that $\bm{\cdot}$ is an operation of the structure. Then $f$ is said to be a homomorphism if $\forall x, y\in A$,
+		\begin{align}
+			f(x\cdot y) = f(x) \cdot f(y).
+		\end{align}
+		
 	\end{defn}
 	
 	\newpage
