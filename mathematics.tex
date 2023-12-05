@@ -46,6 +46,11 @@
 			\alpha(e, x) &= x, 
 			\\ \alpha(g, \alpha(h, x)) &= \alpha(gh, x)
 		\end{align}
+		The group action is commonly written as $g\cdot x$ s.t.~the axioms become
+		\begin{align*}
+			e\cdot x &= x, 
+			\\ g\cdot \left(h\cdot x\right) &= \left(gh\right)\cdot x
+		\end{align*}
 		A right group action of $G$ on $X$ is a function
 		\begin{align}
 			\alpha: X\times G \rightarrow X
@@ -56,13 +61,27 @@
 			\\ \alpha(\alpha(x, g), h) &= \alpha(x, gh)
 		\end{align}
 	\end{defn}
-		
+	
+	\begin{exmp}
+		Consider $G = \text{SO}(2)$, i.e.~the group of all rotations in $\mathbb R^2$, with the group operation given by the composition of rotations, and let $X = S^1$ be the unit circle in $\mathbb C$. Now consider the group action
+		\begin{align}
+			\Phi:\text{SO}(2) \times S^{1} \rightarrow S^{1}, (R_{\theta}, p) \mapsto R_{\theta}(p)
+		\end{align}
+		This is a group action on $X = S^{1}$, since 
+		\begin{align*}
+			\Phi(R_{\theta_1}, \Phi(R_{\theta_2}, p)) = \Phi(R_{\theta_1 + \theta_2}, p).
+		\end{align*}
+		In the short notation, one would write this as
+		\begin{align*}
+			R_{\theta_1}\cdot \left( R_{\theta_2} \cdot p \right) = R_{\theta_1 + \theta_2} \cdot p.
+		\end{align*}
+	\end{exmp}
+	
 	\begin{defn}
 		Let $f:A\rightarrow B$ be a map between two sets $A$ and $B$ that are equipped with the same structure. Also assume that $\bm{\cdot}$ is an operation of the structure. Then $f$ is said to be a homomorphism if $\forall x, y\in A$,
 		\begin{align}
-			f(x\cdot y) = f(x) \cdot f(y).
+			f(x\bm{\cdot} y) = f(x) \bm{\cdot} f(y).
 		\end{align}
-		
 	\end{defn}
 	
 	\newpage
