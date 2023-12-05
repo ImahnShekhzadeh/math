@@ -32,8 +32,35 @@
 
 \begin{document}
 	\maketitle
+	\newpage 
+	
+	\section{Groups}
+	
+	\begin{defn}[Action]
+		Let $G$ be a group (where $e$ is the neutral element), and $X$ a set. Then a (left) group action $\alpha$ of $G$ on $X$ is a function
+		\begin{align}
+			\alpha: G\times X \rightarrow X
+		\end{align}
+		satisfying the following two axioms $(\forall g, h\in G) \wedge (\forall x\in X)$:
+		\begin{align}
+			\alpha(e, x) &= x, 
+			\\ \alpha(g, \alpha(h, x)) &= \alpha(gh, x)
+		\end{align}
+		A right group action of $G$ on $X$ is a function
+		\begin{align}
+			\alpha: X\times G \rightarrow X
+		\end{align}
+		satisfying the following two axioms $(\forall g, h\in G) \wedge (\forall x\in X)$:
+		\begin{align}
+			\alpha(x, e) &= x, 
+			\\ \alpha(\alpha(x, g), h) &= \alpha(x, gh)
+		\end{align}
+	\end{defn}
+	
+	\newpage
+	
 	\section{Measure Theory}
-	\begin{defn}[Generated $\sigma$-algebra 		\cite{generated-sigma-algebras}]
+	\begin{defn}[Generated $\sigma$-algebra \cite{generated-sigma-algebras}]
 		Let $X$ be a set and $\mathcal E\subset \mathcal P(X)$ a non-empty collection of subsets of $X$. The \textit{smallest} $\sigma$-algebra containing all the sets of $\mathcal E$ is denoted by $\sigma(\mathcal E)$. 
 	\end{defn}
 
@@ -754,6 +781,8 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 			\frac{\alpha^{(k)}\left(\xi\right)}{\beta^{(k)}(\xi)} = \frac{a_0\xi^2 + a_1\xi + a_2}{b_0\xi^2 + b_1\xi + b_2} 
 		\end{align}
 	\end{defn}	
+
+\newpage 
 
 \section{Diffusion-Based Models}
 	
