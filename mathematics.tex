@@ -36,21 +36,21 @@
 	
 	\section{Algebra}
 	
-	\begin{defn}[Action]
+	\begin{defn}[Action]\label{defn:algebra__group_action}
 		Let $G$ be a group (where $e$ is the neutral element), and $X$ a set. Then a (left) group action $\alpha$ of $G$ on $X$ is a function
 		\begin{align}
 			\alpha: G\times X \rightarrow X
 		\end{align}
 		satisfying the following two axioms $(\forall g, h\in G) \wedge (\forall x\in X)$:
-		\begin{align}
+		\begin{align*}
 			\alpha(e, x) &= x, 
 			\\ \alpha(g, \alpha(h, x)) &= \alpha(gh, x)
-		\end{align}
+		\end{align*}
 		The group action is commonly written as $g\cdot x$ s.t.~the axioms become
-		\begin{align*}
+		\begin{align}\label{eqn:left__group_action}
 			e\cdot x &= x, 
 			\\ g\cdot \left(h\cdot x\right) &= \left(gh\right)\cdot x
-		\end{align*}
+		\end{align}
 		A right group action of $G$ on $X$ is a function
 		\begin{align}
 			\alpha: X\times G \rightarrow X
@@ -119,14 +119,34 @@
 	\begin{defn}[Group representation]
 		An $n$-dimensional real \textbf{representation} of a group $G$ is a map $\rho:G\rightarrow \text{GL}(n, \mathbb R)$ (correspondingly, one defines an $n$-dimensional complex representation) \cite[p.~15]{bronstein2021geometric}, where each $g\in G$ is mapped to an invertible matrix, under the \textit{condition} that the map is a homomorphism, i.e.~$\rho(gh) = \rho(g)\rho(h)$.
 	\end{defn}
-	
-	\begin{exmp}
-		content...
+
+	\begin{exmp}[Group representation]
+		Let $G = \mathbb Z_{n}$\footnote{Cyclic group of order $n$, $\mathbb Z_n = \{ 0, 1, \dots, n - 1 \}$.}, where the group operation is addition. The group representation 
+		\begin{align}
+			\rho: \mathbb Z_{n} \rightarrow \text{GL}(1, \mathbb C), g\mapsto \exp\left(\frac{2\pi ig}{n}\right)
+		\end{align}
+		To see that this is indeed a group representation, note that
+		\begin{align}
+			\rho(gh) = \rho(g + h) = \exp\left( \frac{2\pi igh}{n} \right) = \exp\left( \frac{2\pi i\left(g + h\right)}{n} \right) = \exp\left( \frac{2\pi ig}{n} \right)\exp\left( \frac{2\pi ih}{n} \right),
+		\end{align}
+		i.e.~the group representation is a homomorphism.
 	\end{exmp}
 	
 	\begin{defn}[Equivariance]
-	
+		Let $\rho$ be a representation of a group $G$. A function $f:\mathcal X(\Omega, V) \rightarrow \mathcal X(\Omega, V)$ is $G$-equivariant if 
+		\begin{align}\label{eqn:group_action}
+			f(\rho(g)x) = \rho(g)f(x) \quad \forall g\in G.
+		\end{align}
 	\end{defn}
+	
+	\begin{remark}
+		Note that $\rho(g)\in \text{GL}(n, \mathbb K)$, $x\in \mathcal X(\Omega, V)$, and hence $\rho(g)x$ is a group action mediated by the representation $\rho$ on the group element $g$, i.e.~$\rho(g)x\in \mathcal X(\Omega, V)$. Also note that $f(x)\in \mathcal X(\Omega, V)$, i.e.~$\rho(g)f(x)$ is a group action as well, where the group element $g$ -- mediated by the representation $\rho$ -- and hence $\rho(g)f(x) \in \mathcal X(\Omega, V)$.
+		
+		The fact that we have a group action implies according to Def.~\ref{defn:algebra__group_action} and Eq.~\eqref{eqn:group_action},
+		\begin{align}
+			f\left(\rho(g)(\rho(h)x)\right) \overset{\scriptsize \eqref{eqn:left__group_action}}{=} f\left( (\rho(g)\rho(h))x \right) = \left(\rho(g)\rho(h)\right)f(x).
+		\end{align}
+	\end{remark}
 	
 	\newpage
 	
