@@ -77,11 +77,55 @@
 		\end{align*}
 	\end{exmp}
 	
-	\begin{defn}
+	\begin{defn}[Signals\footnote{\cite[p.~11]{bronstein2021geometric}}] 
+		Let $V$ be a vector space\footnote{In computer vision, its dimensions would be called \textit{channels}.} and $\Omega$ a set, possibly with additional structure. Then the space of $V$-valued signals on $\Omega$,
+		\begin{align}
+			\mathcal X(\Omega, V) = \{ x: \Omega \rightarrow V \}
+		\end{align}
+		is a function space with a vector space structure. (Note that each $x\in \mathcal X(\Omega, V)$ is a signal.)
+		
+		Addition and scalar multiplication of signals are defined as 
+		\begin{align}
+			(\alpha x + \beta y)(u) := \alpha x(u) + \beta y(u) \quad \forall u\in\Omega\ \forall \alpha, \beta\in \mathbb R.
+		\end{align}
+	\end{defn}
+
+	\begin{lemma}
+		If $V$ is endowed with an inner product $\langle v, w\rangle_{V}$ and a measure $\mu$ on a $\sigma$-algebra defined on the set $\Omega$ (wrt which an integral can be defined), we have the following induced inner product on $\mathcal X(\Omega, V)$
+		\begin{align}
+			\langle x, y\rangle_{\mathcal X(\Omega, V)} := \int_{\Omega}\langle \underbrace{x(u)}_{\in V}, \underbrace{y(u)}_{\in V}\rangle_{V}d\mu(u)
+		\end{align}
+	\end{lemma}
+
+	\begin{proof}
+		Trivial.
+	\end{proof}
+
+	\begin{remark}
+		The domain (set) $\Omega$ can be discrete, in which case $\mu$ can be chosen to be the counting measure, in which case the integral becomes a sum.
+	\end{remark}
+
+	\begin{exmp}
+		Let $\Omega = \mathbb Z_{n}\times Z_{n}$, i.e.~a two-dimensional grid, and $x$ an RGB image, i.e.~a signal $x:\Omega\rightarrow \mathbb R^3$, and $f$ a function (such as a single-layer perceptron) operating on $3n^2$-dimensional inputs.
+	\end{exmp}
+	
+	\begin{defn}[Homomorphism]
 		Let $f:A\rightarrow B$ be a map between two sets $A$ and $B$ that are equipped with the same structure. Also assume that $\bm{\cdot}$ is an operation of the structure. Then $f$ is said to be a homomorphism if $\forall x, y\in A$,
 		\begin{align}
 			f(x\bm{\cdot} y) = f(x) \bm{\cdot} f(y).
 		\end{align}
+	\end{defn}
+	
+	\begin{defn}[Group representation]
+		An $n$-dimensional real \textbf{representation} of a group $G$ is a map $\rho:G\rightarrow \text{GL}(n, \mathbb R)$ (correspondingly, one defines an $n$-dimensional complex representation) \cite[p.~15]{bronstein2021geometric}, where each $g\in G$ is mapped to an invertible matrix, under the \textit{condition} that the map is a homomorphism, i.e.~$\rho(gh) = \rho(g)\rho(h)$.
+	\end{defn}
+	
+	\begin{exmp}
+		content...
+	\end{exmp}
+	
+	\begin{defn}[Equivariance]
+	
 	\end{defn}
 	
 	\newpage
@@ -218,6 +262,41 @@
 	
 	\newpage 
 	\section{Functional Analysis}
+	\begin{defn}[Inner Product Space]
+		Let $\mathbb K$ be a field ($\mathbb K = \mathbb R$ or $\mathbb K = \mathbb C$). An inner product space is a vector space $V$ over $\mathbb K$ that allows for an \textbf{inner product} 
+		\begin{align}
+			\left\langle \bm{\cdot}, \bm{\cdot}\right\rangle: V\times V\rightarrow \mathbb K
+		\end{align}
+		satisfying the following properties $\forall \alpha, \beta\in \mathbb K; x, y, z\in V$:
+		\begin{enumerate}
+			\item \textbf{Conjugate symmetry}:
+			\begin{align}
+				\langle x, y\rangle = \overline{\langle y, x\rangle},
+			\end{align}
+			which implies that $\langle x, x\rangle\in \mathbb R$, even if $\mathbb K = \mathbb C$.\footnote{Set $y = x$.} 
+			
+			For $\mathbb K = \mathbb R$, conjugate symmetry is exact symmetry.
+			
+			\item \textbf{Linearity} (in the first argument): 
+			\begin{align}
+				\langle \alpha x + \beta y, z\rangle = \alpha\langle x, z\rangle + \beta\langle y, z\rangle
+			\end{align}
+			From the conjugate symmetry property, this means that we have semi-linearity in the second argument:
+			\begin{align}
+				\langle x, \alpha y + \beta z\rangle = \overline{\langle \alpha y + \beta z, x \rangle} = \overline{\alpha\langle y, x \rangle + \beta\langle z, x \rangle} = \overline{\alpha}\langle x, y\rangle + \overline{\beta}\langle x, z\rangle.
+			\end{align}
+		
+			\item \textbf{Positive-definiteness}:
+			\begin{align}
+				\langle x, x\rangle \geq 0
+			\end{align}
+			and 
+			\begin{align}
+				\langle x, x\rangle = 0 \Leftrightarrow x = 0.
+			\end{align}
+		\end{enumerate}
+	\end{defn}
+
 	\begin{defn}[Normed Space]
 		content...
 	\end{defn}
