@@ -317,9 +317,78 @@
 		\end{enumerate}
 	\end{defn}
 
-	\begin{defn}[Normed Space]
-		content...
+	\begin{defn}[Normed Space]\label{defn:normed_space}
+		Let $\mathbb K$ be a space ($\mathbb{K} = \mathbb{R}$ or $\mathbb{K} = \mathbb{C}$). Then a mapping $\norm{\cdot}{}: X\to\mathbb{R}$ is called a \textbf{norm} if it satisfies the following properties for all $\varphi$, $\psi\in X$ and $\alpha\in \mathbb{K}$:
+		
+		\begin{enumerate}
+			\item \textbf{Positivity}:
+			\begin{align}
+				\norm{\varphi}{} \geq 0
+			\end{align}
+
+			\item \textbf{Definiteness}:
+			\begin{align}
+				\norm{\varphi}{} = 0 \Leftrightarrow \varphi = 0
+			\end{align}
+		
+			\item \textbf{Homogeneity}:
+			\begin{align}
+				\norm{\alpha\varphi}{} = \abs{\alpha}\norm{\varphi}{}
+			\end{align}
+		
+			\item \textbf{Triangle inequality}:
+			\begin{align}
+				\norm{\varphi + \psi}{} \leq \norm{\varphi}{} + \norm{\psi}{}
+			\end{align}
+			
+			A linear space $X$ with a norm $\norm{\cdot}{}$ is called a \textbf{normed linear space} or \textbf{normed space} for short. For a normed space, we shall use the notation $\left(X, \norm{\cdot}{}\right)$.
+			
+		\end{enumerate}
 	\end{defn}
+
+	\begin{exmp}
+		Let $X = \mathbb{R}^d$. Then for $1 \leq p < \infty$, the $L^p$ norm of a vector $x\in X$ is defined as:
+		
+		\begin{align}\label{eq:L^p_norm}
+			\norm{x}{p} := \left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}
+		\end{align}
+		In the limit $p\to\infty$, we obain the so-called \textit{supremum norm}:
+		\begin{align}\label{eq:sup_norm}
+			\norm{x}{\infty} := \max_{1\leq j\leq d}{\abs{x_j}}.
+		\end{align} 
+		In the special case of $p = 2$, we recover the Euclidean norm.
+	\end{exmp}
+	
+	\noindent\textit{Proof}: First, we show that Eq. \eqref{eq:sup_norm} is indeed the limit of Eq. \eqref{eq:L^p_norm}:
+	
+	\begin{align}
+		\norm{x}{\infty} &= \max_{1\leq j\leq d}{\abs{x_j}} \leq \sum_{j=1}^{d}\abs{x_j} \leq d \cdot \norm{x}{\infty}
+		\\ \Rightarrow \norm{x}{\infty}^p &= \left(\max_{1\leq j\leq d}{\abs{x_j}}\right)^p = \max_{1\leq j\leq d}{\abs{x_j}^p} \leq \sum_{j=1}^{d}\abs{x_j}^p \leq d \cdot \max_{1\leq j\leq d}{\abs{x_j}^p} = d\norm{x}{\infty}^p
+		\\ \Rightarrow \norm{x}{\infty} &\leq \left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}} \leq d^{\frac{1}{p}}\norm{x}{\infty}
+		\\ \Rightarrow \lim\limits_{p\to\infty}\norm{x}{\infty} &= \norm{x}{\infty} \leq \lim\limits_{p\to\infty}\left\{\left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}\right\} \leq \lim\limits_{p\to\infty}\left\{d^{\frac{1}{p}}\norm{x}{\infty}\right\} = \norm{x}{\infty}
+		\\ \Rightarrow \lim\limits_{p\to\infty}\left\{\left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}\right\} &= \norm{x}{\infty}
+	\end{align}
+
+	To show the norm property of the $L^p$ norm for $1 \leq p < \infty$, we will explicitly show the fulfilling properties of a norm, cf. Defn. \eqref{defn:normed_space}, for all $x$, $y$, $z\in X$ and $\alpha\in \mathbb{R}$:
+
+	\begin{enumerate}
+		\item Positivity: $\norm{x}{p} \geq 0 \ \forall x\in X$,
+		\item Definiteness: $\norm{x}{p} = 0\Leftrightarrow x = 0$,
+		\item Homogeneity: $$\norm{\alpha x}{p} = \left(\sum_{j=1}^{d}\abs{\alpha x_j}^p\right)^{\frac{1}{p}} = \left(\sum_{j=1}^{d}\abs{\alpha}^p\abs{x_j}^p\right)^{\frac{1}{p}} = \abs{\alpha}\norm{x}{p},$$
+		\item Triangle inequality: $$\norm{x + y}{p} = \left(\sum_{j=1}^{d}\abs{x_j + y_j}^p\right)^{\frac{1}{p}} \leq \left(\sum_{j=1}^{d}\abs{x_j}^p + \abs{y_j}^p\right)^{\frac{1}{p}} = \norm{x}{p} + \norm{y}{p}.$$	
+	\end{enumerate}
+	
+	In case of $p = \infty$, we will only show the triangle inequality, since the other properties are trivial to prove:
+	
+	$$\norm{x + y}{\infty} = \max_{1\leq j\leq d}{\abs{x_j + y_j}} \leq \max_{1\leq j\leq d}\left\{\abs{x_j} + \abs{y_j}\right\} \leq \max_{1\leq j\leq d}\abs{x_j} + \max_{1\leq j\leq d}\abs{y_j} = \norm{x}{\infty} + \norm{y}{\infty},$$
+	
+	where the last inequality holds since for any $1\leq j \leq d$, it holds that
+	\begin{align*}
+		&\left(\abs{x_j} \leq \max_{1\leq k\leq d}\abs{x_k}\right) \wedge \left(\abs{y_j} \leq \max_{1\leq k\leq d}\abs{y_k}\right) 
+		\\ &\Rightarrow \abs{x_j} + \abs{y_j} \leq \max_{1\leq k\leq d}\abs{x_k} + \max_{1\leq k\leq d}\abs{y_k} 
+		\\ &\Rightarrow \max_{1\leq j\leq d}\left\{\abs{x_j} + \abs{y_j}\right\} \leq \max_{1\leq k\leq d}\abs{x_k} + \max_{1\leq k\leq d}\abs{y_k}
+	\end{align*}
+	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
 	
 	\begin{theorem}\label{second-triangle-inequality}
 		Let $(X, \norm{\cdot}{})$ be a normed space. Then the \enquote{second triangle inequality} holds: 
