@@ -515,7 +515,7 @@
 	
 	\newpage 
 	\section{Topology}
-	\begin{defn}[Metric Space \cite{fa2019}]
+	\begin{defn}[Metric Space \cite{fa2019}]\label{defn:metric_space}
 		Let $X$ be a non-empty set. Then the map 
 		\begin{align*}
 			d: X\times X\rightarrow \mathbb R
@@ -549,7 +549,17 @@
 			B_{r}(\varphi) := \left\{ \psi\in X \vert d(\varphi, \psi) < r\right\} \subset X
 		\end{align}
 		\textit{open ball} in $X$ with middle point $\varphi$ and radius $r$. 
- 	\end{defn} 
+ 	\end{defn}
+ 
+ 	\begin{exmp}
+ 		For the discrete metric $d$ according to Remark \ref{discrete-metric}, the open balls can be characterized as follows:
+ 		\begin{align}
+ 			B_{r}(\varphi) = \begin{cases}
+ 				\{\varphi\}, &r \leq 1 
+ 				\\ X, &r > 1
+ 			\end{cases}
+ 		\end{align}
+ 	\end{exmp} 
 	
 	\begin{defn}[Open Set]
 		\label{defn-open-set}
@@ -576,11 +586,28 @@
 	\begin{align}
 		d(f, \psi) \leq d(f, \varphi) + d(\varphi, \psi) < d(f, \varphi) + r - d(\varphi, f) = r,  		
 	\end{align}
-	i.e. $d(f, \psi) < r$ and thus $\psi\in B_{r}(f)$.  \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	i.e. $d(f, \psi) < r$ and thus $\psi\in U = B_{r}(f)$.  \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
 	
 	\begin{theorem}
-		Let $(X, d)$ be a metric space. The collection of open sets as in Definition \ref{defn-open-set} gives a topology. Thus, every metric space is a topological space. 
+		Let $(X, d)$ be a metric space. The collection of open sets as in Definition \ref{defn-open-set} gives a topology.
 	\end{theorem}
+	\begin{proof}		
+		According to Defn. \ref{defn:metric_space}, we need to prove that $X$ and $\emptyset$ are open, that the union of an arbitrary number of open sets is open, and that the intersection of a finite number of open sets is open. 
+		
+		Clearly, $X$ is open (since for any choice of $r > 0$ and $\varphi\in X$, $B_{r}(\varphi)\subset X$). $\emptyset$ is also open, since nothing needs to be shown.
+		
+		Now let $U_{1}$, $\dots$, $U_{n}\subset X$ be open, and consider the intersection
+		\begin{align}
+			U := \bigcap_{i=1}^{n}U_{i} \subset X.
+		\end{align} 
+		For any $\varphi\in U$, we know that $\varphi\in U_i$ for all $1\leq i \leq n$. Since the $U_{i}$ are open, there is a radius $r_{i} > 0$ such that $B_{r_i}(\varphi) \subset U_i$ for all $1\leq i \leq n$. Defining $r := \min_{1 \leq i \leq n}\{r_{i}\} > 0$, we have that $B_{r}(\varphi) \subset U_i$ for all $1\leq i\leq n$ and hence $B_{r}(\varphi)\subset U$.
+		
+		Finally, let $U_{i}$, $i\in I$, be open, where $I$ is in index set. Consider the union
+		\begin{align}
+			U := \bigcup_{i\in I}U_{i} \subset X.
+		\end{align}
+		For any $\varphi\in U$ there is an index $i\in I$ such that $\varphi\in U_i$. Since $U_i$ is open, there is an $r > 0$ such that $B_{r}(\varphi) \subset U_i \subset U$.
+	\end{proof}
 	
 	\begin{defn}[Bounded Set]
 		Let $(X, d)$ be a metric space. Then $A\subset X$ is called \textit{bounded} if there exists $r>0$ and $\varphi\in X$ such that $A\subset B_{r}(\varphi)\subset X$. \cite[p. 567]{MfPII}
