@@ -612,6 +612,20 @@
 	\begin{defn}[Bounded Set]
 		Let $(X, d)$ be a metric space. Then $A\subset X$ is called \textit{bounded} if there exists $r>0$ and $\varphi\in X$ such that $A\subset B_{r}(\varphi)\subset X$. \cite[p. 567]{MfPII}
 	\end{defn}
+
+	\begin{defn}\label{defn:accumulation_point}
+		Let $U\subset X$. Then $\varphi\in X$ is called an \textit{accumulation point} of $U$ if there is a sequence $\left(\varphi_{n}\right)_{n\in \mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_{n} = \varphi$.
+	\end{defn}
+
+	\begin{theorem}
+		A subset $U \subset X$ is closed if and only if it contains all its accumulation points according to Defn. \ref{defn:accumulation_point}.
+	\end{theorem}
+
+	\begin{proof}
+		\enquote{$\Longleftarrow$}: Let $U$ contain all its accumulation points, and let $\varphi\in X\backslash U$. We will now show that there is an $n\in \mathbb N$ such that $B_{\frac{1}{n}}(\varphi) \subset X\backslash U$, proving that $X\backslash U$ is open. Assuming there is no such $n\in \mathbb N$, then $B_{\frac{1}{n}}(\varphi) \cap U = \emptyset$ for all $n\in \mathbb N$. This means that there is a sequence $(\varphi_{n})_{n\in\mathbb N}$ in $U$ such that $d(\varphi, \varphi_n) < \frac{1}{n}$ for all $n\in\mathbb N$. Hence, $\varphi$ is an accumulation point of $U$, and since $U$ contains all its accumulation points by assumption, it follows that $\varphi\in U$, contradicting the assumption that $\varphi\in X\backslash U$.
+		
+		\enquote{$\Longrightarrow$}: Let $U$ be closed, i.e. $X\backslash U$ is open. Further, let $\varphi\in X$ be an accumulation point of $U$, i.e. there is a sequence $(\varphi_n)_{n\in\mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_n = \varphi$. Hence, by definition of convergence, for all $\epsilon > 0$ there exists an $n\in\mathbb N$ such that $\varphi_n\in B(\varphi, \epsilon) \cap U$, implying that $\varphi\in U$. Thus, $U$ contains all its accumulation points.
+	\end{proof}
 	
 	\begin{defn}[$\epsilon$-$\delta$ definition of continuity]
 		Let $D$ be a subset of a metric space $(X, d)$ and let $p\in D$. Let $(Y, d')$ be another metric space. A function $f: D\rightarrow Y$ is called \textit{continuous} at $p$ if for all $\epsilon > 0$ there exists a $\delta > 0$ s.t. 
