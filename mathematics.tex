@@ -500,7 +500,7 @@
 	\begin{defn}
 		Let $X$ be a linear space equipped with two metrics $d$ and $d'$. Then the metrics are \textit{strongly equivalent} if and only if there exist positive constants $0 < \alpha \leq \beta < \infty$ such that 
 		\begin{align}
-			\alpha d(x, y) \leq d'(x, y) \leq \beta d(x, y). 
+			\alpha d(x, y) \leq d'(x, y) \leq \beta d(x, y) \quad\forall x, y\in X. 
 		\end{align}
 		\cite{equivalence-metrics}
 	\end{defn}
@@ -637,7 +637,7 @@
 		Let $(X, d)$ be a metric space. Then $A\subset X$ is called \textit{bounded} if there exists $r>0$ and $\varphi\in X$ such that $A\subset B_{r}(\varphi)\subset X$. \cite[p. 567]{MfPII}
 	\end{defn}
 
-	\begin{defn}\label{defn:accumulation_point}
+	\begin{defn}[Accumulation point]\label{defn:accumulation_point}
 		Let $U\subset X$. Then $\varphi\in X$ is called an \textit{accumulation point} of $U$ if there is a sequence $\left(\varphi_{n}\right)_{n\in \mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_{n} = \varphi$.
 	\end{defn}
 
@@ -651,7 +651,7 @@
 		\enquote{$\Longrightarrow$}: Let $U$ be closed, i.e. $X\backslash U$ is open. Further, let $\varphi\in X$ be an accumulation point of $U$, i.e. there is a sequence $(\varphi_n)_{n\in\mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_n = \varphi$. Hence, by definition of convergence, for all $\epsilon > 0$ there exists an $n\in\mathbb N$ such that $\varphi_n\in B(\varphi, \epsilon) \cap U$, implying that $\varphi\in U$. Thus, $U$ contains all its accumulation points.
 	\end{proof}
 	
-	\begin{defn}[Closure of set]
+	\begin{defn}[Closure of set]\label{defn:closure_set}
 		The set 
 		\begin{align}
 			\bar{U} := \{\varphi\in X\mid \varphi\ \text{is an accumulation point of}\ U\} \subset X
@@ -659,13 +659,33 @@
 		is called the closure of the set $U \subset X$.
 	\end{defn}
 
-	\begin{remark}
+	\begin{remark}\label{remark:closure_superset}
 		Clearly, $U\subset \bar{U}$, since any $\varphi\in U$ is an accumulation point of $U$ (consider the constant sequence, where for any $n\in\mathbb N$, $\varphi_n := \varphi$).
 	\end{remark}
 
 	\begin{remark}
 		According to Theorem \ref{thm:closed_set_acc_point}, a subset $U\subset X$ is closed if and only if coincides with its closure, i.e. $U = \bar{U}$.
 	\end{remark}
+	
+	\begin{theorem}\label{thrm:closure_closed}
+		Let $U\subset X$. Then its closure, $\bar{U}$, is closed.
+	\end{theorem}
+
+	\begin{proof}
+		According to Theorem \ref{thm:closed_set_acc_point}, we need to prove that $\bar{U}$ contains all its limit points. Let $\varphi\in X$ be an accumulation point of $\overline{U}$. Then for all $n\in \mathbb N$ there is a $\varphi_n\in\overline{U}$ such that $d(\varphi, \varphi_n) < 1/n$. By Def. \ref{defn:closure_set}, we also know that since $\varphi_n\in \bar{U}$, it is an accumulation point of $U$, i.e. for every $\varphi_n\in \overline{U}$ there is a $\psi_n\in U$ such that $d(\varphi_n, \psi_n) < 1/n$. Thus:
+		\begin{align}
+			d(\psi_n, \varphi) \leq d(\psi_n, \varphi_n) + d(\varphi_n, \varphi) < \frac{1}{n} + \frac{1}{n} \overset{n\to\infty}{\longrightarrow} 0,
+		\end{align}
+		i.e. $(\psi_n)_{n\in\mathbb N}$ is a sequence in $U$ that converges to $\varphi$, i.e. $\varphi$ is an accumulation point of $U$, hence $\varphi\in \bar{U}$.
+	\end{proof}
+	
+	\begin{theorem}
+		Let $U\subset X$. Then its closure, $\overline{U}$, is the \textit{smallest} closed set in $X$ containing $U$.
+	\end{theorem}
+
+	\begin{proof}
+		From Remark \ref{remark:closure_superset}, we know that $U\subset \overline{U}$, and from Theorem \ref{thrm:closure_closed}, we know that $\overline{U}$ is closed. To prove that $\overline{U}$ is the smallest \textit{closed} set in $X$ containing $U$, let $V\subset X$ be another closed set that contains $U$, i.e. $U\subset V$. Every sequence in $U$ is also a sequence in $V$, i.e. every accumulation point of $U$ is in $V$, i.e. $\overline{U}\subset V$.
+	\end{proof}
 	
 	\begin{defn}[$\epsilon$-$\delta$ definition of continuity]
 		Let $D$ be a subset of a metric space $(X, d)$ and let $p\in D$. Let $(Y, d')$ be another metric space. A function $f: D\rightarrow Y$ is called \textit{continuous} at $p$ if for all $\epsilon > 0$ there exists a $\delta > 0$ s.t. 
