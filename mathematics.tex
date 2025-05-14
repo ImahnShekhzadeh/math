@@ -548,7 +548,7 @@
 		\begin{align}
 			B_{r}(\varphi) := \left\{ \psi\in X \vert d(\varphi, \psi) < r\right\} \subset X
 		\end{align}
-		\textit{open ball} in $X$ with middle point $\varphi$ and radius $r$. 
+		is called an \textit{open ball} in $X$ with middle point $\varphi$ and radius $r$. 
  	\end{defn}
  
  	\begin{exmp}
@@ -560,6 +560,14 @@
  			\end{cases}
  		\end{align}
  	\end{exmp} 
+	
+	 \begin{defn}[Closed ball]
+		Let $(X, d)$ be a metric space, $\varphi\in X$ and $r > 0$. Then 
+		\begin{align}
+			B_{r}[\varphi] := \left\{ \psi\in X \vert d(\varphi, \psi) \leq r\right\} \subset X
+		\end{align}
+		is called a \textit{closed ball} in $X$ with middle point $\varphi$ and radius $r$. 
+	\end{defn}
 	
 	\begin{defn}[Open Set]
 		\label{defn-open-set}
@@ -587,6 +595,22 @@
 		d(f, \psi) \leq d(f, \varphi) + d(\varphi, \psi) < d(f, \varphi) + r - d(\varphi, f) = r,  		
 	\end{align}
 	i.e. $d(f, \psi) < r$ and thus $\psi\in U = B_{r}(f)$.  \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	
+	\begin{theorem}\label{thrm:closed_balls_open}
+		Closed balls are closed.
+	\end{theorem}
+	
+	\begin{proof}
+		Let $f\in X$ and for $r > 0$ consider the closed ball $B_{r}[f]\subset X$. By definition, for every $\varphi \in X\backslash B_{r}[f]\subset X$, it holds that $d(\varphi, f) > r$. We will now show that 
+		\begin{align}
+			B_{d(\varphi, f) - r}(\varphi) \subset X \backslash B_{r}[f],
+		\end{align}
+		which would prove that $B_{r}[f]$ is closed. Let $\psi\in B_{d(\varphi, f) - r}(\varphi)$, i.e. $d(\psi, \varphi) < d(\varphi, f) -r$. With the triangle inequality, we obtain:
+		\begin{align}
+			d(f, \varphi) \leq d(f, \psi) + d(\psi, \varphi) \Leftrightarrow d(f, \psi) \geq d(f, \varphi) - d(\psi, \varphi) > d(f, \phi) - d(\varphi, f) + r = r, 
+		\end{align}
+		i.e. $d(f, \psi) > r$, and hence $\psi\notin B_r[f]$, implying that $\psi\in X\backslash B_{r}[f]$. 
+	\end{proof}
 	
 	\begin{theorem}
 		Let $(X, d)$ be a metric space. The collection of open sets as in Definition \ref{defn-open-set} gives a topology.
@@ -617,7 +641,7 @@
 		Let $U\subset X$. Then $\varphi\in X$ is called an \textit{accumulation point} of $U$ if there is a sequence $\left(\varphi_{n}\right)_{n\in \mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_{n} = \varphi$.
 	\end{defn}
 
-	\begin{theorem}
+	\begin{theorem}\label{thm:closed_set_acc_point}
 		A subset $U \subset X$ is closed if and only if it contains all its accumulation points according to Defn. \ref{defn:accumulation_point}.
 	\end{theorem}
 
@@ -626,6 +650,22 @@
 		
 		\enquote{$\Longrightarrow$}: Let $U$ be closed, i.e. $X\backslash U$ is open. Further, let $\varphi\in X$ be an accumulation point of $U$, i.e. there is a sequence $(\varphi_n)_{n\in\mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_n = \varphi$. Hence, by definition of convergence, for all $\epsilon > 0$ there exists an $n\in\mathbb N$ such that $\varphi_n\in B(\varphi, \epsilon) \cap U$, implying that $\varphi\in U$. Thus, $U$ contains all its accumulation points.
 	\end{proof}
+	
+	\begin{defn}[Closure of set]
+		The set 
+		\begin{align}
+			\bar{U} := \{\varphi\in X\mid \varphi\ \text{is an accumulation point of}\ U\} \subset X
+		\end{align}
+		is called the closure of the set $U \subset X$.
+	\end{defn}
+
+	\begin{remark}
+		Clearly, $U\subset \bar{U}$, since any $\varphi\in U$ is an accumulation point of $U$ (consider the constant sequence, where for any $n\in\mathbb N$, $\varphi_n := \varphi$).
+	\end{remark}
+
+	\begin{remark}
+		According to Theorem \ref{thm:closed_set_acc_point}, a subset $U\subset X$ is closed if and only if coincides with its closure, i.e. $U = \bar{U}$.
+	\end{remark}
 	
 	\begin{defn}[$\epsilon$-$\delta$ definition of continuity]
 		Let $D$ be a subset of a metric space $(X, d)$ and let $p\in D$. Let $(Y, d')$ be another metric space. A function $f: D\rightarrow Y$ is called \textit{continuous} at $p$ if for all $\epsilon > 0$ there exists a $\delta > 0$ s.t. 
