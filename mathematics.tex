@@ -497,7 +497,7 @@
 	\end{align}
 	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
 	
-	\begin{defn}
+	\begin{defn}\label{defn:strong_equivalence}
 		Let $X$ be a linear space equipped with two metrics $d$ and $d'$. Then the metrics are \textit{strongly equivalent} if and only if there exist positive constants $0 < \alpha \leq \beta < \infty$ such that 
 		\begin{align}
 			\alpha d(x, y) \leq d'(x, y) \leq \beta d(x, y) \quad\forall x, y\in X. 
@@ -686,6 +686,47 @@
 	\begin{proof}
 		From Remark \ref{remark:closure_superset}, we know that $U\subset \overline{U}$, and from Theorem \ref{thrm:closure_closed}, we know that $\overline{U}$ is closed. To prove that $\overline{U}$ is the smallest \textit{closed} set in $X$ containing $U$, let $V\subset X$ be another closed set that contains $U$, i.e. $U\subset V$. Every sequence in $U$ is also a sequence in $V$, i.e. every accumulation point of $U$ is in $V$, i.e. $\overline{U}\subset V$.
 	\end{proof}
+
+	\begin{defn}[Topological equivalence \cite{topology-singh}]
+		Two metrics $d$ and $d'$ on a set $X$ are called \textit{equivalent} if they induce the same topology on $X$, i.e. $\tau_d = \tau_{d'}$.
+	\end{defn}
+
+	\begin{theorem}\label{thrm:topological_equivalence}
+		Two metrics $d$ and $d'$ on a set $X$ are equivalent if and only if for each $x\in X$ and for each $\epsilon > 0$, there exist real numbers $\delta_1$, $\delta_2 > 0$ (depending upon $x$ and $\epsilon$) such that $B^{d}_{\delta_1}(x) \subset B^{d'}_{\epsilon}(x)$ and $B^{d'}_{\delta_2}(x) \subset B^{d}_{\epsilon}(x)$. \cite{topology-singh}.
+	\end{theorem}
+
+	\begin{proof}
+		\enquote{$\Longrightarrow$} For each $x\in X$ and for each $\epsilon > 0$, the open ball $B^{d}_{\epsilon}(x)$ in the metric space $(X, d)$ is open in the topology $\tau_{d'}$, and the open ball $B^{d'}_{\epsilon}(x)$ in the metric space $(X, d')$ is open in the topology $\tau_{d}$. Hence, there exist $\delta_1$, $\delta_2$ such that $B^{d'}_{\delta_1}(x) \subset B^{d}_{\epsilon}(x)$ and $B^{d}_{\delta_2}(x) \subset B^{d'}_{\epsilon}(x)$.
+		
+		\enquote{$\Longleftarrow$} Suppose that $B^{d'}_{\delta_1}(x) \subset B^{d}_{\epsilon}(x)$ and $B^{d}_{\delta_2}(x) \subset B^{d'}_{\epsilon}(x)$ hold for each $x\in X$ and $\epsilon > 0$. Given an open set $U\subset X$ in the topology $\tau_d$ and a point $x\in U$, there exists an open ball $B^{d}_{r}(x) \subset U$ with $r > 0$. By assumption, there exists an open ball $B^{d'}_{\delta_1}(x) \subset B^{d}_{r}(x) \subset U$, proving that $U$ is an open set in the topology $\tau_{d'}$. Similarly, one can show that every open set in the topology $\tau_{d'}$ is also open in the topology $\tau_{d}$. Hence, $\tau_{d'} = \tau_{d}$.
+	\end{proof}
+
+	\begin{theorem}
+		If two metrics $d$ and $d'$ on a set $X$ are strongly equivalent, cf. Def. \ref{defn:strong_equivalence}, then they are also (topologically) equivalent.
+	\end{theorem}
+
+	\begin{proof}\cite{1379634}
+		By definition of strong equivalence, we know that 
+		\begin{align}
+			\alpha d(x, y) \leq d'(x, y) \leq \beta d(x, y) \quad\forall x, y\in X, \alpha, \beta > 0.
+		\end{align}
+		According to Theorem \ref{thrm:topological_equivalence}, we need to show that for all $x\in X$ and $\epsilon > 0$, there exist $\delta_1$, $\delta_2 > 0$ such that 
+		\begin{align}
+			\left(B_{\delta_1}^{d}(x) \subset B_{\epsilon}^{d'}(x)\right) \wedge \left(B^{d'}_{\delta_2}(x) \subset B^{d}_{\epsilon}(x)\right)
+		\end{align}
+		To show the first inclusion, let $\delta_1 \leq \epsilon/\beta$, then we have for all $x$, $y\in X$:
+		\begin{align}
+			\frac{d'(x, y)}{\beta} \leq d(x, y) < \delta_1 \leq \frac{\epsilon}{\beta} \Rightarrow d'(x, y) < \epsilon.
+		\end{align}
+		To show the second inclusion, let $\delta_2 \leq \epsilon\alpha$, then we have for all $x$, $y\in X$:
+		\begin{align}
+			\alpha d(x, y)\leq d'(x, y) < \delta_2 \leq \epsilon\alpha \Rightarrow d(x, y) < \epsilon.
+		\end{align}
+	\end{proof}
+
+	\begin{remark}
+		There exist metrics $d$ and $d'$ on a set $X$ that are (topologically) equivalent, but not strongly equivalent.
+	\end{remark}
 	
 	\begin{defn}[$\epsilon$-$\delta$ definition of continuity]
 		Let $D$ be a subset of a metric space $(X, d)$ and let $p\in D$. Let $(Y, d')$ be another metric space. A function $f: D\rightarrow Y$ is called \textit{continuous} at $p$ if for all $\epsilon > 0$ there exists a $\delta > 0$ s.t. 
@@ -796,7 +837,7 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 	\end{exmp}
 	
 	\begin{remark}
-		Metric spaces are not automatically Hausdorff spaces. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{basis_discrete_metric}, \ref{basis_metric_space},  the topological space $X$ is not second countable, since $X$ is uncountable. 
+		Metric spaces are not automatically second countable. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{basis_discrete_metric}, \ref{basis_metric_space},  the topological space $X$ is not second countable, since $X$ is uncountable. 
 	\end{remark}
 	
 	\begin{defn}[Homeomorphism] A \textit{homeomorphism} between two topological spaces $X$ and $Y$ is an invertible function $f: X\rightarrow Y$ such that $f$ and $f^{-1}$ are continuous \cite[p. 33]{topology-singh}. 
