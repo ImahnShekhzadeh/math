@@ -637,6 +637,22 @@
 		Let $(X, d)$ be a metric space. Then $A\subset X$ is called \textit{bounded} if there exists $r>0$ and $\varphi\in X$ such that $A\subset B_{r}(\varphi)\subset X$. \cite[p. 567]{MfPII}
 	\end{defn}
 
+	\begin{defn}[Convergence of sequence \cite{fa2019}]
+		Let $(X, d)$ be a metric space. A sequence $(\varphi_n)_{n\in\mathbb N}$ with elements $\varphi_n\in X$, $n\in\mathbb N$, is called \textit{convergent} if there is a $\varphi\in X$ s.t.
+		\begin{align}
+			\lim\limits_{n\to\infty}d(\varphi_n, \varphi) = 0,
+		\end{align}
+		i.e. for all $\epsilon > 0$ there exists an $N(\epsilon)\in\mathbb N$ s.t.
+		\begin{align}
+			d(\varphi_n, \varphi) < \epsilon \quad \forall n\geq N(\epsilon).
+		\end{align}
+		$\varphi$ is called the \textit{limit} of the sequence $(\varphi_n)_{n\in \mathbb N}$. For this, we write 
+		\begin{align}
+			\lim\limits_{n\to\infty}\varphi_n = \varphi \quad \text{or}\quad \varphi_n \overset{n \to\infty}{\longrightarrow} \varphi.
+		\end{align}
+		Non-convergent sequence are called \textit{divergent}.
+	\end{defn}
+
 	\begin{defn}[Accumulation point]\label{defn:accumulation_point}
 		Let $U\subset X$. Then $\varphi\in X$ is called an \textit{accumulation point} of $U$ if there is a sequence $\left(\varphi_{n}\right)_{n\in \mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_{n} = \varphi$.
 	\end{defn}
