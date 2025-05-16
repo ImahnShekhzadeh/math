@@ -770,8 +770,81 @@
 		We have shown that $d$ and $d'$ induce the same topology on $X$, and are hence equivalent.
 	\end{proof}
 
+	\begin{defn}[Bounded set]
+		A subset $U\subset X$ is called \textit{bounded} in $X$ if it is contained in a closed ball in $X$, i.e. there exists $r > 0$ and $\varphi \in X$ s.t. $U\subset B_{r}[\varphi]$.
+	\end{defn}
+
+	\begin{theorem}
+		Convergent sequences in $X$ are fully contained in a bounded subset.
+	\end{theorem}
 	
+	\begin{proof}
+		Let $(\varphi_n)_{n\in\mathbb N}$ be a convergent sequence in $X$ with limit point $\varphi\in X$. Then there exists an $N\in\mathbb N$ s.t. $d(\varphi_n, \varphi) < \epsilon$ for all $n\geq N$ for a fixed $\epsilon > 0$. Defining
+		\begin{align}
+			r := \max \left\{ \epsilon, \max_{n \leq N}\{d(\varphi, \varphi_n)\} \right\},
+		\end{align}
+		we have $d(\varphi, \varphi_n) \leq r$ for all $n\in\mathbb N$. Hence, for any $n\in\mathbb N$, 
+		$\varphi_n\in B_{r}[\varphi]$.¸
+	\end{proof}
 	
+	\begin{defn}[Isometry]
+		Let $(X, d)$ and $(X', d')$ be metric spaces. Then $f: X \rightarrow Y$ is called a distance-preserving map (or \textit{isometry}) if
+		\begin{align}
+			d'(f(\varphi), f(\psi)) = d(\varphi, \psi) \quad\forall \varphi, \psi\in X
+		\end{align}
+		$(X, d)$ and $(X', d')$ are called \textit{isometric} if there is a surjective isometry $f:X\rightarrow X'$.
+	\end{defn}
+
+	\begin{theorem}
+		Let $(X, d)$ and $(X', d')$ be metric spaces and $f: X\rightarrow X'$  be an isometry. If $f(\varphi) = f(\psi)$ for any $\varphi$, $\psi\in X$, then 
+		\begin{align}
+			d'(f(\varphi), f(\psi)) = d'(f(\varphi), f(\varphi)) = d(\varphi, \psi) = 0, 
+		\end{align}
+		i.e. $\varphi = \psi$.¸
+	\end{theorem}
+
+	\begin{remark}
+		Two isometric spaces $(X, d)$ and $(X', d')$ do not differ in their properties wrt their metrics, but instead through the properties of their individual elements. Any metric property holding in one metric space also holds in the other. Hence, in this sense, we say that $(X, d)$ and $(X', d')$ are \textit{identical}.
+	\end{remark}
+	
+	\begin{remark}
+		Surjective isometries are hence bijective.
+	\end{remark}
+	
+	\subsection{Complete metric spaces}
+	
+	\begin{defn}
+		A sequence $(\varphi_n)_{n\in\mathbb N}$ in a metric space $(X, d)$ is a \textit{Cauchy sequence} if 
+		\begin{align}
+			\lim\limits_{n, m\to\infty} d(\varphi_n, \varphi_m) = 0,
+		\end{align}
+		i.e. for all $\epsilon > 0$ there exists an $N(\epsilon)\in \mathbb N$ s.t. 
+		\begin{align}
+			d(\varphi_n, \varphi_m) < \epsilon \quad\forall n, m\geq N.
+		\end{align}
+	\end{defn}
+
+	\begin{theorem}\label{thrm:convergent_sequence_cauchy_sequence}
+		Every convergent sequence in $X$ is a cauchy sequence in $X$.
+	\end{theorem}
+
+	\begin{proof}
+		Let $(\varphi_n)_{n\in\mathbb N}$ be a convergent sequence in $X$ with limit point $\varphi\in X$. Hence, for all $\epsilon > 0$, there is an $N(\epsilon)\in\mathbb N$ with $d(\varphi_n, \varphi) < \epsilon$ for all $n\geq N(\epsilon)$. Hence
+		\begin{align}
+			d(\varphi_n, \varphi_m) \leq d(\varphi_n, \varphi) + d(\varphi, \varphi_m) < 2\epsilon \quad\forall n,m\geq N.
+		\end{align}
+	\end{proof}
+
+	\begin{remark}
+		The converse of Theorem \ref{thrm:convergent_sequence_cauchy_sequence} is in general not true: Take $X=\mathbb Q$ and let \newline $d(x, y) := \abs{x - y}$, for any $x$, $y\in\mathbb Q$. Then we have a metric space $(\mathbb Q, d)$, but the sequence $(a_n)_{n\in\mathbb N}$ with
+		\begin{align}
+			a_n := \left(1 + \frac{1}{n}\right)^n,
+		\end{align}
+		where all elements are in $\mathbb Q$, does not converge in $\mathbb Q$ (the limit point is Euler's number $e$).
+	\end{remark}
+	
+	\newpage 
+	\subsection{Continuity}
 	\begin{defn}[$\epsilon$-$\delta$ definition of continuity]
 		Let $D$ be a subset of a metric space $(X, d)$ and let $p\in D$. Let $(Y, d')$ be another metric space. A function $f: D\rightarrow Y$ is called \textit{continuous} at $p$ if for all $\epsilon > 0$ there exists a $\delta > 0$ s.t. 
 		\begin{align}
