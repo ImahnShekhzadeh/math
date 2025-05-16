@@ -820,13 +820,17 @@
 		$(X, d)$ and $(X', d')$ are called \textit{isometric} if there is a surjective isometry $f:X\rightarrow X'$.
 	\end{defn}
 
-	\begin{theorem}
-		Let $(X, d)$ and $(X', d')$ be metric spaces and $f: X\rightarrow X'$  be an isometry. If $f(\varphi) = f(\psi)$ for any $\varphi$, $\psi\in X$, then 
+	\begin{theorem}\label{thrm:isometries_injective}
+		Let $(X, d)$ and $(X', d')$ be metric spaces and $f: X\rightarrow X'$  be an isometry. Then it is injective.
+	\end{theorem}
+
+	\begin{proof}
+		If $f(\varphi) = f(\psi)$ for any $\varphi$, $\psi\in X$, then 
 		\begin{align}
 			d'(f(\varphi), f(\psi)) = d'(f(\varphi), f(\varphi)) = d(\varphi, \psi) = 0, 
 		\end{align}
-		i.e. $\varphi = \psi$.¸
-	\end{theorem}
+		i.e. $\varphi = \psi$.
+	\end{proof}
 
 	\begin{remark}
 		Two isometric spaces $(X, d)$ and $(X', d')$ do not differ in their properties wrt their metrics, but instead in the properties of their individual elements. Any metric property holding in one metric space also holds in the other. Hence, in this sense, we say that $(X, d)$ and $(X', d')$ are \textit{identical}.
@@ -952,6 +956,30 @@
 			\\ &\leq 1 + \sum_{k=0}^{\infty}\frac{1}{2^k} = 3.
 		\end{align}
 	\end{proof}
+
+	\begin{defn}
+		Let $(X, d)$ be a metric space. Then $(X, d)$ is called \textit{complete} if every Cauchy sequence in $X$ converges to a $\varphi\in X$ wrt $d$.
+	\end{defn}
+	
+	\begin{theorem}
+		Let $(X, d)$ be a metric space and consider the set $Y$. If $f: X\to Y$ is a bijection, then we can endow $Y$ with the following metric $d'$:
+		\begin{align}\label{eq:metrics_completion}
+			d'(y_1, y_2) := d\left(f^{-1}(y_1), f^{-1}(y_2)\right). \quad \forall y_1, y_2\in Y
+		\end{align}
+		$(X, d)$ is complete iff $(Y, d')$ is complete \cite{3789234}.
+	\end{theorem}
+	
+	\begin{proof}
+		Let $(X, d)$ be complete, i.e. every Cauchy sequence in $X$ converges in $X$. Now let $(x_n)_{n\in\mathbb N}$ be a Cauchy sequence in $X$ with limit point $\varphi\in X$. Consider the sequence $(y_n)_{n\in\mathbb N} := \left(f(x_n)\right)_{n\in\mathbb N}$ in $Y$. Since $X$ is Cauchy, we have $ d(x_m, x_n) = d'(y_m, y_n) < \epsilon$ for all $\epsilon > 0$ and $m$, $n\geq N$. Thus, we have that $(y_{n})_{n\in\mathbb N}$ is also a Cauchy sequence in $Y$. The limit point of $\left(y_n\right)_{n\in\mathbb N}$ is $f(\varphi)$, since $d'(y_n, f(\varphi)) = d(x_n, \varphi) < \epsilon'$ for all $\epsilon' > 0$ and $n\geq N'$.
+	\end{proof}
+
+	\begin{remark}
+		To construct incomplete metric spaces, we can thus take an incomplete metric space $(X, d)$, construct a surjection $f:X\to Y$ to another set $Y$ and endow $Y$ with the metric $d'$ from Eq. \eqref{eq:metrics_completion}, then $(Y, d')$ is also incomplete.
+	\end{remark}
+	
+	\begin{exmp}
+		Let $X = \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$, and consider the metric $d(x_1, x_2) := \abs{x_1 - x_2}$. Define $Y = \mathbb R$, and consider the map $f: X\to Y$, $x\mapsto \tan(x)$, which is surjective. On $Y$, consider the metric $d'(y_1, y_2) := d\left( \arctan(y_1), \arctan(y_2)\right) = \abs{\arctan y_1 - \arctan y_2}$, cf. Eq. \eqref{eq:metrics_completion}. Since $(X, d)$ is incomplete, $(Y, d')$ is incomplete as well. To see that $(X, d)$ is incomplete, note that $\left(\frac{\pi}{2} - \frac{1}{n}\right)_{n\in\mathbb N}$ or $\left( -\frac{\pi}{2} + \frac{1}{n} \right)_{n\in\mathbb N}$ are Cauchy in $X$, yet do not converge in $X$.
+	\end{exmp}
 	
 	\newpage 
 	\subsection{Continuity}
