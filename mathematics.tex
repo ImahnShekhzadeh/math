@@ -737,7 +737,7 @@
 	\end{proof}
 
 	\begin{remark}
-		There exist metrics $d$ and $d'$ on a set $X$ that are (topologically) equivalent, but not strongly equivalent.
+		There exist metrics $d$ and $d'$ on a set $X$ that are (topologically) equivalent, but not strongly equivalent. \cite{5065146}
 	\end{remark}
 
 	\begin{exmp}
@@ -745,7 +745,28 @@
 		
 		However, $d$ and $d'$ are (topologically) equivalent. To see this, remember that acc. to \mbox{Theorem \ref{thrm:topological_equivalence}}, we need to prove that for any $x\in X$ and for any $\epsilon > 0$, there exist $\delta_{1}(x, \epsilon)$ and $\delta_2(x, \epsilon)$ s.t. $B_{\delta_1}^{d}(x) \subset B_{\epsilon}^{d'}(x)$ and $B_{\delta_2}^{d'}(x) \subset B_{\epsilon}^{d}(x)$. 
 		
-		To show the first inclusion, choose $\delta_{1} := \epsilon x$
+		To show the first inclusion, choose any
+		\begin{align}\label{eq:top-eq-not-imply-strong-eq-delta_1}
+			\delta_{1} < \frac{\epsilon x^2}{\epsilon x + 1}.
+		\end{align}
+		Now we have 
+		\begin{align}\label{eq:top-eq-not-imply-strong-eq-delta_1-2}
+			y \in B_{\delta_1}^{d}(x) \Rightarrow \abs{y - x} < \delta_1 \Rightarrow \frac{1}{xy}\abs{x - y} = \abs{\frac{1}{x} - \frac{1}{y}} < \frac{\delta_1}{xy}
+		\end{align}
+		Since $z \leq \abs{z}$ for any $z\in\mathbb R$, 
+		\begin{align}\label{eq:top-eq-not-imply-strong-eq-delta_1-3}
+			y \in B_{\delta_1}^{d}(x) \Rightarrow x - y \leq \abs{x-y} < \delta_1 \Rightarrow x - \delta_1 < y\Rightarrow \frac{1}{y} < \frac{1}{x - \delta_1},
+		\end{align}
+		and hence 
+		\begin{align}
+			y \in B_{\delta_1}^{d}(x) \overset{\tiny \eqref{eq:top-eq-not-imply-strong-eq-delta_1-2}}{\Rightarrow} \abs{\frac{1}{x} - \frac{1}{y}} &< \frac{\delta_1}{xy} \overset{\tiny \eqref{eq:top-eq-not-imply-strong-eq-delta_1-3}}{<} \frac{\delta_1}{x(x - \delta_1)} = \frac{\delta_1}{x^2 - x\delta_1} \overset{\tiny \eqref{eq:top-eq-not-imply-strong-eq-delta_1}}{<} \frac{\epsilon x^2}{\left(\epsilon x + 1\right)\left(x^2 - \frac{\epsilon x^3}{\epsilon x + 1}\right)} 
+			\\ &= \frac{\epsilon x^2}{\epsilon x^3 - \frac{\epsilon^2 x^4}{\epsilon x + 1} + x^2 - \frac{\epsilon x^3}{\epsilon x + 1}} = \frac{\epsilon x^2}{\frac{\epsilon^2 x^4 + \epsilon x^3}{\epsilon x + 1} - \frac{\epsilon^2 x^4}{\epsilon x + 1} + x^2 - \frac{\epsilon x^3}{\epsilon x + 1}} = \epsilon.
+		\end{align}
+		
+		To show the second inclusion, i.e. $B_{\delta_2}^{d'}(x) \subset B_{\epsilon}^{d}(x)$, choose $\delta_2 := \epsilon$, then we have:
+		\begin{align}
+			y \in B_{\delta_2}^{d'}(x) \Rightarrow \abs{\frac{1}{x} - \frac{1}{y}} < \delta_2 \Rightarrow xy\abs{\frac{1}{x} - \frac{1}{y}} = \abs{y - x} < \delta_2 xy \overset{x, y\in X = (0, 1]}{\leq} \delta_2 = \epsilon.
+		\end{align}
 	\end{exmp}
 
 	\begin{theorem}
@@ -808,7 +829,7 @@
 	\end{theorem}
 
 	\begin{remark}
-		Two isometric spaces $(X, d)$ and $(X', d')$ do not differ in their properties wrt their metrics, but instead through the properties of their individual elements. Any metric property holding in one metric space also holds in the other. Hence, in this sense, we say that $(X, d)$ and $(X', d')$ are \textit{identical}.
+		Two isometric spaces $(X, d)$ and $(X', d')$ do not differ in their properties wrt their metrics, but instead in the properties of their individual elements. Any metric property holding in one metric space also holds in the other. Hence, in this sense, we say that $(X, d)$ and $(X', d')$ are \textit{identical}.
 	\end{remark}
 	
 	\begin{remark}
