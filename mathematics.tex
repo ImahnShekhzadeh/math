@@ -1,6 +1,6 @@
 \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{comment, listings, centernot, amssymb, hyperref, graphicx, amsmath, textcomp, breqn, mathtools, csquotes, cancel, enumitem, amsthm, caption, bm, tikz}
+\usepackage{comment, listings, centernot, amssymb, hyperref, graphicx, amsmath, textcomp, breqn, mathtools, csquotes, cancel, enumitem, amsthm, caption, bm, tikz} % amsthm provides `proof`environment
 \usepackage[backend=biber]{biblatex}
 \usepackage[english]{babel}
 \addbibresource{references.bib}
@@ -632,10 +632,6 @@
 		\end{align}
 		For any $\varphi\in U$ there is an index $i\in I$ such that $\varphi\in U_i$. Since $U_i$ is open, there is an $r > 0$ such that $B_{r}(\varphi) \subset U_i \subset U$.
 	\end{proof}
-	
-	\begin{defn}[Bounded Set]
-		Let $(X, d)$ be a metric space. Then $A\subset X$ is called \textit{bounded} if there exists $r>0$ and $\varphi\in X$ such that $A\subset B_{r}(\varphi)\subset X$. \cite[p. 567]{MfPII}
-	\end{defn}
 
 	\begin{defn}[Convergence of sequence \cite{fa2019}]\label{defn:convergence_sequence}
 		Let $(X, d)$ be a metric space. A sequence $(\varphi_n)_{n\in\mathbb N}$ with elements $\varphi_n\in X$, $n\in\mathbb N$, is called \textit{convergent} if there is a $\varphi\in X$ s.t.
@@ -744,6 +740,14 @@
 		There exist metrics $d$ and $d'$ on a set $X$ that are (topologically) equivalent, but not strongly equivalent.
 	\end{remark}
 
+	\begin{exmp}
+		Let $X := (0, 1]$, and for any $x$, $y\in X$, define $d(x, y) := \abs{x - y}$ and \newline $d'(x, y) := \abs{x^{-1} - y^{-1}}$. Clearly, $d$ and $d'$ define metrics on $X$, and they are not strongly equivalent, since there is no $\beta > 0$ s.t. $d'(x, y) \leq d(x, y)$ for all $x$, $y\in X$. 
+		
+		However, $d$ and $d'$ are (topologically) equivalent. To see this, remember that acc. to \mbox{Theorem \ref{thrm:topological_equivalence}}, we need to prove that for any $x\in X$ and for any $\epsilon > 0$, there exist $\delta_{1}(x, \epsilon)$ and $\delta_2(x, \epsilon)$ s.t. $B_{\delta_1}^{d}(x) \subset B_{\epsilon}^{d'}(x)$ and $B_{\delta_2}^{d'}(x) \subset B_{\epsilon}^{d}(x)$. 
+		
+		To show the first inclusion, choose $\delta_{1} := \epsilon x$
+	\end{exmp}
+
 	\begin{theorem}
 		Two metrics $d$ and $d'$ on a set $X$ are (topologically) equivalent iff each convergent sequence in $X$ wrt $d$ is also convergent in $X$ wrt $d'$. In that case, their limits coincide.
 	\end{theorem}
@@ -835,13 +839,98 @@
 		\end{align}
 	\end{proof}
 
-	\begin{remark}
+	\begin{remark}\label{remark:cauchy_not_convergent_necess}
 		The converse of Theorem \ref{thrm:convergent_sequence_cauchy_sequence} is in general not true: Take $X=\mathbb Q$ and let \newline $d(x, y) := \abs{x - y}$, for any $x$, $y\in\mathbb Q$. Then we have a metric space $(\mathbb Q, d)$, but the sequence $(a_n)_{n\in\mathbb N}$ with
-		\begin{align}
+		\begin{align}\label{eq:seq_euler}
 			a_n := \left(1 + \frac{1}{n}\right)^n,
 		\end{align}
-		where all elements are in $\mathbb Q$, does not converge in $\mathbb Q$ (the limit point is Euler's number $e$).
+		which is a Cauchy sequence and where all elements are in $\mathbb Q$, does not converge in $\mathbb Q$ (the limit point is Euler's number $e$). To prove this, we will make use of the following two Theorems.
 	\end{remark}
+
+	\begin{theorem}\label{thrm:mono_inc_seq_Cauchy}
+		Any sequence $(a_n)_{n\in\mathbb N}$ with $a_n\in \mathbb R$ for any $n\in \mathbb N$ that is monotonically increasing and upper bounded for any $n\in\mathbb N$ is a Cauchy sequence in ($\mathbb R$, $d$) with $d(x, y):= \abs{x - y}$ for any \newline $x$, $y\in \mathbb R$.		
+	\end{theorem}
+
+	\begin{proof}(\cite{2169936})
+		The completeness axiom states that any non-empty subset of $\mathbb R$ that has an upper bound has a least upper bound in $\mathbb R$. Let $M$ be the least upper bound for the sequence $(a_n)_{n\in\mathbb N}$, i.e. $a_n \leq M$ for all $n\in\mathbb N$. Since $M$ is the least upper bound, for all $\epsilon > 0$ there is an $N\in\mathbb N$ s.t. $M - \epsilon < a_N \leq M$.
+		
+		By assumption, the sequence is monotonically increasing, i.e. $a_m \geq a_n$ for any $m > n$. Without loss of generality, let $m > n$, then we have
+		\begin{align}
+			M - \epsilon < a_N \leq a_n \leq a_m \leq M, \quad \forall (m, n\geq N) \wedge (m > n)
+		\end{align}
+		from which $a_m - a_n < \epsilon$ follows. Similarly, we can show that $a_n - a_m < \epsilon$ for $n > m$. Hence, $d(a_m, a_n) < \epsilon$ for any $m$, $n\geq N$.
+	\end{proof}
+	
+	\begin{theorem}\label{thrm:AM-GM}
+		Let $x_1$, \dots, $x_n\in\mathbb R_{\geq 0}$, $n\geq 1$, then the arithmetic mean is bigger than or equal to the geometric mean, i.e.
+		\begin{align}\label{eq:AM-GM}
+			\frac{\sum_{i=1}^{n} x_i}{n} \geq \left(\prod_{i=1}^{n}x_i\right)^{1/n}
+		\end{align}
+	\end{theorem}
+	
+	\begin{proof}(\cite{Wiki:AM-GM})
+		Via induction. Let $n=1$, then $x_1 \geq x_1$, which is true. 
+		
+		Assuming that Eq. \eqref{eq:AM-GM} holds for any $n\in\mathbb N$, we will make the transition $n\mapsto n + 1$ and denote the arithmetic mean of $x_1$, \dots, $x_{n + 1}$ by $\alpha$:
+		\begin{align}\label{eq:AM-GM-proof-1}
+			(n + 1) \alpha = \sum_{i=1}^{n + 1} x_i \Leftrightarrow n\alpha = \sum_{i=1}^{n + 1}x_i - \alpha
+		\end{align}
+		If $x_i = \alpha$ for all $1\leq i\leq n + 1$, then we are done, since Eq. \eqref{eq:AM-GM} would be an equality. If all the $x_i$ are not equal to $\alpha$, then WLOG, let there be exactly two $x_i$ that are not equal to $\alpha$. Place these two elements at the end, and noting that one needs to be bigger than $\alpha$ and the other smaller than $\alpha$, WLOG we have 
+		\begin{align}\label{eq:AM-GM-proof-2}
+			\left(x_n - \alpha > 0\right) \wedge \left( \alpha - x_{n+1} > 0 \right) \Rightarrow (x_n - \alpha)(\alpha - x_{n+1}) > 0.
+		\end{align}
+		Now define
+		\begin{align}
+			y := x_{n} + x_{n + 1} - \alpha \geq x_{n} - \alpha \overset{\tiny\eqref{eq:AM-GM-proof-2}}{>} 0.
+		\end{align}
+		and substitute it into Eq. \eqref{eq:AM-GM-proof-1}:
+		\begin{align}
+			n\alpha = \sum_{i=1}^{n + 1}x_i - \alpha = \sum_{i=1}^{n-1}x_i + x_n + x_{n+1} - \alpha = \sum_{i=1}^{n-1}x_i + y
+		\end{align}
+		Thus, $\alpha$ is also the arithmetic mean of the $n$ numbers $x_1$, \dots, $x_{n-1}$, $y$. Making use of the induction hypothesis, we get
+		\begin{align}\label{eq:AM-GM-proof-3}
+			\alpha^{n+1} = \alpha\alpha^n \geq \alpha y\prod_{i=1}^{n-1} x_i.
+		\end{align}
+		From Eq.\eqref{eq:AM-GM-proof-2} we know that 
+		\begin{align}\label{eq:AM-GM-proof-4}
+			y\alpha - x_{n}x_{n+1} = (x_{n} + x_{n + 1} - \alpha)\alpha - x_{n}x_{n+1} = (x_n - \alpha)(\alpha - x_{n+1}) > 0 \Leftrightarrow y\alpha > x_{n}x_{n+1}
+		\end{align}
+		Substituting Eq. \eqref{eq:AM-GM-proof-4} into \eqref{eq:AM-GM-proof-3}, we get
+		\begin{align}
+			\alpha^{n+1} \geq \alpha y\prod_{i=1}^{n-1} x_i > x_nx_{n+1}\prod_{i=1}^{n-1} x_i = \prod_{i=1}^{n + 1} x_i \Leftrightarrow \alpha \geq \left(\prod_{i=1}^{n+1}x_i\right)^{\frac{1}{n+1}},
+		\end{align}
+		which proves the induction hypothesis.
+	\end{proof}
+	
+	\begin{proof}(of Remark \ref{remark:cauchy_not_convergent_necess}) 
+		Looking at the proof of Theorem \ref{thrm:mono_inc_seq_Cauchy}, we will see that that the statement of Theorem \ref{thrm:mono_inc_seq_Cauchy} also holds for sequences in $\mathbb Q$ that are upper bounded and monotonically increasing, since any non-empty subset of $\mathbb Q\subset \mathbb R$ that is upper bounded has a least upper bound in $\mathbb R$ (though not necessarily in $\mathbb Q$). 
+		
+		Hence, to show that the sequence $(a_n)_{n\in\mathbb N}$ with $a_n = \left(1 + n^{-1}\right)^n$ is a Cauchy sequence in $\mathbb Q$, we only need to show that it is monotonically increasing and derive an upper bound.
+			
+		For the monotonicity, we will make use of Theorem \ref{thrm:AM-GM} (\cite{64864}). For this, define the $x_i$ as follows: 
+		\begin{align}
+			x_i := \begin{cases}
+				1, & i = 1
+				\\ 1 + \frac{1}{n}, & 2 \leq i \leq n + 1
+			\end{cases}
+		\end{align}
+		Then we have
+		\begin{align}
+			\frac{\sum_{i=1}^{n + 1}x_i}{n + 1} &\geq \left(\prod_{i = 1}^{n + 1}x_i\right)^{\frac{1}{n+1}} 
+			\Leftrightarrow \left(\frac{\sum_{i=1}^{n + 1}x_i}{n + 1}\right)^{n+1} \geq \prod_{i = 1}^{n + 1}x_i
+			\\ \Rightarrow \left(\frac{1 + n\left(1 + \frac{1}{n}\right)}{n+1}\right)^{n + 1} &= \left(1 + \frac{1}{n + 1}\right)^{n + 1} \geq \left(1 + \frac{1}{n}\right)^n \quad\forall n\in\mathbb N,
+		\end{align}
+		i.e. $a_{n+1} > a_n$.
+		
+		To prove that the sequence $(a_n)_{n\in\mathbb N}$ is upper bounded (\cite{5065619}), note that
+		\begin{align}
+			a_n &= \left(1 + \frac{1}{n}\right)^n = \sum_{k=0}^{n}\begin{pmatrix}
+				n \\ k
+			\end{pmatrix}\frac{1}{n^k} = \sum_{k = 0}^{n}\frac{n!}{k!(n-k)!}\frac{1}{n^k} = 1 + \sum_{k = 1}^{n}\frac{n!}{k!(n-k)!}\frac{1}{n^k}
+			\\ &= 1 + \sum_{k = 1}^{n}\frac{n(n-1)\dots (n-k+1)}{k!}\frac{1}{n^k} \leq 1 + \sum_{k=1}^{n}\frac{1}{k!} \leq 1 + \sum_{k=1}^{n}\frac{1}{2^{k-1}}
+			\\ &\leq 1 + \sum_{k=0}^{\infty}\frac{1}{2^k} = 3.
+		\end{align}
+	\end{proof}
 	
 	\newpage 
 	\subsection{Continuity}
