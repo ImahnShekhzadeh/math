@@ -871,7 +871,7 @@
 		\end{align}
 		which is a Cauchy sequence and where all elements are in $\mathbb Q$, does not converge in $\mathbb Q$ (the limit point is Euler's number $e$). To prove this, we will make use of the following two Theorems.
 	\end{remark}
-
+	
 	\begin{theorem}\label{thrm:mono_inc_seq_Cauchy}
 		Any sequence $(a_n)_{n\in\mathbb N}$ with $a_n\in \mathbb R$ for any $n\in \mathbb N$ that is monotonically increasing and upper bounded for any $n\in\mathbb N$ is a Cauchy sequence in ($\mathbb R$, $d$) with $d(x, y):= \abs{x - y}$ for any \newline $x$, $y\in \mathbb R$.		
 	\end{theorem}
@@ -880,7 +880,7 @@
 		The completeness axiom states that any non-empty subset of $\mathbb R$ that has an upper bound has a least upper bound in $\mathbb R$. Let $M$ be the least upper bound for the sequence $(a_n)_{n\in\mathbb N}$, i.e. $a_n \leq M$ for all $n\in\mathbb N$. Since $M$ is the least upper bound, for all $\epsilon > 0$ there is an $N\in\mathbb N$ s.t. $M - \epsilon < a_N \leq M$.
 		
 		By assumption, the sequence is monotonically increasing, i.e. $a_m \geq a_n$ for any $m > n$. Without loss of generality, let $m > n$, then we have
-		\begin{align}
+		\begin{align}\label{eq:mono_inc_seq_Cauchy}
 			M - \epsilon < a_N \leq a_n \leq a_m \leq M, \quad \forall (m, n\geq N) \wedge (m > n)
 		\end{align}
 		from which $a_m - a_n < \epsilon$ follows. Similarly, we can show that $a_n - a_m < \epsilon$ for $n > m$. Hence, $d(a_m, a_n) < \epsilon$ for any $m$, $n\geq N$.
@@ -956,6 +956,23 @@
 			\\ &\leq 1 + \sum_{k=0}^{\infty}\frac{1}{2^k} = 3.
 		\end{align}
 	\end{proof}
+
+	\begin{theorem}\label{thrm:mono_inc_seq_converges}
+		Any sequence $(a_n)_{n\in\mathbb N}$ with $a_n\in \mathbb R$ for any $n\in \mathbb N$ that is monotonically increasing and upper bounded for any $n\in\mathbb N$ converges in ($\mathbb R$, $d$) with $d(x, y):= \abs{x - y}$ for any $x$, $y\in \mathbb R$.
+	\end{theorem}
+
+	\begin{proof}
+		The proof is identical to that of Theorem \ref{thrm:mono_inc_seq_Cauchy}. With the same notation as there, we have, cf. Eq. \eqref{eq:mono_inc_seq_Cauchy}:
+		\begin{align}
+			M - \epsilon &< a_n \leq M, \quad \forall n\geq N
+			\\ \Rightarrow \abs{a_n - M} &< \epsilon,
+		\end{align}
+		i.e. the limit point of $(a_n)_{n\in\mathbb N}$ is $M$ (the least upper bound).
+	\end{proof}
+
+	\begin{remark}
+		Note that Theorem \ref{thrm:mono_inc_seq_converges} does not hold in $\mathbb Q$, since the completeness axiom only guarantess the existence of a least upper bound in $\mathbb R$.
+	\end{remark}
 
 	\begin{defn}
 		Let $(X, d)$ be a metric space. Then $(X, d)$ is called \textit{complete} if every Cauchy sequence in $X$ converges to a $\varphi\in X$ wrt $d$.
