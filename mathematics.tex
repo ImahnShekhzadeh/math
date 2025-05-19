@@ -23,6 +23,7 @@
 \newcommand{\abs}[1]{\left\vert #1 \right\vert}
 \newcommand{\inner}[1]{\left\langle #1 \right\rangle}
 \newcommand{\epi}[1]{\text{epi($ #1 $) } }
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 \title{Mathematics}
@@ -956,6 +957,14 @@
 			\\ &\leq 1 + \sum_{k=0}^{\infty}\frac{1}{2^k} = 3.
 		\end{align}
 	\end{proof}
+
+	\begin{exmp}
+		We can instruct infinitely many counter-examples to Theorem \ref{thrm:convergent_sequence_cauchy_sequence} in $\mathbb Q$. Let 
+		\begin{align}
+			\left(a_n\right)_{n\in\mathbb N} := \floor{10^{n} \cdot a}\cdot 10^{-n}, 
+		\end{align}
+		where $a\in \mathbb R\backslash \mathbb Q$. $(a_n)_{n\in\mathbb N}$ is a Cauchy sequence in $\mathbb Q$, which gives $a$ to its $n^{\text{th}}$ decimal point, converging to $a$. To see that it is a Cauchy sequence in $\mathbb Q$, note that all sequence elements are rational, that the sequence is bounded by $a$ and that it is monotonically increasing. Thus, by the proof of Theorem \ref{thrm:mono_inc_seq_Cauchy}, which also holds for $\mathbb Q$, $\left(a_n\right)_{n\in\mathbb N}$ is Cauchy in $\mathbb Q$.
+	\end{exmp}
 
 	\begin{theorem}\label{thrm:mono_inc_seq_converges}
 		Any sequence $(a_n)_{n\in\mathbb N}$ with $a_n\in \mathbb R$ for any $n\in \mathbb N$ that is monotonically increasing and upper bounded for any $n\in\mathbb N$ converges in ($\mathbb R$, $d$) with $d(x, y):= \abs{x - y}$ for any $x$, $y\in \mathbb R$.
