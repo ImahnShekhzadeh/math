@@ -348,7 +348,7 @@
 		\end{enumerate}
 	\end{defn}
 
-	\begin{exmp}
+	\begin{exmp}\label{exmp:lp-norm-vectors}
 		Let $X = \mathbb{R}^d$. Then for $1 \leq p < \infty$, the $L^p$ norm of a vector $x\in X$ is defined as:
 		
 		\begin{align}\label{eq:L^p_norm}
@@ -1007,9 +1007,55 @@
 		Let $X = \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$, and consider the metric $d(x_1, x_2) := \abs{x_1 - x_2}$. Define $Y = \mathbb R$, and consider the map $f: X\to Y$, $x\mapsto \tan(x)$, which is surjective. On $Y$, consider the metric $d'(y_1, y_2) := d\left( \arctan(y_1), \arctan(y_2)\right) = \abs{\arctan y_1 - \arctan y_2}$, cf. Eq. \eqref{eq:metrics_completion}. Since $(X, d)$ is incomplete, $(Y, d')$ is incomplete as well. To see that $(X, d)$ is incomplete, note that $\left(\frac{\pi}{2} - \frac{1}{n}\right)_{n\in\mathbb N}$ or $\left( -\frac{\pi}{2} + \frac{1}{n} \right)_{n\in\mathbb N}$ are Cauchy in $X$, yet do not converge in $X$.
 	\end{exmp}
 	
+	\begin{exmp}[Complete metric spaces]
+		Any set $X$ equipped with the discrete metric from Def. \ref{discrete-metric} is complete.
+	\end{exmp}
+	
+	\begin{exmp}
+		The metric space $(\mathbb R, d)$ with $d(x, y) := \abs{x - y}$ is \mbox{complete}. Also, $(\mathbb R^{d}, \norm{x}{p})$, cf. Example \ref{exmp:lp-norm-vectors}, for $1\leq p\leq \infty$ is complete.
+	\end{exmp}
+
+	\begin{exmp}
+		Let $\mathcal C[a, b]$ be the space of all continuous functions $\chi: [a, b]\to\mathbb{R}$ with the metric 
+		\begin{align}
+			d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} :=  \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \varphi(y)} \right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
+		\end{align}
+		The metric space $(\mathcal C[a, b], d_{\infty})$ is complete.
+	\end{exmp}
+
+	\begin{proof}
+		Let $(\varphi_n)_{n\in\mathbb N}$ be a Cauchy sequence in $\mathcal C[a, b]$, then for any $x\in [a, b]$:
+		\begin{align}
+			\abs{\varphi_n(x) - \varphi_m(x)} \leq \sup_{x\in [a, b]}\left\{ \abs{\varphi_{n}(x) - \varphi_{m}(y)} \right\} < \epsilon. \quad\forall m, n\geq N
+		\end{align} 
+		Hence, $(\varphi_n)_{n\in\mathbb N}(x)$ is a Cauchy sequence in $\mathbb R$ for any $x\in[a, b]$ wrt the metric $d(x, y) := \abs{x - y}$. Since $\left(\mathbb R, d\right)$ is complete, we know that $\varphi(x) := \lim\limits_{n\to\infty}\varphi_n(x)$ exists. 
+		
+		Finally, let us show that $\varphi\in\mathcal C[a, b]$. Since $\left(\varphi_n(x)\right)_{n\in\mathbb N}$ converges in $(\mathbb R, d)$, we can choose an $N\in\mathbb N$ s.t. $\abs{\varphi_n(x) - \varphi(x)} < \epsilon/3$ for all $n\geq N$ and all $x\in[a, b]$. And since $\left(\varphi_n\right)_{n\in\mathbb N}$ is a Cauchy sequence in $(\mathcal C[a, b], d_{\infty})$ (by assumption), i.e. the $\varphi_n$ are continuous, there exists a $\delta > 0$ s.t. $\abs{\varphi_N(x) - \varphi_{N}(y)} < \epsilon/3$ with $\abs{x - y} < \delta$. If $\abs{x-y} < \delta$, we get by applying the triangle inequality
+		\begin{align}
+			\abs{\varphi(x) - \varphi(y)} \leq \abs{\varphi(x) - \varphi_N(x)} + \abs{\varphi_N(x) - \varphi_N(y)} + \abs{\varphi_N(y) - \varphi(y)} < \epsilon,
+		\end{align}
+		which shows the continuity of $\varphi$, cf. Def. \ref{defn:continuity}.
+		
+		Thus, we have shown that $\varphi\in\mathcal C[a, b]$.
+	\end{proof}
+
+	\begin{theorem}
+		Let $(X, d)$ be a metric space. Then the following statements are true.
+		\begin{enumerate}[label=(\alph*)]
+			\item Complete subsets of $(X, d)$ are closed. \vspace{-0.3cm}
+			\item If $(X, d)$ is complete, then every closed subset of $(X, d)$ is complete.
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		(a): Let $U\subset X$ be closed wrt $d$, and let $\varphi\in X$ be a limit point of $\overline{U}$, i.e. there exists a sequence $\left(\varphi_{n}\right)_{n\in\mathbb N}$ in $U$ s.t. $\lim\limits_{n\to\infty}\varphi_n = \varphi$. Hence, $\left(\varphi_{n}\right)_{n\in\mathbb N}$ converges in $X$, and is thus a Cauchy sequence in $X$. Since $U$ is closed, the limit of the sequence lies in $U$, i.e. $U$ is closed.
+		
+		(b): Let $(X, d)$ be complete, $U\subset X$ closed and $(\varphi_n)_{n\in\mathbb N}$ a Cauchy sequence in $U$, which converges to a $\varphi\in X$, since $X$ is closed. Since $\varphi$ is the limit of $(\varphi_n)_{n\in\mathbb N}$ and $U$ is closed, it follows that $\varphi\in U$.
+	\end{proof}
+	
 	\newpage 
 	\subsection{Continuity}
-	\begin{defn}[$\epsilon$-$\delta$ definition of continuity]
+	\begin{defn}[$\epsilon$-$\delta$ definition of continuity]\label{defn:continuity}
 		Let $D$ be a subset of a metric space $(X, d)$ and let $p\in D$. Let $(Y, d')$ be another metric space. A function $f: D\rightarrow Y$ is called \textit{continuous} at $p$ if for all $\epsilon > 0$ there exists a $\delta > 0$ s.t. 
 		\begin{align}
 			d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon \ \forall z\in D \quad \text{with} \ d\left(z, p\right) < \delta.  
