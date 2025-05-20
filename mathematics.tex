@@ -6,7 +6,7 @@
 \addbibresource{references.bib}
 
 % NEW (16-04-21, 19p49)
-\usepackage[margin = 0.6in]{geometry}
+\usepackage[margin = 1in]{geometry}
 \numberwithin{equation}{section}
 
 \theoremstyle{definition}
@@ -24,6 +24,7 @@
 \newcommand{\inner}[1]{\left\langle #1 \right\rangle}
 \newcommand{\epi}[1]{\text{epi($ #1 $) } }
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\seq}[1][\varphi]{\left( #1 \right)_{n \in \mathbb{N}}}
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 \title{Mathematics}
@@ -540,7 +541,7 @@
 		A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. 
 	\end{defn} 
 	
-	\begin{remark}[Discrete Metric]\label{discrete-metric}
+	\begin{remark}[Discrete Metric]\label{remark:discrete-metric}
 		Let $X$ be an arbitrary set and $d(\varphi, \psi) = 1 \ \forall \varphi$, $\psi\in X$ and $d(\varphi, \varphi) = 0$. Then $d$ is a metric, called the \textit{discrete metric} on $X$. 
 	\end{remark}
 	
@@ -552,8 +553,8 @@
 		is called an \textit{open ball} in $X$ with middle point $\varphi$ and radius $r$. 
  	\end{defn}
  
- 	\begin{exmp}
- 		For the discrete metric $d$ according to Remark \ref{discrete-metric}, the open balls can be characterized as follows:
+ 	\begin{exmp}\label{exmp:open-balls-discrete-metric}
+ 		For the discrete metric $d$ according to Remark \ref{remark:discrete-metric}, the open balls can be characterized as follows:
  		\begin{align}
  			B_{r}(\varphi) = \begin{cases}
  				\{\varphi\}, &r \leq 1 
@@ -690,6 +691,16 @@
 			d(\psi_n, \varphi) \leq d(\psi_n, \varphi_n) + d(\varphi_n, \varphi) < \frac{1}{n} + \frac{1}{n} \overset{n\to\infty}{\longrightarrow} 0,
 		\end{align}
 		i.e. $(\psi_n)_{n\in\mathbb N}$ is a sequence in $U$ that converges to $\varphi$, i.e. $\varphi$ is an accumulation point of $U$, hence $\varphi\in \bar{U}$.
+	\end{proof}
+	
+	\begin{theorem}\label{thrm:property_metric_space}
+		Let $(X, d)$ be a metric space. Then $\varphi\in \overline{U}$ for $U\subset X$ if and only if for every open set $O\subset X$ containing $\varphi$, $U\cap O\ne \emptyset$.
+	\end{theorem}
+
+	\begin{proof}
+		\enquote{$\Longrightarrow$} Since $\varphi\in\overline{U}$, there exists a sequence $\left(\varphi_n\right)_{n\in\mathbb N}$ converging to $\varphi$ wrt $d$, i.e. for all $\epsilon > 0$ there exists an $N\in\mathbb N$ s.t. for all $n\geq N$, $d(\varphi_n, \varphi) < \epsilon$. Let $O\subset X$ be open, and let $\varphi\in O$. By definition, there exists an open ball $B_{r}(\varphi)\subset O$ with $r > 0$. Choose $\epsilon = r$ and $\psi = x_{N}\in U$, then $\psi\in B_{r}(\varphi) \subset O$.
+		
+		\enquote{$\Longleftarrow$} By assumption, for any non-empty open set $O\subset X$, $U\cap O\ne\emptyset$, where $U\subset X$. Let $\varphi\in X$. Since open balls are open, for any $\epsilon > 0$, $U\cap B_{\epsilon}(\varphi)\ne\emptyset$. Consider the sequence of open balls $\left( B_{1/n}(\varphi)\right)_{n\in\mathbb N}$, for which $U\cap B_{\frac{1}{n}}(\varphi) \ne \emptyset$ holds. Thus for each $n\in\mathbb N$, there exists a point $\varphi_{n}\in X$ s.t. $\varphi_n \in B_{\frac{1}{n}}(\varphi)$ and $\varphi_n\in U$. Hence, by definition, $\varphi\in X$ is an accumulation point of $U$.
 	\end{proof}
 	
 	\begin{theorem}
@@ -1008,14 +1019,14 @@
 	\end{exmp}
 	
 	\begin{exmp}[Complete metric spaces]
-		Any set $X$ equipped with the discrete metric from Def. \ref{discrete-metric} is complete.
+		Any set $X$ equipped with the discrete metric from Def. \ref{remark:discrete-metric} is complete.
 	\end{exmp}
 	
 	\begin{exmp}
 		The metric space $(\mathbb R, d)$ with $d(x, y) := \abs{x - y}$ is \mbox{complete}. Also, $(\mathbb R^{d}, \norm{x}{p})$, cf. Example \ref{exmp:lp-norm-vectors}, for $1\leq p\leq \infty$ is complete.
 	\end{exmp}
 
-	\begin{exmp}
+	\begin{exmp}\label{exmp:space-continuous-functions-complete}
 		Let $\mathcal C[a, b]$ be the space of all continuous functions $\chi: [a, b]\to\mathbb{R}$ with the metric 
 		\begin{align}
 			d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} :=  \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \varphi(y)} \right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
@@ -1052,6 +1063,59 @@
 		
 		(b): Let $(X, d)$ be complete, $U\subset X$ closed and $(\varphi_n)_{n\in\mathbb N}$ a Cauchy sequence in $U$, which converges to a $\varphi\in X$, since $X$ is closed. Since $\varphi$ is the limit of $(\varphi_n)_{n\in\mathbb N}$ and $U$ is closed, it follows that $\varphi\in U$.
 	\end{proof}
+
+	\begin{defn}
+		Let $(X, d)$ be a metric space. Then $U\subset X$ is called \textit{dense} in $X$ if $\overline{U} = X$, i.e. to every $\varphi\in X$ there exists a sequence $\left(\varphi_n\right)_{n\in\mathbb N}$ in $U$ that converges to $\varphi$ wrt $d$. Alternatively, we can say that to every $\varphi\in X$ and $\epsilon > 0$ there is a $\psi\in U$ s.t. $d(\varphi, \psi) < \epsilon$ (set e.g. $\psi := \varphi_N$, where $N$ is s.t. for all $n\geq N$, $d(\varphi_n, \varphi) < \epsilon$).
+	\end{defn}
+
+	\begin{exmp}
+		$\mathbb Q$ lies dense in $\mathbb R$ wrt $d(x, y) := \abs{x - y}$ for all $x$, $y\in\mathbb R$.
+	\end{exmp}
+
+	\begin{theorem}\label{remark:sum-rational-irrational}
+		If $\varphi\in\mathbb R\backslash \mathbb Q$ and $\psi\in\mathbb Q$, then $\varphi + \psi$ is irrational. This is because any $\psi \in \mathbb Q$ can be written as $p/q$, where $p$, $q\in\mathbb Z$. Thus: If $\varphi + \psi$ was rational, we would have
+		\begin{align}
+			\varphi + \psi = \varphi + \frac{p}{q} = \frac{r}{s} \Rightarrow \varphi = \frac{r}{s} - \frac{p}{q} = \frac{rq - ps}{qs} \in \mathbb Q,
+		\end{align}
+		which is a contradiction to the assumption $\varphi\in\mathbb R\backslash\mathbb Q$. This proves that the sum of a rational and irrational number is always irrational.
+	\end{theorem}
+
+	\begin{exmp}[Dense subsets]
+		$\mathbb R\backslash \mathbb Q$ lies dense in $\mathbb R$ wrt $d(x, y) := \abs{x - y}$ for all $x$, $y\in\mathbb R$.
+	\end{exmp}
+
+	\begin{proof}
+		We need to show that to every $\varphi\in \mathbb R$ there exists a sequence $\left(\varphi_n\right)_{n\in\mathbb N}\in \mathbb R\backslash \mathbb Q$ s.t. $\varphi_n\overset{n\to\infty}{\longrightarrow}\varphi$ wrt $d$. We already know that $\mathbb Q$ lies dense in $\mathbb R$ wrt $d$, i.e. there exists a sequence $\left(\psi_n\right)_{n\in\mathbb N}$ s.t. $\psi_n\overset{n\to\infty}{\longrightarrow}\varphi$. Now define the sequence $\seq[\varphi_n] := \seq[\psi_n + \frac{a}{n}]$, where $a\in\mathbb R\backslash \mathbb Q$. Each sequence element lies in $\mathbb R\backslash \mathbb Q$, since the sum of a rational and an irrational number is irrational, cf. Remark \ref{remark:sum-rational-irrational}, and converges to $\varphi$ wrt $d$.
+	\end{proof}
+
+	\begin{exmp}[Weierstrass Approximation Theorem]\label{exmp:weierstrass-approx-thrm}
+		The algebraic polynomials $\mathcal P$ are dense on an interval $[a, b]\subset \mathbb R$ with $-\infty < a < b < \infty$ in $\mathcal C[a, b]$ wrt the metric $d_{\infty}$ from Example \ref{exmp:space-continuous-functions-complete}. \cite[Corollary 6.12]{iske:approximation}
+	\end{exmp}
+
+	\begin{proof}
+		We deletegate the proof of this celebrated Theorem to appendix \ref{app:weierstrass-app-theorem}. 
+	\end{proof}
+
+	\begin{theorem}\label{thrm:characterization-dense-subsets}
+		Let $(X, d)$ be a metric space. $U\subset X$ dense iff every non-empty open set $O\subset X$ intersects $U$, i.e. $U\cap O\ne\emptyset$.
+	\end{theorem}
+
+	\begin{proof}
+		\enquote{$\Longrightarrow$} Use Theorem \ref{thrm:property_metric_space} and note that $U\subset X$ is dense, i.e. $\overline{U} = X$.
+		\newline\newline\enquote{$\Longleftarrow$} We want to prove $U\subset X$ dense $\Rightarrow U\cap O\ne\emptyset$ for all non-empty open sets $O\subset X$. We will prove this via its contraposition, i.e. if there exists a non-empty open set $O\subset X$ with $U\cap O=\emptyset$, then $U\subset X$ is not complete.
+		
+		Note that according to Theorem \ref{thrm:property_metric_space}, if $\varphi\in\overline{U}$ for $U\subset X$, then for every open set $O\subset X$ containing $\varphi$, $U\cap O\ne\emptyset$. The contraposition of this statement is what we want to prove.
+	\end{proof}
+
+	\begin{remark}
+		Let $d$ and $d'$ be two metrics on $X$. If $U\subset X$ is dense wrt $d$, it is not necessarily dense wrt $d'$.
+	\end{remark}
+
+	\begin{exmp}
+		Consider $X=\mathbb R$ and let $d(x, y) := \abs{x - y}$ for all $x$, $y\in\mathbb R$. While $U = \mathbb Q \subset X = \mathbb R$ is dense wrt $d$, it is not dense wrt the discrete metric from Remark \ref{remark:discrete-metric}, since for $r \leq 1$, the open balls are given by the singletons $\{\varphi\}$ for any $\varphi\in X$, cf. Example \ref{exmp:open-balls-discrete-metric}. Let $\varphi = \pi$, then $B_{r}(\pi) = \{\pi\}$ for any $r\leq 1$, but clearly, $\mathbb Q \cap \{\pi\} = \emptyset$, and thus by Theorem \ref{thrm:characterization-dense-subsets} $\mathbb Q$ is not dense in $\mathbb R$ wrt the discrete metric.
+	\end{exmp}
+
+	
 	
 	\newpage 
 	\subsection{Continuity}
@@ -1119,7 +1183,7 @@
 	\end{defn}
 
 	\begin{exmp}\label{basis_discrete_metric}
-		Let $(X, d)$ be a metric space, where the metric is the discrete metric from Remark \ref{discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$ is basis of $X$. 
+		Let $(X, d)$ be a metric space, where the metric is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$ is basis of $X$. 
 	\end{exmp}
 	
 	\begin{exmp}\label{basis_metric_space}
@@ -1594,6 +1658,13 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 			
 		\end{enumerate}
 	\end{proof}
+
+
+\appendix 
+\include{appendix_A.tex}
+
+
+
 
 \newpage 
 \printbibliography

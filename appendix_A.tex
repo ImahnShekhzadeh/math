@@ -1,0 +1,21 @@
+\section{Weierstrass Approximation Theorem}\label{app:weierstrass-app-theorem}
+
+In the following, we will prove the Weierstrass approximation theorem, as stated in Example \ref{exmp:weierstrass-approx-thrm}. The proof will use \textit{Korovkin\footnote{\textsc{KOROVKIN} (1913 -- 1985), Russian mathematician.} sequences}. The approach is taken from \mbox{Chapter 6} of \cite{iske:approximation}.
+
+\begin{defn}[Monotonicity of Operator]\label{defn:monotonicity-operator}
+	A linear operator $K: \mathcal C[a, b] \to \mathcal C[a, b]$ is \textit{monotone} on $\mathcal C[a, b]$ if $K$ is \textit{positive} on $\mathcal C[a, b]$, i.e. $Kf \geq 0$ for all $f\in \mathcal C[a, b]$ satisfying $f\geq 0$, where all inequalities are taken pointwise on $[a, b]$.
+\end{defn}
+
+\begin{remark}
+	Definition \ref{defn:monotonicity-operator} is equivalent to the following statement: For any \mbox{$f$, $g\in\mathcal C[a, b]$} satisfying $f\leq g$, we have $Kf \leq Kg$.
+\end{remark}
+
+\begin{proof}
+	\enquote{$\Longrightarrow$} Let $K$ be monotone, i.e. for any $f\in\mathcal C[a, b]$ with $f\geq 0$ we have $Kf \geq 0$, and consider $h := g - f \in \mathcal C[a, b]$ with $h\geq 0$, i.e. $f\leq g$, which implies $Kf\leq Kg$.
+	
+	\enquote{$\Longleftarrow$} Assume that for any \mbox{$f$, $g\in\mathcal C[a, b]$} satisfying $f\leq g$, we have $Kf \leq Kg$. Take $f = 0$, then $g\geq 0$ implies $Kg \geq 0$ for any $g\in\mathcal C[a, b]$.
+\end{proof}
+
+\begin{defn}[Korovkin sequence]
+	content...
+\end{defn}
