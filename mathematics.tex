@@ -3,6 +3,7 @@
 \usepackage{comment, listings, centernot, amssymb, hyperref, graphicx, amsmath, textcomp, breqn, mathtools, csquotes, cancel, enumitem, amsthm, caption, bm, tikz} % amsthm provides `proof`environment
 \usepackage[backend=biber]{biblatex}
 \usepackage[english]{babel}
+\usepackage{array}
 \addbibresource{references.bib}
 
 % NEW (16-04-21, 19p49)
@@ -678,7 +679,7 @@
 	\end{remark}
 
 	\begin{remark}
-		According to Theorem \ref{thm:closed_set_acc_point}, a subset $U\subset X$ is closed if and only if coincides with its closure, i.e. $U = \bar{U}$.
+		According to Theorem \ref{thm:closed_set_acc_point}, a subset $U\subset X$ is closed if and only if it contains all its limit points, thus for a closed subset we have $\overline{U} \subset U$. With Remark \ref{remark:closure_superset}, we get $U$ is closed if and only if $U = \overline{U}$.
 	\end{remark}
 	
 	\begin{theorem}\label{thrm:closure_closed}
@@ -877,7 +878,7 @@
 	\end{proof}
 
 	\begin{remark}\label{remark:cauchy_not_convergent_necess}
-		The converse of Theorem \ref{thrm:convergent_sequence_cauchy_sequence} is in general not true: Take $X=\mathbb Q$ and let \newline $d(x, y) := \abs{x - y}$, for any $x$, $y\in\mathbb Q$. Then we have a metric space $(\mathbb Q, d)$, but the sequence $(a_n)_{n\in\mathbb N}$ with
+		The converse of Theorem \ref{thrm:convergent_sequence_cauchy_sequence} is in general not true: Take $X=\mathbb Q$ and let $d(x, y) := \abs{x - y}$, for any $x$, $y\in\mathbb Q$. Then we have a metric space $(\mathbb Q, d)$, but the sequence $(a_n)_{n\in\mathbb N}$ with
 		\begin{align}\label{eq:seq_euler}
 			a_n := \left(1 + \frac{1}{n}\right)^n,
 		\end{align}
@@ -1050,7 +1051,7 @@
 		Thus, we have shown that $\varphi\in\mathcal C[a, b]$.
 	\end{proof}
 
-	\begin{theorem}
+	\begin{theorem}\label{thrm:complete_subsets_properties}
 		Let $(X, d)$ be a metric space. Then the following statements are true.
 		\begin{enumerate}[label=(\alph*)]
 			\item Complete subsets of $(X, d)$ are closed. \vspace{-0.3cm}
@@ -1115,6 +1116,25 @@
 		Consider $X=\mathbb R$ and let $d(x, y) := \abs{x - y}$ for all $x$, $y\in\mathbb R$. While $U = \mathbb Q \subset X = \mathbb R$ is dense wrt $d$, it is not dense wrt the discrete metric from Remark \ref{remark:discrete-metric}, since for $r \leq 1$, the open balls are given by the singletons $\{\varphi\}$ for any $\varphi\in X$, cf. Example \ref{exmp:open-balls-discrete-metric}. Let $\varphi = \pi$, then $B_{r}(\pi) = \{\pi\}$ for any $r\leq 1$, but clearly, $\mathbb Q \cap \{\pi\} = \emptyset$, and thus by Theorem \ref{thrm:characterization-dense-subsets} $\mathbb Q$ is not dense in $\mathbb R$ wrt the discrete metric.
 	\end{exmp}
 
+	\begin{remark}
+		Let $(X, d)$ be a metric space. Then there are examples of dense subsets $U\subset X$ wrt $d$ that are not complete wrt $d$, and vice versa.
+	\end{remark}
+
+	\begin{exmp}
+		Consider the cantor set $\mathcal C$ on $[0, 1]$, which we consider as a subset of the metric space $\left([0, 1], d\right)$ with $d(x, y) := \abs{x - y}$ for all $x$, $y\in[0, 1]$. Formally, it is defined as follows:
+		\begin{align}
+			C_{0} &:= [0, 1],
+			\\ C_{n} &:= \frac{C_{n-1}}{3} \cup \left(\frac{2}{3} + \frac{C_{n-1}}{3}\right) = \frac{1}{3}\left(C_{n-1} \cup \left( 2 + C_{n-1} \right)\right),
+			\\ \mathcal C &:= \bigcap_{n=0}^{\infty}C_n.
+		\end{align} 
+		Intuitively, the Cantor set $\mathcal C$ is created by iteratively removing the open middle third of each line segment.
+	
+		Since for all $n\in\mathbb N$, $C_n$ is closed (as the finite union of closed sets) -- for a formal proof, use induction -- and the arbitrary intersection of closed sets is closed, we have that $\mathcal C\subset [0, 1]$ is closed wrt $d$. Thus, by Theorem \ref{thrm:complete_subsets_properties} b), $\mathcal C$ is complete wrt $d$. Now consider the open set $O := \left(\frac{1}{2}, \frac{2}{3}\right) \subset [0, 1]$, which is open wrt $d$. Clearly, $O\cap \mathcal C = \emptyset$, and thus by Theorem \ref{thrm:characterization-dense-subsets} $\mathcal C$ is not dense wrt $d$.
+	\end{exmp}
+
+	\begin{exmp}
+		$\mathbb Q$ is a dense subset of $X$, where $\left(X, d\right)$ with $d(x, y) := \abs{x-y}$ for all $x$, $y\in\mathbb R$. However, we have already established that $\mathbb Q$ is not complete wrt $d$, e.g. cf. Remark \ref{remark:cauchy_not_convergent_necess}.
+	\end{exmp}
 	
 	
 	\newpage 
