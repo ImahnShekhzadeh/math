@@ -808,7 +808,7 @@
 		We have shown that $d$ and $d'$ induce the same topology on $X$, and are hence equivalent.
 	\end{proof}
 
-	\begin{defn}[Bounded set]
+	\begin{defn}[Bounded set]\label{defn:bounded_set}
 		A subset $U\subset X$ is called \textit{bounded} in $X$ if it is contained in a closed ball in $X$, i.e. there exists $r > 0$ and $\varphi \in X$ s.t. $U\subset B_{r}[\varphi]$.
 	\end{defn}
 
@@ -1030,7 +1030,7 @@
 	\begin{exmp}\label{exmp:space-continuous-functions-complete}
 		Let $\mathcal C[a, b]$ be the space of all continuous functions $\chi: [a, b]\to\mathbb{R}$ with the metric 
 		\begin{align}
-			d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} :=  \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \varphi(y)} \right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
+			d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} :=  \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(y)} \right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
 		\end{align}
 		The metric space $(\mathcal C[a, b], d_{\infty})$ is complete.
 	\end{exmp}
@@ -1140,16 +1140,43 @@
 	\newpage 
 	\subsection{Continuity}
 	\begin{defn}[$\epsilon$-$\delta$ definition of continuity \cite{MfPI}]\label{defn:continuity}
-		Let $D$ be a subset of $X$, where $(X, d)$ is a metric space, and let $p\in D$. Let $(Y, d')$ be another metric space. A function $f: D\rightarrow Y$ is called \textit{continuous} at $p$ if for all $\epsilon > 0$ there exists a $\delta > 0$ s.t. 
+		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{continuous} at $p\in X$ if for all $\epsilon > 0$ there exists a $\delta = \delta(\epsilon, p) > 0$ s.t. 
 		\begin{align}
-			d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon \ \forall z\in D \quad \text{with} \ d\left(z, p\right) < \delta.  
+			\forall z\in D: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.  
 		\end{align}
-		$f$ is called continuous on $D$ if it is continuous for every $p\in D$.
+		$f$ is called continuous on $X$ if it is continuous for every $p\in X$.
 	\end{defn}
+
+	\begin{defn}[Uniform continuity \cite{src:uniform_continuity}]
+		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{uniformly continuous} on $X$ if for all $\epsilon > 0$ there exists a $\delta = \delta(\epsilon)$ s.t. for all $p\in X$,
+		\begin{align}
+			\forall z\in D: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.
+		\end{align}
+	\end{defn}
+
+	\begin{remark}
+		While uniform continuity implies continuity, the opposite is in general not true.
+	\end{remark}
 
 	\begin{theorem}
 		Def. \ref{defn:continuity} is equivalent to the following (with the same notation): For every sequence $\seq[p_n]$ in $D$ that converges to $p$, i.e. $p_n \overset{n\to\infty}{\longrightarrow} p$ wrt $d$, the sequence $\seq[f(p_n)]$ converges to $f(p)$ wrt $d'$.
 	\end{theorem}
+
+	\begin{theorem}
+		Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$, where on $\mathbb R$ we consider the usual metric, that is continuous on $[a, b]$, is uniformly continuous on  $[a, b]$.
+	\end{theorem}
+
+	\begin{proof}
+		\cite[p. 285]{MfPI}.
+	\end{proof}
+
+	\begin{theorem}
+		Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$ (where on $\mathbb R$ we consider the usual metric) that is continuous is bounded, in the sense that $\{ f(x) \mid x\in [a, b] \}$ is bounded, cf. Defn. \ref{defn:bounded_set}, 
+	\end{theorem}
+
+	\begin{proof}
+		\cite[p. 161]{MfPI}.
+	\end{proof}
 
 	\begin{lemma}\label{continuity_vector_components}
 		Consider the map $f: \mathbb R^m\rightarrow\mathbb R^n$. Then $f$ is continuous if all the $f_i: \mathbb R^m\rightarrow\mathbb R$, $i\in\{1, \dots, n\}$ are continuous. 
