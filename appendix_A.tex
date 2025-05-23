@@ -20,15 +20,28 @@ In the following, we will prove the Weierstrass approximation theorem, as stated
 	\enquote{$\Longleftarrow$} Assume that for any \mbox{$f$, $g\in\mathcal C[a, b]$} satisfying $f\leq g$, we have $Kf \leq Kg$. Take $f = 0$, then $g\geq 0$ implies $Kg \geq 0$ for any $g\in\mathcal C[a, b]$.
 \end{proof}
 
-\begin{defn}[Korovkin sequence]
-	A sequence $\seq[K_n]$ of linear and positive operators $K_n: \mathcal C[a, b]\to\mathcal C[a, b]$ is called a \textit{Korovkin sequence} on $\mathcal C[a, b]$ if $K_np \overset{n\to\infty}{\longrightarrow}p$ wrt $d_{\infty}$ for all $p\in \mathcal P_{2}$, where $\mathcal P_n$ is the linear space of all univariate polynomials of degree at most $n$.
+\begin{defn}[Korovkin sequence]\label{defn:Korovkin_sequence}
+	A sequence $\seq[K_n]$ of linear and positive operators $K_n: \mathcal C[a, b]\to\mathcal C[a, b]$ is called a \textit{Korovkin sequence} on $\mathcal C[a, b]$ if $K_np \overset{n\to\infty}{\longrightarrow}p$ wrt $d_{\infty}$ for all $p\in \mathcal P_{2}$, where $\mathcal P_n$ is the linear space of all univariate polynomials of degree at most $n$ defined on $[a, b]$.
 \end{defn}
+
+\begin{theorem}[Korovkin, 1953]\label{thrm:korovkin_1953}
+	For a compact interval $[a, b]\subset \mathbb R$, let $\seq[K_n]$ be a Korovkin sequence on $\mathcal C[a, b]$. Then for any $f\in\mathcal C[a, b]$, we have
+	\begin{align}
+		K_nf \overset{n\to\infty}{\longrightarrow} f \quad \text{wrt}\ d_{\infty}.
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	Let 
+\end{proof}
+
+In the following, we will explicitly construct a Korovkin sequence on $\mathcal C[a, b]$.
 
 \begin{remark}
 	In the following, we might restrict ourselves to the continuous functions $\mathcal C[0, 1]$ on $[0, 1]$. This is WLOG, since for any $x\in [a, b]$, we can transform it into $[0, 1]$ via a simple affine-linear transformation.
 \end{remark}
 
-\begin{defn}
+\begin{defn}\label{defn:Bernstein-polynomials}
 	Let $x\in[0, 1]$, then the \textit{Bernstein\footnote{\textsc{Sergei Natanovich Bernstein} (1880 -- 1968)} polynomials} are defined as
 	\begin{align}
 		\beta_{j}^{(n)}(x) := \begin{pmatrix}
@@ -50,7 +63,7 @@ In the following, we will prove the Weierstrass approximation theorem, as stated
 	\end{gather*} 
 \end{exmp}
 
-\begin{remark}
+\begin{remark}\label{remark:properties_Bernstein_polynomials}
 	The Bernstein polynomials $\beta_{0}^{(n)}, \dots, \beta_{n}^{(n)}\in\mathcal P_n$, for $n\in\mathbb N_{0}$, \dots 
 	\begin{enumerate}[label=(\alph*)]
 		\item \dots form a basis for the polynomial space $\mathcal P_n$;
@@ -133,4 +146,81 @@ In the following, we will prove the Weierstrass approximation theorem, as stated
 			\end{pmatrix}x^j(1-x)^{n-j} = (x + (1-x))^n = 1.
 		\end{align}
 	\end{enumerate}		
+\end{proof}
+
+\begin{defn}\label{defn:Bernstein-operators}
+	For $n\in\mathbb N$, define the \textit{Bernstein operator} $B_n: \mathcal C[0, 1]\to \mathcal P_n$ as 
+	\begin{align}\label{eq:bernstein_operator}
+		\left(B_nf\right)(x) := \sum_{j=0}^{n}f\left(\frac{j}{n}\right)\beta_{j}^{(n)}(x) \quad \forall f\in\mathcal C[0, 1],
+	\end{align}
+	where the $\beta_{j}^{(n)}$ are the Bernstein polynomials from Def. \ref{defn:Bernstein-polynomials}.
+\end{defn}
+
+\begin{remark}
+	The Bernstein operators $B_n$ are linear operators on $\mathcal C[0, 1]$. They are also positive (and hence monotone) on $\mathcal C[0, 1]$, since the $\beta_{j}^{(n)}$ are positive, cf. Remark \ref{remark:properties_Bernstein_polynomials} b).
+\end{remark}
+
+\begin{remark}
+	The Bernstein operators $B_n: \mathcal C[0, 1]\to\mathcal P_n$ are also bounded (in the sense of Def. \ref{defn:boundedness_operator}) wrt $\norm{\cdot}{\infty}$ ($C=1$ is one upper bound). By Theorem \ref{thrm:continuous-operator-bounded}, they are thus also continuous on $\mathcal C [0, 1]$.
+\end{remark}
+
+\begin{proof}
+	We show the boundedness of the Bernstein operators $B_n: \mathcal C[0, 1]\to \mathcal P_n$ directly. Let $f\in\mathcal C[0, 1]$ and $n\in\mathbb N$ be arbitrary, then
+	\begin{align}
+		\norm{B_nf}{\infty} &= \norm{\sum_{j=0}^{n}f\left(\frac{j}{n}\right)\beta_j^{(n)}(x)}{\infty} = \sup_{x\in[0, 1]}\left\{\abs{\sum_{j=0}^{n}f\left(\frac{j}{n}\right)\beta_{j}^{(n)}(x)}\right\}
+		\\[4pt] &\leq \sup_{x\in[0, 1]}\left\{\abs{\sup_{x\in[0, 1]}\{\abs{f(x)}\}\sum_{j=0}^{n}\beta_{j}^{(n)}(x)}\right\} = \norm{f}{\infty}\sup_{x\in[0, 1]}\left\{\sum_{j=0}^{n}\beta_{j}^{(n)}(x)\right\} = \norm{f}{\infty},
+	\end{align}
+	since the Bernstein polynomials form a partition of unity, cf. Remark \ref{remark:properties_Bernstein_polynomials} d). 
+	
+	Hence, we have shown that $\norm{B_nf}{\infty} \leq \norm{f}{\infty}$, which proves the boundedness of $B_n$ and that $C = 1$ is one upper bound for $B_n$.
+\end{proof}
+
+\begin{theorem}
+	The sequence $\seq[B_n]$ with $B_n: \mathcal C[0, 1]\to \mathcal P_n$ according to Def. \ref{defn:Bernstein-polynomials} forms a Korovkin sequence on $\mathcal C[0, 1]$, cf. Def. \ref{defn:Korovkin_sequence}.
+\end{theorem}
+
+\begin{proof}
+	The Bernstein operators $B_n$ for $n\in\mathbb N$ reproduce linear polynomials: Let \\ $1\in\mathcal C[0, 1]$ be the constant function that assigns each $x\in[0, 1]$ the value $1$, then
+	\begin{align}
+		B_n 1 = 1, 
+	\end{align}
+	and by the linearity of $B_n$ we have $B_n(c) = c$ for any $c\in\mathbb R$.
+	
+	We also have $B_n p_1 = p_1$, where $p_1\in\mathcal C[0, 1]$ is the identity function:
+	\begin{align}
+		B_n p_1 &= \sum_{j=0}^{n}p_1\left(\frac{j}{n}\right)\beta_{j}^{(n)}(x) = \sum_{j=0}^{n}\frac{j}{n}\beta_j^{(n)}(x) = \sum_{j=1}^{n}\frac{j}{n}\beta_{j}^{(n)}(x)
+		\\[4pt] &= \sum_{j=1}^{n}\begin{pmatrix}n-1 \\ j-1\end{pmatrix}x^j(1-x)^{n-j} = \sum_{j=0}^{n-1}\begin{pmatrix} n - 1 \\ j \end{pmatrix}x^{j+1}(1-x)^{n-j-1} 
+		\\[4pt] &= x\sum_{j=0}^{n-1}\beta_{j}^{(n-1)}(x) = x = p_1(x),
+	\end{align}
+	since the $\beta_j^{(n-1)}$ form a partition of unity, cf. Remark \ref{remark:properties_Bernstein_polynomials} d). This implies that \\ $B_n(\alpha p_1 + c) = \alpha p_1 + c$ for any real $\alpha, c$.
+	
+	Now consider $p_2\in\mathcal P_2$, where $p_2(x) := x^2$, and consider the following sequence of polynmials of degree $2$ for $n\geq 2$:
+	\begin{align}
+		f_n(x) := \frac{x(nx-1)}{n-1} = \frac{n}{n-1}x^2 - \frac{1}{n-1}x\in\mathcal P_2.
+	\end{align}
+	For $n\geq 2$, we have
+	\begin{align}\label{eq:bernstein_operator_seq}
+		\begin{split}
+			\left(B_nf_n\right)(x) &= \sum_{j=0}^{n}f\left(\frac{j}{n}\right)\beta_j^{(n)}(x) = \sum_{j=0}^{n}f\left(\frac{j}{n}\right)\begin{pmatrix}n\\ j\end{pmatrix}x^j(1-x)^{n-j}
+			\\[4pt] &= \sum_{j=0}^{n}\frac{j(j-1)}{n(n-1)}\begin{pmatrix}n\\ j\end{pmatrix}x^j(1-x)^{n-j} = \sum_{j=2}^{n}\frac{j(j-1)}{n(n-1)}\begin{pmatrix}n\\ j\end{pmatrix}x^j(1-x)^{n-j}
+			\\[4pt] &= \sum_{j=2}^{n}\frac{(n-2)!}{(n-j)!(j-2)!}x^j(1-x)^{n-j} = x^2\sum_{j=0}^{n-2}\begin{pmatrix}n - 2\\ j\end{pmatrix}x^j(1-x)^{n-j-2}
+			\\[4pt] &= x^2\sum_{j=0}^{n-2}\beta_j^{(n-2)} = x^2 = p_2(x),
+		\end{split}
+	\end{align}
+	since the Bernstein polynomials $\left\{\beta_j^{(n-2)}\right\}_{0\leq j\leq n-2}$ form a partition of unity, cf. Remark \ref{remark:properties_Bernstein_polynomials} d).
+	
+	Now note that any polynomial $p\in\mathcal P_2$ can be written as $p = \alpha p_2 + \beta p_1 + \gamma$ for some $\alpha, \beta, \gamma\in\mathbb R$: Using the linearity and boundedness of the Bernstein operators (where $C=1$ is one upper bound), we have:
+	\begin{align}
+		B_n p = \alpha B_n p_2 + \beta B_np_1 + B_n\gamma = \alpha B_n p_2 + \beta p_1 + \gamma,
+	\end{align}
+	since $B_n p_1 = p_1$ and $B_n\gamma = \gamma$, as we have previously shown. Further:
+	\begin{align}
+		\begin{split}
+			\norm{B_n p - p}{\infty} &= \norm{\alpha B_np_2 - \alpha p_2}{\infty} = \abs{\alpha}\norm{B_n p_2 - p_2}{\infty} \overset{\tiny\eqref{eq:bernstein_operator_seq}}{=} \abs{\alpha}\norm{B_n(p_2 - f_n)}{\infty}
+			\\ &\leq \abs{\alpha}\norm{p_2 - f_n}{\infty} = \abs{\alpha}\sup_{x\in[0, 1]}\left\{\abs{p_2(x) - f_n(x)}\right\} 
+			\\ &= \abs{\alpha}\sup_{x\in[0, 1]}\left\{\abs{x^2 - \frac{nx^2}{n-1}- \frac{x}{n-1}}\right\} = \abs{\alpha}\sup_{x\in[0, 1]}\left\{\abs{- \frac{x^2}{n-1}- \frac{x}{n-1}}\right\}
+			\\ &= \abs{\alpha}\sup_{x\in[0, 1]}\left\{ \frac{x^2 + x}{n-1} \right\} \overset{x=1}{=}\frac{2\abs{\alpha}}{n-1} \overset{n\to\infty}{\longrightarrow} 0.
+		\end{split}
+	\end{align}	 
+	
 \end{proof}
