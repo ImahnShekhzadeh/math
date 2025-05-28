@@ -1133,7 +1133,7 @@
 	\end{exmp}
 
 	\begin{exmp}
-		$\mathbb Q$ is a dense subset of $X$, where $\left(X, d\right)$ with $d(x, y) := \abs{x-y}$ for all $x$, $y\in\mathbb R$. However, we have already established that $\mathbb Q$ is not complete wrt $d$, e.g. cf. Remark \ref{remark:cauchy_not_convergent_necess}.
+		$\mathbb Q$ is a dense subset of $X = \mathbb R$, where $\left(X, d\right)$ with $d(x, y) := \abs{x-y}$ for all $x$, $y\in\mathbb R$. However, we have already established that $\mathbb Q$ is not complete wrt $d$, e.g. cf. Remark \ref{remark:cauchy_not_convergent_necess}.
 	\end{exmp}
 	
 	
@@ -1415,7 +1415,7 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 	\newpage 
 	\section{Set Theory}
 	\begin{defn}[Binary Relation \cite{binary_relations}]
-		A \textit{binary relation} over a set $X$ is some relation $R$ where \\ $\forall x$, $y\in X$ the statement $xRy$ is either true or false. 
+		A \textit{binary relation} over a set $X$ is some relation $R$ where for all $x$, $y\in X$ the statement $xRy$ is either true or false. 
 	\end{defn}
 	
 	\begin{defn}[Equivalence Relation and Class \cite{equivalence_relation}]
@@ -1425,10 +1425,37 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 			\item \textbf{symmetry}: $x \sim y\Leftrightarrow y\sim x$, 
 			\item  \textbf{transitivity}: $\left(x\sim y\right) \wedge \left(y\sim z\right)\Rightarrow x\sim z$.  
 		\end{itemize}
-		The \textit{equivalence class} of an element $x\in X$ is defined as 
+	\end{defn}
+
+	\begin{defn}[Equivalence Class]
+		Let $\sim$ be an equivalence relation on $X$. Then the \textit{equivalence class} of an element $x\in X$ is defined as 
 		\begin{align}
-			\left[x\right] := \left\{y\in X \mid x\sim y \right\} = \left\{ y\in X \mid y\sim x \right\}. 
+			\left[x\right] := \left\{y\in X \mid x\sim y \right\} = \left\{ y\in X \mid y\sim x \right\} \subset X. 
 		\end{align}
+	
+		The set of all equivalences classes in $X$ wrt an equivalence relation $\sim$ is denoted by $X/\sim$. Note that $X/\sim\ \subset P(X)$, where $P(X)$ denotes the power set of $X$ \cite{src:quotient_set_X_by_equivalence_relation}. The surjective map $f: X\rightarrow X/\sim, x\mapsto [x]$ is called the \textit{canoninal surjection}.
+	\end{defn}
+
+	\begin{theorem}\label{thrm:characterization_equivalence_classes}
+		Let $\sim$ be an equivalence relation on $X$. For any $x, y\in X$, it holds that $[x] = [y]$ iff $x\sim y$.
+	\end{theorem}
+	
+	\begin{proof}
+		\enquote{$\Longrightarrow$} Since $x\in[x] = [y]$ we have $x\sim y$.
+		\\ \\
+		\enquote{$\Longleftarrow$} Let $x\sim y$ for arbitrary $x, y\in X$ hold, and consider $x'\in [x]$, i.e. $x'\sim x$. By transitivity, we have $x' \sim y$, i.e. $[x] \subset [y]$. Similarly, we show $[y]\subset [x]$, and hence $[x] = [y]$.
+	\end{proof}
+
+	\begin{theorem}
+		Let $\sim$ be an equivalence relation on $X$. Then for $x, y\in X$, we either have $[x] \cap [y] = \emptyset$ or $[x] = [y]$.
+	\end{theorem}
+
+	\begin{proof}
+		We know that the statement $x\sim y$ is either true or false. If it is true, then by Theorem \ref{thrm:characterization_equivalence_classes}, $[x] = [y]$. If $x\not\sim y$, then no $x'\in [x] = \{z\in X\mid x\sim z\}$ can lie in $[y] = \{z'\in X\mid x\sim z'\}$ (and vice versa), because otherwise, by transitivity, $x\sim y$, which we said is false. Hence, $[x] \cap [y] = \emptyset$.
+	\end{proof}
+
+	\begin{defn}
+		Every element of an equivalence class characterizes it, and can be used to \textit{represent} it. Such a chosen element is called a \textit{representative}.
 	\end{defn}
 
 	\begin{defn}[Partially Ordered Set \cite{kuratowski_zorn_lemma}]\label{partially_ordered_set}
