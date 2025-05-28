@@ -64,11 +64,11 @@ def bernstein_polynomial(
         np.max(argument) <= b
     ), f"Please ensure that the x-values lie in `[{a}, {b}]`. Did you forget to provide `a` and `b`?"
 
-    # do affine mapping of `[0, 1]` to `[a, b]` via `x * (b-a) + a`
+    # do affine mapping of `[a, b]` to `[0, 1]` via `(x - a) / (b - a)`
     return (
         math.comb(n, j)
-        * np.power(argument * (b - a) + a, j)
-        * np.power(1 - argument * (b - a) - a, n - j)
+        * np.power((argument - a) / (b - a), j)
+        * np.power(1 - (argument - a) / (b - a), n - j)
     )
 
 
@@ -99,7 +99,8 @@ def bernstein_operator(
     for j in range(0, n + 1):
         np.add(
             bernstein_operator_eval,
-            function(j / n) * bernstein_polynomial(argument, j, n, a, b),
+            function((b - a) * j / n + a)  # affine mapping `[0, 1] -> [a, b]`
+            * bernstein_polynomial(argument, j, n, a, b),
             bernstein_operator_eval,
             casting="unsafe",
         )
@@ -148,7 +149,7 @@ def plot(
 
 @typechecked
 def main() -> None:
-    a, b = 0, 1
+    a, b = 0, pi / 2
     korovkin_sequence = bernstein_operator_sequence(
         n_max=100,
         function=function,
