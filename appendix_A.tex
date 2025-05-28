@@ -32,7 +32,38 @@ In the following, we will prove the Weierstrass approximation theorem, as stated
 \end{theorem}
 
 \begin{proof}
-	Let $f\in\mathcal C[a, b]$ be arbitrary. Then 
+	Let $f\in\mathcal C[a, b]$ be arbitrary. Then, $f$ is bounded on $[a, b]$, cf. Theorem \ref{thrm:continuous_functions_bounded_on_compact_interval}, i.e. there is an $M > 0$ s.t. $\norm{f}{\infty} \leq M$. Also, $f$ is uniformly continuous on $[a, b]$, cf. Theorem \ref{thrm:uniform_continuity}, i.e.
+	\begin{align}
+		\forall \epsilon > 0\ \exists \delta > 0\ \forall x, y\in [a, b]: \abs{x - y} < \delta \Rightarrow \abs{f(x) - f(y)} < \epsilon.
+	\end{align}
+	Now let $t\in[a, b]$ be fixed, $x\in[a, b]$ and $\epsilon > 0$ be arbitrary, then if $\abs{x - t} < \delta$, we have $f(x) - f(t) < \epsilon$. Applying the linear and monotone operator $K_n$, for $n\in\mathbb N$, to both sides of the inequality (wrt $x$), we have
+	\begin{align}
+		(K_nf)(x) - f(t)(K_n1)(x) &< \epsilon (K_n 1)(x)
+		\\ \Rightarrow \abs{(K_nf)(x) - f(t)(K_n1)(x)} &< \epsilon\abs{(K_n 1)(x)}.\label{eq:proof_korovkin_1953_1}
+	\end{align}
+	By assumption, for any $\tilde{\epsilon} > 0$ there is an $N(\tilde{\epsilon})\in\mathbb N$ satisfying 
+	\begin{align}\label{eq:proof_korovkin_1953_2}
+		d_{\infty}\left(K_n x^k, x^k\right) = \norm{K_nx^k - x^k}{\infty} < \tilde{\epsilon} \qquad \text{for}\ k\in\{0, 1, 2\}\ \forall n\geq N.
+	\end{align}
+	This in particular implies
+	\begin{align}\label{eq:proof_korovkin_1953_3}
+		\abs{(K_n1)(x)} \leq \norm{K_n1}{\infty} = \norm{K_n1 - 1 + 1}{\infty} \leq \norm{K_n1 - 1}{\infty} + 1 < \tilde{\epsilon} + 1
+	\end{align}
+	for all $n\geq N$. Using the triangle inequality and putting Eq. \eqref{eq:proof_korovkin_1953_3} into \eqref{eq:proof_korovkin_1953_1}, we get the following inequality:
+	\begin{align}
+		\abs{(K_nf)(x) - f(t)} &\leq \abs{(K_n f)(x) - f(t)(K_n 1)(x)} + \abs{f(t)(K_n 1)(x) - f(t)}		
+		\\ &\overset{\tiny \eqref{eq:proof_korovkin_1953_1}}{<} \epsilon\abs{(K_n 1)(x)} + \abs{f(t)}\abs{(K_n 1)(x) - 1} 
+		\\ &\overset{\tiny\eqref{eq:proof_korovkin_1953_3}}{<} \epsilon(\tilde{\epsilon} + 1) + M\norm{K_n 1 - 1}{\infty}   \quad \forall n\geq N
+		\\ &< \epsilon(\tilde{\epsilon + 1}) + M\tilde{\epsilon} \quad \forall n\geq N.
+	\end{align}
+	For $x = t$, we have the inequality 
+	\begin{align}
+		\abs{(K_nf)(t) - f(t)} < \epsilon \left(\tilde{\epsilon} + 1\right) \quad \forall n\geq N.
+	\end{align}
+	The RHS can be bounded from above by an arbitrarily small $\hat{\epsilon} > 0$, so that for some $N' = N(\hat{\epsilon})\in\mathbb N$ we have
+	\begin{align}
+		d_{\infty}(K_nf, f) < \hat{\epsilon} \quad \forall n\geq N'.
+	\end{align}	
 \end{proof}
 
 In the following, we will explicitly construct a Korovkin sequence on $\mathcal C[a, b]$.
@@ -175,7 +206,7 @@ In the following, we will explicitly construct a Korovkin sequence on $\mathcal 
 	Hence, we have shown that $\norm{B_nf}{\infty} \leq \norm{f}{\infty}$, which proves the boundedness of $B_n$ and that $C = 1$ is one upper bound for $B_n$.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{thrm:bernstein_operators_korovkin_sequence}
 	The sequence $\seq[B_n]$ with $B_n: \mathcal C[0, 1]\to \mathcal P_n$ according to Def. \ref{defn:Bernstein-polynomials} forms a Korovkin sequence on $\mathcal C[0, 1]$, cf. Def. \ref{defn:Korovkin_sequence}.
 \end{theorem}
 
@@ -222,5 +253,9 @@ In the following, we will explicitly construct a Korovkin sequence on $\mathcal 
 			\\ &= \abs{\alpha}\sup_{x\in[0, 1]}\left\{ \frac{x^2 + x}{n-1} \right\} \overset{x=1}{=}\frac{2\abs{\alpha}}{n-1} \overset{n\to\infty}{\longrightarrow} 0.
 		\end{split}
 	\end{align}	 
-	
 \end{proof}
+
+\begin{proof}(Weierstrass Approximation Theorem)
+	Consider the sequence $\seq[B_n]$ of Bernstein operators, which are a Korovkin sequence on $\mathcal C[0, 1]$, cf. Theorem \ref{thrm:bernstein_operators_korovkin_sequence}. Let $f\in\mathcal C[0, 1]$ and $\epsilon > 0$, then by Theorem \ref{thrm:korovkin_1953} there exists an $N(\epsilon)\in\mathbb N$ s.t. for all $n\geq N(\epsilon)$ we have $d_{\infty}(B_nf, f) < \epsilon$. Noting that $B_nf\in\mathcal P_n\subset \mathcal P$ completes the proof.
+\end{proof}
+	

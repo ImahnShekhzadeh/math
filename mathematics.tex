@@ -1142,7 +1142,7 @@
 	\begin{defn}[$\epsilon$-$\delta$ definition of continuity \cite{MfPI}]\label{defn:continuity}
 		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{continuous} at $p\in X$ if for all $\epsilon > 0$ there exists a $\delta = \delta(\epsilon, p) > 0$ s.t. 
 		\begin{align}
-			\forall z\in D: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.  
+			\forall z\in X: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.  
 		\end{align}
 		$f$ is called continuous on $X$ if it is continuous for every $p\in X$.
 	\end{defn}
@@ -1150,7 +1150,7 @@
 	\begin{defn}[Uniform continuity \cite{src:uniform_continuity}]
 		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{uniformly continuous} on $X$ if for all $\epsilon > 0$ there exists a $\delta = \delta(\epsilon)$ s.t. for all $p\in X$,
 		\begin{align}
-			\forall z\in D: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.
+			\forall z\in X: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.
 		\end{align}
 	\end{defn}
 
@@ -1162,7 +1162,7 @@
 		Def. \ref{defn:continuity} is equivalent to the following (with the same notation): For every sequence $\seq[p_n]$ in $D$ that converges to $p$, i.e. $p_n \overset{n\to\infty}{\longrightarrow} p$ wrt $d$, the sequence $\seq[f(p_n)]$ converges to $f(p)$ wrt $d'$.
 	\end{theorem}
 
-	\begin{theorem}
+	\begin{theorem}\label{thrm:uniform_continuity}
 		Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$, where on $\mathbb R$ we consider the usual metric, that is continuous on $[a, b]$, is uniformly continuous on  $[a, b]$.
 	\end{theorem}
 
@@ -1170,8 +1170,8 @@
 		\cite[p. 285]{MfPI}.
 	\end{proof}
 
-	\begin{theorem}
-		Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$ (where on $\mathbb R$ we consider the usual metric) that is continuous is bounded, in the sense that $\{ f(x) \mid x\in [a, b] \}$ is bounded, cf. Defn. \ref{defn:bounded_set}, 
+	\begin{theorem}\label{thrm:continuous_functions_bounded_on_compact_interval}
+		Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$ (where on $\mathbb R$ we consider the usual metric) that is continuous is bounded, in the sense that $\{ f(x) \mid x\in [a, b] \} \subset \mathbb R$ is bounded, cf. Defn. \ref{defn:bounded_set}, 
 	\end{theorem}
 
 	\begin{proof}
