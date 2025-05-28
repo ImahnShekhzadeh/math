@@ -1,8 +1,9 @@
 """
-This script demonstrates how to approximate the function sin(x) on [0, pi]
-via Bernstein operators.
+This script demonstrates the approximation of any continuous function defined
+on the compact set `[a, b]` via Bernstein operators.
 """
 
+import os
 from math import pi
 import math
 from typing import List, Callable
@@ -25,10 +26,7 @@ def function(
     Returns:
         f(x)
     """
-    if type(argument) == float:
-        return math.sin(argument)
-    else:
-        return np.sin(argument)
+    return np.sin(argument)
 
 
 @typechecked
@@ -144,20 +142,55 @@ def plot(
     a: float = 0.0,
     b: float = 1.0,
 ) -> None:
-    plt.plot()
+    """
+    Plot function and some elements of the Korovkin sequence approximating the 
+    continuous function.
+
+    Args:
+        korovkin_sequence: Each index contains a numpy array (evaluations for 
+            different x). First index corresponds to `n = 1`.
+        -- cf. func `bernstein_operator()` for rest
+    """
+
+    n_max = len(korovkin_sequence)
+
+    plt.plot(
+        argument,
+        function(argument),
+        color="black",
+        label="f",
+    )
+    plt.plot(argument, korovkin_sequence[1], label="B_2f", ls="--")
+    plt.plot(argument, korovkin_sequence[10], label="B_{11}f", ls="--")
+    plt.plot(argument, korovkin_sequence[-1], label=f"B_{{{n_max}}}f", ls="--")
+    plt.legend(framealpha=0)
+    plt.xlim(a - 0.01, b + 0.01)
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.savefig(
+        os.path.join(os.getcwd(), "approximation.pdf"),
+        bbox_inches="tight",
+        pad_inches=0.01,
+        dpi=600,
+    )
+    plt.close()
 
 
 @typechecked
 def main() -> None:
-    a, b = 0, pi / 2
+
+    n = 500  # number of seq. elements to consider
+    a, b = 0, pi  # function is approximated on `[a, b]`
+    argument = np.linspace(start=a, stop=b, num=100, endpoint=True)  # x-values
     korovkin_sequence = bernstein_operator_sequence(
-        n_max=100,
+        n_max=n,
         function=function,
-        argument=np.linspace(start=a, stop=b, num=100, endpoint=True),
+        argument=argument,
         a=a,
         b=b,
-    )
-    print(f"Korovkin sequence:\n\n{korovkin_sequence}")
+    )  # approximating polynomials
+    print(f"Korovkin sequence:\n{korovkin_sequence[0]}")
+    plot(korovkin_sequence, function, argument, a, b)
 
 
 if __name__ == "__main__":
