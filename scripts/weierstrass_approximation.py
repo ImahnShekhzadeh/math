@@ -6,7 +6,6 @@ via Bernstein operators.
 from math import pi
 import math
 from typing import List, Callable
-import logging
 
 import numpy as np
 from typeguard import typechecked
@@ -27,8 +26,8 @@ def function(
         f(x)
     """
     if type(argument) == float:
-        return math.sin(argument) 
-    else: 
+        return math.sin(argument)
+    else:
         return np.sin(argument)
 
 
@@ -98,8 +97,11 @@ def bernstein_operator(
     """
     bernstein_operator_eval = np.zeros_like(argument)
     for j in range(0, n + 1):
-        bernstein_operator_eval += function(j / n) * bernstein_polynomial(
-            argument, j, n, a, b
+        np.add(
+            bernstein_operator_eval,
+            function(j / n) * bernstein_polynomial(argument, j, n, a, b),
+            bernstein_operator_eval,
+            casting="unsafe",
         )
 
     return bernstein_operator_eval
@@ -146,9 +148,9 @@ def plot(
 
 @typechecked
 def main() -> None:
-    a, b = 0, pi
+    a, b = 0, 1
     korovkin_sequence = bernstein_operator_sequence(
-        n_max=67,
+        n_max=100,
         function=function,
         argument=np.linspace(start=a, stop=b, num=100, endpoint=True),
         a=a,
