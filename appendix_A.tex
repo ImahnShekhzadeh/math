@@ -260,9 +260,17 @@ In the following, we will explicitly construct a Korovkin sequence on $\mathcal 
 \end{proof}
 	
 \begin{exmp}
-	Let $f:\mathcal C[0, \pi]\to\mathcal C[0, \pi], x\mapsto \sin x$. To approximate this function arbitrarily well, we will consider $\seq[B_nf]$, where $\seq[B_n]$ is the sequence of Bernstein operators. Since in Def. \ref{defn:Bernstein-operators} we considered the $B_n$ to be defined on $\mathcal C[0, 1]$, we need an affine-linear transformation to map $[0, 1]$ to $[0, \pi]$. For this, consider $x\mapsto \pi x$. With this mapping, the Bernstein operators $B_n$ are defined on $\mathcal C[0, \pi]$ as follows:
+	Let $f:\mathcal C[0, \pi]\to\mathcal C[0, \pi], x\mapsto \sin x$. To approximate this function arbitrarily well, we will consider $\seq[B_nf]$, where $\seq[B_n]$ is the sequence of Bernstein operators. Since in Def. \ref{defn:Bernstein-operators} we considered the $B_n$ to be defined on $\mathcal C[0, 1]$, we need an affine-linear transformation to map $[0, \pi]$ to $[0, 1]$. For this, consider $x\mapsto x/\pi$. And since we considered $f$ to be defined on $[0, 1]$ in Def. \ref{defn:Bernstein-operators}, consider the mapping $x\mapsto \pi x$ to get to $[0, \pi]$. With this mapping, the Bernstein operators $B_n$ are defined on $\mathcal C[0, \pi]$ as follows:
 	\begin{align}
-		(B_nf)(x) = \sum_{j=0}^{n}\sin\left(\frac{j}{n}\right)\beta_{j}^{(n)}(\pi x) = \pi^j\sum_{j=0}^{n}\sin\left(\frac{j}{n}\right)\begin{pmatrix}n\\ j\end{pmatrix} x^j(1-\pi x)^{n-j}
+		(B_nf)(x) = \sum_{j=0}^{n}\sin\left(\pi\frac{j}{n}\right)\beta_{j}^{(n)}(x/\pi) = \frac{1}{\pi^j}\sum_{j=0}^{n}\sin\left(\pi\frac{j}{n}\right)\begin{pmatrix}n\\ j\end{pmatrix} x^j(1-x/\pi)^{n-j}.
 	\end{align}
+	For different $n\in\mathbb N$, Fig. \ref{fig:sine_approx} shows some approximating polynomials $B_nf\in\mathcal P_n$.
+	
+	\begin{figure}[h!]
+		\centering 
+		\includegraphics[width=0.68\textwidth]{scripts/approximation_sine.pdf}
+		\caption{Approximation of $sin(x)$ by linear combination of Bernstein polynomials on $[a, b]$.}
+		\label{fig:sine_approx}
+	\end{figure}
 \end{exmp}
 

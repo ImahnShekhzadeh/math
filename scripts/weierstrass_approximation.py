@@ -73,7 +73,7 @@ def bernstein_polynomial(
 @typechecked
 def bernstein_operator(
     n: int,
-    function: Callable[float, float],
+    function: Callable,
     argument: List[float] | np.ndarray,
     a: float = 0.0,
     b: float = 1.0,
@@ -109,7 +109,7 @@ def bernstein_operator(
 @typechecked
 def bernstein_operator_sequence(
     n_max: int,
-    function: Callable[float, float],
+    function: Callable,
     argument: List[float] | np.ndarray,
     a: float = 0.0,
     b: float = 1.0,
@@ -137,17 +137,17 @@ def bernstein_operator_sequence(
 @typechecked
 def plot(
     korovkin_sequence: List[np.ndarray],
-    function: Callable[float, float],
+    function: Callable,
     argument: List[float] | np.ndarray,
     a: float = 0.0,
     b: float = 1.0,
 ) -> None:
     """
-    Plot function and some elements of the Korovkin sequence approximating the 
+    Plot function and some elements of the Korovkin sequence approximating the
     continuous function.
 
     Args:
-        korovkin_sequence: Each index contains a numpy array (evaluations for 
+        korovkin_sequence: Each index contains a numpy array (evaluations for
             different x). First index corresponds to `n = 1`.
         -- cf. func `bernstein_operator()` for rest
     """
@@ -189,8 +189,6 @@ def main() -> None:
         a=a,
         b=b,
     )  # approximating polynomials
-    print(f"Korovkin sequence:\n{korovkin_sequence[0]}")
-    plot(korovkin_sequence, function, argument, a, b)
 
 
 if __name__ == "__main__":
