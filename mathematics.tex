@@ -20,6 +20,7 @@
 \newtheorem{remark}[thm]{Remark} % same for example numbers
 \newtheorem{theorem}[thm]{Theorem} 
 \newtheorem{corollary}[thm]{Corollary}
+\newtheorem{proposition}[thm]{Proposition}
 \newcommand{\norm}[2]{\left\vert\left\vert #1 \right\vert\right\vert_{#2}}
 \newcommand{\abs}[1]{\left\vert #1 \right\vert}
 \newcommand{\inner}[1]{\left\langle #1 \right\rangle}
@@ -525,10 +526,10 @@
 		\end{align*}
 		is called a \textit{metric} on $X$ if for all $\varphi$, $\psi$, $\chi\in X$ the following properties are given: 
 		\begin{itemize}
-			\item $d(\varphi, \psi) \geq 0$, 
-			\item $d(\varphi, \psi) = d(\psi, \varphi)$, 
-			\item $d(\varphi, \varphi) = 0$, 
-			\item $d(\varphi, \psi) \leq d(\varphi, \chi) + d(\chi, \psi)$. 
+			\item \textbf{positivity}: $d(\varphi, \psi) \geq 0$, 
+			\item \textbf{symmetry}: $d(\varphi, \psi) = d(\psi, \varphi)$, 
+			\item \textbf{definiteness}: $d(\varphi, \psi) = 0$ iff $\varphi = \psi$, 
+			\item \textbf{triangle inequality}: $d(\varphi, \psi) \leq d(\varphi, \chi) + d(\chi, \psi)$. 
 		\end{itemize}
 	\end{defn}
 
@@ -541,6 +542,22 @@
 		\end{itemize}
 		A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. 
 	\end{defn} 
+	
+	\begin{theorem}\label{thrm:vierecksungleichung}
+		Let $(X, d)$ be a metric space. Then we have the inequality
+		\begin{align}
+			\abs{d(\varphi, \psi) - d(\varphi', \psi')} \leq d(\varphi, \varphi') + d(\psi, \psi') \quad \forall \varphi, \varphi', \psi, \psi'\in X.
+		\end{align}
+	\end{theorem}
+
+	\begin{proof}
+		Let $\varphi, \varphi', \psi, \psi'\in X$ be arbitrary. Applying the triangle inequality twice, we have
+		\begin{align}
+			d(\varphi, \psi) \leq d(\varphi, \varphi') + d(\varphi', \psi) &\leq d(\varphi, \varphi') + d(\psi, \psi') + d(\psi', \varphi')
+			\\ \Rightarrow d(\varphi, \psi) - d(\varphi', \psi') &\leq d(\varphi, \varphi') + d(\psi, \psi')
+		\end{align}
+		Exchanging the roles of $\varphi$ and $\varphi'$ and $\psi$ and $\psi'$, we get the stated inequality.
+	\end{proof}
 	
 	\begin{remark}[Discrete Metric]\label{remark:discrete-metric}
 		Let $X$ be an arbitrary set and $d(\varphi, \psi) = 1 \ \forall \varphi$, $\psi\in X$ and $d(\varphi, \varphi) = 0$. Then $d$ is a metric, called the \textit{discrete metric} on $X$. 
@@ -1136,6 +1153,143 @@
 		$\mathbb Q$ is a dense subset of $X = \mathbb R$, where $\left(X, d\right)$ with $d(x, y) := \abs{x-y}$ for all $x$, $y\in\mathbb R$. However, we have already established that $\mathbb Q$ is not complete wrt $d$, e.g. cf. Remark \ref{remark:cauchy_not_convergent_necess}.
 	\end{exmp}
 	
+	\begin{defn}[Completion of metric spaces]
+		Let $(X, d)$ be a metric space. Then a \textit{completion} of $X$ is a triplet $\left(\tilde{X}, \tilde{d}, f\right)$, where $\left(\tilde{X}, \tilde{d}\right)$ is a complete metric space and $f: X\to\tilde{X}$ is an isometry with dense image, i.e. $f(X)\subset \tilde{X}$ is dense wrt $\tilde{d}$ \cite[Def. 2.2]{src:completion_metric_spaces}.
+	\end{defn}
+
+	\begin{remark}
+		Let $(X, d)$ be a metric space. If a completion $\left(\tilde{X}, \tilde{d}, f\right)$ exists, then $X$ is isometric to the dense subset $f(X)$.
+	\end{remark}
+	
+	\begin{proposition}\label{prop:completion_of_metric_space_exists}
+		To every metric space $(X, d)$, a completion $\left(\tilde{X}, \tilde{d}, f\right)$ exists and up to isometry, it is unique.
+	\end{proposition}
+
+	\begin{remark}
+		We can henceforth talk about \textit{the} completion of a metric space.
+	\end{remark}
+
+	\begin{proof}[Proof of Proposition \ref{prop:completion_of_metric_space_exists}]
+		Let $(X, d)$ be a metric space. We will proceed in several steps. 
+
+		\textit{Step 1}: We will first construct $\tilde{X}$.
+		
+		Let $\seq[\varphi_n]$ and $\seq[\psi_n]$ be Cauchy sequences in $X$. Then by Theorem \ref{thrm:vierecksungleichung}, 
+		\begin{align}
+			\abs{d(\varphi_n, \psi_n) - d(\varphi_m, \psi_m)} \leq d(\varphi_n, \varphi_m) + d(\psi_n, \psi_m) \overset{n, m\to\infty}{\longrightarrow} 0,
+		\end{align}
+		which implies that $\seq[d(\varphi_n, \psi_n)]$ is a Cauchy sequence in $\mathbb R$ with the usual metric. By the completeness $\mathbb R$, every Cauchy sequence in $\mathbb R$ converges, and thus the limit $\lim\limits_{n\to\infty}d(\varphi, \psi_n)$ exists.
+		
+		We will now construct an equivalence relation on the set of Cauchy sequences in $X$ as follows: Let $\seq[\varphi_n]$ and $\seq[\psi_n]$ be Cauchy sequences in $X$, then we call them equivalent if $d(\varphi_n, \psi_n) \overset{n\to\infty}{\longrightarrow} 0$. By Def. \ref{defn:equivalence_relation}, we need to show reflexivity (which holds since $d(\varphi_n, \varphi_n) = 0$), symmetry (which holds since $d(\varphi_n, \psi_n) = d(\psi_n, \varphi_n)$) and transitivity (which holds because $d(\varphi_n, \chi_n) \leq d(\varphi_n, \psi_n) + d(\psi_n, \chi_n)$ for any Cauchy sequence $\seq[\chi_n]$ in $X$). 
+		
+		We will denote the set of all equivalent Cauchy sequences in $X$ by $\tilde{X}$,
+		\begin{align}
+			\tilde{X} = \{ \seq[\varphi_n] \mid \seq[\varphi_n] \text{is a Cauchy sequence in } X \} / \sim.
+		\end{align}
+		
+		\textit{Step 2}: We will now define a metric $\tilde{d}$ on $\tilde{X}$. Let $\tilde{\varphi}, \tilde{\psi}\in\tilde{X}$ with representations $\seq[\varphi_n]$ and $\seq[\psi_n]$. We set 
+		\begin{align}
+			\tilde{d}\left(\tilde{\varphi}, \tilde{\psi}\right) := \lim\limits_{n\to\infty}d(\varphi_n, \psi_n).
+		\end{align}
+		The map $\tilde{d}: \tilde{X}\times\tilde{X}\to\mathbb R$ is well-defined, since for other representations $\seq[\varphi'_n] \sim \seq[\varphi_n]$ and $\seq[\psi'_n]\sim\seq[\psi_n]$, we have by Theorem \ref{thrm:vierecksungleichung} the inequality
+		\begin{align}
+			\abs{d(\varphi_n', \psi_n') - d(\varphi_n, \psi_n)} \leq d(\varphi_n', \varphi_n) + d(\psi_n', \psi_n) \overset{n\to\infty}{\longrightarrow} 0.
+		\end{align}
+		And we have already established in Step 1 that the Cauchy sequence $\seq[d(\varphi_n, \psi_n)]\in\mathbb R$ is convergent wrt the usual metric on $\mathbb R$.
+		
+		To show that $\tilde{d}$ is indeed a metric on $\tilde{X}$, note that for any $\tilde{\varphi}, \tilde{\psi}, \tilde{\chi}\in \tilde{X}$ (with representations $\seq[\varphi_n]$, $\seq[\psi_n]$ and $\seq[\chi_n]$), we have:
+		\begin{enumerate}
+			\item Positivity: $\tilde d\left(\tilde{\varphi}, \tilde{\varphi}\right) = \lim\limits_{n\to\infty} d(\varphi_n, \varphi_n) = 0$.
+			\item Symmetry: $\tilde d\left(\tilde{\varphi}, \tilde{\psi}\right) = \lim\limits_{n\to\infty} d(\varphi_n, \psi_n) = \lim\limits_{n\to\infty} d(\psi_n, \varphi_n) = \tilde{d}\left(\tilde{\psi}, \tilde{\varphi}\right)$.
+			\item Definiteness: $\tilde d\left(\tilde{\varphi}, \tilde{\psi}\right) = \lim\limits_{n\to\infty}d(\varphi_n, \psi_n) = 0$ iff $\seq[\varphi_n]\sim\seq[\psi_n]$, i.e. $\tilde{\varphi} = \tilde{\psi}$, cf. Theorem \ref{thrm:characterization_equivalence_classes}.
+			\item Triangle inequality: $$\tilde{d}\left(\tilde{\varphi}, \tilde{\psi}\right) = \lim\limits_{n\to\infty}d(\varphi_n, \psi_n) \leq \lim\limits_{n\to\infty}\left\{d(\varphi_n, \chi_n) + d(\chi_n, \psi_n)\right\}$$ Since $\seq[d(\varphi_n, \chi_n)]$ and $\seq[d(\chi_n, \psi_n)]$ are Cauchy sequences in $\mathbb R$, also cf. Step 1, we have 
+			\begin{align*}
+				\tilde{d}\left(\tilde{\varphi}, \tilde{\psi}\right) &\leq \lim\limits_{n\to\infty}\left\{d(\varphi_n, \chi_n) + d(\chi_n, \psi_n)\right\} = \lim\limits_{n\to\infty}d(\varphi_n, \chi_n) + \lim\limits_{n\to\infty}d(\chi_n, \psi_n) 
+				\\ &= \tilde{d}\left(\tilde{\varphi}, \tilde{\chi}\right) + \tilde{d}\left(\tilde{\chi}, \tilde{\psi}\right),
+			\end{align*}
+			which shows the triangle inequality.
+		\end{enumerate}
+		\textit{Step 3}: We now embed $X$ isometrically as a dense subset of $\tilde{X}$. For this, consider the map $f: X\to\tilde{X}, \varphi\mapsto \seq[\varphi_n]$ with $\varphi_n = \varphi$ for any $n\in\mathbb N$. $f$ is an isometry, since 
+		\begin{align}
+			\tilde{d}\left(f(\varphi), f(\psi)\right) = \lim\limits_{n\to\infty} d\left(f(\varphi)_n, f(\psi)_n\right) = \lim\limits_{n\to\infty}d(\varphi, \psi) = d(\varphi, \psi).
+		\end{align}
+		The image of $f$ under $X$, i.e. $f(X)\subset \tilde{X}$, is dense in $\tilde{X}$ wrt $\tilde{d}$, since for any $\tilde{\varphi}\in\tilde{X}$ with representation $\seq[\varphi_n]$ the sequence $\seq[f(\varphi_n)]\in f(X)$ converges to $\tilde{\varphi}$ wrt $\tilde{d}$:
+		\begin{align}
+			\lim\limits_{n\to\infty}\tilde{d}\left(\tilde{\varphi}, \seq[f(\varphi_n)]\right) = \lim\limits_{n\to\infty}\lim\limits_{m\to\infty}d(\varphi_m, f(\varphi_n)_m) = \lim\limits_{n,m\to\infty} d(\varphi_m, \varphi_n) = 0,
+		\end{align}
+		since $\seq[\varphi_n]$ is a Cauchy sequence in $X$ wrt $d$.
+		
+		\textit{Step 4}: We will now show that $\left(\tilde{X}, \tilde{d}\right)$ is a complete metric space.
+		
+		Let $\seq[\tilde{\varphi}_n]$ be a Cauchy sequence in $\tilde{X}$. Since $f(X)\subset \tilde{X}$ is dense wrt $\tilde{d}$, to every $\tilde{\varphi}_n$ there is a $\varphi_n\in X$ s.t. $\tilde{d}\left(\tilde{\varphi}_n, f(\varphi_n)\right) < 1/n$. Hence, by applying the triangle equality twice, we have
+		\begin{align}
+			d(\varphi_n, \varphi_m) = \tilde{d}\left(f(\varphi_n), f(\varphi_m)\right) &\leq \tilde{d}\left(f(\varphi_n), \tilde{\varphi}_n\right) + \tilde{d}\left(\tilde{\varphi}_{n}, \tilde{\varphi}_m\right) + \tilde{d}\left(\tilde{\varphi}_m, f(\varphi_m)\right)
+			\\ &< \frac{1}{n} + \tilde{d}\left(\tilde{\varphi}_n, \tilde{\varphi}_m\right) + \frac{1}{m} \overset{n, m\to\infty}{\longrightarrow} 0,
+		\end{align}
+		since by assumption, $\seq[\tilde{\varphi}_n]$ is a Cauchy sequence. Hence, $\seq[\varphi_n]$ is a Cauchy sequence in $X$, and hence a representation for some $\tilde{\varphi}\in\tilde{X}$. We will now show that $\seq[\tilde{\varphi}_n]$ converges to $\tilde{\varphi}$:
+		\begin{align}
+			\tilde{d}\left(\tilde{\varphi}_n, \tilde{\varphi}\right) &\leq \tilde{d}\left(\tilde{\varphi}, f(\varphi_n)\right) + \tilde{d}\left( f(\varphi_n), \tilde{\varphi}_n \right) < \tilde{d}\left(\tilde{\varphi}, f(\varphi_n)\right) + \frac{1}{n} 
+			\\  &= \lim\limits_{m\to\infty} d\left(f(\varphi_n)_m, \varphi_m\right) + \frac{1}{n} = \lim\limits_{m\to\infty} d\left(\varphi_n, \varphi_m\right) + \frac{1}{n} 
+			\\ \Rightarrow \lim\limits_{n\to\infty}\tilde{d}\left(\tilde{\varphi}_n, \tilde{\varphi}\right) &\leq \lim\limits_{n, m\to\infty} d(\varphi_n, \varphi_m) = 0.
+		\end{align}
+		Hence, $\left(\tilde{X}, \tilde{d}\right)$ is complete.
+		
+		\textit{Step 5}: We will now show $\tilde{X}$, a completion of $X$, is unique up to isometry.
+		
+		Let $(Y, d_Y, f)$ and $(Z, d_Z, g)$ be completions of the metric space $(X, d)$, i.e. $(Y, d_Y)$ and $(Z, d_Z)$ are complete metric spaces, and $f: X\to Y$ and $g: X\to Z$ are isometries with dense subsets $f(X)\subset Y$ wrt $d_Y$ and $g(X)\subset Z$ wrt $d_Z$.
+		
+		We will now show that $(Y, d_Y)$ and $(Z, d_Z)$ are isometric. For this, let $\psi\in Y$. Since $f(X)\subset Y$ is dense wrt $d_Y$, there is a sequence $\seq[\varphi_n]$ in $X$ s.t. $$\lim\limits_{n\to\infty}d_Y(\psi, f(\varphi_n)) = 0.$$ Now define $h: Y\to Z$ via
+		\begin{align}\label{eq:prop_proof_isomet_unique}
+			h(\psi) := \lim\limits_{n\to\infty}g(\varphi_n).
+		\end{align}
+		Note the following properties of $h$:
+		\begin{itemize}
+			\item The limit in Eq. \eqref{eq:prop_proof_isomet_unique} exists, since
+			\begin{align}
+				d_Z(g(\varphi_n), g(\varphi_m)) &= d_X(\varphi_n, \varphi_m) = d_Y(f(\varphi_n), f(\varphi_m))
+				\\ \label{eq:unique_completion_isometry} \Rightarrow \lim\limits_{n, m\to\infty}d_Z(g(\varphi_n), g(\varphi_m)) &= \lim\limits_{n, m\to\infty} d_Y(f(\varphi_n), f(\varphi_m)) = d_Y(\psi, \psi) = 0,
+			\end{align}
+			since by Theorem \ref{thrm:vierecksungleichung} we have that
+			\begin{align*}
+				\abs{d_Y(f(\varphi_n), f(\varphi_m)) - d_Y(\psi, \psi)} \leq d_Y(f(\varphi_n), \psi) + d_Y(f(\varphi_m), f(\psi)).
+			\end{align*}
+			Eq. \eqref{eq:unique_completion_isometry} shows that $\seq[g(\varphi_n)]$ is a Cauchy sequence in $Z$, which also converges in $Z$, since by assumption, $(Z, d_Z)$ is complete.
+			
+			\item Let $\seq[\varphi'_n]$ be another sequence in $X$ converging to $\psi$ wrt $d_Y$. Then
+			\begin{align*}
+				d_Z(g(\varphi_n), g(\varphi'_n)) &= d_X(\varphi_n, \varphi'_n) = d_Y(f(\varphi_n), f(\varphi'_n)) \overset{n\to\infty}{\longrightarrow} d_Y(\psi, \psi) = 0
+				\\ \Rightarrow \lim\limits_{n\to\infty}g(\varphi_n) &= \lim\limits_{n\to\infty}g(\varphi'_n),
+			\end{align*}
+			which makes the limit in Eq. \eqref{eq:prop_proof_isomet_unique} well-defined.
+			
+			\item The map $h$ is an isometry, since from the triangle inequality and the inequality in Eq. \eqref{thrm:vierecksungleichung}, we have for arbitrary $\psi$, $\psi'\in Y$
+			\begin{align*}
+				&\abs{d_Z(h(\psi), h(\psi')) - d_Y(\psi, \psi')} 
+				\\ = &\abs{d_Z(h(\psi), h(\psi')) + \underbrace{d_Y(f(\varphi_n), f(\varphi'_n)) - d_Y(f(\varphi_n), f(\varphi'_n))}_{=0} - d_Y(\psi, \psi')}
+				\\ = &\abs{d_Z(h(\psi), h(\psi')) + d_Y(f(\varphi_n), f(\varphi'_n)) - \underbrace{d_Y(f(\varphi_n), f(\varphi'_n))}_{=d_X(\varphi_n, \varphi'_n) = d_Z(g(\varphi_n), g(\varphi'_n))} - d_Y(\psi, \psi')}
+				\\ \leq &\abs{d_Z(h(\psi), h(\psi')) - d_Z(g(\varphi_n), g(\varphi'_n))} + \abs{d_Y(f(\varphi_n), f(\varphi'_n)) - d_Y(\psi, \psi')}
+				\\ \leq &d_Z(h(\psi), g(\varphi_n)) + d_Z(h(\psi'), g(\varphi_n')) + d_Y(f(\varphi_n), \psi) + d_Y(f(\varphi_n'), \psi')
+				\\ &\overset{n\to\infty}{\longrightarrow} 0, 
+			\end{align*}
+			since we choose the sequences $\seq[\varphi_n]$ and $\seq[\varphi_n']$ in $X$ such that $f(\varphi_n) \overset{n\to\infty}{\longrightarrow}\psi$ and $f(\varphi'_n) \overset{n\to\infty}{\longrightarrow}\psi'$ (wrt $d_Y$ each). By definition, cf. Eq. \eqref{eq:prop_proof_isomet_unique}, we then have $h(\psi) = \lim\limits_{n\to\infty}g(\varphi_n)$ and $h(\psi') = \lim\limits_{n\to\infty}g(\varphi_n')$.
+			
+			The above calculation shows that $d_Z(h(\psi), h(\psi')) = d_Y(\psi, \psi')$ for arbitrary $\psi, \psi'\in Y$.
+
+			\item Finally, $h$ is surjective, since for every $\chi\in Z$ there is a sequence $\seq[\varphi_n]\in X$ s.t. $\lim\limits_{n\to\infty}g(\varphi_n) = \chi$, since $g(X)$ is dense in $Z$ wrt $d_Z$. Now consider the limit $\psi := \lim\limits_{n\to\infty} f(\varphi_n)\in Y$ and note that $\chi = h(\psi) = \lim\limits_{n\to\infty}g(\varphi_n)$.
+			
+			Note that the existence of the limit $\psi = \lim\limits_{n\to\infty} f(\varphi_n)\in Y$ follows from
+			\begin{align}
+				d_Y(f(\varphi_n), f(\varphi_m)) = d_X(\varphi_n, \varphi_m) = d_Z(g(\varphi_n), g(\varphi_m)) \overset{n\to\infty}{\longrightarrow} 0, 
+			\end{align}
+			i.e. $\seq[f(\varphi_n)]$ is a Cauchy sequence in $Y$, and hence by the completeness of $(Y, d_Y)$, the sequence also converges in $Y$.
+			
+			This proof of the existence of the limit $\psi = \lim\limits_{n\to\infty} f(\varphi_n)$ is very similar to how we proved the existence of the limit in Eq. \eqref{eq:prop_proof_isomet_unique} for the definition of $h$.
+		\end{itemize}
+	\end{proof}
+
+	\begin{exmp}
+		Consider the metric space $(\mathbb Q, d)$ with $d(r_1, r_2) := \abs{r_1 - r_2}$ for any $r_1, r_2\in\mathbb Q$. Then the real numbers $(\mathbb R, d_{\text{ext}})$ with $d_{\text{ext}}(\varphi, \psi) := \abs{\varphi - \psi}$ for any $\varphi, \psi\in\mathbb R$ can be constructed as the completion of $(\mathbb Q, d)$ \cite{src:completion_of_Q}.
+	\end{exmp}
 	
 	\newpage 
 	\subsection{Continuity}
@@ -1418,7 +1572,7 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 		A \textit{binary relation} over a set $X$ is some relation $R$ where for all $x$, $y\in X$ the statement $xRy$ is either true or false. 
 	\end{defn}
 	
-	\begin{defn}[Equivalence Relation and Class \cite{equivalence_relation}]
+	\begin{defn}[Equivalence Relation and Class \cite{equivalence_relation}]\label{defn:equivalence_relation}
 		An \textit{equivalence relation} on a set $X$ is a binary relation $\sim$ with the following properties $\forall x$, $y$, $z \in X$: 
 		\begin{itemize}
 			\item \textbf{reflexivity}: $x\sim x$, 
