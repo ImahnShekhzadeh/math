@@ -1085,15 +1085,27 @@
 	\end{proof}
 	
 	\begin{remark}
-		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ and $\seq[\psi_n]$ are Cauchy sequences in $(X, d)$, $\seq[\varphi_n + \psi_n]$ is \textit{not} necessarily a Cauchy sequence.
+		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ and $\seq[\psi_n]$ are Cauchy sequences in $(X, d)$, their sum $\seq[\varphi_n + \psi_n]$ is \textit{not} necessarily a Cauchy sequence in $X$ wrt $d$.
 	\end{remark}
 
-	\begin{exmp}
+	\begin{exmp}\label{exmp:counter_exmp_sum_Cauchy_not_Cauchy}
 		Consider the metric space $(\mathbb R, d)$ with $d(x, y) := \abs{\arctan x - \arctan y}$ for any $x$, $y\in\mathbb R$, cf. Example \ref{exmp:r_with_arctan_metric}. Define the sequences $\seq[a_n]$ as $a_n := n$ and $\seq[b_n]$ as $b_n := (-1)^n - n$. Note that both sequences are Cauchy, but $\seq[a_n + b_n] = \seq[(-1)^n]$ is not.
 	\end{exmp}
+
+	\begin{remark}
+		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ and $\seq[\psi_n]$ are Cauchy sequences in $(X, d)$, their product $\seq[\varphi_n \cdot \psi_n]$ is \textit{not} necessarily a Cauchy sequence in $X$ wrt $d$.
+	\end{remark}
+
+	\begin{exmp}\label{exmp:counter_exmp_prod_Cauchy_not_Cauchy}
+		Consider the metric space $(\mathbb R, d)$ with $d(x, y) := \abs{\arctan x - \arctan y}$ for any $x$, $y\in\mathbb R$, cf. Example \ref{exmp:r_with_arctan_metric}. Define the sequences $\seq[a_n]$ as $a_n := n$ and $\seq[b_n]$ as $b_n := \frac{(-1)^n}{n}$. Note that both sequences are Cauchy, but $\seq[a_n \cdot b_n] = \seq[(-1)^n]$ is not.
+	\end{exmp}
 	
-	\begin{proof}
-		First, we will show that $\seq[a_n]$ is Cauchy. For any $\epsilon > 0$, choose $N = N(\epsilon)$ s.t. $N > 1/\epsilon$, and note that for any $m$, $n\geq N$, we have
+	\begin{remark}
+		In the special case of $X = \mathbb Q$ or $X = \mathbb R$ with $d(x, y) := \abs{x - y}$ for any $x$, $y\in X$, then the sum and product of two Cauchy sequences is indeed Cauchy again, cf. Theorem \ref{thrm:sum_Cauchy_sequences_Cauchy} and \ref{thrm:prod_Cauchy_sequences_Cauchy}.
+	\end{remark}
+	
+	\begin{proof}[Proof of Example \ref{exmp:counter_exmp_sum_Cauchy_not_Cauchy}]
+		First, we will show that $\seq[a_n] = \seq[n]$ is Cauchy. For any $\epsilon > 0$, choose $N = N(\epsilon)$ s.t. $N > 1/\epsilon$, and note that for any $m$, $n\geq N$, we have
 		\begin{align}\label{eq:arctan_cauchy_exmp}
 			d(a_m, a_n) = \abs{\arctan m - \arctan n} = \abs{\arctan\left(\frac{m - n}{1 + mn}\right)} \overset{(\star)}{\leq} \abs{\frac{m - n}{1 + mn}} \leq \frac{\abs{m - n}}{mn},
 		\end{align}
@@ -1101,7 +1113,7 @@
 		\begin{align*}
 			d(a_m, a_n) \overset{\tiny\eqref{eq:arctan_cauchy_exmp}}{\leq} \frac{\abs{m - n}}{mn} \leq \frac{m}{mn} \overset{n\geq N}{\leq}\frac{m}{mN} = \frac{1}{N} \overset{N > \epsilon^{-1}}{<} \epsilon. 
 		\end{align*}
-		To show that $\seq[b_n]$ is Cauchy, choose $N = N(\epsilon)$ s.t. $N > \frac{1}{\epsilon} + 2$, and note that for $m$, $n\geq N$, we have
+		To show that $\seq[b_n] = \seq[(-1)^n - n]$ is Cauchy, choose $N = N(\epsilon)$ s.t. $N > \frac{1}{\epsilon} + 2$, and note that for $m$, $n\geq N$, we have
 		\begin{align}
 			d(b_m, b_n) &= \abs{\arctan\left((-1)^m - m\right)} - \abs{\arctan\left((-1)^n - n\right)} \\[2pt] &= \abs{\arctan\left( \frac{(-1)^m - m - (-1)^n+n}{1 + \left((-1)^m - m\right) \cdot \left((-1)^n -n\right) } \right)} 
 			\\[2pt] &\leq \abs{\frac{(-1)^m - m - (-1)^n+n}{1 + \left((-1)^m - m\right) \cdot \left((-1)^n -n\right) }} 
@@ -1141,6 +1153,15 @@
 		\end{enumerate}
 		Finally, note that it is obvious that $\seq[a_n + b_n] = \seq[(-1)^n]$ is not Cauchy.
 	\end{proof}
+	
+	\begin{proof}[Proof of Example \ref{exmp:counter_exmp_prod_Cauchy_not_Cauchy}]
+		We have already shown in the proof of Example \ref{exmp:counter_exmp_sum_Cauchy_not_Cauchy} that $\seq[a_n] = \seq[n]$ is Cauchy wrt $d(x, y) := \abs{\arctan x - \arctan y}$ for any $x$, $y\in\mathbb R$. To show that $\seq[b_n] = \seq[\frac{(-1)^n}{n}]$ is Cauchy wrt $d$, choose $N = N(\epsilon) > \frac{2}{\epsilon}$, then we have for any $m$, $n\geq N$:
+		\begin{align*}
+			d(b_m, b_n) &= \abs{\arctan\left(\frac{(-1)^m}{m}\right) - \arctan \left(\frac{(-1)^n}{n}\right)} 
+			\\[2pt] &\leq \abs{\arctan\left(\frac{(-1)^m}{m}\right)} + \abs{\arctan\left(\frac{(-1)^n}{n}\right)} 
+			\\[2pt] &\leq \abs{\frac{(-1)^m}{m}} + \abs{\frac{(-1)^n}{n}} = \frac{1}{m} + \frac{1}{n} \\[2pt] &\overset{\text{\tiny WLOG}\ n \leq m}{\leq} \frac{2}{n} \overset{n \geq N}{\leq} \frac{2}{N} \overset{N > 2\epsilon^{-1}}{<} \epsilon.
+		\end{align*}
+	\end{proof} 
 	
 	\begin{theorem}\label{thrm:complete_subsets_properties}
 		Let $(X, d)$ be a metric space. Then the following statements are true.
@@ -1244,8 +1265,12 @@
 	\end{remark}
 	
 	\begin{exmp}
-		Consider the metric space $(\mathbb Q, d)$ with $d(r_1, r_2) := \abs{r_1 - r_2}$ for any $r_1, r_2\in\mathbb Q$. In Appendix \ref{app:completion_Q}, we will construct the real numbers with the extended metric $d_{\text{ext}}(x, y) := \abs{x - y}$ for any $x$, $y\in\mathbb R$ with an isometry $f:\mathbb Q\to\mathbb R$.
+		Consider the metric space $(\mathbb Q, d)$ with $d(r_1, r_2) := \abs{r_1 - r_2}$ for any $r_1, r_2\in\mathbb Q$. In Appendix \ref{app:completion_Q}, we will construct the completion of $\mathbb Q$ (the real numbers $\mathbb R$) with the extended metric $d_{\text{ext}}(x, y) := \abs{x - y}$ for any $x$, $y\in\mathbb R$ with an isometry $f:\mathbb Q\to\mathbb R$.
 	\end{exmp}
+
+	\begin{remark}
+		The completion of $\mathbb R$ wrt $\abs{\cdot}$ is needed for the proof of Proposition \ref{prop:completion_of_metric_space_exists}.
+	\end{remark}
 
 	\begin{proof}[Proof of Proposition \ref{prop:completion_of_metric_space_exists}]
 		Let $(X, d)$ be a metric space. We will proceed in several steps. 
