@@ -1,0 +1,23 @@
+\section{Construction of $\mathbb R$}\label{app:completion_Q}
+
+We will follow Ref. \cite{src:completion_of_Q} to construct the real numbers $\mathbb R$. There are two possibilities to do so:
+\begin{enumerate}
+	\item Dedekind completion: Every non-empty subset has a least upper bound (wrt $\leq$).
+	\item Cauchy completion: Every Cauchy sequence converges wrt $\abs{\cdot}$.
+\end{enumerate}
+
+We will use the second definition of completion.
+
+\begin{defn}
+	The (archimedean) absolute value of $\mathbb Q$ is the function 
+	\begin{align}
+		\abs{\cdot}: \mathbb Q\to\mathbb{Q}_{\geq 0}, \abs{x} := \begin{cases}
+			x &\text{if}\ x \geq 0,
+			\\ -x &\text{if}\ x < 0.
+		\end{cases}
+	\end{align}
+\end{defn}
+
+\begin{defn}
+	A \textit{Cauchy sequence} of rational numbers is a sequence $\seq[x_n]$ s.t. for every $\epsilon\in\mathbb{Q}_{> 0}$ there exist an $N = N(\epsilon)\in\mathbb N$ s.t. for all $m$, $n\geq N$, $\abs{x_m - x_n} < \epsilon$.
+\end{defn}

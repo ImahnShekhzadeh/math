@@ -1012,6 +1012,22 @@
 		Note that Theorem \ref{thrm:mono_inc_seq_converges} does not hold in $\mathbb Q$, since the completeness axiom only guarantess the existence of a least upper bound in $\mathbb R$.
 	\end{remark}
 
+	\begin{theorem}
+		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ is a Cauchy sequence, it is bounded.
+	\end{theorem}
+
+	\begin{proof}
+		Fix $\epsilon > 0$ and $\psi\in X$. Since $\seq[\varphi_n]$ is a Cauchy sequence, there exists an $N\in\mathbb N$ s.t. $d(\varphi_m, \varphi_n) <\epsilon$ for all $m, n\geq N$. Define
+		\begin{align}
+			M := \max_{1\leq i\leq N}\left\{ d(\psi, \varphi_n) \right\}, 
+		\end{align}
+		and note that the maximum exists since we take it over a set with finitely many elements. For $n\leq N$, we obviously have $d(\psi, \varphi_n)\geq M$. For $n > N$, we have
+		\begin{align*}
+			d(\psi, \varphi_n) \leq d(\psi, \varphi_N) + d(\varphi_N, \varphi_n) < M + \epsilon.
+		\end{align*}
+		Thus, $\seq[\varphi_n]$ is contained in $B_{M + \epsilon + 1}[\psi]$.
+	\end{proof}
+
 	\begin{defn}
 		Let $(X, d)$ be a metric space. Then $(X, d)$ is called \textit{complete} if every Cauchy sequence in $X$ converges to a $\varphi\in X$ wrt $d$.
 	\end{defn}
@@ -1032,7 +1048,7 @@
 		To construct incomplete metric spaces, we can thus take an incomplete metric space $(X, d)$, construct a surjection $f:X\to Y$ to another set $Y$ and endow $Y$ with the metric $d'$ from Eq. \eqref{eq:metrics_completion}, then $(Y, d')$ is also incomplete.
 	\end{remark}
 	
-	\begin{exmp}
+	\begin{exmp}\label{exmp:r_with_arctan_metric}
 		Let $X = \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$, and consider the metric $d(x_1, x_2) := \abs{x_1 - x_2}$. Define $Y = \mathbb R$, and consider the map $f: X\to Y$, $x\mapsto \tan(x)$, which is surjective. On $Y$, consider the metric $d'(y_1, y_2) := d\left( \arctan(y_1), \arctan(y_2)\right) = \abs{\arctan y_1 - \arctan y_2}$, cf. Eq. \eqref{eq:metrics_completion}. Since $(X, d)$ is incomplete, $(Y, d')$ is incomplete as well. To see that $(X, d)$ is incomplete, note that $\left(\frac{\pi}{2} - \frac{1}{n}\right)_{n\in\mathbb N}$ or $\left( -\frac{\pi}{2} + \frac{1}{n} \right)_{n\in\mathbb N}$ are Cauchy in $X$, yet do not converge in $X$.
 	\end{exmp}
 	
@@ -1067,7 +1083,65 @@
 		
 		Thus, we have shown that $\varphi\in\mathcal C[a, b]$.
 	\end{proof}
+	
+	\begin{remark}
+		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ and $\seq[\psi_n]$ are Cauchy sequences in $(X, d)$, $\seq[\varphi_n + \psi_n]$ is \textit{not} necessarily a Cauchy sequence.
+	\end{remark}
 
+	\begin{exmp}
+		Consider the metric space $(\mathbb R, d)$ with $d(x, y) := \abs{\arctan x - \arctan y}$ for any $x$, $y\in\mathbb R$, cf. Example \ref{exmp:r_with_arctan_metric}. Define the sequences $\seq[a_n]$ as $a_n := n$ and $\seq[b_n]$ as $b_n := (-1)^n - n$. Note that both sequences are Cauchy, but $\seq[a_n + b_n] = \seq[(-1)^n]$ is not.
+	\end{exmp}
+	
+	\begin{proof}
+		First, we will show that $\seq[a_n]$ is Cauchy. For any $\epsilon > 0$, choose $N = N(\epsilon)$ s.t. $N > 1/\epsilon$, and note that for any $m$, $n\geq N$, we have
+		\begin{align}\label{eq:arctan_cauchy_exmp}
+			d(a_m, a_n) = \abs{\arctan m - \arctan n} = \abs{\arctan\left(\frac{m - n}{1 + mn}\right)} \overset{(\star)}{\leq} \abs{\frac{m - n}{1 + mn}} \leq \frac{\abs{m - n}}{mn},
+		\end{align}
+		where the inequality in $(\star)$ can be obtained by using the integral definition of $\arctan x$. WLOG assume $n\leq m$, then Equation \eqref{eq:arctan_cauchy_exmp} can be further simplified to
+		\begin{align*}
+			d(a_m, a_n) \overset{\tiny\eqref{eq:arctan_cauchy_exmp}}{\leq} \frac{\abs{m - n}}{mn} \leq \frac{m}{mn} \overset{n\geq N}{\leq}\frac{m}{mN} = \frac{1}{N} \overset{N > \epsilon^{-1}}{<} \epsilon. 
+		\end{align*}
+		To show that $\seq[b_n]$ is Cauchy, choose $N = N(\epsilon)$ s.t. $N > \frac{1}{\epsilon} + 2$, and note that for $m$, $n\geq N$, we have
+		\begin{align}
+			d(b_m, b_n) &= \abs{\arctan\left((-1)^m - m\right)} - \abs{\arctan\left((-1)^n - n\right)} \\[2pt] &= \abs{\arctan\left( \frac{(-1)^m - m - (-1)^n+n}{1 + \left((-1)^m - m\right) \cdot \left((-1)^n -n\right) } \right)} 
+			\\[2pt] &\leq \abs{\frac{(-1)^m - m - (-1)^n+n}{1 + \left((-1)^m - m\right) \cdot \left((-1)^n -n\right) }} 
+			\\[2pt] &= \abs{\frac{1}{1 + \left((-1)^m - m\right) \cdot \left((-1)^n -n\right)}}\cdot \abs{(-1)^m - m - (-1)^n+n}
+			\\[2pt] &\leq  \abs{\frac{1}{1 + \left((-1)^m - m\right) \cdot \left((-1)^n -n\right)}}\abs{n - m} 
+			\\[2pt] &= \abs{\frac{m - n}{1 + (-1)^{m + n} - m \cdot (-1)^n -n\cdot (-1)^m + mn}}
+			\\[2pt] &\leq \abs{\frac{m - n}{- m \cdot (-1)^n -n\cdot (-1)^m + mn}} \label{eq:arctan_cauchy_exmp_2}
+		\end{align}
+		We will distinguish four cases:
+		\begin{enumerate}
+			\item If $m$ and $n$ are both uneven, then Eq. \eqref{eq:arctan_cauchy_exmp_2} becomes 
+			\begin{align*}
+				d(b_m, b_n) &\overset{\tiny\eqref{eq:arctan_cauchy_exmp_2}}{\leq} \abs{\frac{m - n}{- m \cdot (-1)^n -n\cdot (-1)^m + mn}}
+				\\[2pt] &= \abs{\frac{m - n}{m + n + mn}} \leq \abs{\frac{m - n}{nm}},
+			\end{align*}
+			which reduces to showing that $\seq[a_n]$ is Cauchy, cf. Eq. \eqref{eq:arctan_cauchy_exmp}.
+			
+			\item If $m$ and $n$ are both even and WLOG we assume $n\leq m$, then Eq. \eqref{eq:arctan_cauchy_exmp_2} becomes
+			\begin{align*}
+				d(b_m, b_n) &\overset{\tiny\eqref{eq:arctan_cauchy_exmp_2}}{\leq} \abs{\frac{m - n}{- m \cdot (-1)^n -n\cdot (-1)^m + mn}}
+				\\[2pt] &= \abs{\frac{m - n}{-m-n+mn}} \overset{n\leq m}{\leq} \frac{m}{\abs{-m -n + mn}} = \frac{1}{\abs{-1 -\frac{n}{m} + n}}
+				\\[2pt] &\overset{(\star)}{=} \frac{1}{-1-\frac{n}{m} + n} \overset{(\diamond)}{\leq}\frac{1}{n - 2} \overset{n\geq N}{\leq} \frac{1}{N - 2} \overset{N > \epsilon^{-1} + 2}{<} \epsilon,
+			\end{align*} 
+			where the equality in $(\star)$ and the inequality in $(\star)$ follow from $n\geq N > 2$ and $n\leq m$, since 
+			\begin{align*}
+				n \leq m \Rightarrow \frac{n}{m} \leq 1\Rightarrow -1- \frac{n}{m} + n\geq n - 2 > 0.
+			\end{align*}
+		
+			\item If $m$ is uneven and $n$ is even and WLOG we asumme $n\leq m$, then we have
+			\begin{align*}
+				d(b_m, b_n) &\overset{\tiny\eqref{eq:arctan_cauchy_exmp_2}}{\leq} \abs{\frac{m - n}{- m \cdot (-1)^n -n\cdot (-1)^m + mn}} = \abs{\frac{m - n}{-m + n + mn}}
+				\\[2pt] &\overset{n\leq m}{\leq} \frac{m}{\abs{n - m + mn}} = \frac{1}{\abs{\frac{n}{m} - 1 + n}} = \frac{1}{\frac{n}{m} - 1 + n} \leq \frac{1}{n - 1}
+				\\[2pt] &\overset{n \geq N}{\leq} \frac{1}{N - 1} \overset{N > \epsilon^{-1} + 2}{<} \epsilon.
+			\end{align*}
+			
+			\item If $m$ is even and $n$ is uneven, proceed similarly to 3.
+		\end{enumerate}
+		Finally, note that it is obvious that $\seq[a_n + b_n] = \seq[(-1)^n]$ is not Cauchy.
+	\end{proof}
+	
 	\begin{theorem}\label{thrm:complete_subsets_properties}
 		Let $(X, d)$ be a metric space. Then the following statements are true.
 		\begin{enumerate}[label=(\alph*)]
@@ -1168,6 +1242,10 @@
 	\begin{remark}
 		We can henceforth talk about \textit{the} completion of a metric space.
 	\end{remark}
+	
+	\begin{exmp}
+		Consider the metric space $(\mathbb Q, d)$ with $d(r_1, r_2) := \abs{r_1 - r_2}$ for any $r_1, r_2\in\mathbb Q$. In Appendix \ref{app:completion_Q}, we will construct the real numbers with the extended metric $d_{\text{ext}}(x, y) := \abs{x - y}$ for any $x$, $y\in\mathbb R$ with an isometry $f:\mathbb Q\to\mathbb R$.
+	\end{exmp}
 
 	\begin{proof}[Proof of Proposition \ref{prop:completion_of_metric_space_exists}]
 		Let $(X, d)$ be a metric space. We will proceed in several steps. 
@@ -1286,10 +1364,6 @@
 			This proof of the existence of the limit $\psi = \lim\limits_{n\to\infty} f(\varphi_n)$ is very similar to how we proved the existence of the limit in Eq. \eqref{eq:prop_proof_isomet_unique} for the definition of $h$.
 		\end{itemize}
 	\end{proof}
-
-	\begin{exmp}
-		Consider the metric space $(\mathbb Q, d)$ with $d(r_1, r_2) := \abs{r_1 - r_2}$ for any $r_1, r_2\in\mathbb Q$. Then the real numbers $(\mathbb R, d_{\text{ext}})$ with $d_{\text{ext}}(\varphi, \psi) := \abs{\varphi - \psi}$ for any $\varphi, \psi\in\mathbb R$ can be constructed as the completion of $(\mathbb Q, d)$ \cite{src:completion_of_Q}.
-	\end{exmp}
 	
 	\newpage 
 	\subsection{Continuity}
@@ -1997,6 +2071,7 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 
 \appendix 
 \include{appendix_A.tex}
+\include{appendix_B.tex}
 
 
 
