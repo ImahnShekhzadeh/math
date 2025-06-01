@@ -27,7 +27,11 @@ We will use the second definition of completion.
 \end{theorem}
 
 \begin{proof}
-	\Huge\color{red}TODO\color{black}\normalsize
+	First, we note that the sum of two rational numbers is also rational. Since both $\seq[x_n]$ and $\seq[y_n]$ are Cauchy sequences, for all $\epsilon\in\mathbb Q_{>0}$ there is an $N'\in\mathbb N$ s.t. for all $m', n'\geq N$, we have $\abs{x_{m'} - x_{n'}} < \epsilon$ and an $\tilde{N}\in\mathbb N$ s.t. for all $\tilde{m}, \tilde{n}\geq \tilde{N}$, we have $\abs{y_{\tilde{m}} - y_{\tilde{n}}} < \epsilon$. Let $N := \max\{N', \tilde{N}\}$, then for all $m, n\geq N$, we have
+	\begin{align*}
+		\abs{x_m + y_m - (x_n + y_n)} = \abs{x_m - x_n + y_m - y_n} \leq \abs{x_m - x_n} + \abs{y_m - y_n} < 2\epsilon,
+	\end{align*}
+	which proves that $\seq[x_n + y_n]$ is also a Cauchy sequence.
 \end{proof}
 
 \begin{theorem}\label{thrm:prod_Cauchy_sequences_Cauchy}
@@ -35,5 +39,15 @@ We will use the second definition of completion.
 \end{theorem}
 
 \begin{proof}
-	\Huge\color{red}TODO\color{black}\normalsize
+	First, we note that the multiplication and division of two rational numbers is rational. By Theorem \ref{thrm:cauchy_sequences_bounded}, Cauchy sequences are bounded, hence choose $M\in\mathbb Q$ s.t. $\abs{x_n}\leq M$ and $\abs{y_n}\leq M$ for all $n\in\mathbb N$, and note that for any $\epsilon\in\mathbb Q_{>0}$ there exists $N'\in\mathbb N$ s.t. for all $m', n'\geq N'$, we have $\abs{x_{m'} - x_{n'}} < \epsilon/M$ and an $\tilde{N}\in\mathbb N$ s.t. for all $\tilde{m}, \tilde{n}\geq \tilde{N}$, $\abs{y_{\tilde{m}} - y_{\tilde{n}}} < \epsilon/M$. Let $N := \max\{N', \tilde{N}\}$, then for all $m, n\geq N$, we have
+	\begin{align*}
+		\abs{x_my_m - x_ny_n} &= \abs{x_my_m + x_my_n - x_my_n - x_ny_n} = \abs{x_m\left(y_m - y_n\right) + y_n\left(x_m - x_n\right)}
+		\\ &\leq \abs{x_m(y_m - y_n)} + \abs{y_n(x_m - x_n)} = \abs{x_m}\abs{y_m - y_n} + \abs{y_n}\abs{x_m - x_n}
+		\\ &\leq M\cdot \epsilon/M + M\cdot \epsilon/M = 2\epsilon,
+	\end{align*}
+	where we used that $\abs{xy} = \abs{x}\abs{y}$. 
 \end{proof}
+
+\begin{remark}
+	For the proof of the uniqueness of the completion of $\mathbb Q$, we refer to step 5 of the proof of Proposition \ref{prop:completion_of_metric_space_exists}.
+\end{remark}

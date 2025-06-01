@@ -1012,7 +1012,7 @@
 		Note that Theorem \ref{thrm:mono_inc_seq_converges} does not hold in $\mathbb Q$, since the completeness axiom only guarantess the existence of a least upper bound in $\mathbb R$.
 	\end{remark}
 
-	\begin{theorem}
+	\begin{theorem}\label{thrm:cauchy_sequences_bounded}
 		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ is a Cauchy sequence, it is bounded.
 	\end{theorem}
 
@@ -1274,10 +1274,9 @@
 
 	\begin{proof}[Proof of Proposition \ref{prop:completion_of_metric_space_exists}]
 		Let $(X, d)$ be a metric space. We will proceed in several steps. 
-
-		\textit{Step 1}: We will first construct $\tilde{X}$.
+		\\
 		
-		Let $\seq[\varphi_n]$ and $\seq[\psi_n]$ be Cauchy sequences in $X$. Then by Theorem \ref{thrm:vierecksungleichung}, 
+		\textit{Step 1}: We will first construct $\tilde{X}$. Let $\seq[\varphi_n]$ and $\seq[\psi_n]$ be Cauchy sequences in $X$. Then by Theorem \ref{thrm:vierecksungleichung}, 
 		\begin{align}
 			\abs{d(\varphi_n, \psi_n) - d(\varphi_m, \psi_m)} \leq d(\varphi_n, \varphi_m) + d(\psi_n, \psi_m) \overset{n, m\to\infty}{\longrightarrow} 0,
 		\end{align}
