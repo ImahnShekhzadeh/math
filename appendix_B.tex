@@ -49,5 +49,84 @@ We will use the second definition of completion.
 \end{proof}
 
 \begin{remark}
+	The set of Cauchy sequences in $\mathbb Q$ forms a ring, cf. Def. \ref{defn:ring}, where $0 = \seq[0]$ and $1 = \seq[1]$ are the neutral elements for the additive and multiplicative operation respectively. Since multiplication is commutative, we have a commutative ring.
+\end{remark}
+
+\begin{remark}
+	The set of Cauchy sequences in $\mathbb Q$ does not form a field, cf. Def. \ref{defn:field}, though, since many Cauchy sequences do not have a multiplicative inverse, such as $(1, 0, 0, 0, \dots)$. Thus, the set of Cauchy sequences in $\mathbb Q$ does not form a field.
+\end{remark}
+
+\begin{defn}
+	We say that a rational Cauchy sequence $\seq[x_n]$ is \textit{equivalent to zero} if $\lim\limits_{n\to\infty} \abs{x_n} = 0$. We say that two rational Cauchy sequences $\seq[x_n]$ and $\seq[y_n]$ are rational, denoted by $\seq[x_n] \sim \seq[y_n]$, if $\seq[x_n - y_n]$ is equivalent to $0$.
+\end{defn}
+
+\begin{theorem}
+	The operation $\sim$ is an equivalence relation on the set of all Cauchy sequences in $\mathbb Q$.
+\end{theorem}
+
+\begin{proof}
+	Note that any rational Cauchy sequence is equivalent to itself, since \\ $\seq[x_n - x_n] = \seq[0]$, and $\lim\limits_{n\to\infty}\abs{0} = 0$. We also have symmetry, since \\ $\abs{x_n - y_n} = \abs{y_n - x_n}$. Finally, if $\seq[x_n]\sim \seq[y_n]$ and $\seq[y_n]\sim \seq[z_n]$, then $\seq[x_n]\sim \seq[z_n]$, since $\abs{x_n - z_n} = \abs{x_n - y_n + y_n - z_n} \leq \abs{x_n - y_n} + \abs{y_n - z_n}$, thus the operation $\sim$ is also transitive.
+	
+	Thus, according to Def. \ref{defn:equivalence_relation}, $\sim$ forms an equivalence relation.
+\end{proof}
+
+\begin{defn}[Real numbers]
+	We define $\mathbb R := \mathbb Q / \sim$. We extend the absolute value of $\mathbb Q$ to $\mathbb R$ via
+	\begin{align}
+		\abs{\left[\seq[x_n]\right]} := \left[ \seq[\abs{x_n}] \right],
+	\end{align}
+	where $\seq[x_n]$ is a Cauchy sequence in $\mathbb Q$.
+\end{defn}
+
+\begin{remark}
+	We embed $\mathbb Q$ in $\mathbb R$ via the map $x\mapsto \left[\seq[x]\right]$, i.e. the equivalence class of a constant sequence, whose elements are always $x$. This map is injective. It is standard to abuse notation and write $x$ for $\left[\seq[x]\right]$. That way, we can see $\mathbb Q$ as a subset of $\mathbb R$.
+\end{remark}
+
+Before proving that $\mathbb Q$ is dense in $\mathbb R$ and that $\mathbb R$ is a field, we need to look at the algebraic structure of $\mathbb R$, and at what it means to say $\left[\seq[a_n]\right] < \left[\seq[b_n]\right]$.
+
+\begin{defn}\label{defn:addition_multiplication_R}
+	Let $s$, $t\in\mathbb R$, i.e. there are rational Cauchy sequences $\seq[s_n]$ and $\seq[t_n]$ s.t. $s = \left[\seq[s_n]\right]$ and $t = \left[\seq[t_n]\right]$.
+	\begin{enumerate}[label=\alph*)]
+		\item Define the map $+: \mathbb R\times \mathbb R\to\mathbb R, s + t := \left[\seq[s_n + t_n]\right]$, 
+		\item and define $\cdot: \mathbb R\times \mathbb R\to\mathbb R, s \cdot t := \left[\seq[s_n\cdot t_n]\right]$.
+	\end{enumerate}
+\end{defn}
+
+\begin{remark}
+	Since we are dealing with equivalence classes, and $\seq[s_n]$ is merely a representation of $\left[\seq[s_n]\right]$, we need to verify that the above definitions are well-defined, i.e. representation-independent.
+\end{remark}
+
+\begin{theorem}
+	The addition and multiplication of equivalence classes as defined in Def. \ref{defn:addition_multiplication_R} are well-defined.
+\end{theorem}
+
+\begin{proof}
+	Let $s, t\in\mathbb R$, i.e. there exist rational Cauchy sequences $\seq[s_n]$ and $\seq[t_n]$ s.t. $s = \left[\seq[s_n]\right]$ and $t = \left[\seq[t_n]\right]$. Now let $\seq[s_n'], \seq[t_n']$ be rational Cauchy sequences s.t. $\seq[s_n]\sim \seq[s_n']$ and $\seq[t_n]\sim \seq[t_n']$, i.e. $\left[\seq[s_n]\right] = \left[\seq[s_n']\right]$ and  $\left[\seq[t_n]\right] = \left[\seq[t_n']\right]$. 
+	
+	Since 
+	\begin{align*}
+		\abs{s_n' + t_n' - (s_n + t_n)} = \abs{s_n' - s_n} + \abs{t_n' - t_n} \overset{n\to\infty}{\longrightarrow} 0,
+	\end{align*}
+	we have $\seq[s_n' + t_n] \sim \seq[s_n + t_n]$, and thus $\left[\seq[s_n' + t_n']\right] = \left[\seq[s_n + t_n]\right]$, which shows the well-definedness of $+$.
+	
+	For the multiplication $\cdot$, note that
+	\begin{align*}
+		\abs{s_n't_n' - s_nt_n} &= \abs{s_n't_n' + t_n's_n - t_n's_n - s_nt_n} = \abs{t_n'\left(s_n' - s_n\right) + s_n\left(t_n' - t_n\right)}
+		\\ &\leq \abs{t_n'}\abs{s_n'-s_n} + \abs{s_n}\abs{t_n' - t_n}
+		\\ &\leq M\abs{s_n'-s_n} + M\abs{t_n' - t_n} \overset{n\to\infty}{\longrightarrow} 0,
+	\end{align*}
+	where we proceeded as in the proof of Theorem \ref{thrm:prod_Cauchy_sequences_Cauchy} and chose an $M\in\mathbb Q$ s.t. $\abs{t_n'}\leq M$ and $\abs{s_n}\leq M$ for all $n\in\mathbb N$, cf. Theorem \ref{thrm:cauchy_sequences_bounded}. Thus, we have shown that $\seq[s_n't_n'] \sim \seq[s_nt_n]$, and hence $\left[\seq[s_n't_n']\right] = \left[\seq[s_nt_n]\right]$, showing the well-definedness of $\cdot$.
+\end{proof}
+
+\begin{theorem}
+	$\mathbb Q$ is dense in $\mathbb R$.
+\end{theorem}
+
+\begin{proof}
+	According to 
+\end{proof}
+
+
+\begin{remark}
 	For the proof of the uniqueness of the completion of $\mathbb Q$, we refer to step 5 of the proof of Proposition \ref{prop:completion_of_metric_space_exists}.
 \end{remark}

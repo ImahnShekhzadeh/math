@@ -1085,7 +1085,7 @@
 	\end{proof}
 	
 	\begin{remark}
-		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ and $\seq[\psi_n]$ are Cauchy sequences in $(X, d)$, their sum $\seq[\varphi_n + \psi_n]$ is \textit{not} necessarily a Cauchy sequence in $X$ wrt $d$.
+		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ and $\seq[\psi_n]$ are Cauchy sequences in $(X, d)$, their sum $\seq[\varphi_n + \psi_n]$ is \textit{not} necessarily a Cauchy sequence in $X$ wrt $d$. (Note that we are assuming here that $X$ is equipped with a binary operation $+$.)
 	\end{remark}
 
 	\begin{exmp}\label{exmp:counter_exmp_sum_Cauchy_not_Cauchy}
@@ -1093,7 +1093,7 @@
 	\end{exmp}
 
 	\begin{remark}
-		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ and $\seq[\psi_n]$ are Cauchy sequences in $(X, d)$, their product $\seq[\varphi_n \cdot \psi_n]$ is \textit{not} necessarily a Cauchy sequence in $X$ wrt $d$.
+		Let $(X, d)$ be a metric space. Then if $\seq[\varphi_n]$ and $\seq[\psi_n]$ are Cauchy sequences in $(X, d)$, their product $\seq[\varphi_n \cdot \psi_n]$ is \textit{not} necessarily a Cauchy sequence in $X$ wrt $d$. (Note that we are assuming here that $X$ is equipped with a binary operation $\cdot$.)
 	\end{remark}
 
 	\begin{exmp}\label{exmp:counter_exmp_prod_Cauchy_not_Cauchy}
@@ -1799,6 +1799,28 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 		To see that not all atlases are equivalent to each other, consider $M = \mathbb R$ (which is a second countable Hausdorff topological space). Consider the atlases $\mathcal A = \{ (\varphi, M) \}$ with $\varphi: M\rightarrow M$, $x\mapsto x$ and $\mathcal B = \{(\psi, M)\}$ with $\psi: M\rightarrow M$, $x\mapsto x^3$. The atlases are not equivalent, since $\varphi\circ \psi^{-1}: M \rightarrow M$, $x\mapsto \sqrt[3]{x}$ is not smooth (the derivative is not continuous). 
 	\end{remark}
 	
+	\newpage
+	\section{Algebra}
+
+	\begin{defn}[Ring \cite{src:algebra}]\label{defn:ring}
+		Let $R$ be a set equipped with two binary operations, i.e. maps from $R\times R$ to $R$ that are called \textit{addition} and \textit{multiplication} and that are denoted by $+$ and $\cdot$. Further, let there be two elements that are called \textit{zero} and \textit{unity} and that are denoted by $0$ and $1$ respectively. Then $(R, +, \cdot)$ is called a \textit{ring} if 
+		
+		\begin{enumerate}
+			\item $(R, +, 0)$ is an abelian group, where $0$ is the neutral element for the operation $+$,
+			\item $(R, \cdot, 1)$ is a monoid, where $1$ is the neutral element for the operation $\cdot$,
+			\item the \textit{distributive laws} hold in $R$, i.e. for all $a, b, c\in R$, we have
+			\begin{align*}
+				\left((a + b)\cdot c = a\cdot c + b\cdot c\right) \wedge \left(a\cdot (b + c) = a\cdot b + a\cdot c\right),
+			\end{align*}
+			\item we have $0\cdot a = a\cdot 0 = 0$ for all $a\in R$.
+		\end{enumerate}
+	\end{defn}
+	
+	\begin{defn}[Field \cite{src:algebra}]\label{defn:field}
+		Let $R$ be a commutative ring, then we say it is a \textit{field} if $0\neq 1$ in $R$ and if every non-zero element has a multiplicative inverse.
+	\end{defn}
+	
+	\newpage 
 	\section{Normalizing Flows}
 	\begin{defn}\label{defn-diffeomorphism}
 		Let $M$, $N$ be two manifolds, $g: M\rightarrow N$ a differentiable map. If $g$ is a bijection and its inverse $g^{-1}: N\rightarrow M$ is differentiable as well, then we call $f$ a \textit{diffeomorphism}. We talk of a $C^k$ \textit{diffeomorphism} if both $g$ and $g^{-1}$ are $k$-times continuously differentiable. 
