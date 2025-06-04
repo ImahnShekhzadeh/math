@@ -4,6 +4,7 @@
 \usepackage[backend=biber]{biblatex}
 \usepackage[english]{babel}
 \usepackage{array}
+\usepackage{cancel}
 \addbibresource{references.bib}
 
 % NEW (16-04-21, 19p49)
@@ -33,6 +34,10 @@
 % \subtitle{Questions}
 \author{Imahn Shekhzadeh}
 \date{\today}
+
+% https://tex.stackexchange.com/a/94397/239562
+\binoppenalty=10000 
+\relpenalty=10000 
 
 \begin{document}
 	\maketitle
@@ -1311,13 +1316,13 @@
 			\end{align*}
 			which shows the triangle inequality.
 		\end{enumerate}
-		\textit{Step 3}: We now embed $X$ isometrically as a dense subset of $\tilde{X}$. For this, consider the map $f: X\to\tilde{X}, \varphi\mapsto \seq[\varphi_n]$ with $\varphi_n = \varphi$ for any $n\in\mathbb N$. $f$ is an isometry, since 
+		\textit{Step 3}: We now embed $X$ isometrically as a dense subset of $\tilde{X}$. For this, consider the map $f: X\to\tilde{X}, \varphi\mapsto \left[\seq[\varphi_n]\right]$ with $\varphi_n = \varphi$ for any $n\in\mathbb N$. $f$ is an isometry, since 
 		\begin{align}
-			\tilde{d}\left(f(\varphi), f(\psi)\right) = \lim\limits_{n\to\infty} d\left(f(\varphi)_n, f(\psi)_n\right) = \lim\limits_{n\to\infty}d(\varphi, \psi) = d(\varphi, \psi).
+			\tilde{d}\left(f(\varphi), f(\psi)\right) = \lim\limits_{n\to\infty} d\left(\varphi_n, \psi_n\right) = \lim\limits_{n\to\infty}d(\varphi, \psi) = d(\varphi, \psi).
 		\end{align}
 		The image of $f$ under $X$, i.e. $f(X)\subset \tilde{X}$, is dense in $\tilde{X}$ wrt $\tilde{d}$, since for any $\tilde{\varphi}\in\tilde{X}$ with representation $\seq[\varphi_n]$ the sequence $\seq[f(\varphi_n)]\in f(X)$ converges to $\tilde{\varphi}$ wrt $\tilde{d}$:
 		\begin{align}
-			\lim\limits_{n\to\infty}\tilde{d}\left(\tilde{\varphi}, \seq[f(\varphi_n)]\right) = \lim\limits_{n\to\infty}\lim\limits_{m\to\infty}d(\varphi_m, f(\varphi_n)_m) = \lim\limits_{n,m\to\infty} d(\varphi_m, \varphi_n) = 0,
+			\lim\limits_{n\to\infty}\tilde{d}\left(\tilde{\varphi}, f(\varphi_n)\right) = \lim\limits_{n\to\infty}\lim\limits_{m\to\infty}d(\varphi_m, \varphi_n) = 0,
 		\end{align}
 		since $\seq[\varphi_n]$ is a Cauchy sequence in $X$ wrt $d$.
 		
@@ -1388,6 +1393,40 @@
 			This proof of the existence of the limit $\psi = \lim\limits_{n\to\infty} f(\varphi_n)$ is very similar to how we proved the existence of the limit in Eq. \eqref{eq:prop_proof_isomet_unique} for the definition of $h$.
 		\end{itemize}
 	\end{proof}
+
+	\subsection{Compactness}
+	\begin{defn}[Compact]
+		Let $U$ be a subset of a metric space. Then it is called 
+		\begin{itemize}
+			\item \textit{compact} if every open covering of $U$ contains a finite sub-covering, i.e. if to every family $\{V_j\}_{j\in J}$ of open sets with $U \subset \bigcup_{j\in\mathbb N} V_j$ there are finitely many $V_{j_1}$, dots, $V_{j_n}$ s.t. 
+			\begin{align*}
+				U \subset \bigcup_{k = 1}^{n}V_{j_k},
+			\end{align*}
+			\item \textit{sequentially compact} if every sequence in $U$ contains a convergent subsequence in $U$.
+		\end{itemize}
+	\end{defn}
+
+	\begin{exmp}
+		Consider $U := (0, 1]$, which is a subset of the metric space $(\mathbb R, \abs{\cdot})$. Then $V_j := (1/j, 1 + 1/j)$, $j\in\mathbb N$, are an open covering of $U$, but $U$ is not compact, since there is no \textit{finite} covering of $U$ with open sets from from $\{V_j\}_{j\in\mathbb N}$.
+		
+		$U$ is also not sequentially compact, since the sequence $\seq[1/n]$ does not contain a convergent subsequence in $U$ ($0\notin U$).
+	\end{exmp}
+
+	\begin{exmp}
+		$(\mathbb R, \abs{\cdot})$ is obviously not compact. Also, it is not sequentially compact, since $\seq[n]$ does not contain a convergent subsequence in $\mathbb R$.
+	\end{exmp}
+	
+	\begin{defn}[Totally bounded set]
+		A subset $U$ of a metric space is called \textit{totally bounded} if for every $\epsilon > 0$ there are finitely many elements $\varphi_1, \dots, \varphi_n\in U$ s.t. 
+		\begin{align*}
+			U\subset \bigcup_{i = 1}^{n}B_{\epsilon}(\varphi_i),
+		\end{align*}
+		i.e. to every $\varphi\in U$ there is a $\varphi_k\in U$, $1\leq k\leq n$, s.t. $d(\varphi, \varphi_k) < \epsilon$.
+	\end{defn}
+
+	\begin{theorem}
+		Every totally bounded set is bounded.
+	\end{theorem}
 	
 	\newpage 
 	\subsection{Continuity}

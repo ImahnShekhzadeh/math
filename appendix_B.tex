@@ -105,7 +105,7 @@ Before proving that $\mathbb Q$ is dense in $\mathbb R$ and that $\mathbb R$ is 
 	
 	Since 
 	\begin{align*}
-		\abs{s_n' + t_n' - (s_n + t_n)} = \abs{s_n' - s_n} + \abs{t_n' - t_n} \overset{n\to\infty}{\longrightarrow} 0,
+		\abs{s_n' + t_n' - (s_n + t_n)} \leq \abs{s_n' - s_n} + \abs{t_n' - t_n} \overset{n\to\infty}{\longrightarrow} 0,
 	\end{align*}
 	we have $\seq[s_n' + t_n] \sim \seq[s_n + t_n]$, and thus $\left[\seq[s_n' + t_n']\right] = \left[\seq[s_n + t_n]\right]$, which shows the well-definedness of $+$.
 	
@@ -119,14 +119,108 @@ Before proving that $\mathbb Q$ is dense in $\mathbb R$ and that $\mathbb R$ is 
 \end{proof}
 
 \begin{theorem}
-	$\mathbb Q$ is dense in $\mathbb R$.
+	$\mathbb R$, equipped with the two operations $+$ and $\cdot$, is a field.
 \end{theorem}
 
 \begin{proof}
-	According to 
+	Here, we will only prove that every $s\in\mathbb R\backslash \{0\}$ has a multiplicative inverse (the rest is genereally easier to prove than this one).
+	
+	We shall first understand what the existence of the multiplicative inverse means. Let $\seq[s_n]$ be a rational Cauchy sequence s.t. $s = \left[\seq[s_n]\right]$. Since $s\ne 0$, we know that $\seq[s_n]\cancel{\sim}\seq[0]$, i.e. $\seq[s_n]$ does not converge to $0$. We now need to find a multiplicative inverse $t$ s.t. $s \cdot t = 1$. While this might seem trivial (since every $s_n\in\mathbb Q$ has a multiplicative inverse, i.e. we could choose $t_n = s_n^{-1}$), there is a subtle difficulty. The fact that $s$ is non-zero does \textit{not} mean that all sequence elements of $\seq[s_n]$ are unequal to zero. For example, let $s = 1$, then $\seq[s_n] = \left(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, \dots\right)$ is in the equivalence class of $[\seq[1]]$. However, the point is that \textit{eventually}, the sequence elements must be non-zero (since $s$ is non-zero), and thus there is an $N\in\mathbb N$ s.t. for $n\geq N$, we have $s_n\ne 0$. Thus, define a sequence $\seq[t_n]$ that for $n < N$ is zero and for $n\geq N$ let $t_n := s_n^{-1}$. Now the multiplicative inverse of $s$ is $t = \left[\seq[t_n]\right]$.
 \end{proof}
 
+\begin{defn}[Order of $\mathbb R$]\label{defn:order_R}
+	Let $s\in\mathbb R$, i.e. there is a rational Cauchy sequence $\seq[s_n]$ s.t. $\left[\seq[s_n]\right] = s$. We say that $s$ is \textit{positive}, denoted by $s > 0$, if $s\ne 0$ and if there is an $N\in\mathbb N$ s.t. $s_n > 0$ for all $n\geq N$.
+	
+	Let $t\in\mathbb R$, i.e. there is a rational Cauchy sequence $\seq[t_n]$ s.t. $\left[\seq[t_n]\right] = t$. Then we write $s > t$ if $s - t$ is positive.
+\end{defn}
+
+\begin{theorem}
+	The order of the real numbers is well-defined.
+\end{theorem}
+
+\begin{proof}
+	Fix $s\in\mathbb R$, i.e. $s = \left[\seq[s_n]\right]$ for a rational Cauchy sequence $\seq[s_n]$. Also, let $s$ be positive, i.e. there is an $N\in\mathbb N$ s.t. $s_n > 0$ for all $n\geq N$. We need to show that for any other representative of $\left[\seq[s_n]\right]$, i.e. $\seq[s_n']\in\left[\seq[s_n]\right]$ with $\seq[s_n'] \sim \seq[s_n]$, there is an $N'\in\mathbb N$ s.t. $s_n' > 0$ for all $n\geq N'$.
+	
+	We first show that there exists a rational number $r\in\mathbb Q_{> 0}$ and an $\tilde{N}\in\mathbb N$ s.t. $s_n > r$ for all $n\geq \tilde{N}$ by contradiction. Suppose that for all $r\in\mathbb Q_{> 0}$ and all $\tilde{N}\in\mathbb N$ there exists an $n = n(r, \tilde{N})\geq \tilde{N}$ s.t. $s_n \leq r$. Then there is a subsequence $\left(s_{n_k}\right)_{k\in\mathbb N}$ of $\seq[s_n]$ s.t. $0 < s_{n_k} \leq 1/k$. We will prove this via induction. Set $n_1 := n(1, N)$. Assume we have constructed $n_1, n_2, \dots, n_k$ s.t. $n_1 < n_2 < \dots < n_k$ and $0 < s_{n_j} \leq 1/j$ for $j\in\{1, \dots, k\}$. Then set $n_{k + 1} := n(1/(k + 1), n_{k} + 1)$. We have $n_k < n_{k + 1}$ and $0 < s_{n_{k + 1}} \leq 1/(k +1)$. 
+	
+	Since $\seq[s_n]$ is Cauchy, there exists an $M_k\in\mathbb N$ s.t. $\abs{s_n - s_m} < 1/k$ for all $n, m\geq M_k$. Choose $l\geq k$ s.t. $n_l \geq M_k$. Then for $n\geq M_k$, we have
+	\begin{align}
+		\abs{s_n} = \abs{s_n - s_{n_l} + s_{n_l}} \leq \abs{s_n - s_{n_l}} + \abs{s_{n_l}} < \frac{1}{k} + \frac{1}{l} \leq \frac{2}{k} \overset{k\to\infty}{\longrightarrow} 0.
+	\end{align}
+	This means that $\seq[s_n]$ converges to $0$, and thus $s = 0$, which is a contradiction. Hence, there exists a rational number $r\in\mathbb Q_{> 0}$ and an $\tilde{N}\in\mathbb N$ s.t. $s_n > r$ for all $n\geq \tilde{N}$. Let $\seq[s_n']$ be another representative of $\left[\seq[s_n]\right]$, i.e. $\seq[s_n] \sim \seq[s_n']$, and thus $s_n' - s_n \overset{n\to\infty}{\longrightarrow} 0$. This in turn implies that $\abs{s_n' - s_n} < r$ for $n\geq N'$. Let $n\geq \max\{\tilde{N}, N'\}$, then we have
+	\begin{align*}
+		s_n' = s_n - (s_n - s_n') \geq s_n - \abs{s_n - s_n'} > r - r = 0,
+	\end{align*}
+	since $s_n - s_n' \leq \abs{s_n - s_n'}$, which implies $-(s_n - s_n') \geq - \abs{s_n - s_n'}$.
+\end{proof}
+
+\begin{theorem}
+	Let $s, t, r\in\mathbb R$, then if $s > t$, we also have $s + r > t + r$.
+\end{theorem}
+
+\begin{proof}
+	Let $\seq[s_n], \seq[t_n], \seq[r_n]$ be rational Cauchy sequences s.t. $s = \left[\seq[s_n]\right]$, $t = \left[\seq[t_n]\right]$ and $r = \left[\seq[r_n]\right]$. Since $s > t$, we know that there is an $N\in\mathbb N$ s.t. for all $n\geq N$, we have 
+	\begin{align*}
+		s_n - t_n > 0\Leftrightarrow s_n > t_n \Leftrightarrow s_n + r_n > t_n + r_n \Leftrightarrow \underbrace{(s_n + r_n) - (t_n + r_n)}_{=s_n - t_n} > 0
+	\end{align*}
+	Since $s_n - t_n$ does not go to $0$ for $n\to\infty$ (since $s > t$), we have that $(s_n + r_n) - (t_n + r_n)$ does not either, and thus $s + r > t + r$.
+\end{proof}
+
+The density of $\mathbb Q$ in $\mathbb R$ follows almost immediately from the construction of $\mathbb R$ from $\mathbb Q$.
+
+\begin{theorem}\label{thrm:Q_dense_R}
+	$\mathbb Q$ is dense in $\mathbb R$, i.e. for any $\epsilon \in\mathbb Q_{> 0}$ and $s\in\mathbb R$ there is a rational number $r\in\mathbb Q$ s.t. $\abs{s - r} < \epsilon$.
+\end{theorem}
+
+\begin{proof}
+	Since $s\in\mathbb R$, there is a rational Cauchy sequence $\seq[s_n]$ s.t. $s = \left[\seq[s_n]\right]$. Since $\seq[s_n]$ is Cauchy, there is an $N\in\mathbb N$ s.t. for all $m, n\geq N$, we have $\abs{s_n - s_m} < \epsilon$. Let $r := s_N\in\mathbb R$, and note that we can embed it into $\mathbb R$ as $\left[\seq[a_N]\right]$. Thus, ${\abs{s - r} = \left[\seq[\abs{s_n - s_N}]\right]}$. For $n\geq N$, we have $\abs{s_n - s_N} < \epsilon$ and thus $s_n - s_N < \epsilon$ and $s_N - s_n < \epsilon$, since for any rational number $a$, $a \leq \abs{a}$. Thus, $\left(s_n - s_N\right) - \epsilon$ and $\left(s_N - s_n\right) - \epsilon$ are negative, i.e. $s - r < \epsilon$ and $r - s < \epsilon$, which can be summarized to $\abs{s - r¸} < \epsilon$.
+\end{proof}
+
+\begin{remark}
+	The density of $\mathbb Q$ in $\mathbb R$ implies that we could replace $\epsilon\in\mathbb Q_{> 0}$ with $\epsilon\in\mathbb R_{>0}$ throughout.
+\end{remark}
+
+\begin{theorem}
+	$\mathbb R$ has the Archimedean property, i.e. for all $s, t\in\mathbb R$ there exists a natural number $m\in\mathbb N$ s.t. $m\cdot s > t$.
+\end{theorem}
+
+\begin{proof}
+	Since $s, t\in\mathbb R$, there exist rational Cauchy sequences $\seq[s_n]$ and $\seq[t_n]$ s.t. $s = \left[\seq[s_n]\right]$ and $t = \left[\seq[t_n]\right]$. 
+	
+	Recally that by $m\in\mathbb N\subset \mathbb Q$, we mean the $m$ that is embedded into $\mathbb R$, i.e. $\left[\seq[m]\right]$. Thus, we need to show that there exists an $m, N\in\mathbb N$ s.t. $m s_n - t_n > 0$ for all $n\geq N$ and that $\seq[ms_n - t_n]$ does not converge to $0$, cf. Definition \ref{defn:order_R}.
+	
+	We will prove the first part by contradiction. Assume that for all $m, N\in\mathbb N$, there exists an $n\geq N$ s.t. $ms_n - t_n\leq 0$. For this, note that $\seq[t_n]$ is bounded, cf. \mbox{Theorem \ref{thrm:cauchy_sequences_bounded}}, i.e. there is an $M\in\mathbb Q$ s.t. $t_n \leq M$ for all $n\in\mathbb N$. By the Archimedean property of $\mathbb Q$, for any $\epsilon\in\mathbb Q_{> 0}$ there is an $m\in\mathbb N$ s.t. $m\epsilon/2 > M$, or equivalently $M/m < \epsilon/2$. Thus,
+	\begin{align}\label{eq:archimedean_property_R}
+		ms_n - t_n \leq 0 \Leftrightarrow s_n \leq \frac{t_n}{m} \leq \frac{M}{m} < \frac{\epsilon}{2}.
+	\end{align}
+	Since $\seq[s_n]$ is Cauchy, there exists an $N\in\mathbb N$ s.t. for all $n', k \geq N$, $\abs{s_k - s_{n'}} < \epsilon/2$, i.e. $s_k - s_{n'} < \epsilon/2$. Now choose an $n'\geq n\geq N$, then for all $k\geq N$, we have
+	\begin{align*}
+		s_k < s_{n'} + \frac{\epsilon}{2} \overset{\tiny\eqref{eq:archimedean_property_R}}{<} \epsilon.
+	\end{align*}
+	Thus, $s$ cannot be positive, contradicting the assumption that $s > 0$. Hence, we have shown that there exists an $m, N\in\mathbb N$ s.t. $m s_n - t_n > 0$ for all $n\geq N$.
+	
+	If $\seq[ms_n - t_n]$ converges to $0$, e.g. for $\seq[s_n] = \seq[1]$ and $\seq[t_n] = \seq[m]$, then we can choose $m + 1$ instead of $m$, since $(m + 1)s_n - t_n = ms_n - t_n + s_n \overset{n\to\infty}{\longrightarrow} \lim\limits_{n\to\infty}s_n > 0$, since $s \ne 0$.
+\end{proof}
+
+We can now prove that $\mathbb R$ is complete.
+
+\begin{proposition}\label{prop:R_is_complete}
+	Let $\seq[x_n]$ be a Cauchy sequence of \textit{real numbers}, then it converges to an $x\in\mathbb R$, i.e. $\mathbb R$ is complete.
+\end{proposition}
+
+\begin{proof}
+	Fix an $x_n$ of the sequence. By the density of $\mathbb Q$ in $\mathbb R$, cf. Theorem \ref{thrm:Q_dense_R}, we know there exists a $q_n\in\mathbb Q$ s.t. $\abs{x_n - q_n} < 1/n$. We will now show that $\seq[q_n]$ is Cauchy in $\mathbb Q$. Let $\epsilon\in\mathbb Q_{> 0}$, then by the Archimedean property of $\mathbb Q$, there exists an $N\in\mathbb N$ s.t. $N\epsilon/3 > 1$, or equivalently $1/N < \epsilon/3$. Since $\seq[x_n]$ is Cauchy in $\mathbb R$, there exists an $M\in\mathbb R$ s.t. for all $n, m\geq M$, we have $\abs{x_n - x_m} < \epsilon/3$. Now, if $n, m\geq \max\{N, M\}$, we have 
+	\begin{align*}
+		\abs{q_n - q_m} &= \abs{q_n -x_n + x_n - x_m + x_m - q_m } \leq \abs{q_n - x_n} + \abs{x_n - x_m} + \abs{x_m - q_m} 
+		\\  &< \frac{1}{n} + \frac{\epsilon}{3} + \frac{1}{m} \leq \frac{2}{N} + \frac{\epsilon}{3} < \epsilon,
+	\end{align*}
+	which proves that $\seq[q_n]$ is a Cauchy sequence, and thus it represents a real number, which we shall denote by $x$. We now want to show that $\seq[x_n]$ converges to $x$. First of all, by definition of $x$, $q_n - x\overset{n\to\infty}{\longrightarrow} 0$. We also know that $\abs{x_n - q_n} < 1/n$, cf. above. Thus, 
+	\begin{align*}
+		\abs{x_n - x} = \abs{x_n - q_n + q_n - x} \leq \abs{x_n - q_n} + \abs{q_n - x} < \frac{1}{n} + \abs{q_n - x}\overset{n\to\infty}{\longrightarrow} 0.
+	\end{align*}
+\end{proof}
 
 \begin{remark}
 	For the proof of the uniqueness of the completion of $\mathbb Q$, we refer to step 5 of the proof of Proposition \ref{prop:completion_of_metric_space_exists}.
 \end{remark}
+
