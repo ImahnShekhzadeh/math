@@ -674,6 +674,18 @@
 		Non-convergent sequence are called \textit{divergent}.
 	\end{defn}
 
+	\begin{theorem}
+		A sequence is convergent iff every subsequence converges to the same limit.
+	\end{theorem}
+	
+	\begin{proof}[Proof \cite{213285}]
+		\enquote{$\Longleftarrow$} Every sequence has a trivial subsequence, namely itself.
+		
+		\enquote{$\Longrightarrow$} Let $\left(\varphi_{n_k}\right)_{k\in\mathbb N}$ be a subsequence of $\seq[\varphi_n]$. Note that $n_k \geq k$ for all $k\in\mathbb N$, which we will prove by induction: Clearly, $n_1\geq 1$, and $n_k\geq k$ implies $n_{k + 1} > n_{k} \geq k$, i.e. $n_{k + 1}\geq k + 1$. 
+		
+		We denote the limit of $\seq[\varphi_n]$ by $\varphi$, and note that for all $\epsilon > 0$, there exists an $N\in\mathbb N$ s.t. for all $n \geq N$, we have $d(\varphi_n, \varphi) < \epsilon$. Thus, for all $k\geq N$ (and hence $n_k\geq N$), we have $d(\varphi_{n_k}, \varphi) < \epsilon$.
+	\end{proof}
+
 	\begin{defn}[Accumulation point]\label{defn:accumulation_point}
 		Let $U\subset X$. Then $\varphi\in X$ is called an \textit{accumulation point} of $U$ if there is a sequence $\left(\varphi_{n}\right)_{n\in \mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_{n} = \varphi$.
 	\end{defn}
@@ -897,6 +909,20 @@
 		\begin{align}
 			d(\varphi_n, \varphi_m) \leq d(\varphi_n, \varphi) + d(\varphi, \varphi_m) < 2\epsilon \quad\forall n,m\geq N.
 		\end{align}
+	\end{proof}
+
+	\begin{theorem}
+		A Cauchy sequence in a metric space $(X, d)$ is convergent iff it contains a convergent subsequence.
+	\end{theorem}
+
+	\begin{proof}[Proof \cite{354965}]
+		\enquote{$\Longrightarrow$} Every sequence has a trivial subsequence, namely itself.
+		
+		\enquote{$\Longleftarrow$} Let $\left(\varphi_{n_k}\right)_{k\in\mathbb N}$ be a subsequence of the Cauchy sequence $\seq[\varphi_n]$, and assume that $\lim\limits_{k\to\infty}\varphi_{n_k} = \varphi$ wrt $d$, where $\varphi\in X$, i.e. for all $\epsilon > 0$ there exists an $N'\in\mathbb N$ s.t. for all $k\geq N'$, $d(\varphi_{n_k}, \varphi) < \epsilon$ (note that $n_k \geq k$). Since $\seq[\varphi_n]$ is Cauchy, there exists an $\tilde{N}$ s.t. for all $m, n\geq \tilde{N}$, we have $d(\varphi_n, \varphi_m) < \epsilon$. Define $N := \max\left\{N', \tilde{N}\right\}$, then for all $k, n\geq N$,
+		\begin{align*}
+			d(\varphi_n, \varphi) \leq d(\varphi_n, \varphi_{n_k}) + d(\varphi_{n_k}, \varphi) < 2\epsilon,
+		\end{align*}
+		and thus $\seq[\varphi_n]$ converges to $\varphi$.
 	\end{proof}
 
 	\begin{remark}\label{remark:cauchy_not_convergent_necess}
