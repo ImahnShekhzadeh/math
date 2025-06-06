@@ -637,7 +637,7 @@
 		i.e. $d(f, \psi) > r$, and hence $\psi\notin B_r[f]$, implying that $\psi\in X\backslash B_{r}[f]$. 
 	\end{proof}
 	
-	\begin{theorem}
+	\begin{theorem}\label{thrm:open_sets_form_topology}
 		Let $(X, d)$ be a metric space. The collection of open sets as in Definition \ref{defn-open-set} gives a topology.
 	\end{theorem}
 	\begin{proof}		
@@ -1424,9 +1424,90 @@
 		i.e. to every $\varphi\in U$ there is a $\varphi_k\in U$, $1\leq k\leq n$, s.t. $d(\varphi, \varphi_k) < \epsilon$.
 	\end{defn}
 
-	\begin{theorem}
+	\begin{theorem}\label{thrm:totally_bounded_set_bounded}
 		Every totally bounded set is bounded.
 	\end{theorem}
+
+	\begin{proof}
+		Let $\varphi_1, \dots, \varphi_n\in U$ be s.t.
+		\begin{align*}
+			U\subset \bigcup_{i = 1}^{n}B_{\epsilon}(\varphi_i)
+		\end{align*}
+		for all $\epsilon > 0$. Now note that
+		\begin{align*}
+			U\subset \bigcup_{i = 1}^{n}B_{\epsilon}(\varphi_i) \subset \bigcup_{i = 1}^{n}B_{\epsilon}[\varphi_i],
+		\end{align*}
+		and that by Theorem \ref{thrm:open_sets_form_topology}, the finite union of closed sets is also closed. Thus, $U$ is bounded.
+	\end{proof}
+
+	\begin{remark}
+		The converse of Theorem \ref{thrm:totally_bounded_set_bounded} is not true in general: There are bounded sets that are not totally bounded.
+	\end{remark}
+
+	\begin{exmp}
+		Consider $\mathbb R$ with the metric $d(x, y) := \min\{ 1, \abs{x - y} \}$. Then $\mathbb R$ (as a subset of $\mathbb R$) is bounded, but not totally bounded.
+	\end{exmp}
+
+	\begin{proof}
+		$\mathbb R$ is bounded wrt $d$, since $\mathbb R \subset B_{r}[0]$, where $r \geq 1$. However, $\mathbb R$ is not totally bounded. For this, let $\epsilon\leq 1$ be arbitrary, then it is clear that we need infinitely many open balls to cover $\mathbb Z$, and thus also $\mathbb R$.
+	\end{proof}
+	
+	\begin{theorem}
+		Every sequentially compact set is totally bounded.
+	\end{theorem}
+
+	\begin{proof}
+		We will proof this by contradiction. So let $U$ be sequentially compact, but not totally bounded. The fact that $U$ is totally bounded can be written with quantifiers:
+		\begin{align*}
+			\forall \epsilon > 0\ \exists \psi_1, \dots, \psi_n\in U: U\subset \bigcup_{i=1}^{n}B_{\epsilon}(\psi_i)
+		\end{align*}
+		So if $U$ is not totally bounded, we can write this as 
+		\begin{align*}
+			\exists\epsilon > 0\ \forall \psi_1, \dots, \psi_n\in U:\exists \psi\in U, \psi\notin\bigcup_{i = 1}^{n}B_{\epsilon}(\psi_i)
+		\end{align*}		
+		So there is an $\epsilon > 0$ s.t. for arbitrary $\psi_1, \dots, \psi_n\in U$, $n\in\mathbb N$, there is a $\psi_{n+1}\in U$ s.t. $d(\psi_{n+1}, \psi_j) \geq \epsilon$ for all $j\in\{1, \dots, n\}$. Thus, we can also find a $\psi_{n+2}\in U$ s.t. $d(\psi_{n+2}, \psi_j) \geq \epsilon$ for all $j\in \{1, \dots, n+1\}$. Hence, we can recursively construct a sequence $\seq[\psi_n]$ in $U$ s.t.
+		\begin{align*}
+			d(\psi_l, \psi_k) \geq\epsilon\quad \text{for}\ n < k < l.
+		\end{align*}
+		However, such a sequence cannot contain a convergent subsequence, which is in contradiction to $U$ being sequentially compact.
+	\end{proof}
+
+	\begin{defn}
+		A set $U$ of a metric space is called separable, if $U$ contains a countable dense subset.
+	\end{defn}
+
+	\begin{exmp}
+		Consider the metric space $(\mathbb R, d)$, where $d$ is the usual metric. Then $\mathbb Q\subset\mathbb R$ is separable wrt $d$.
+	\end{exmp}
+
+	\begin{theorem}
+		Every totally bounded set is separable.
+	\end{theorem}
+
+	\begin{proof}
+		Let $U$ be totally bounded. There for every $\epsilon_{m} = 1/m > 0$ there is a finite sequence of elements $\varphi_{1, m}, \dots, \varphi_{n_m, m}\in U$ s.t.
+		\begin{align*}
+			U \subset \bigcup_{j = 1}^{n_m}B_{\epsilon_m}(\varphi_{j, m}).
+		\end{align*}
+		Consider the set
+		\begin{align*}
+			V := \{\varphi_{1, 1}, \dots, \varphi_{n_1, 1}, \varphi_{1, 2}, \dots, \varphi_{n_2, 2}, \varphi_{1, 3}, \dots, \varphi_{n_3, 3}, \dots \dots\},
+		\end{align*}
+		which is the set of elements of the sequence $\left(\varphi_{1, m}, \dots, \varphi_{n_m, m}\right)_{m\in\mathbb N}$. Obviously, $V$ is countable. Also, for every $\varphi\in U$ and $\epsilon > 0$, there is an $\epsilon_m = 1/m < \epsilon$ and a $\varphi_{j, m}\in V$ s.t. $d(\varphi_{j, m}, \varphi) < \epsilon_m = 1/m < \epsilon$. Thus, $V$ is dense in $U$.
+	\end{proof}
+
+	\begin{theorem}
+		Let $U$ be a subset of a metric space, then the following statements are equivalent:
+		\begin{enumerate}[label=(\alph*)]
+			\item $U$ is compact, 
+			\item $U$ is sequentially compact,
+			\item $U$ is totally bounded and complete.
+		\end{enumerate}
+	\end{theorem}
+
+	\begin{proof}
+		Let $U$ be compact. 
+	\end{proof}
 	
 	\newpage 
 	\subsection{Continuity}
