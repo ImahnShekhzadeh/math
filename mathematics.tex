@@ -537,7 +537,19 @@
 			\item \textbf{triangle inequality}: $d(\varphi, \psi) \leq d(\varphi, \chi) + d(\chi, \psi)$. 
 		\end{itemize}
 	\end{defn}
+	
+	\begin{theorem}
+		Let $X$ be a linear space and $d$ a metric on $X$. Then $\norm{x}{} := d(x, 0)$ defines a norm on $X$ if $d(tx, 0) = \abs{t}d(x, 0)$ (\enquote{scaling property}) for all $t\in\mathbb K$, $x\in X$, and if $d(x + y, y) = d(x, 0)$ for all $x, y\in X$ (\enquote{translation invariance}).
+	\end{theorem}
 
+	\begin{proof}
+		Positivity, definiteness and homogeneity of $\norm{\cdot}{}$ are obvious, for the triangle inequality note that for all $x, y\in X$,
+		\begin{align*}
+			\norm{x + y}{} &= d(x + y, 0) = d(x, -y) \leq d(x, 0) + d(0, -y) = d(x, 0) + d(-y, 0) 
+			\\ &= d(x, 0) + d(y, 0) = \norm{x}{} + \norm{y}{}.
+		\end{align*}
+	\end{proof}
+	
 	\begin{defn}[Topological Space \cite{topology-singh}]
 		A topology on a set $X$ is a collection $\tau$ of subsets of $X$ such that 
 		\begin{itemize}
@@ -911,7 +923,7 @@
 		\end{align}
 	\end{proof}
 
-	\begin{theorem}
+	\begin{theorem}\label{thrm:cauchy_convergent_subsequence}
 		A Cauchy sequence in a metric space $(X, d)$ is convergent iff it contains a convergent subsequence.
 	\end{theorem}
 
@@ -934,7 +946,7 @@
 	\end{remark}
 	
 	\begin{theorem}\label{thrm:mono_inc_seq_Cauchy}
-		Any sequence $(a_n)_{n\in\mathbb N}$ with $a_n\in \mathbb R$ for any $n\in \mathbb N$ that is monotonically increasing and upper bounded for any $n\in\mathbb N$ is a Cauchy sequence in ($\mathbb R$, $d$) with $d(x, y):= \abs{x - y}$ for any \newline $x$, $y\in \mathbb R$.		
+		Any sequence $(a_n)_{n\in\mathbb N}$ with $a_n\in \mathbb R$ for any $n\in \mathbb N$ that is monotonically increasing and upper bounded for any $n\in\mathbb N$ is a Cauchy sequence in ($\mathbb R$, $d$) with $d(x, y):= \abs{x - y}$ for any $x$, $y\in \mathbb R$.		
 	\end{theorem}
 
 	\begin{proof}(\cite{2169936})
@@ -1424,7 +1436,7 @@
 	\begin{defn}[Compact]
 		Let $U$ be a subset of a metric space. Then it is called 
 		\begin{itemize}
-			\item \textit{compact} if every open covering of $U$ contains a finite sub-covering, i.e. if to every family $\{V_j\}_{j\in J}$ of open sets with $U \subset \bigcup_{j\in\mathbb N} V_j$ there are finitely many $V_{j_1}$, dots, $V_{j_n}$ s.t. 
+			\item \textit{compact} if every open covering of $U$ contains a finite sub-covering, i.e. if to every family $\{V_j\}_{j\in J}$ of open sets with $U \subset \bigcup_{j\in\mathbb N} V_j$ there are finitely many $V_{j_1}$, $\dots$, $V_{j_n}$ s.t. 
 			\begin{align*}
 				U \subset \bigcup_{k = 1}^{n}V_{j_k},
 			\end{align*}
@@ -1478,7 +1490,7 @@
 		$\mathbb R$ is bounded wrt $d$, since $\mathbb R \subset B_{r}[0]$, where $r \geq 1$. However, $\mathbb R$ is not totally bounded. For this, let $\epsilon\leq 1$ be arbitrary, then it is clear that we need infinitely many open balls to cover $\mathbb Z$, and thus also $\mathbb R$.
 	\end{proof}
 	
-	\begin{theorem}
+	\begin{theorem}\label{thrm:seq_compact_set_tot_bound}
 		Every sequentially compact set is totally bounded.
 	\end{theorem}
 
@@ -1532,7 +1544,50 @@
 	\end{theorem}
 
 	\begin{proof}
-		Let $U$ be compact. 
+		\enquote{(a) $\Longrightarrow$ (b)}: Proof by contradiction: Let $U$ be compact, but not sequentially compact. Then there is a sequence $\seq[\varphi_n]$ in $U$ that does not have a convergent subsequence. Thus, to every $\varphi\in U$ there exists an open ball $B_{\varphi} = B_{r_\varphi}(\varphi)$, where $B_{\varphi}$ only contains finitely many elements of $\seq[\varphi_n]$.
+		
+		However, since $U$ is compact, there are finitely many elements $\psi_1, \dots, \psi_n\in U$ s.t. 
+		\begin{align*}
+			U \subset \bigcup_{k=1}^{n}B_{\psi_k}, 
+		\end{align*}
+		where $B_{\psi_k}$ only contains finitely many points of $\seq[\varphi_n]$. But then, $U$ contains only finitely many elements of $\seq[\varphi_n]$, which is a contradiction.
+		\\
+		
+		\enquote{(b) $\Longrightarrow$ (c)}: Let $U$ be sequentially compact and thus totally bounded by Theorem \eqref{thrm:seq_compact_set_tot_bound}. It now remains to be shown that $U$ is complete. Let $\seq[\varphi_n]$ be a Cauchy sequence in $U$, then it contains a convergent subsequence in $U$, since $U$ is sequentially compact, and thus by Theorem \ref{thrm:cauchy_convergent_subsequence}, $\seq[\varphi_n]$ converges.
+		\\
+		
+		\enquote{(c) $\Longrightarrow$ (a)}: Let $U$ be complete and totally bounded. We will show that $U$ is compact via contradiction.
+		
+		Let $\{V_j\}_{j\in J}$ be an open cover of $U$ s.t. 
+		\begin{align}\label{eq:open_cover}
+			U\subset \bigcup_{j\in J}V_j.
+		\end{align}
+		We now define
+		$$\mathcal B := \left\{ \left.B\subset U\ \right\vert B\subset \bigcup_{i\in I}V_i\Rightarrow I\ \text{infinite, where}\ I \subset J \right\}$$
+		and we will show that $U\notin \mathcal B$.
+		
+		Since $U$ is totally bounded, for all $\epsilon > 0$ there is an open cover
+		$$U\subset \bigcup_{i=1}^{n_{\epsilon}}B_{\epsilon}(\varphi_i)$$ 
+		with points $\varphi_1, \dots, \varphi_n\in U$. Further, to \textit{each} $B\in\mathcal B$, there is an $i(\epsilon)$ with $B_{\epsilon}(\varphi_i)\cap B\in\mathcal B$.
+		
+		If $U\in\mathcal B$, define $B_1 := U\in\mathcal B$, and then recursively construct (for $\epsilon_k = 1/k$)
+		\begin{align}\label{eq:construction_B_k}
+			B_k := B_{\epsilon_k}(\varphi_k) \cap B_{k - 1}\in\mathcal B\quad\text{for}\ k\geq 2.
+		\end{align}
+		By construction, we have
+		$$B_{k} \subset B_{k - 1}\subset \cdots\subset B_2\subset B_1 = U.$$
+		Now, for any $n$, choose $\psi_n\in B_n$, then for all $l, k\in\mathbb N$ we have (WLOG, let $l\geq k$),
+		\begin{align}
+			d(\psi_k, \psi_l) \leq d(\psi_k, \varphi_k) + d(\varphi_k, \psi_l) < 2\epsilon_k,
+		\end{align}
+		and hence $\seq[\psi_n]$ is a Cauchy sequence in $U$. Since $U$ is complete, $\seq[\psi_n]$ converges to a $\psi\in U$ wrt $d$. Since $\psi\in V_{j_0}$ for a $j_{0}\in J$, cf. Eq. \eqref{eq:open_cover}, for sufficiently large $k$, we have
+		$$B_k\subset B_{\epsilon_k}(\varphi_k) \subset B_{2\epsilon_k}(\psi_k) \subset B_{2\epsilon_k + d(\psi_k, \psi)}(\psi) \subset V_{j_0}.$$
+		For the second inclusion, note that for any $\varphi\in B_{\epsilon_k}(\varphi_k)$, $$d(\varphi, \psi_k) \leq d(\psi_k, \varphi_k) + d(\varphi_k, \varphi) < 2\epsilon_k.$$
+		For the third inclusion, note that for any $\chi\in B_{2\epsilon_k}(\psi_k)$, $$d(\psi, \chi) \leq d(\psi, \psi_k) + d(\psi_k, \chi) < d(\psi, \psi_k) + 2\epsilon_k.$$
+		For the final inclusion, note that $V_{j_0}$ is open, i.e. for $\psi\in U$ there is an $r > 0$ s.t. $B_{r}(\psi) \subset V_{j_0}$. Since $2\epsilon_k + d(\psi_k, \psi) = 2/k + d(\psi_k, \psi)$ becomes arbitrarily small, for sufficiently large $k$, the last inclusion holds.
+		
+		However, $B_k\in V_{j_0}$ is a contradiction to $B_k\in\mathcal B$, cf. the construction of the $B_k$ in Eq. \eqref{eq:construction_B_k}.
+		
 	\end{proof}
 	
 	\newpage 
