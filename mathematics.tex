@@ -1266,6 +1266,10 @@
 		We deletegate the proof of this celebrated Theorem to appendix \ref{app:weierstrass-app-theorem}. 
 	\end{proof}
 
+	\begin{exmp}
+		Let $(X, d)$ be a metric space. Then $U\subset X$ lies dense in $\overline{U}\subset X$ wrt $d$.
+	\end{exmp}
+
 	\begin{theorem}\label{thrm:characterization-dense-subsets}
 		Let $(X, d)$ be a metric space. $U\subset X$ dense iff every non-empty open set $O\subset X$ intersects $U$, i.e. $U\cap O\ne\emptyset$.
 	\end{theorem}
@@ -1622,8 +1626,39 @@
 	\end{proof}
 
 	\begin{remark}
-		For topological spaces, this does not hold in general. \color{red}TODO\color{black}
+		For topological spaces, this does not hold in general. \color{red}TODO.\color{black}
 	\end{remark}
+	
+	\begin{defn}[Relatively compact]
+		A subset $U$ of a metric space $(X, d)$ is called \textit{relatively compact} in $X$ if its closure $\overline{U}\subset X$ is compact.
+	\end{defn}
+
+	\begin{theorem}
+		$U\subset X$ is sequentially compact iff $U$ is relatively compact and closed.
+	\end{theorem}
+
+	\begin{proof}
+		\enquote{$\Longrightarrow$} Since $U$ is sequentially compact, it is compact, and thus closed. Since it is closed, we have that $U = \overline{U}$, and thus $\overline{U}$ is compact.
+		
+		\enquote{$\Longleftarrow$} Since $U$ is closed, we have that $U = \overline{U}$, and since $U$ is relatively compact in $X$, $U = \overline{U}$ is compact, and hence also sequentially compact.
+	\end{proof}
+
+	\begin{theorem}
+		A subset $U\subset X$ of a metric space $(X, d)$ is relatively compact iff every sequence in $U$ contains a convergent subsequence in $X$.
+	\end{theorem}
+
+	\begin{proof}
+		\enquote{$\Longrightarrow$} Let $U$ be relatively compact, i.e. $\overline{U}$ is compact, and thus also sequentially compact. Since every sequence $\seq[\varphi_n]$ in $U$ also lies in $\overline{U}$, $U\subset \overline{U}$, $\seq[\varphi_n]$ contains a convergent subsequence in $\overline{U}\subset X$.
+		
+		\enquote{$\Longleftarrow$} Let every sequence in $U$ contain a convergent subsequence in $X$. We now show that $\overline{U}$ is sequentially compact, which implies its compactness.
+		
+		Let $\seq[\varphi_n]$ be a sequence in $\overline{U}$. Since $U$ is dense in $\overline{U}$, for every $\varphi_n$, $n\in\mathbb N$, there is a $\psi_n\in U$ s.t. $d(\varphi_n, \psi_n) < 1/n$. That way we can construct a sequence $\seq[\psi_n]$ in $U$, and by assumption it contains a convergent subsequence $\left(\psi_{n_k}\right)_{k\in\mathbb N}$ in $X$; denote the limit by $\psi\in X$. Now note that
+		$$d(\varphi_{n_k}, \psi) \leq d(\varphi_{n_k}, \psi_{n_k}) + d(\psi_{n_k}, \psi) < \frac{2}{k} \overset{k\to\infty}{\longrightarrow} 0,$$ i.e. every sequence $\seq[\varphi_n]$ in $\overline{U}$ contains a convergent subsequence $\left(\varphi_{n_k}\right)_{k\in\mathbb N}$ in $X$.
+	\end{proof}
+	
+	\begin{theorem}
+		\color{red}Cf. Proposition 4.27 here (https://www.mileshwheeler.com/ma30252/sec-rel.html)\color{black}
+	\end{theorem}
 	
 	\newpage 
 	\subsection{Continuity}
