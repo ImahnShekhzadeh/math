@@ -686,7 +686,21 @@
 		Non-convergent sequence are called \textit{divergent}.
 	\end{defn}
 
-	\begin{theorem}
+	\begin{theorem}\label{thrm:sequences_unique_limits}
+		Let $(X, d)$ be a metric space, and $\seq[\varphi_n]$ a convergent sequence in $X$ wrt $d$. Then the limit is unique.
+	\end{theorem}
+
+	\begin{proof}
+		Assume the limit is not unique, i.e. $\seq[\varphi_n]$ converges to both $\varphi\in X$ and $\psi\in X$. with $\varphi\ne\psi$. Then for $\epsilon := d(\varphi, \psi) / 2$ there exists an $N'\in\mathbb N$ s.t. for all $n\geq N$, we have
+		$$d(\varphi_n, \varphi) < \frac{d(\varphi, \psi)}{2} = \epsilon$$ 
+		and an $\tilde{N}$ s.t. for all $n\geq \tilde{N}$, we have
+		$$d(\varphi_n, \psi) < \frac{d(\varphi, \psi)}{2} = \epsilon.$$
+		Define $N := \max\{N', \tilde{N}\}$, then for all $n\geq N$, we have
+		$$d(\varphi, \psi) \leq d(\varphi, \varphi_n) + d(\varphi_n, \psi) < d(\varphi, \psi),$$
+		which is a contradiction.
+	\end{proof}
+
+	\begin{theorem}\label{thrm:seq_convergence_subsequences}
 		A sequence is convergent iff every subsequence converges to the same limit.
 	\end{theorem}
 	
@@ -1534,7 +1548,7 @@
 		which is the set of elements of the sequence $\left(\varphi_{1, m}, \dots, \varphi_{n_m, m}\right)_{m\in\mathbb N}$. Obviously, $V$ is countable. Also, for every $\varphi\in U$ and $\epsilon > 0$, there is an $\epsilon_m = 1/m < \epsilon$ and a $\varphi_{j, m}\in V$ s.t. $d(\varphi_{j, m}, \varphi) < \epsilon_m = 1/m < \epsilon$. Thus, $V$ is dense in $U$.
 	\end{proof}
 
-	\begin{theorem}
+	\begin{theorem}\label{thrm:compact_seq_totally_bound_compl}
 		Let $U$ be a subset of a metric space, then the following statements are equivalent:
 		\begin{enumerate}[label=(\alph*)]
 			\item $U$ is compact, 
@@ -1567,8 +1581,10 @@
 		and we will show that $U\notin \mathcal B$.
 		
 		Since $U$ is totally bounded, for all $\epsilon > 0$ there is an open cover
-		$$U\subset \bigcup_{i=1}^{n_{\epsilon}}B_{\epsilon}(\varphi_i)$$ 
-		with points $\varphi_1, \dots, \varphi_n\in U$. Further, to \textit{each} $B\in\mathcal B$, there is an $i(\epsilon)$ with $B_{\epsilon}(\varphi_i)\cap B\in\mathcal B$.
+		\begin{align}\label{eq:totally_bounded_open_cover}
+			U\subset \bigcup_{i=1}^{n_{\epsilon}}B_{\epsilon}(\varphi_i)
+		\end{align}
+		with points $\varphi_1, \dots, \varphi_n\in U$. Further, to \textit{each} $B\in\mathcal B$, there is an $i(\epsilon)$ with $B_{\epsilon}(\varphi_i)\cap B\in\mathcal B$. This holds because according to Eq. \eqref{eq:totally_bounded_open_cover}, $$B\cap U = B \subset \left(\bigcup_{i=1}^{n_{\epsilon}}B_{\epsilon}(\varphi_i)\right) \cap B = \bigcup_{i=1}^{n_{\epsilon}}\left(B_{\epsilon}(\varphi_i) \cap B\right),$$ where the last equality follows from the distributive law for sets. Since $B_{\epsilon}(\varphi_i) \cap B \subset B$, we have equality, i.e. $$B = \bigcup_{i=1}^{n_{\epsilon}}\left(B_{\epsilon}(\varphi_i) \cap B\right).$$ Since we assumed $B\in\mathcal B$, this implies that there is an $i(\epsilon)$ s.t. $B_{\epsilon}(\varphi_i)\cap B\in \mathcal B$, since otherwise, $B$ could be covered by a finite collection of $\{V_i\}_{i\in I}$.
 		
 		If $U\in\mathcal B$, define $B_1 := U\in\mathcal B$, and then recursively construct (for $\epsilon_k = 1/k$)
 		\begin{align}\label{eq:construction_B_k}
@@ -1586,9 +1602,28 @@
 		For the third inclusion, note that for any $\chi\in B_{2\epsilon_k}(\psi_k)$, $$d(\psi, \chi) \leq d(\psi, \psi_k) + d(\psi_k, \chi) < d(\psi, \psi_k) + 2\epsilon_k.$$
 		For the final inclusion, note that $V_{j_0}$ is open, i.e. for $\psi\in U$ there is an $r > 0$ s.t. $B_{r}(\psi) \subset V_{j_0}$. Since $2\epsilon_k + d(\psi_k, \psi) = 2/k + d(\psi_k, \psi)$ becomes arbitrarily small, for sufficiently large $k$, the last inclusion holds.
 		
-		However, $B_k\in V_{j_0}$ is a contradiction to $B_k\in\mathcal B$, cf. the construction of the $B_k$ in Eq. \eqref{eq:construction_B_k}.
-		
+		However, $B_k\in V_{j_0}$ is a contradiction to $B_k\in\mathcal B$, cf. the construction of the $B_k$ in Eq. \eqref{eq:construction_B_k}.	
 	\end{proof}
+	
+	\begin{corollary}
+		Compact sets in metric spaces are closed and bounded.
+	\end{corollary}
+	
+	\begin{proof}
+		Let $(X, d)$ be a metric space, and let $U\subset X$ be compact. 
+		
+		Let $\varphi\in \overline{U}$, i.e. $\varphi$ is an accumulation point of $U$, and thus there exists a sequence $\seq[\varphi_n]$ in $U$ converging to $\varphi$ wrt $d$. Thus, by Theorem \ref{thrm:seq_convergence_subsequences}, every subsequence of $\seq[\varphi_n]$ also converges to $\varphi$ in $\overline{U}$. Since $U$ is sequentially compact, cf. Theorem \ref{thrm:compact_seq_totally_bound_compl}, there is a subsequence $\left(\varphi_{n_k}\right)_{k\in\mathbb N}$ of $\seq[\varphi_n]$ converging to $\psi\in U\subset \overline{U}$, and since limits of convergent sequences are unique, cf. Theorem \ref{thrm:sequences_unique_limits}, it follows that $\varphi=\psi$, i.e. $\varphi\in U$, which shows that $U$ is closed.
+		
+		To see that $U$ is bounded, note that by Theorem \ref{thrm:compact_seq_totally_bound_compl}, $U$ is totally bounded. Hence, for any fixed $\epsilon > 0$, there exist points $\varphi_1, \dots, \varphi_{n_{\epsilon}}\in U$ with $$U\subset \bigcup_{i = 1}^{n_{\epsilon}}B_{\epsilon}(\varphi_1),$$ i.e. for $\varphi\in U$ we have $\varphi\in B_{\epsilon}(\varphi_j)$ for $1\leq j\leq n$. Now define
+		$$r := \epsilon + \max_{1\leq j\leq n}\left\{ d(\varphi_1, \varphi_j)\right\},$$
+		then we have
+		$$d(\varphi, \varphi_1) \leq d(\varphi, \varphi_j) + d(\varphi_j, \varphi_1) < \epsilon + r - \epsilon = r.$$
+		Thus, $U\subset B_{r}[\varphi_1]$.
+	\end{proof}
+
+	\begin{remark}
+		For topological spaces, this does not hold in general. \color{red}TODO\color{black}
+	\end{remark}
 	
 	\newpage 
 	\subsection{Continuity}
@@ -1741,7 +1776,7 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 	\begin{exmp}
 		The Euclidean space $\mathbb R^n$, equipped with the usual topology, is homeomorphic to the open ball $B_{r}(\varphi) =  \{x\in\mathbb R^n \mid \lvert\lvert x-\varphi \rvert\rvert < r \} \subset \mathbb R^n$ (consider the open ball as a metric space with the \textit{induced metric} from the whole space of $\mathbb R^n$ and then equip it with the usual topology on a metric space given by the open sets). 
 	\end{exmp}
-	\noindent\textit{Proof:} Consider the map $$f: \mathbb R^n\rightarrow B_r(\varphi), \ x\mapsto \frac{r\cdot (x-\varphi)}{1+\lvert\lvert x-\varphi\rvert\rvert}.$$ Obviously, $f$ is continuous with inverse $$f^{-1}: B_r(\varphi)\rightarrow \mathbb R^n, \ x \mapsto \frac{x}{r-\lvert\lvert x\rvert\rvert}+\varphi,$$ which is also continuous. One can easily show that $f$ and $f^{-1}$ are inverses to each other. Thus, $f$ \\ describes a homeomorphism. 	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad$\blacksquare$
+	\noindent\textit{Proof:} Consider the map $$f: \mathbb R^n\rightarrow B_r(\varphi), \ x\mapsto \frac{r\cdot (x-\varphi)}{1+\lvert\lvert x-\varphi\rvert\rvert}.$$ Obviously, $f$ is continuous with inverse $$f^{-1}: B_r(\varphi)\rightarrow \mathbb R^n, \ x \mapsto \frac{x}{r-\lvert\lvert x\rvert\rvert}+\varphi,$$ which is also continuous. One can easily show that $f$ and $f^{-1}$ are inverses to each other. Thus, $f$ describes a homeomorphism. 	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad$\blacksquare$
 	
 	\begin{exmp}[Stereographic projection]
 		The unit sphere $S^n$, embedded in $\mathbb R^{n+1}$, without the north pole, i.e. $S^n\backslash \{p\} \subset \mathbb R^{n+1}$, where $S^n := \{ x\in\mathbb R^{n+1} \mid \norm{x}{2} = 1 \}$ and $p := \{ x\in\mathbb R^{n+1} \mid x_i = 0 \ \forall i\in[1, n], x_{n+1} = 1 \}$, is homeomorphic to $\mathbb R^n$ (consider the unit sphere as a metric space with the \textit{induced metric} from the whole space of $\mathbb R^{n+1}$ and then equip it with the usual topology on a metric space given by the open sets). 
