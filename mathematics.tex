@@ -555,10 +555,26 @@
 		\begin{itemize}
 			\item the intersection of two members of $\tau$ is in $\tau$, 
 			\item the union of any collection of members of $\tau$ is in $\tau$, 
-			\item the empty set $\{\}$ and $X$ itself are in $\tau$.
+			\item the empty set $\emptyset$ and $X$ itself are in $\tau$.
 		\end{itemize}
 		A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. 
 	\end{defn} 
+	
+	\begin{defn}[Neighborhood \cite{topology-singh}]
+		Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$.
+	\end{defn}
+	
+	\begin{defn}
+		Let $(X, \tau)$ be a topological space, then a sequence $\seq[\varphi_n]$ is said to converge to a point $\varphi\in X$ if for each neighborhood $U$ of $x$, there exists an $N\in\mathbb N$ s.t. for all $n\geq N$, we have $\varphi_n\in U$ \cite{289740}.
+	\end{defn}
+	
+	\begin{remark}
+		Unlike metric spaces, the limit point of a converging sequence in topological spaces is not guaranteed to be unique.
+	\end{remark}
+	
+	\begin{exmp}
+		Consider $X = \mathbb R$ and the topology $\tau = \left\{\mathbb R, \emptyset\right\}$. Then a sequence $\seq[\varphi_n]$ in $\mathbb R$ converges to any point in $\mathbb R$, since the neighborhood of any $x\in \mathbb R$ is $\mathbb R$.
+	\end{exmp}
 	
 	\begin{theorem}\label{thrm:vierecksungleichung}
 		Let $(X, d)$ be a metric space. Then we have the inequality
@@ -1626,7 +1642,7 @@
 	\end{proof}
 
 	\begin{remark}
-		For topological spaces, this does not hold in general. \color{red}TODO.\color{black}
+		For topological spaces, this does not hold in general.
 	\end{remark}
 	
 	\begin{defn}[Relatively compact]
