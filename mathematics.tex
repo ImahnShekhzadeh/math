@@ -285,7 +285,7 @@
 		It is a metric.\
 	\end{lemma}
 	\begin{proof}
-		Clearly, $d\left(\mathcal G(\mu_{x}, \Sigma_{x}), \mathcal G(\mu_{x}, \Sigma_{x})\right) = 0$.\ Also, $d\left(\mathcal G(\mu_{x}, \Sigma_{x}), \mathcal G(\mu_{y}, \Sigma_{y})\right) = d\left(\mathcal G(\mu_{y}, \Sigma_{y}), \mathcal G(\mu_{x}, \Sigma_{x})\right)$, which holds because $\text{Tr}(AB) = \text{Tr}(BA)$ for any matrices $A$ and $B$.\ To see that $d\left(\mathcal G(\mu_{x}, \Sigma_{x}), \mathcal G(\mu_{y}, \Sigma_{y})\right) \geq 0$, note that $\text{Tr}(\Sigma_{x} + \Sigma_{y} - 2\left(\Sigma_{x}\Sigma_{y}\right)^{1/2}) = \text{Tr}\left(\left(\Sigma_{x}^{1/2} - \Sigma_{y}^{1/2}\right)^{2}\right) \geq 0$, since the covariance matrices contain the variances on the diagonal, which are obviously non-negative.\ It now remains to be shown that also the triangle inequality is fulfilled.\ For this, note that 
+		Clearly, $d\left(\mathcal G(\mu_{x}, \Sigma_{x}), \mathcal G(\mu_{x}, \Sigma_{x})\right) = 0$.\ Also, $$d\left(\mathcal G(\mu_{x}, \Sigma_{x}), \mathcal G(\mu_{y}, \Sigma_{y})\right) = d\left(\mathcal G(\mu_{y}, \Sigma_{y}), \mathcal G(\mu_{x}, \Sigma_{x})\right),$$ which holds because $\text{Tr}(AB) = \text{Tr}(BA)$ for any matrices $A$ and $B$.\ To see that $$d\left(\mathcal G(\mu_{x}, \Sigma_{x}), \mathcal G(\mu_{y}, \Sigma_{y})\right) \geq 0,$$ note that $\text{Tr}(\Sigma_{x} + \Sigma_{y} - 2\left(\Sigma_{x}\Sigma_{y}\right)^{1/2}) = \text{Tr}\left(\left(\Sigma_{x}^{1/2} - \Sigma_{y}^{1/2}\right)^{2}\right) \geq 0$, since the covariance matrices contain the variances on the diagonal, which are obviously non-negative.\ It now remains to be shown that also the triangle inequality is fulfilled.\ For this, note that 
 		\begin{align}
 			d\left(\mathcal G(\mu_{x}, \Sigma_{x}), \mathcal G(\mu_{y}, \Sigma_{y})\right) &= \sqrt{\left\vert\left\vert \mu_{x} - \mu_{y} \right\vert\right\vert_{2}^{2} + \text{Tr}\left(\Sigma_{x} + \Sigma_{y} - 2\left(\Sigma_{x}\Sigma_{y}\right)^{\frac{1}{2}}\right)} 
 			\\ &= \sqrt{\left\vert\left\vert \mu_{x} - \mu_{y} \right\vert\right\vert_{2}^{2} + \text{Tr}\left(\left(\Sigma_{x}^{1/2} - \Sigma_{y}^{1/2}\right)^{2}\right)}
@@ -387,80 +387,87 @@
 		In the special case of $p = 2$, we recover the Euclidean norm.
 	\end{exmp}
 	
-	\noindent\textit{Proof}: First, we show that Eq. \eqref{eq:sup_norm} is indeed the limit of Eq. \eqref{eq:L^p_norm}:
+	\begin{proof}
+		First, we show that Eq. \eqref{eq:sup_norm} is indeed the limit of Eq. \eqref{eq:L^p_norm}:
 	
-	\begin{align}
-		\norm{x}{\infty} &= \max_{1\leq j\leq d}{\abs{x_j}} \leq \sum_{j=1}^{d}\abs{x_j} \leq d \cdot \norm{x}{\infty}
-		\\ \Rightarrow \norm{x}{\infty}^p &= \left(\max_{1\leq j\leq d}{\abs{x_j}}\right)^p = \max_{1\leq j\leq d}{\abs{x_j}^p} \leq \sum_{j=1}^{d}\abs{x_j}^p \leq d \cdot \max_{1\leq j\leq d}{\abs{x_j}^p} = d\norm{x}{\infty}^p
-		\\ \Rightarrow \norm{x}{\infty} &\leq \left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}} \leq d^{\frac{1}{p}}\norm{x}{\infty}
-		\\ \Rightarrow \lim\limits_{p\to\infty}\norm{x}{\infty} &= \norm{x}{\infty} \leq \lim\limits_{p\to\infty}\left\{\left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}\right\} \leq \lim\limits_{p\to\infty}\left\{d^{\frac{1}{p}}\norm{x}{\infty}\right\} = \norm{x}{\infty}
-		\\ \Rightarrow \lim\limits_{p\to\infty}\left\{\left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}\right\} &= \norm{x}{\infty}
-	\end{align}
-
-	To show the norm property of the $L^p$ norm for $1 \leq p < \infty$, we will explicitly show the fulfilling properties of a norm, cf. Defn. \eqref{defn:normed_space}, for all $x$, $y$, $z\in X$ and $\alpha\in \mathbb{R}$:
-
-	\begin{enumerate}
-		\item Positivity: $\norm{x}{p} \geq 0 \ \forall x\in X$,
-		\item Definiteness: $\norm{x}{p} = 0\Leftrightarrow x = 0$,
-		\item Homogeneity: $$\norm{\alpha x}{p} = \left(\sum_{j=1}^{d}\abs{\alpha x_j}^p\right)^{\frac{1}{p}} = \left(\sum_{j=1}^{d}\abs{\alpha}^p\abs{x_j}^p\right)^{\frac{1}{p}} = \abs{\alpha}\norm{x}{p},$$
-		\item Triangle inequality: $$\norm{x + y}{p} = \left(\sum_{j=1}^{d}\abs{x_j + y_j}^p\right)^{\frac{1}{p}} \leq \left(\sum_{j=1}^{d}\abs{x_j}^p + \abs{y_j}^p\right)^{\frac{1}{p}} = \norm{x}{p} + \norm{y}{p}.$$	
-	\end{enumerate}
+		\begin{align}
+			\norm{x}{\infty} &= \max_{1\leq j\leq d}{\abs{x_j}} \leq \sum_{j=1}^{d}\abs{x_j} \leq d \cdot \norm{x}{\infty}
+			\\ \Rightarrow \norm{x}{\infty}^p &= \left(\max_{1\leq j\leq d}{\abs{x_j}}\right)^p = \max_{1\leq j\leq d}{\abs{x_j}^p} \leq \sum_{j=1}^{d}\abs{x_j}^p \leq d \cdot \max_{1\leq j\leq d}{\abs{x_j}^p} = d\norm{x}{\infty}^p
+			\\ \Rightarrow \norm{x}{\infty} &\leq \left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}} \leq d^{\frac{1}{p}}\norm{x}{\infty}
+			\\ \Rightarrow \lim\limits_{p\to\infty}\norm{x}{\infty} &= \norm{x}{\infty} \leq \lim\limits_{p\to\infty}\left\{\left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}\right\} \leq \lim\limits_{p\to\infty}\left\{d^{\frac{1}{p}}\norm{x}{\infty}\right\} = \norm{x}{\infty}
+			\\ \Rightarrow \lim\limits_{p\to\infty}\left\{\left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}\right\} &= \norm{x}{\infty}
+		\end{align}
 	
-	In case of $p = \infty$, we will only show the triangle inequality, since the other properties are trivial to prove:
+		To show the norm property of the $L^p$ norm for $1 \leq p < \infty$, we will explicitly show the fulfilling properties of a norm, cf. Defn. \eqref{defn:normed_space}, for all $x$, $y$, $z\in X$ and $\alpha\in \mathbb{R}$:
 	
-	$$\norm{x + y}{\infty} = \max_{1\leq j\leq d}{\abs{x_j + y_j}} \leq \max_{1\leq j\leq d}\left\{\abs{x_j} + \abs{y_j}\right\} \leq \max_{1\leq j\leq d}\abs{x_j} + \max_{1\leq j\leq d}\abs{y_j} = \norm{x}{\infty} + \norm{y}{\infty},$$
+		\begin{enumerate}
+			\item Positivity: $\norm{x}{p} \geq 0 \ \forall x\in X$,
+			\item Definiteness: $\norm{x}{p} = 0\Leftrightarrow x = 0$,
+			\item Homogeneity: $$\norm{\alpha x}{p} = \left(\sum_{j=1}^{d}\abs{\alpha x_j}^p\right)^{\frac{1}{p}} = \left(\sum_{j=1}^{d}\abs{\alpha}^p\abs{x_j}^p\right)^{\frac{1}{p}} = \abs{\alpha}\norm{x}{p},$$
+			\item Triangle inequality: $$\norm{x + y}{p} = \left(\sum_{j=1}^{d}\abs{x_j + y_j}^p\right)^{\frac{1}{p}} \leq \left(\sum_{j=1}^{d}\abs{x_j}^p + \abs{y_j}^p\right)^{\frac{1}{p}} = \norm{x}{p} + \norm{y}{p}.$$	
+		\end{enumerate}
+		
+		In case of $p = \infty$, we will only show the triangle inequality, since the other properties are trivial to prove:
+		
+		$$\norm{x + y}{\infty} = \max_{1\leq j\leq d}{\abs{x_j + y_j}} \leq \max_{1\leq j\leq d}\left\{\abs{x_j} + \abs{y_j}\right\} \leq \max_{1\leq j\leq d}\abs{x_j} + \max_{1\leq j\leq d}\abs{y_j} = \norm{x}{\infty} + \norm{y}{\infty},$$
+		
+		where the last inequality holds since for any $1\leq j \leq d$, it holds that
+		\begin{align*}
+			&\left(\abs{x_j} \leq \max_{1\leq k\leq d}\abs{x_k}\right) \wedge \left(\abs{y_j} \leq \max_{1\leq k\leq d}\abs{y_k}\right) 
+			\\ &\Rightarrow \abs{x_j} + \abs{y_j} \leq \max_{1\leq k\leq d}\abs{x_k} + \max_{1\leq k\leq d}\abs{y_k} 
+			\\ &\Rightarrow \max_{1\leq j\leq d}\left\{\abs{x_j} + \abs{y_j}\right\} \leq \max_{1\leq k\leq d}\abs{x_k} + \max_{1\leq k\leq d}\abs{y_k}
+		\end{align*}
+	\end{proof}
 	
-	where the last inequality holds since for any $1\leq j \leq d$, it holds that
-	\begin{align*}
-		&\left(\abs{x_j} \leq \max_{1\leq k\leq d}\abs{x_k}\right) \wedge \left(\abs{y_j} \leq \max_{1\leq k\leq d}\abs{y_k}\right) 
-		\\ &\Rightarrow \abs{x_j} + \abs{y_j} \leq \max_{1\leq k\leq d}\abs{x_k} + \max_{1\leq k\leq d}\abs{y_k} 
-		\\ &\Rightarrow \max_{1\leq j\leq d}\left\{\abs{x_j} + \abs{y_j}\right\} \leq \max_{1\leq k\leq d}\abs{x_k} + \max_{1\leq k\leq d}\abs{y_k}
-	\end{align*}
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
-	
+		
 	\begin{theorem}\label{second-triangle-inequality}
 		Let $(X, \norm{\cdot}{})$ be a normed space. Then the \enquote{second triangle inequality} holds: 
 			\begin{align}
 				\abs{\norm{\varphi}{} - \norm{\psi}{}} \leq \norm{\varphi - \psi}{} \quad \forall \varphi, \psi \in X. 
 			\end{align}
 	\end{theorem}
-	\noindent\textit{Proof}: For $\varphi$, $\psi \in X$ we have 
-	\begin{align}
-		\norm{\varphi}{} = \norm{\varphi - \psi + \psi}{} \leq \norm{\varphi - \psi}{} + \norm{\psi}{} \Leftrightarrow \norm{\varphi}{} - \norm{\psi}{} \leq \norm{\varphi - \psi}{}. 
-	\end{align}
-	By exchanging the roles of $\varphi$ and $\psi$ we obtain 
-	\begin{align}
-		\norm{\psi}{} - \norm{\varphi}{} \leq \norm{\varphi - \psi}{}
-	\end{align}
-	and thus 
-	\begin{align}
-		\abs{\norm{\varphi}{} - \norm{\psi}{}} \leq \norm{\varphi - \psi}{}. 
-	\end{align}
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+
+	\begin{proof}
+		For $\varphi$, $\psi \in X$ we have 
+		\begin{align}
+			\norm{\varphi}{} = \norm{\varphi - \psi + \psi}{} \leq \norm{\varphi - \psi}{} + \norm{\psi}{} \Leftrightarrow \norm{\varphi}{} - \norm{\psi}{} \leq \norm{\varphi - \psi}{}. 
+		\end{align}
+		By exchanging the roles of $\varphi$ and $\psi$ we obtain 
+		\begin{align}
+			\norm{\psi}{} - \norm{\varphi}{} \leq \norm{\varphi - \psi}{}
+		\end{align}
+		and thus 
+		\begin{align}
+			\abs{\norm{\varphi}{} - \norm{\psi}{}} \leq \norm{\varphi - \psi}{}. 
+		\end{align}
+	\end{proof}
 	
 	\begin{theorem}\label{norms_continuities}
 		Let $(X, \norm{\cdot}{})$ be a normed space. Then the addition, scalar multiplication and the norm itself are continuous. 
 	\end{theorem}
-	\noindent\textit{Proof}: 
-	\begin{itemize}
-		\item ad continuity of the addition: Let $(\varphi_n)_{n\in\mathbb{N}}$ and $(\psi_n)_{n\in\mathbb{N}}$ be convergent sequences in $X$ with limit elements $\varphi$, $\psi\in X$, i.e. $\varphi_n \longrightarrow \varphi$ and $\psi_n \longrightarrow \psi$ for $n\to\infty$. Thus 
-		\begin{align}
-			0\leq \norm{(\varphi_n + \psi_n) - (\varphi + \psi)}{} \leq \norm{\varphi_n - \varphi}{} + \norm{\psi_n - \psi}{} \longrightarrow 0 \quad\text{for } n\to \infty
-		\end{align}
-		and hence $\varphi_n + \psi_n \rightarrow \varphi + \psi$ for $n\to\infty$. 
-		\item ad continuity of the scalar multiplication: Let $\left(\alpha_n\right)_{n\in\mathbb N} \in \mathbb K$ converge to $\alpha\in \mathbb K$ and \\ $\left(\varphi_n\right)_{n\in\mathbb N}\in X \rightarrow \varphi\in X$ for $n\to\infty$. Then 	
-		\begin{align}
-			0&\leq\norm{\alpha_n\varphi_n-\alpha\varphi}{} = \norm{\alpha_n\left(\varphi_n-\varphi\right) + \left(\alpha_n-\alpha\right)\varphi}{} \leq \norm{\alpha_n(\varphi_n-\varphi)}{} + \norm{\left(\alpha_n - \alpha\right)\varphi}{}
-			\\ &\leq \abs{\alpha_n}\norm{\varphi_n-\varphi}{} + \abs{\alpha_n-\alpha}\norm{\varphi}{} \overset{n\to\infty}{\longrightarrow} 0. 
-		\end{align}
-		This implies $\alpha_n\varphi_n  \rightarrow \alpha\varphi$ for $n\to\infty$. 
-		\item ad continuity of the norm: Let $\varphi_n \rightarrow\varphi$. With Theorem \ref{second-triangle-inequality} we have: 
-		\begin{align}
-			0\leq \abs{\ \norm{\varphi_n}{}-\norm{\varphi}{}\ } \leq \norm{\varphi_n - \varphi}{} \overset{n\to\infty}{\longrightarrow}  
-		\end{align}
-		and hence $\norm{\varphi_n}{} \rightarrow \norm{\varphi}{}$ for $n\to\infty$. 
-	\end{itemize}
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	
+	\begin{proof} 
+		\begin{itemize}
+			\item ad continuity of the addition: Let $(\varphi_n)_{n\in\mathbb{N}}$ and $(\psi_n)_{n\in\mathbb{N}}$ be convergent sequences in $X$ with limit elements $\varphi$, $\psi\in X$, i.e. $\varphi_n \longrightarrow \varphi$ and $\psi_n \longrightarrow \psi$ for $n\to\infty$. Thus 
+			\begin{align}
+				0\leq \norm{(\varphi_n + \psi_n) - (\varphi + \psi)}{} \leq \norm{\varphi_n - \varphi}{} + \norm{\psi_n - \psi}{} \longrightarrow 0 \quad\text{for } n\to \infty
+			\end{align}
+			and hence $\varphi_n + \psi_n \rightarrow \varphi + \psi$ for $n\to\infty$. 
+			\item ad continuity of the scalar multiplication: Let $\left(\alpha_n\right)_{n\in\mathbb N} \in \mathbb K$ converge to $\alpha\in \mathbb K$ and \\ $\left(\varphi_n\right)_{n\in\mathbb N}\in X \rightarrow \varphi\in X$ for $n\to\infty$. Then 	
+			\begin{align}
+				0&\leq\norm{\alpha_n\varphi_n-\alpha\varphi}{} = \norm{\alpha_n\left(\varphi_n-\varphi\right) + \left(\alpha_n-\alpha\right)\varphi}{} \leq \norm{\alpha_n(\varphi_n-\varphi)}{} + \norm{\left(\alpha_n - \alpha\right)\varphi}{}
+				\\ &\leq \abs{\alpha_n}\norm{\varphi_n-\varphi}{} + \abs{\alpha_n-\alpha}\norm{\varphi}{} \overset{n\to\infty}{\longrightarrow} 0. 
+			\end{align}
+			This implies $\alpha_n\varphi_n  \rightarrow \alpha\varphi$ for $n\to\infty$. 
+			\item ad continuity of the norm: Let $\varphi_n \rightarrow\varphi$. With Theorem \ref{second-triangle-inequality} we have: 
+			\begin{align}
+				0\leq \abs{\ \norm{\varphi_n}{}-\norm{\varphi}{}\ } \leq \norm{\varphi_n - \varphi}{} \overset{n\to\infty}{\longrightarrow}  
+			\end{align}
+			and hence $\norm{\varphi_n}{} \rightarrow \norm{\varphi}{}$ for $n\to\infty$. 
+		\end{itemize}
+	\end{proof} 
+
+
 	\begin{defn}
 		Two norms $\left\vert\left\vert \cdot \right\vert\right\vert_{a}$ and $\left\vert\left\vert \cdot \right\vert\right\vert_{b}$ on a linear space $X$ are said to be equivalent if and only if there exist positive constants $0 < c \leq C < \infty$ such that 
 		\begin{align}\label{equivalence_norms}
@@ -472,28 +479,32 @@
 	\begin{lemma}
 		Let $X$ be a linear space and the pairs $\left(\norm{\cdot}{a}, \norm{\cdot}{c}\right)$ and $\left(\norm{\cdot}{b}, \norm{\cdot}{c}\right)$ be equivalent. Then also the pair $\left(\norm{\cdot}{a}, \norm{\cdot}{b}\right)$ is equivalent. 
 	\end{lemma}
-	\noindent\textit{Proof}: By assumption, we know that 
-	\begin{align}
-		c\norm{\varphi}{c} &\leq \norm{\varphi}{a} \leq C\norm{\varphi}{c} \quad \forall \varphi\in X \label{equivalent-norms-lemma-proof}
-	\end{align}
-	and 
-	\begin{align}
-		d\norm{\varphi}{c} &\leq \norm{\varphi}{b} \leq D\norm{\varphi}{c} \quad \forall \varphi\in X
-							\\ 
-		\Leftrightarrow \norm{\varphi}{c} &\leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d}\norm{\varphi}{c}. 
-							\\
-		\overset{\tiny\eqref{equivalent-norms-lemma-proof}}{\Leftrightarrow} \frac{1}{C}\norm{\varphi}{a} &\leq \norm{\varphi}{c} \leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d}\norm{\varphi}{c} \leq \frac{D}{d\cdot c}\norm{\varphi}{a}  
-							\\ 
-		\Leftrightarrow \frac{1}{C}\norm{\varphi}{a} &\leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d\cdot c}\norm{\varphi}{a}
-							\\ 
-		\Leftrightarrow \frac{d}{C}\norm{\varphi}{a} &\leq \norm{\varphi}{b} \leq \frac{D}{c}\norm{\varphi}{a}. 
-	\end{align}
-	It is clear that $0 < dC^{-1} \leq Dc^{-1} < \infty$ holds. \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+
+	\begin{proof}
+		By assumption, we know that 
+		\begin{align}
+			c\norm{\varphi}{c} &\leq \norm{\varphi}{a} \leq C\norm{\varphi}{c} \quad \forall \varphi\in X \label{equivalent-norms-lemma-proof}
+		\end{align}
+		and 
+		\begin{align}
+			d\norm{\varphi}{c} &\leq \norm{\varphi}{b} \leq D\norm{\varphi}{c} \quad \forall \varphi\in X
+								\\ 
+			\Leftrightarrow \norm{\varphi}{c} &\leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d}\norm{\varphi}{c}. 
+								\\
+			\overset{\tiny\eqref{equivalent-norms-lemma-proof}}{\Leftrightarrow} \frac{1}{C}\norm{\varphi}{a} &\leq \norm{\varphi}{c} \leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d}\norm{\varphi}{c} \leq \frac{D}{d\cdot c}\norm{\varphi}{a}  
+								\\ 
+			\Leftrightarrow \frac{1}{C}\norm{\varphi}{a} &\leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d\cdot c}\norm{\varphi}{a}
+								\\ 
+			\Leftrightarrow \frac{d}{C}\norm{\varphi}{a} &\leq \norm{\varphi}{b} \leq \frac{D}{c}\norm{\varphi}{a}. 
+		\end{align}
+		It is clear that $0 < dC^{-1} \leq Dc^{-1} < \infty$ holds. 
+	\end{proof} 
 
 	\begin{theorem}\label{finite_dimensional_norm_equivalence}
 		On a \textit{finite-dimensional} space $X$ over a field $\mathbb{K}$ all norms are equivalent. 
 	\end{theorem}
-	\noindent\textit{Proof \cite[p. 27f.]{werner-fa}}: Let $\dim(X) = n$, $\{e_1, \dots, e_n\}$ be a basis of $X$ and $\norm{\cdot}{}$ a norm on $X$. We can now show that $\norm{\cdot}{}$ is equivalent to the Euclidean norm $\norm{\sum_{i = 1}^n\alpha_ie_i}{2} = \left( \sum_{i = 1}^{n}\left\vert \alpha_i \right\vert^2 \right)^{1/2}$ as follows: \\[6pt] Set $K:= \max\left\{ \norm{e_1}{}, \dots, \norm{e_n}{}\right\} > 0$. Then from the triangle inequality for $\norm{\cdot}{}$ we have: 
+
+	\begin{proof}[Proof \cite{werner-fa}] Let $\dim(X) = n$, $\{e_1, \dots, e_n\}$ be a basis of $X$ and $\norm{\cdot}{}$ a norm on $X$. We can now show that $\norm{\cdot}{}$ is equivalent to the Euclidean norm $\norm{\sum_{i = 1}^n\alpha_ie_i}{2} = \left( \sum_{i = 1}^{n}\left\vert \alpha_i \right\vert^2 \right)^{1/2}$ as follows: \\[6pt] Set $K:= \max\left\{ \norm{e_1}{}, \dots, \norm{e_n}{}\right\} > 0$. Then from the triangle inequality for $\norm{\cdot}{}$ we have: 
 	\begin{align}\label{equivalence-of-norms}
 		\norm{x}{} = \norm{\sum_{i= 1}^{n}\alpha_ie_i}{} \leq \sum_{i= 1}^n \norm{\alpha_ie_i}{} = \sum_{i= 1}^n \abs{\alpha_i} \norm{e_i}{}
 	\end{align}
@@ -522,7 +533,7 @@
 	\begin{align}
 		m\norm{x}{2} \leq \norm{x}{} \leq K\sqrt{n}\norm{x}{2} \quad \forall x\in X. 
 	\end{align}
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	\end{proof} 
 	
 	\begin{defn}[Strongly equivalent metrics \cite{equivalence-metrics}]\label{defn:strong_equivalence}
 		Let $X$ be a linear space equipped with two metrics $d$ and $d'$. Then the metrics are \textit{strongly equivalent} if and only if there exist positive constants $0 < \alpha \leq \beta < \infty$ such that
@@ -1828,26 +1839,31 @@
 			\item preimages $f^{-1}(V) := \left\{ x\in X\mid f\left(x\right) \in V \right\}$ of \underline{all} open sets $V\subset Y$ are open,  
 			\item preimages $f^{-1}(A)$ of \underline{all} closed sets $A\subset Y$ are closed. 	
 		\end{enumerate}
-	\end{theorem} 
-	\noindent\textit{Proof:} \\ (i) $\Rightarrow$ (ii) Assume that $f$ is continuous and that $V\subset Y$ is open and let $a\in f^{-1}\left( V\right)$. Since $V$ is an open set, $\exists \epsilon > 0$ s.t. $B_{\epsilon}\left( f\left(a\right) \right)\subset V$, cf. Def. \ref{defn-open-set}. By assumption, $f$ is continuous at $a\in f^{-1}\left(V\right)\subset X$ and therefore $\forall \epsilon > 0 \ \exists \delta > 0$ s.t. $d_{X}\left(x, a\right) < \delta\Rightarrow d_{Y}\left(f\left(x\right), f\left(a\right)\right) < \epsilon \ \forall x\in X$. Put differently, $x\in B_{\delta}\left( a\right)$ implies $f\left(x\right) \in B_{\epsilon}\left( f\left(a\right) \right) \subset V$. Thus, $B_{\delta}(a) \subset f^{-1}(V) \Rightarrow f^{-1}(V) \subset X$ is an open set, cf. Def. \ref{defn-open-set}. 
-	\\ 
-	\\ 
-	(ii) $\Rightarrow$ (i) Assume that $f^{-1}\left(Y\right) \subset X$ is open for $V\subset Y$ open and let $a\in X$, $\epsilon > 0$. From Theorem \ref{open-balls-open} we know that $B_{\epsilon}\left(f\left(a\right)\right)\subset Y$ is open. Thus, by assumption, $f^{-1}\left( B_{\epsilon}\left( f\left(a\right) \right) \right) = \left\{ x\in X \mid f\left( x \right) \in B_{\epsilon}\left( f\left(a\right) \right) \right\} = \left\{ x\in X \mid f\left(x\right) \in \left\{ y\in Y\mid d_Y\left( y, f\left(a\right) \right) < \epsilon \right\}\right\}$ is open as well. Clearly, $a\in f^{-1}\left( B_{\epsilon}\left( f\left(a\right) \right) \right)$. Therefore, it follows from Def. \ref{defn-open-set} that $\exists\delta > 0$ s.t. $B_{\delta}(a) \subset f^{-1}\left( B_{\epsilon}\left( f\left(a\right) \right) \right)$. Thus, $\forall x\in B_{\delta}(a): d_{X}\left( x, a \right) < \delta \Rightarrow d_Y\left(f\left(x\right), f\left(a\right)\right) < \epsilon$. This proves that $f: X\rightarrow Y$ is continuous in every point $a\in X$. \cite{cont-functions-open-sets}   
-	\\ 
-	\\
-	(ii) $\Rightarrow$ (iii) Assume that the preimages $f^{-1}(V)$ of all open sets $V\subset Y$ are open. Since $f^{-1}(Y\backslash V) = f^{-1}(Y)\backslash f^{-1}(V)$, as can be easily shown by using the definition of the complement of a set, we have for all open sets $V \subset Y$: 
-	\begin{align}
-		f^{-1}(Y\backslash V) = f^{-1}(Y)\backslash f^{-1}(V) = X\backslash f^{-1}(V). 
-	\end{align}
-	Since $f^{-1}(V)$ is open by assumption, $f^{-1}(Y\backslash V) = X\backslash f^{-1}(V)$ is closed. 
-	\\ 
-	\\
-	(iii) $\Rightarrow$ (ii) Assume that the preimages $f^{-1}(A)$
-	of all closed sets $A\subset Y$ are closed. Then: 
-	\begin{align}
-		f^{-1}(Y\backslash A) = f^{-1}(Y)\backslash f^{-1}(A) = X\backslash f^{-1}(A). 
-	\end{align}
-	Since $f^{-1}(A)$ is closed by assumption, $f^{-1}(Y\backslash A) = X\backslash f^{-1}(A)$ is open. \cite{preimage-of-closed-sets} \qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	\end{theorem}
+ 
+	\begin{proof}
+		(i) $\Rightarrow$ (ii) Assume that $f$ is continuous and that $V\subset Y$ is open and let $a\in f^{-1}\left( V\right)$. Since $V$ is an open set, $\exists \epsilon > 0$ s.t. $B_{\epsilon}\left( f\left(a\right) \right)\subset V$, cf. Def. \ref{defn-open-set}. By assumption, $f$ is continuous at $a\in f^{-1}\left(V\right)\subset X$ and therefore $\forall \epsilon > 0 \ \exists \delta > 0$ s.t. 
+		$$d_{X}\left(x, a\right) < \delta\Rightarrow d_{Y}\left(f\left(x\right), f\left(a\right)\right) < \epsilon \ \forall x\in X.$$ 
+		Put differently, $x\in B_{\delta}\left( a\right)$ implies $f\left(x\right) \in B_{\epsilon}\left( f\left(a\right) \right) \subset V$. Thus, $B_{\delta}(a) \subset f^{-1}(V) \Rightarrow f^{-1}(V) \subset X$ is an open set, cf. Def. \ref{defn-open-set}. 
+		\\ 
+		\\ 
+		(ii) $\Rightarrow$ (i) Assume that $f^{-1}\left(Y\right) \subset X$ is open for $V\subset Y$ open and let $a\in X$, $\epsilon > 0$. From Theorem \ref{open-balls-open} we know that $B_{\epsilon}\left(f\left(a\right)\right)\subset Y$ is open. Thus, by assumption, $f^{-1}\left( B_{\epsilon}\left( f\left(a\right) \right) \right) = \left\{ x\in X \mid f\left( x \right) \in B_{\epsilon}\left( f\left(a\right) \right) \right\} = \left\{ x\in X \mid f\left(x\right) \in \left\{ y\in Y\mid d_Y\left( y, f\left(a\right) \right) < \epsilon \right\}\right\}$ is open as well. Clearly, $a\in f^{-1}\left( B_{\epsilon}\left( f\left(a\right) \right) \right)$. Therefore, it follows from Def. \ref{defn-open-set} that $\exists\delta > 0$ s.t. $B_{\delta}(a) \subset f^{-1}\left( B_{\epsilon}\left( f\left(a\right) \right) \right)$. Thus, $\forall x\in B_{\delta}(a): d_{X}\left( x, a \right) < \delta \Rightarrow d_Y\left(f\left(x\right), f\left(a\right)\right) < \epsilon$. This proves that $f: X\rightarrow Y$ is continuous in every point $a\in X$. \cite{cont-functions-open-sets}   
+		\\ 
+		\\
+		(ii) $\Rightarrow$ (iii) Assume that the preimages $f^{-1}(V)$ of all open sets $V\subset Y$ are open. Since $f^{-1}(Y\backslash V) = f^{-1}(Y)\backslash f^{-1}(V)$, as can be easily shown by using the definition of the complement of a set, we have for all open sets $V \subset Y$: 
+		\begin{align}
+			f^{-1}(Y\backslash V) = f^{-1}(Y)\backslash f^{-1}(V) = X\backslash f^{-1}(V). 
+		\end{align}
+		Since $f^{-1}(V)$ is open by assumption, $f^{-1}(Y\backslash V) = X\backslash f^{-1}(V)$ is closed. 
+		\\ 
+		\\
+		(iii) $\Rightarrow$ (ii) Assume that the preimages $f^{-1}(A)$
+		of all closed sets $A\subset Y$ are closed. Then: 
+		\begin{align}
+			f^{-1}(Y\backslash A) = f^{-1}(Y)\backslash f^{-1}(A) = X\backslash f^{-1}(A). 
+		\end{align}
+		Since $f^{-1}(A)$ is closed by assumption, $f^{-1}(Y\backslash A) = X\backslash f^{-1}(A)$ is open. \cite{preimage-of-closed-sets}
+	\end{proof} 
 	
 	\begin{corollary}
 		Let $(X, \tau_1)$ and $(Y, \tau_2)$ be topological spaces coming from metric spaces. Then $f: X\rightarrow Y$ is continuous if and only if $f^{-1}(G)$ for every open set $G\in Y$. 
@@ -2084,9 +2100,7 @@
 				\item $\{U_i \mid i\in I\}$ is an open covering of $M$, 
 				\item $\varphi_i \circ \varphi_j^{-1}: \varphi_j(U_i \cap U_j) \rightarrow \varphi_i(U_i \cap U_j)$ are smooth $\forall i$, $j \in I$. 
 			\end{itemize}
-			The tuples $(\varphi_i, U_i)$, $i\in I$, are so-called \textit{charts} on $M$, the maps $\varphi_i\circ \varphi_j^{-1}$ are called \textit{transition maps} or \textit{changes of coordinates} and $n$ is the \textit{dimension} of $M$.  \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\begin{tikzpicture}
-				\draw (0,0) circle (0.15cm);
-			\end{tikzpicture}	
+			The tuples $(\varphi_i, U_i)$, $i\in I$, are so-called \textit{charts} on $M$, the maps $\varphi_i\circ \varphi_j^{-1}$ are called \textit{transition maps} or \textit{changes of coordinates} and $n$ is the \textit{dimension} of $M$.
 		\end{defn}
 	\end{samepage}
 
@@ -2103,7 +2117,6 @@
 			\\ 
 			\Rightarrow \varphi_i\left(\varphi_j^{-1}(x)\right) &\in \varphi_i\left(U_i\cap U_j\right). 
 		\end{align*}
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
 	\end{remark}
 	
 	\begin{defn}[Equivalence of Atlases]
@@ -2242,20 +2255,22 @@
 	\begin{theorem}
 		Normalizing flows in $\mathbb{R}^D$ come from the push-forward of a measure. 
 	\end{theorem}
-	\noindent \textit{Proof.} Let $\mathcal Y$, $\mathcal Z\subset\mathbb{R}^D$ be open,  $\Sigma_{\mathcal Y} = \mathcal B(\mathcal Y)$, $\Sigma_{\mathcal Z} = \mathcal B(\mathcal Z)$ and $g: \mathcal Z\rightarrow\mathcal Y$ be a diffeomorphism. The function $g: \mathcal Z \rightarrow \mathcal Y$ is measurable if and only if $g^{-1}(G)\in \Sigma_{\mathcal Z}$ for every set $G$ that is open in $\mathcal Y$, cf. Theorem \ref{generator-and-measurable-function} (Borel $\sigma$-algebras are generated by the open sets). Since for functions between two topological spaces it holds that they are continuous if and only if the inverse image of an open set is again open, we have that $g$ is indeed measurable. 
-	\\ \\ Now define the probability measure $\mu$ on the measurable space $(\mathcal Z, \Sigma_{\mathcal Z})$ as 
-	\begin{align}\label{prob-measure-proof}
-		\mu(I) := \int_{I} p_{\mathbf{Z}}(z)d\lambda(z) \ \forall I\in \Sigma_{\mathcal Z}, 
-	\end{align}
-	where $p_{\mathbf{Z}}: \mathcal Z \rightarrow\mathbb{R}$ shall be a PDF and $\lambda$ the Lebesgue measure. (The Lebesgue measure is defined on the completion of $\mathcal B(\mathbb R^D)$, which is \enquote{larger} than $\mathcal B(\mathbb R^D)$.) By considering the push-forward of $\mu$ under the measurable map $g$, we have $\forall J \in \Sigma_{\mathcal Y}$: 
-	\begin{align}
-		g_{\star}\mu\left(J\right) = \mu(g^{-1}(J))  \overset{\tiny\eqref{prob-measure-proof}}{=} \int_{g^{-1}(J)} p_{\mathbf{Z}}(z)d\lambda(z)
-	\end{align}
-	Since by assumption $g:\mathcal Z\rightarrow \mathcal Y$ and therefore also the inverse $g^{-1}: \mathcal Y \rightarrow \mathcal Z$ are a diffeomorphism, we can use the change of variables formula from Theorem \ref{change-of-variables}, since we assume $p_{\mathbf{Z}}$ to be integrable over $\mathcal Z$. We apply Theorem \ref{change-of-variables} to $g^{-1}$ instead of $g$, cf. Remark \ref{diffeomorphism-inverse}: 
-	\begin{align}
-		g_{\star}\mu(J) = \int_{g^{-1}(J)}p_{\mathbf{Z}}(z)d\lambda(z) = \int_{J} \underbrace{\left(p_{\mathbf{Z}}\circ g^{-1}\right)(y) \cdot \left\vert \det Dg^{-1}(y) \right\vert }_{= p_{\mathbf{Y}}(y)} d\lambda(y) 						
-	\end{align}
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	
+	\begin{proof}
+		Let $\mathcal Y$, $\mathcal Z\subset\mathbb{R}^D$ be open,  $\Sigma_{\mathcal Y} = \mathcal B(\mathcal Y)$, $\Sigma_{\mathcal Z} = \mathcal B(\mathcal Z)$ and $g: \mathcal Z\rightarrow\mathcal Y$ be a diffeomorphism. The function $g: \mathcal Z \rightarrow \mathcal Y$ is measurable if and only if $g^{-1}(G)\in \Sigma_{\mathcal Z}$ for every set $G$ that is open in $\mathcal Y$, cf. Theorem \ref{generator-and-measurable-function} (Borel $\sigma$-algebras are generated by the open sets). Since for functions between two topological spaces it holds that they are continuous if and only if the inverse image of an open set is again open, we have that $g$ is indeed measurable. 
+		\\ \\ Now define the probability measure $\mu$ on the measurable space $(\mathcal Z, \Sigma_{\mathcal Z})$ as 
+		\begin{align}\label{prob-measure-proof}
+			\mu(I) := \int_{I} p_{\mathbf{Z}}(z)d\lambda(z) \ \forall I\in \Sigma_{\mathcal Z}, 
+		\end{align}
+		where $p_{\mathbf{Z}}: \mathcal Z \rightarrow\mathbb{R}$ shall be a PDF and $\lambda$ the Lebesgue measure. (The Lebesgue measure is defined on the completion of $\mathcal B(\mathbb R^D)$, which is \enquote{larger} than $\mathcal B(\mathbb R^D)$.) By considering the push-forward of $\mu$ under the measurable map $g$, we have $\forall J \in \Sigma_{\mathcal Y}$: 
+		\begin{align}
+			g_{\star}\mu\left(J\right) = \mu(g^{-1}(J))  \overset{\tiny\eqref{prob-measure-proof}}{=} \int_{g^{-1}(J)} p_{\mathbf{Z}}(z)d\lambda(z)
+		\end{align}
+		Since by assumption $g:\mathcal Z\rightarrow \mathcal Y$ and therefore also the inverse $g^{-1}: \mathcal Y \rightarrow \mathcal Z$ are a diffeomorphism, we can use the change of variables formula from Theorem \ref{change-of-variables}, since we assume $p_{\mathbf{Z}}$ to be integrable over $\mathcal Z$. We apply Theorem \ref{change-of-variables} to $g^{-1}$ instead of $g$, cf. Remark \ref{diffeomorphism-inverse}: 
+		\begin{align}
+			g_{\star}\mu(J) = \int_{g^{-1}(J)}p_{\mathbf{Z}}(z)d\lambda(z) = \int_{J} \underbrace{\left(p_{\mathbf{Z}}\circ g^{-1}\right)(y) \cdot \left\vert \det Dg^{-1}(y) \right\vert }_{= p_{\mathbf{Y}}(y)} d\lambda(y) 						
+		\end{align}
+	\end{proof}
 	
 	\begin{defn}
 		A rational-quadratic function takes the form of a quotient of two quadratic polynomials. 
@@ -2302,7 +2317,8 @@
 	\end{align}
 	Assuming that the assumptions of Fubini's theorem hold and from the monotonicity of the expectation, we have: 
 	\begin{align}\label{diff_elbo_to_be_proved}
-		\mathbb E_{q(x_{0})}\left[ \log p_{\theta}(x_{0}) \right] \geq \mathbb E_{q(x_{1}, \dots,  x_{T} \mid x_{0})q(x_{0})}\left[\log \frac{q(x_{1}, \dots, x_{T} \mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right] = E_{q(x_{0}, \dots,  x_{T} \mid x_{0})}\left[\log \frac{q(x_{1}, \dots, x_{T} \mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right].
+		\mathbb E_{q(x_{0})}\left[ \log p_{\theta}(x_{0}) \right] &\geq \mathbb E_{q(x_{1}, \dots,  x_{T} \mid x_{0})q(x_{0})}\left[\log \frac{q(x_{1}, \dots, x_{T} \mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right] 
+		\\ &= E_{q(x_{0}, \dots,  x_{T} \mid x_{0})}\left[\log \frac{q(x_{1}, \dots, x_{T} \mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right].
 	\end{align}
 \end{proof}
 
@@ -2324,11 +2340,6 @@
 	\end{align}
 	This is what makes Wiener processes so powerful (and explains the ubiquity of Brownian motion).\ According to Donsker's theorem, the  above expression becomes a Wiener process.
 \end{remark}
-
-\begin{defn}[Globally Lipschitz continuous]
-	
-	
-\end{defn}
 
 \newpage 
 
