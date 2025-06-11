@@ -525,7 +525,7 @@
 	\begin{align}
 		S:= \{ x\in X \mid \norm{x}{2} = 1 \}. 
 	\end{align}
-	This set is closed since it is the preimage of the closed set $\{1\}\subset \mathbb R$ under the continuous function $\norm{\cdot}{2}$, cf. Theorem \ref{norms_continuities}, \ref{defn:preimages_continuous_functions}. $S$ is also closed since $S\subset B_{r}(0) = \{\psi\in X\mid \norm{\psi}{2} < r\}$ for $r>0$ (here, we take into account that every norm induces a metric). Thus, $S$ is compact according to Heine-Borel (which applies to every finite-dimensional normed vector space). Since every continuous function takes its minimum on a compact set, we know that $\norm{\cdot}{}$ has a minimum $m > 0$ on $S$. Since $x\cdot \norm{x}{2}^{-1}\in S$ for $x\ne 0$, we have ($m$ is the minimum of the function $\norm{\cdot}{}$): 
+	This set is closed since it is the preimage of the closed set $\{1\}\subset \mathbb R$ under the continuous function $\norm{\cdot}{2}$, cf. Theorem \ref{norms_continuities}, \ref{thrm:preimages_continuous_functions}. $S$ is also closed since $S\subset B_{r}(0) = \{\psi\in X\mid \norm{\psi}{2} < r\}$ for $r>0$ (here, we take into account that every norm induces a metric). Thus, $S$ is compact according to Heine-Borel (which applies to every finite-dimensional normed vector space). Since every continuous function takes its minimum on a compact set, we know that $\norm{\cdot}{}$ has a minimum $m > 0$ on $S$. Since $x\cdot \norm{x}{2}^{-1}\in S$ for $x\ne 0$, we have ($m$ is the minimum of the function $\norm{\cdot}{}$): 
 	\begin{align}
 		m\norm{x}{2} \leq \norm{x}{} \quad \forall x\in X.
 	\end{align}
@@ -1791,6 +1791,16 @@
 		Conversely, $\text{id}: (\mathbb R, d) \to (\mathbb R, d'), x\mapsto x$ is not continuous on $\mathbb R$. To see this, let $\epsilon = 1$, consider arbitrary $\delta > 0$ and define $p := \min\{1, \delta\}\in\mathbb R$ and $z := p/2\ne p$. Then $d(z, p) = \abs{p}/2 < \delta$, but $d'(z, p) = 1 \geq \epsilon$.
 	\end{remark}
 
+	In topological spaces (which are not necessarily metrizable), we define continuity as follows \cite{topology-singh}:
+	
+	\begin{defn}\label{defn:continuity_topological_spaces}
+		Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces. Then a function $f: X \to Y$ is called continuous on $X$ if for every $U\in \tau_Y$, $f^{-1}(U) := \{ x\in X \mid f(x)\in U \} \in \tau_X$.
+	\end{defn}
+
+	\begin{remark}
+		In other words, the preimage of an open set is always open. For topological spaces that are metrizable, the $\epsilon$-$\delta$ definition of continuity as in Def. \ref{defn:continuity} is equivalent to the preceding definition, cf. Theorem \ref{thrm:preimages_continuous_functions}.
+	\end{remark}
+
 	\begin{defn}[Uniform continuity \cite{src:uniform_continuity}]
 		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{uniformly continuous} on $X$
 		\begin{align}
@@ -1853,7 +1863,7 @@
 		\end{align}
 	\end{proof}
 	
-	\begin{theorem}\label{defn:preimages_continuous_functions}
+	\begin{theorem}\label{thrm:preimages_continuous_functions}
 		For a map $f: X\rightarrow Y$ between two metric spaces $\left(X, d_{X} \right)$ and $\left(Y, d_{Y} \right)$ the following statements are equivalent: 
 		\begin{enumerate}[label = (\roman*)]
 			\item $f$ is continuous,
@@ -2006,7 +2016,7 @@
 		which proves the continuity of $A$, cf. Def. \ref{defn:continuity} \cite{556667}.
 		\\
 		
-		\enquote{$\Longrightarrow$} Let $A$ be continuous on $X$. Then by Theorem \ref{defn:preimages_continuous_functions}, we know that $A^{-1}\left(B^{Y}_1(0)\right)$ is open, since $B^{Y}_{1}(0)$ is open. By the linearity of $A$, $0\in A^{-1}\left(B^{Y}_1(0)\right)$, since \\ $A(0) = 0 \in B_1^{Y}(0)$. This means that there is an $r > 0$ s.t. $B^{V}_{r}(0) \subset A^{-1}\left(B^{Y}_1(0)\right)$, i.e. the image of $B^{V}_{r}(0)$ is contained in $B^{Y}_{1}(0)$.
+		\enquote{$\Longrightarrow$} Let $A$ be continuous on $X$. Then by Theorem \ref{thrm:preimages_continuous_functions}, we know that $A^{-1}\left(B^{Y}_1(0)\right)$ is open, since $B^{Y}_{1}(0)$ is open. By the linearity of $A$, $0\in A^{-1}\left(B^{Y}_1(0)\right)$, since \\ $A(0) = 0 \in B_1^{Y}(0)$. This means that there is an $r > 0$ s.t. $B^{V}_{r}(0) \subset A^{-1}\left(B^{Y}_1(0)\right)$, i.e. the image of $B^{V}_{r}(0)$ is contained in $B^{Y}_{1}(0)$.
 		
 		Now, for any $a > 1$, choose $C := a/r$, and we will show that $C$ is an upper bound for $A$. For $\varphi\in X\backslash \{0\}$ (for $\varphi =0$, there is nothing to show), note that $$\norm{\frac{r}{a\norm{\varphi}{X}}\varphi}{X} = \frac{r}{a} < r,$$ i.e. 
 		\begin{align}
