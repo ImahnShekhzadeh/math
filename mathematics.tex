@@ -1785,6 +1785,12 @@
 		$f$ is called continuous on $X$ if it is continuous for every $p\in X$.
 	\end{defn}
 
+	\begin{remark}
+		The notion of continuity depends on the metrics. For example \cite{2087322}, let $X = \mathbb R$, and let $d$ be the usual metric on $\mathbb R$, and $d'$ the discrete metric. Then the function $\text{id}: (\mathbb R, d') \to (\mathbb R, d), x\mapsto x$ is continuous for all $p\in \mathbb R$, since for $\delta = 1$, if we have $d'(z, p) < \delta = 1$ for all $z\in\mathbb R$, then $z = p$, and thus $d(z, p) = 0 < \epsilon$ for any $\epsilon > 0$.
+		
+		Conversely, $\text{id}: (\mathbb R, d) \to (\mathbb R, d'), x\mapsto x$ is not continuous on $\mathbb R$. To see this, let $\epsilon = 1$, consider arbitrary $\delta > 0$ and define $p := \min\{1, \delta\}\in\mathbb R$ and $z := p/2\ne p$. Then $d(z, p) = \abs{p}/2 < \delta$, but $d'(z, p) = 1 \geq \epsilon$.
+	\end{remark}
+
 	\begin{defn}[Uniform continuity \cite{src:uniform_continuity}]
 		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{uniformly continuous} on $X$
 		\begin{align}
