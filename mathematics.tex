@@ -575,6 +575,62 @@
 	\begin{exmp}
 		Consider $X = \mathbb R$ and the topology $\tau = \left\{\mathbb R, \emptyset\right\}$. Then a sequence $\seq[\varphi_n]$ in $\mathbb R$ converges to any point in $\mathbb R$, since the neighborhood of any $x\in \mathbb R$ is $\mathbb R$.
 	\end{exmp}
+
+	\begin{defn}[Basis]
+		A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
+		\begin{align}
+			\bigcup_{i\in I}B_i = U. 
+		\end{align}
+	\end{defn}
+	
+	\begin{exmp}\label{basis_discrete_metric}
+		Let $(X, d)$ be a metric space, where the metric is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$ is basis of $X$. 
+	\end{exmp}
+	
+	\begin{exmp}\label{basis_metric_space}
+		In a metric space $X$, the collection $$\{ B_{r}(x) \mid x\in X, r > 0 \}$$ of open balls is a basis for the topology given by the metric on $X$. 
+	\end{exmp}
+	
+	\begin{defn}[Hausdorff]
+		A topology $\left(M, \tau\right)$ is called \textbf{Hausdorff} if $\forall p\ne q \in M \ \exists U$, $V\in \tau$ open with $p\in U$, $q\in V$ such that $U\cap V = \emptyset$.  
+	\end{defn} 
+	
+	\begin{lemma}
+		All metric spaces are Hausdorff spaces. 
+	\end{lemma}
+	\noindent\textit{Proof:} 
+	\begin{figure}[h!]		
+		\centering 
+		\includegraphics[trim = {3.8cm 5.8cm 9.7cm 2.8cm}, width=0.5\textwidth, clip]{Figures/metric-spaces-Hausdorff-spaces-v2.png}
+		\caption{Visualization for why a metric space is a Hausdorff space.}
+		\label{metric-space-Hausdorff-space}
+	\end{figure} 
+	A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove this more rigorously, define $U := B_{r}(p)$ and $V:=B_{r}(q)$ with radius $r := \frac{d(p, q)}{2}$, where from Theorem \ref{open-balls-open} we know that $U$ and $V$ are open. Suppose $U\cap V = \emptyset$ would not hold. Then there exists a $z\in U\cap V$ with 
+	\begin{align}
+		d(p, z) < \frac{d(p, q)}{2}
+	\end{align}
+	and 
+	\begin{align}
+		d(q, z) < \frac{d(p, q)}{2}. 
+	\end{align}
+	Therefore, by the triangle inequality for metric spaces, we have: 
+	\begin{align}
+		d(p, q) \leq d(p, z) + d(q, z) < d(p, q), 
+	\end{align}
+	which is clearly a contradiction. 
+	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	
+	\begin{defn}
+		Let $(X, \tau)$ be a topological space. Then it is said to be \textit{second countable} if $\tau$ has a countable basis. 
+	\end{defn}
+	
+	\begin{exmp}
+		For any $n > 0$, the topological spaces $\mathbb R^n$ are second countable. 
+	\end{exmp}
+	
+	\begin{remark}
+		Metric spaces are not automatically second countable. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{basis_discrete_metric}, \ref{basis_metric_space},  the topological space $X$ is not second countable, since $X$ is uncountable. 
+	\end{remark}
 	
 	\begin{theorem}\label{thrm:vierecksungleichung}
 		Let $(X, d)$ be a metric space. Then we have the inequality
@@ -1780,62 +1836,6 @@
 		Let $(X, \tau_1)$ and $(Y, \tau_2)$ be topological spaces coming from metric spaces. Then $f: X\rightarrow Y$ is continuous if and only if $f^{-1}(G)$ for every open set $G\in Y$. 
 	\end{corollary}
 	
-	\begin{defn}[Basis]
-		A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
-		\begin{align}
-			\bigcup_{i\in I}B_i = U. 
-		\end{align}
-	\end{defn}
-
-	\begin{exmp}\label{basis_discrete_metric}
-		Let $(X, d)$ be a metric space, where the metric is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$ is basis of $X$. 
-	\end{exmp}
-	
-	\begin{exmp}\label{basis_metric_space}
-		In a metric space $X$, the collection $$\{ B_{r}(x) \mid x\in X, r > 0 \}$$ of open balls is a basis for the topology given by the metric on $X$. 
-	\end{exmp}
-
-	\begin{defn}[Hausdorff]
-		A topology $\left(M, \tau\right)$ is called \textbf{Hausdorff} if $\forall p\ne q \in M \ \exists U$, $V\in \tau$ open with $p\in U$, $q\in V$ such that $U\cap V = \emptyset$.  
-	\end{defn} 
-
-	\begin{lemma}
-		All metric spaces are Hausdorff spaces. 
-	\end{lemma}
-	\noindent\textit{Proof:} 
-	\begin{figure}[h!]		
-		\centering 
-		\includegraphics[trim = {3.8cm 5.8cm 9.7cm 2.8cm}, width=0.5\textwidth, clip]{Figures/metric-spaces-Hausdorff-spaces-v2.png}
-		\caption{Visualization for why a metric space is a Hausdorff space.}
-		\label{metric-space-Hausdorff-space}
-	\end{figure} 
-A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove this more rigorously, define $U := B_{r}(p)$ and $V:=B_{r}(q)$ with radius $r := \frac{d(p, q)}{2}$, where from Theorem \ref{open-balls-open} we know that $U$ and $V$ are open. Suppose $U\cap V = \emptyset$ would not hold. Then there exists a $z\in U\cap V$ with 
-	\begin{align}
-		d(p, z) < \frac{d(p, q)}{2}
-	\end{align}
-	and 
-	\begin{align}
-		d(q, z) < \frac{d(p, q)}{2}. 
-	\end{align}
-	Therefore, by the triangle inequality for metric spaces, we have: 
-	\begin{align}
-		d(p, q) \leq d(p, z) + d(q, z) < d(p, q), 
-	\end{align}
-	which is clearly a contradiction. 
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
-	
-	\begin{defn}
-		Let $(X, \tau)$ be a topological space. Then it is said to be \textit{second countable} if $\tau$ has a countable basis. 
-	\end{defn}
-	
-	\begin{exmp}
-		For any $n > 0$, the topological spaces $\mathbb R^n$ are second countable. 
-	\end{exmp}
-	
-	\begin{remark}
-		Metric spaces are not automatically second countable. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{basis_discrete_metric}, \ref{basis_metric_space},  the topological space $X$ is not second countable, since $X$ is uncountable. 
-	\end{remark}
-	
 	\begin{defn}[Homeomorphism] A \textit{homeomorphism} between two topological spaces $X$ and $Y$ is an invertible function $f: X\rightarrow Y$ such that $f$ and $f^{-1}$ are continuous \cite[p. 33]{topology-singh}. 
 	\end{defn}
 
@@ -1859,10 +1859,6 @@ A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove th
 		It is trivial to show that $f$ and $f^{-1}$ are inverses to each other. One can also easily show that $\norm{f^{-1}(x)}{2} = 1$; thus, $f^{-1}$ does indeed bring us to the unit ball $S^n$. 
 		To see that $f^{-1}$ is continuous, note that all components are continuous and thus, according to Lemma \ref{continuity_vector_components}, the function itself is continuous. 
 	\end{proof} 
-	
-	\begin{defn}[Homotopy mapping \cite{ding2023sides}]
-		The function $H(z, \lambda) = \lambda r(z) + (1 - \lambda) g(z)$ is said to be a homotopy mapping from $g(z)$ to $r(z)$ if $\lambda\in [0, 1]$ and $g$ is a smooth function. The equation $H(z, \lambda) = 0$ is the so-called \enquote{zero path} of this homotopy mapping.
-	\end{defn}
 	
 	\newpage 
 	\section{Linear Functional Analysis}
