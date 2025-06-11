@@ -1778,17 +1778,17 @@
 	\newpage 
 	\subsection{Continuity}
 	\begin{defn}[$\epsilon$-$\delta$ definition of continuity \cite{MfPI}]\label{defn:continuity}
-		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{continuous} at $p\in X$ if for all $\epsilon > 0$ there exists a $\delta = \delta(\epsilon, p) > 0$ s.t. 
+		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{continuous} at $p\in X$ if 
 		\begin{align}
-			\forall z\in X: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.  
+			\forall \epsilon > 0\ \exists \delta(\epsilon, p) > 0\ \forall z\in X: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.  
 		\end{align}
 		$f$ is called continuous on $X$ if it is continuous for every $p\in X$.
 	\end{defn}
 
 	\begin{defn}[Uniform continuity \cite{src:uniform_continuity}]
-		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{uniformly continuous} on $X$ if for all $\epsilon > 0$ there exists a $\delta = \delta(\epsilon)$ s.t. for all $p\in X$,
+		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{uniformly continuous} on $X$
 		\begin{align}
-			\forall z\in X: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.
+			\forall\epsilon > 0\ \exists \delta(\epsilon) > 0\ \forall p, z\in X: d\left(z, p\right) < \delta \Rightarrow d'\left( f\left(z\right), f\left(p\right) \right) < \epsilon.
 		\end{align}
 	\end{defn}
 
@@ -1796,9 +1796,24 @@
 		While uniform continuity implies continuity, the opposite is in general not true.
 	\end{remark}
 
+	\begin{exmp}
+		Consider the metric space $(\mathbb R_{> 0}, d)$, where $d(x, y) := \abs{x - y}$ for any $x, y\in\mathbb R_{> 0}$. The function $f: \mathbb R_{>0} \to \mathbb R_{> 0}$ is continuous on $\mathbb R_{> 0}$, but not uniformly continuous on $\mathbb R_{> 0}$. 
+	\end{exmp}
+
+	\begin{proof}
+		To see that $f$ is not uniformly continous on $\mathbb R_{> 0}$, choose $\epsilon = 1$, then for all $\delta > 0$ take $x := \min\{\delta, 1\}\in\mathbb R_{> 0}$ and $y := x/2\in\mathbb R_{> 0}$, then $\abs{x - y} = \frac{x}{2} < \delta$, but
+		$$\abs{f(x) - f(y)} = \abs{\frac{1}{x} - \frac{1}{y}} = \frac{1}{x} \geq 1 = \epsilon.$$
+	\end{proof}
+
 	\begin{theorem}
-		Def. \ref{defn:continuity} is equivalent to the following (with the same notation): For every sequence $\seq[p_n]$ in $D$ that converges to $p$, i.e. $p_n \overset{n\to\infty}{\longrightarrow} p$ wrt $d$, the sequence $\seq[f(p_n)]$ converges to $f(p)$ wrt $d'$.
+		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\to Y$ is continuous at $p\in X$ iff for every sequence $\seq[p_n]$ in $X$ that converges to $p$ wrt $d$, the sequence $\seq[f(p_n)]$ converges to $f(p)$ wrt $d'$.
 	\end{theorem}
+
+	\begin{proof}
+		\enquote{$\Longrightarrow$} Let $f$ be continuous at $p\in X$, and $\seq[p_n]$ a sequence converging to $p$. Then for all $\epsilon > 0$ there exists a $\delta(\epsilon, p)$ s.t. for all $z\in X$, $d(z, p) < \delta$ implies $d'(f(z), f(p)) < \epsilon$. Since $\seq[p_n]$ converges to $p$ wrt $d$, for the same $\delta$, there exists an $N(\delta)$ s.t. for all $n\geq N$, $d(p_n, p) < \delta$, and thus $d'(f(p_n), f(p)) < \epsilon$.
+		
+		\enquote{$\Longleftarrow$} Let $\seq[p_n]$ be a sequence in $X$ converging to $p\in X$ wrt $d$, and $\seq[f(p_n)]$ converging to $f(p)$ wrt $d'$. Assume that $f$ is not continuous at $p$, i.e. there exists an $\epsilon > 0$ s.t. for all $\delta > 0$ there exists a $z\in X$ s.t. $d(z, p) < \delta$, but $d'(f(z), f(p)) \geq \epsilon$. Fix this $\epsilon > 0$, and consider an arbitrary $\delta > 0$. Since $\seq[p_n]$ converges to $p$, there exists an $N(\delta)\in\mathbb N$ s.t. for all $n\geq N$, $d(p_n, p) < \delta$, but $d'(f(p_n), f(p)) \geq \epsilon$. But this is a contradiction to $\seq[f(p_n)]$ converging to $f(p)$ wrt $d'$.
+	\end{proof}
 
 	\begin{theorem}\label{thrm:uniform_continuity}
 		Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$, where on $\mathbb R$ we consider the usual metric, that is continuous on $[a, b]$, is uniformly continuous on  $[a, b]$.
