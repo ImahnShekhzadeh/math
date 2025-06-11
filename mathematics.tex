@@ -1673,8 +1673,23 @@
 	\end{proof}
 	
 	\begin{theorem}
-		\color{red}Cf. Proposition 4.27 here (https://www.mileshwheeler.com/ma30252/sec-rel.html)\color{black}
+		Relationship between totally bounded and relatively compact subsets \cite[Theorem 4.27]{src:relative_compactness}:
+		\begin{enumerate}[label=(\alph*)]
+			\item Any relatively compact subset of a metric space is totally bounded.
+			\item Any totally bounded subset of a complete metric space is relatively compact.
+		\end{enumerate}
 	\end{theorem}
+	
+	\begin{proof}
+		(a): Let $U$ be relatively compact, i.e. $\overline{U}$ is compact, and thus by Theorem \ref{thrm:compact_seq_totally_bound_compl} also totally bounded. Since $U\subset \overline{U}$, $U$ is also totally bounded.
+		
+		(b): Let $U\subset X$ be totally bounded, where $(X, d)$ is a complete metric space. This means that for any fixed $\epsilon > 0$, there exists an $n_{\epsilon}\in\mathbb N$ s.t.
+		$$U\subset \bigcup_{i=1}^{n_{\epsilon}}B_{\epsilon}(\varphi_i),$$
+		where $\varphi_1, \dots, \varphi_{n_{\epsilon}}\in U$. Since $U$ lies dense in $\overline{U}$, for any $\psi\in\overline{U}$ there is a $\varphi\in U$ s.t. $d(\varphi, \psi) < \epsilon$. Since $\varphi\in U$, there is a $j\in\{1, \dots, n_{\epsilon}\}$ s.t. $\varphi\in B_{\epsilon}(\varphi_j)$. Then
+		$$d(\psi, \varphi_j) \leq d(\psi, \varphi) + d(\varphi, \varphi_j) < 2\epsilon,$$
+		i.e. $\overline{U}$ can be covered as follows:
+		$$\overline{U}\subset \bigcup_{i=1}^{n_{\epsilon}}B_{2\epsilon}(\varphi_i),$$ implying that $\overline{U}$ is totally bounded. Since $\overline{U}$ is closed and by Theorem \ref{thrm:complete_subsets_properties}, closed subsets of complete metric spaces are also complete, by Theorem \ref{thrm:compact_seq_totally_bound_compl}, $\overline{U}$ is compact.
+	\end{proof}
 	
 	\newpage 
 	\subsection{Continuity}
