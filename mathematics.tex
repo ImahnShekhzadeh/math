@@ -1824,6 +1824,25 @@
 			\end{itemize}
 			A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. 
 		\end{defn} 
+	
+		\begin{exmp}[Trivial topology]
+			For every set $X$, the trivial topology is defined as $\tau := \{\emptyset, X\}$.
+		\end{exmp}
+		
+		\begin{defn}[Basis]
+			A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
+			\begin{align}
+				\bigcup_{i\in I}B_i = U. 
+			\end{align}
+		\end{defn}
+		
+		\begin{exmp}\label{basis_discrete_metric}
+			Let $(X, d)$ be a metric space, where the metric is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$ is basis of $X$. 
+		\end{exmp}
+		
+		\begin{exmp}\label{basis_metric_space}
+			In a metric space $X$, the collection $$\{ B_{r}(x) \mid x\in X, r > 0 \}$$ of open balls is a basis for the topology given by the metric on $X$. 
+		\end{exmp}
 		
 		Let us now look at what topological structure we can endow $X\times Y := \{ (x, y) \mid x\in X, y\in Y \}$ with if $(X, \tau_X)$ and $(Y, \tau_Y)$ are topological spaces.
 		
@@ -1858,21 +1877,6 @@
 		
 		\begin{exmp}
 			Consider $X = \mathbb R$ and the topology $\tau = \left\{\mathbb R, \emptyset\right\}$. Then a sequence $\seq[\varphi_n]$ in $\mathbb R$ converges to any point in $\mathbb R$, since the neighborhood of any $x\in \mathbb R$ is $\mathbb R$.
-		\end{exmp}
-		
-		\begin{defn}[Basis]
-			A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
-			\begin{align}
-				\bigcup_{i\in I}B_i = U. 
-			\end{align}
-		\end{defn}
-		
-		\begin{exmp}\label{basis_discrete_metric}
-			Let $(X, d)$ be a metric space, where the metric is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$ is basis of $X$. 
-		\end{exmp}
-		
-		\begin{exmp}\label{basis_metric_space}
-			In a metric space $X$, the collection $$\{ B_{r}(x) \mid x\in X, r > 0 \}$$ of open balls is a basis for the topology given by the metric on $X$. 
 		\end{exmp}
 		
 		\begin{defn}[Hausdorff]
@@ -2077,7 +2081,7 @@
 			\left[x\right] := \left\{y\in X \mid x\sim y \right\} = \left\{ y\in X \mid y\sim x \right\} \subset X. 
 		\end{align}
 	
-		The set of all equivalences classes in $X$ wrt an equivalence relation $\sim$ is denoted by $X/\sim$. Note that $X/\sim\ \subset P(X)$, where $P(X)$ denotes the power set of $X$ \cite{src:quotient_set_X_by_equivalence_relation}. The surjective map $f: X\rightarrow X/\sim, x\mapsto [x]$ is called the \textit{canoninal surjection}.
+		The set of all equivalences classes in $X$ wrt an equivalence relation $\sim$ is denoted by $X/\sim$. Note that $X/\sim\ \subset P(X)$, where $\mathcal P(X)$ denotes the power set of $X$ \cite{src:quotient_set_X_by_equivalence_relation}. The surjective map $f: X\rightarrow X/\sim, x\mapsto [x]$ is called the \textit{canoninal surjection}.
 	\end{defn}
 
 	\begin{theorem}\label{thrm:characterization_equivalence_classes}
