@@ -39,6 +39,11 @@
 \binoppenalty=10000 
 \relpenalty=10000 
 
+% https://tex.stackexchange.com/a/9110/239562
+\emergencystretch 3em
+
+
+
 \begin{document}
 	\maketitle
 	\tableofcontents
@@ -587,6 +592,25 @@
 		\end{itemize}
 		A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. 
 	\end{defn} 
+
+	Let us now look at what topological structure we can endow $X\times Y := \{ (x, y) \mid x\in X, y\in Y \}$ with if $(X, \tau_X)$ and $(Y, \tau_Y)$ are topological spaces.
+	
+	\begin{remark}
+		The naive way would be to define the collection of open sets as $\iota := \{ U\times V \mid U\in\tau_X, V\in\tau_Y \}\subset \mathcal P(X\times Y)$. While $\emptyset\in\iota$ (since $\emptyset\in \tau_X$, $Y\in \tau_Y$, and $\emptyset\times Y = \emptyset$), $X\times Y \in \iota$, and if $U_1\times V_1\in \iota$ and $U_2\times V_2\in\iota$, then $(U_1\times V_1) \cap (U_2\times V_2)\in\iota$, i.e. the intersection of two members of $\iota$ is also in $\iota$ again\footnote{This holds because 
+			\begin{align*}
+				(U_1 \times V_1) \cap (U_2\times V_2) &= \{(u, v) \mid (u, v)\in U_1\times V_1 \wedge (u, v)\in U_2\times V_2 \} \\ &= \{(u, v) \mid u\in U_1\wedge v\in V_1\wedge u\in U_2\wedge v\in V_2\}
+				\\ &= \{(u, v)\mid u\in U_1\cap U_2 \wedge v\in V_1\cap V_2\}
+				\\ &= (U_1\cap U_2) \times (V_1\cap V_2),
+			\end{align*}
+			and we have $U_1, U_2\in\tau_X$ and $V_1, V_2\in\tau_Y$, i.e. $U_1\cap U_2\in\tau_X$ and $V_1\cap V_2\in \tau_Y$.
+		}. However, note that the union of two members of $\iota$ is not necessarily in $\iota$ again. For example, consider these two rectangles, then their union is clearly not a rectangle again:
+		\begin{figure}[h!]
+			\centering 
+			\includegraphics[width=0.6\textwidth]{scripts/rectangles.pdf}
+		\end{figure}
+
+		Mathematically, we can describe these two rectangles as $(1, 2) \times (1, 2)$ and $(1.5, 2.5) \times (1.5, 2.5)$, and we consider $X = Y = \mathbb R$ with the standard topology.
+	\end{remark}
 	
 	\begin{defn}[Neighborhood \cite{topology-singh}]
 		Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$.

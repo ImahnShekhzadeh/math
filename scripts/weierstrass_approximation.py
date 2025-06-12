@@ -3,14 +3,14 @@ This script demonstrates the approximation of any continuous function defined
 on the compact set `[a, b]` via Bernstein operators.
 """
 
+import math
 import os
 from math import pi
-import math
-from typing import List, Callable
+from typing import Callable, List
 
 import numpy as np
-from typeguard import typechecked
 from matplotlib import pyplot as plt
+from typeguard import typechecked
 
 
 @typechecked
@@ -54,9 +54,7 @@ def bernstein_polynomial(
     if type(argument) == list:
         argument = np.array(argument)
 
-    assert (
-        j <= n
-    ), "Bernstein polynomial `\beta_{j}^{(n)}(x)` only defined for j <= n"
+    assert j <= n, "Bernstein polynomial `\beta_{j}^{(n)}(x)` only defined for j <= n"
     assert n >= 0, "Bernstein polynomials are only defined for natural `n`"
     assert (np.min(argument) >= a) and (
         np.max(argument) <= b
@@ -178,7 +176,6 @@ def plot(
 
 @typechecked
 def main() -> None:
-
     n = 500  # number of seq. elements to consider
     a, b = 0, pi  # function is approximated on `[a, b]`
     argument = np.linspace(start=a, stop=b, num=100, endpoint=True)  # x-values
