@@ -204,18 +204,20 @@
 			f^{-1}\left(G\right) \in \mathcal E \ \forall G\in\mathcal G. 
 		\end{align}
 	\end{theorem}
-	\noindent \textit{Proof}. \enquote{$\Rightarrow$} Since $\mathcal F = \sigma(\mathcal G)$, it obviously holds that $\mathcal G\subset \mathcal F$ and therefore $f^{-1}(G)\in \mathcal E \ \forall G\in\mathcal G$ is ensured by $f$ being measurable. 
-	\\ \\ 
-	\enquote{$\Leftarrow$} Define the set $\mathcal M:= \left\{ B\subset Y \mid f^{-1}(B)\in \mathcal A \right\}$. First we want to convince ourselves that $\mathcal M$ is a $\sigma$-algebra on $Y$. 
-	\begin{enumerate}
-		\item $\emptyset \in \mathcal M$, since $f^{-1}(\emptyset) = \left\{ x\in X \mid f(x)\in \emptyset \right\} = \emptyset$. 
-		
-		\item Let $B\in \mathcal M$, then also $Y\backslash B\in \mathcal M$, since $f^{-1}\left(Y\backslash B\right) = f^{-1}(Y)\backslash f^{-1}(B)$, as can be easily shown by using the definition of the complement of a set. Since $f^{-1}(Y) = X$, it follows that $f^{-1}(Y\backslash B) = X\backslash f^{-1}(B)$. Since by assumption $B\in \mathcal M$ (and therefore $f^{-1}(B)\in \mathcal A$) and $\mathcal A$ itself is a $\sigma$-algebra, it follows that $X\backslash f^{-1}(B)\in\mathcal A$. 
-		
-		\item  Let $B_i \in \mathcal M$ for $i\in \mathbb N$, then also $\cup_{i\in\mathbb N}B_i\in \mathcal M$, since $$f^{-1}\left(\bigcup_{i\in\mathbb N}B_i\right) = \bigcup_{i\in\mathbb N}f^{-1}\left(B_i\right).$$ 
-	\end{enumerate}
-	Since $\mathcal M$ is a $\sigma$-algebra and since $\mathcal G\subset \mathcal M \Rightarrow \mathcal F = \sigma(\mathcal G)\subset \mathcal M = \sigma(\mathcal M) $, it follows that $f$ is measurable. 
-	 \newline \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	
+	\begin{proof}
+		\enquote{$\Rightarrow$} Since $\mathcal F = \sigma(\mathcal G)$, it obviously holds that $\mathcal G\subset \mathcal F$ and therefore $f^{-1}(G)\in \mathcal E \ \forall G\in\mathcal G$ is ensured by $f$ being measurable. 
+		\\ \\ 
+		\enquote{$\Leftarrow$} Define the set $\mathcal M:= \left\{ B\subset Y \mid f^{-1}(B)\in \mathcal A \right\}$. First we want to convince ourselves that $\mathcal M$ is a $\sigma$-algebra on $Y$. 
+		\begin{enumerate}
+			\item $\emptyset \in \mathcal M$, since $f^{-1}(\emptyset) = \left\{ x\in X \mid f(x)\in \emptyset \right\} = \emptyset$. 
+			
+			\item Let $B\in \mathcal M$, then also $Y\backslash B\in \mathcal M$, since $f^{-1}\left(Y\backslash B\right) = f^{-1}(Y)\backslash f^{-1}(B)$, as can be easily shown by using the definition of the complement of a set. Since $f^{-1}(Y) = X$, it follows that $f^{-1}(Y\backslash B) = X\backslash f^{-1}(B)$. Since by assumption $B\in \mathcal M$ (and therefore $f^{-1}(B)\in \mathcal A$) and $\mathcal A$ itself is a $\sigma$-algebra, it follows that $X\backslash f^{-1}(B)\in\mathcal A$. 
+			
+			\item  Let $B_i \in \mathcal M$ for $i\in \mathbb N$, then also $\cup_{i\in\mathbb N}B_i\in \mathcal M$, since $$f^{-1}\left(\bigcup_{i\in\mathbb N}B_i\right) = \bigcup_{i\in\mathbb N}f^{-1}\left(B_i\right).$$ 
+		\end{enumerate}
+		Since $\mathcal M$ is a $\sigma$-algebra and since $\mathcal G\subset \mathcal M \Rightarrow \mathcal F = \sigma(\mathcal G)\subset \mathcal M = \sigma(\mathcal M) $, it follows that $f$ is measurable. 
+	\end{proof}
 
 	\begin{lemma}[Push-forward measure]\label{push-forward-measure}
 		Let $(X, \mathcal E)$ and $(Y, \mathcal F)$ be measurable spaces. Given a measurable map $f: X\rightarrow Y$ and a measure $\mu$ on $\mathcal E$, let $f_{\#}\mu$ be defined by 
@@ -225,33 +227,30 @@
 		$f_{\#}\mu$ is a measure on $\mathcal F$ and called the \textit{push-forward} of $\mu$ under $f$. 
 	\end{lemma}
 
-	\noindent 
-	\textit{Proof}. Obviously, $f_{\#}\mu(\emptyset) = \mu(f^{-1}(\emptyset)) \overset{\footnotesize\eqref{measurable-mapping-eq}}{=} \mu(\emptyset) = 0$. Also, no matter what kind of set $A\in \mathcal F$ we take, since $\mu(A) \geq 0$, the same holds for $f_{\#}\mu(A)$. Finally, let $(A_n)_{n\in\mathbb{N}} \subset \mathcal F$ be a sequence of mutually disjoint sets, then: 
-	\begin{align}
-		&f_{\#}\mu\left(\bigcup_{n\in\mathbb N}A_n \right) 
-					\\ &= 
-		\mu\left(f^{-1}\left(\bigcup_{n\in\mathbb N}A_n\right) \right) 
-					\\ &\overset{\eqref{measurable-mapping-eq}}{=}
-		\mu\left( \left\{ x\in X \bigg\vert f(x) \in  \bigcup_{n\in\mathbb N}A_n \right\}\right) 
-					\\ &= 		
-		\mu\left( \bigcup_{n\in\mathbb N}\left\{ x\in X \vert f(x)\in A_n \right\} \right) 
-					\\ &=
-		\mu\left( \bigcup_{n\in\mathbb{N}}f^{-1}(A_n) \right)
-					\\ &=
-		\sum_{n\in\mathbb N}\mu\left(f^{-1}(A_n)\right)
-					\\ &=
-		\sum_{n\in\mathbb{N}}f_{\#}\mu(A_n) 
-	\end{align} 
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	\begin{proof}
+		Obviously, $f_{\#}\mu(\emptyset) = \mu(f^{-1}(\emptyset)) \overset{\footnotesize\eqref{measurable-mapping-eq}}{=} \mu(\emptyset) = 0$. Also, no matter what kind of set $A\in \mathcal F$ we take, since $\mu(A) \geq 0$, the same holds for $f_{\#}\mu(A)$. Finally, let $(A_n)_{n\in\mathbb{N}} \subset \mathcal F$ be a sequence of mutually disjoint sets, then: 
+		\begin{align*}
+			f_{\#}\mu\left(\bigcup_{n\in\mathbb N}A_n \right) &= 
+			\mu\left(f^{-1}\left(\bigcup_{n\in\mathbb N}A_n\right) \right) \overset{\tiny\eqref{measurable-mapping-eq}}{=}
+			\mu\left( \left\{ x\in X \bigg\vert f(x) \in  \bigcup_{n\in\mathbb N}A_n \right\}\right) 
+						\\ &= 		
+			\mu\left( \bigcup_{n\in\mathbb N}\left\{ x\in X \vert f(x)\in A_n \right\} \right) 
+						=
+			\mu\left( \bigcup_{n\in\mathbb{N}}f^{-1}(A_n) \right)
+						\\ &= \sum_{n\in\mathbb N}\mu\left(f^{-1}(A_n)\right) = \sum_{n\in\mathbb{N}}f_{\#}\mu(A_n) 
+		\end{align*}
+	\end{proof}
 	
 	\begin{corollary}[Push-forward of a probability measure]
 		Let $(X, \mathcal E)$ and $(Y, \mathcal F)$	be measurable spaces. Given a measurable map $f: X\rightarrow Y$ and a \underline{probability} measure on $\mathcal E$, the push-forward of $\mu$ under $f$, denoted by $f_{\#}\mu$, is also a probability measure. 
 	\end{corollary}
-	\noindent\textit{Proof}. Since $\mu$ is in particular a measure and thus $f_{\#}\mu$ is also a measure, we only need to show that  
-	\begin{align}
-		f_{\#}\mu(Y) = \mu\left(f^{-1}\left(\mu\right)\right) = \mu\left(\left\{ x\in X \mid f(x)\in Y  \right\}\right) = \mu(X) = 1. 
-	\end{align}
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+
+	\begin{proof}
+		Since $\mu$ is in particular a measure and thus $f_{\#}\mu$ is also a measure, we only need to show that  
+		\begin{align}
+			f_{\#}\mu(Y) = \mu\left(f^{-1}\left(\mu\right)\right) = \mu\left(\left\{ x\in X \mid f(x)\in Y  \right\}\right) = \mu(X) = 1. 
+		\end{align}
+	\end{proof} 
 	
 	\begin{defn}[$\sigma$-finite measure] Let $(X, \mathcal A)$ be a measurable space and $\mu$ a measure on it. If there are sets $A_1$, $A_2$, $\dots \in \mathcal A$ with $\mu(A_n) < \infty \ \forall n\in \mathbb N$ that satisfy 
 	\begin{align}
@@ -641,20 +640,25 @@
 	\begin{theorem}\label{open-balls-open}
 		Open balls are open. 
 	\end{theorem}
-	\noindent\textit{Proof:}
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.35\textwidth]{Figures/open-balls-open.png}
-	\end{figure}
-	An illustration is shown in Figure. Let $f\in X$ and for $r > 0$ consider the open ball $U:= B_{r}(f) \subset X$. By definition, for every $\varphi \in U$ it holds that $d\left(\varphi, f\right) < r$. Now we show that 
-	\begin{align}
-		B_{r-d\left(\varphi, f\right)}(\varphi) \subset U.
-	\end{align}
-	For this consider $\psi\in B_{r-d\left(\varphi, f\right)}(\varphi)$, i.e. $d(\psi, \varphi) < r - d(\varphi, f)$. With the triangle inequality we obtain: 
-	\begin{align}
-		d(f, \psi) \leq d(f, \varphi) + d(\varphi, \psi) < d(f, \varphi) + r - d(\varphi, f) = r,  		
-	\end{align}
-	i.e. $d(f, \psi) < r$ and thus $\psi\in U = B_{r}(f)$.  \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+	
+	\begin{proof}
+		An illustration of the idea of the proof is shown in Figure. 
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.35\textwidth]{Figures/open-balls-open.png}
+		\end{figure}
+		
+		Let $f\in X$ and for $r > 0$ consider the open ball $U:= B_{r}(f) \subset X$. By definition, for every $\varphi \in U$ it holds that $d\left(\varphi, f\right) < r$. Now we show that 
+		\begin{align}
+			B_{r-d\left(\varphi, f\right)}(\varphi) \subset U.
+		\end{align}
+		For this consider $\psi\in B_{r-d\left(\varphi, f\right)}(\varphi)$, i.e. $d(\psi, \varphi) < r - d(\varphi, f)$. With the triangle inequality we obtain: 
+		\begin{align}
+			d(f, \psi) \leq d(f, \varphi) + d(\varphi, \psi) < d(f, \varphi) + r - d(\varphi, f) = r,  		
+		\end{align}
+		i.e. $d(f, \psi) < r$ and thus $\psi\in U = B_{r}(f)$.
+	\end{proof}
+	
 	
 	\begin{theorem}\label{thrm:closed_balls_open}
 		Closed balls are closed.
@@ -1878,27 +1882,28 @@
 		\begin{lemma}
 			All metric spaces are Hausdorff spaces. 
 		\end{lemma}
-		\noindent\textit{Proof:} 
-		\begin{figure}[h!]		
-			\centering 
-			\includegraphics[trim = {3.8cm 5.8cm 9.7cm 2.8cm}, width=0.5\textwidth, clip]{Figures/metric-spaces-Hausdorff-spaces-v2.png}
-			\caption{Visualization for why a metric space is a Hausdorff space.}
-			\label{metric-space-Hausdorff-space}
-		\end{figure} 
-		A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove this more rigorously, define $U := B_{r}(p)$ and $V:=B_{r}(q)$ with radius $r := \frac{d(p, q)}{2}$, where from Theorem \ref{open-balls-open} we know that $U$ and $V$ are open. Suppose $U\cap V = \emptyset$ would not hold. Then there exists a $z\in U\cap V$ with 
-		\begin{align}
-			d(p, z) < \frac{d(p, q)}{2}
-		\end{align}
-		and 
-		\begin{align}
-			d(q, z) < \frac{d(p, q)}{2}. 
-		\end{align}
-		Therefore, by the triangle inequality for metric spaces, we have: 
-		\begin{align}
-			d(p, q) \leq d(p, z) + d(q, z) < d(p, q), 
-		\end{align}
-		which is clearly a contradiction. 
-		\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+		
+		\begin{proof}
+			\begin{figure}[h!]		
+				\centering 
+				\includegraphics[trim = {3.8cm 5.8cm 9.7cm 2.8cm}, width=0.5\textwidth, clip]{Figures/metric-spaces-Hausdorff-spaces-v2.png}
+				\caption{Visualization for why a metric space is a Hausdorff space.}
+				\label{metric-space-Hausdorff-space}
+			\end{figure} 
+			A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove this more rigorously, define $U := B_{r}(p)$ and $V:=B_{r}(q)$ with radius $r := \frac{d(p, q)}{2}$, where from Theorem \ref{open-balls-open} we know that $U$ and $V$ are open. Suppose $U\cap V = \emptyset$ would not hold. Then there exists a $z\in U\cap V$ with 
+			\begin{align}
+				d(p, z) < \frac{d(p, q)}{2}
+			\end{align}
+			and 
+			\begin{align}
+				d(q, z) < \frac{d(p, q)}{2}. 
+			\end{align}
+			Therefore, by the triangle inequality for metric spaces, we have: 
+			\begin{align}
+				d(p, q) \leq d(p, z) + d(q, z) < d(p, q), 
+			\end{align}
+			which is clearly a contradiction. 
+		\end{proof}
 		
 		\begin{defn}
 			Let $(X, \tau)$ be a topological space. Then it is said to be \textit{second countable} if $\tau$ has a countable basis. 
@@ -1928,8 +1933,11 @@
 		\begin{exmp}
 			The Euclidean space $\mathbb R^n$, equipped with the usual topology, is homeomorphic to the open ball $B_{r}(\varphi) =  \{x\in\mathbb R^n \mid \lvert\lvert x-\varphi \rvert\rvert < r \} \subset \mathbb R^n$ (consider the open ball as a metric space with the \textit{induced metric} from the whole space of $\mathbb R^n$ and then equip it with the usual topology on a metric space given by the open sets). 
 		\end{exmp}
-		\noindent\textit{Proof:} Consider the map $$f: \mathbb R^n\rightarrow B_r(\varphi), \ x\mapsto \frac{r\cdot (x-\varphi)}{1+\lvert\lvert x-\varphi\rvert\rvert}.$$ Obviously, $f$ is continuous with inverse $$f^{-1}: B_r(\varphi)\rightarrow \mathbb R^n, \ x \mapsto \frac{x}{r-\lvert\lvert x\rvert\rvert}+\varphi,$$ which is also continuous. One can easily show that $f$ and $f^{-1}$ are inverses to each other. Thus, $f$ describes a homeomorphism. 	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad$\blacksquare$
 		
+		\begin{proof}
+			Consider the map $$f: \mathbb R^n\rightarrow B_r(\varphi), \ x\mapsto \frac{r\cdot (x-\varphi)}{1+\lvert\lvert x-\varphi\rvert\rvert}.$$ Obviously, $f$ is continuous with inverse $$f^{-1}: B_r(\varphi)\rightarrow \mathbb R^n, \ x \mapsto \frac{x}{r-\lvert\lvert x\rvert\rvert}+\varphi,$$ which is also continuous. One can easily show that $f$ and $f^{-1}$ are inverses to each other. Thus, $f$ describes a homeomorphism. 	
+		\end{proof}
+				
 		\begin{exmp}[Stereographic projection]
 			The unit sphere $S^n$, embedded in $\mathbb R^{n+1}$, without the north pole, i.e. $S^n\backslash \{p\} \subset \mathbb R^{n+1}$, where $S^n := \{ x\in\mathbb R^{n+1} \mid \norm{x}{2} = 1 \}$ and $p := \{ x\in\mathbb R^{n+1} \mid x_i = 0 \ \forall i\in[1, n], x_{n+1} = 1 \}$, is homeomorphic to $\mathbb R^n$ (consider the unit sphere as a metric space with the \textit{induced metric} from the whole space of $\mathbb R^{n+1}$ and then equip it with the usual topology on a metric space given by the open sets). 
 		\end{exmp}
@@ -2245,38 +2253,40 @@
 			\det\left( \begin{pmatrix}	A & 0 \\ C & D \end{pmatrix} \right) = \det(A)\det(D). 
 		\end{align}
 	\end{lemma}
-	\noindent \textit{Proof.} Define 
-	\begin{align}
-		B := \begin{pmatrix} A & 0 \\ C & D
-		\end{pmatrix}. 
-	\end{align}
-	Clearly, 
-	\begin{align}\label{case-diff}
-		b_{i,j} = 
-		\begin{cases}
-			a_{i, j} \qquad &i, j\leq k, \\
-			0 		 \qquad &i\leq k, j \geq k+1, \\
-			c_{i-k, j} \qquad &i\geq k+1, j \leq k, \\
-			d_{i-k, j-k} \qquad &i, j\geq k+1. 
-		\end{cases}
-	\end{align}
-	We can write the determinant of $B$ as 
-	\begin{align}
-		\det(B) = \sum_{\sigma\in S_{n+k}} \text{sgn}(\sigma)\prod_{i = 1}^{n+k}b_{i, \sigma(i)}. 
-	\end{align}
-	From Eq. \eqref{case-diff} we know that all summands of the form $\sigma(i) = j$ with $i\leq k$, $j\geq k+1$ are $0$. Therefore, we can consider all permutations of the form $\sigma(i) = j$ with $i, j \leq k$ or $\sigma(i) = j$ with $i\geq k+1$, $j\leq k$. We can also write this in the form $\sigma(i) = \pi(i)$ for $i\leq k$ and $\sigma(k + i) = k + \tau(i)$ for $1\leq i \leq n$, where $\pi\in S_k$ and $\tau\in S_n$. Denote the set of all such permutations by $\tilde{S}_{k+n}$.  Thus: 
-	\begin{align}
-		\det(B) &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{n+k}b_{i, \sigma(i)}
-		\\ &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}b_{i, \sigma(i)}\prod_{i = k+1}^{n+k}b_{i, \sigma(i)}
-		\\ &\overset{\tiny\eqref{case-diff}}{=} \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}a_{i, \sigma(i)}\prod_{i=k+1}^{n+k}d_{i-k, \sigma(i)-k}
-		\\ &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}a_{i, \sigma(i)}\prod_{i = 1}^{n}d_{i, \sigma(i+k)-k}
-		\\ &= \sum_{\pi\in S_k, \tau\in S_n}\text{sgn}(\pi)\text{sgn}(\tau)\prod_{i = 1}^{k}a_{i, \pi(i)}\prod_{i = 1}^{n}d_{i, \tau(i)}
-		\\ &= \sum_{\pi\in S_k}\text{sgn}(\pi)\prod_{i = 1}^{k}a_{i, \pi(i)}\sum_{\tau\in S_n}\text{sgn}(\tau)\prod_{i = 1}^{n}d_{i, \tau(i)}
-		\\ &= \det(A)\det(D)
-	\end{align}
-	\cite{block-triangular-matrix}
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
 	
+	\begin{proof}
+		Define 
+		\begin{align}
+			B := \begin{pmatrix} A & 0 \\ C & D
+			\end{pmatrix}. 
+		\end{align}
+		Clearly, 
+		\begin{align}\label{case-diff}
+			b_{i,j} = 
+			\begin{cases}
+				a_{i, j} \qquad &i, j\leq k, \\
+				0 		 \qquad &i\leq k, j \geq k+1, \\
+				c_{i-k, j} \qquad &i\geq k+1, j \leq k, \\
+				d_{i-k, j-k} \qquad &i, j\geq k+1. 
+			\end{cases}
+		\end{align}
+		We can write the determinant of $B$ as 
+		\begin{align}
+			\det(B) = \sum_{\sigma\in S_{n+k}} \text{sgn}(\sigma)\prod_{i = 1}^{n+k}b_{i, \sigma(i)}. 
+		\end{align}
+		From Eq. \eqref{case-diff} we know that all summands of the form $\sigma(i) = j$ with $i\leq k$, $j\geq k+1$ are $0$. Therefore, we can consider all permutations of the form $\sigma(i) = j$ with $i, j \leq k$ or $\sigma(i) = j$ with $i\geq k+1$, $j\leq k$. We can also write this in the form $\sigma(i) = \pi(i)$ for $i\leq k$ and $\sigma(k + i) = k + \tau(i)$ for $1\leq i \leq n$, where $\pi\in S_k$ and $\tau\in S_n$. Denote the set of all such permutations by $\tilde{S}_{k+n}$.  Thus: 
+		\begin{align}
+			\det(B) &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{n+k}b_{i, \sigma(i)}
+			\\ &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}b_{i, \sigma(i)}\prod_{i = k+1}^{n+k}b_{i, \sigma(i)}
+			\\ &\overset{\tiny\eqref{case-diff}}{=} \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}a_{i, \sigma(i)}\prod_{i=k+1}^{n+k}d_{i-k, \sigma(i)-k}
+			\\ &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}a_{i, \sigma(i)}\prod_{i = 1}^{n}d_{i, \sigma(i+k)-k}
+			\\ &= \sum_{\pi\in S_k, \tau\in S_n}\text{sgn}(\pi)\text{sgn}(\tau)\prod_{i = 1}^{k}a_{i, \pi(i)}\prod_{i = 1}^{n}d_{i, \tau(i)}
+			\\ &= \sum_{\pi\in S_k}\text{sgn}(\pi)\prod_{i = 1}^{k}a_{i, \pi(i)}\sum_{\tau\in S_n}\text{sgn}(\tau)\prod_{i = 1}^{n}d_{i, \tau(i)}
+			\\ &= \det(A)\det(D)
+		\end{align}
+		\cite{block-triangular-matrix}
+	\end{proof} 
+		
 	\begin{defn}
 		Let $h(\bm{\cdot}\ ; \theta): \mathbb{R}\rightarrow\mathbb{R}$ be a bijection parametrized by $\theta$. Then an \textit{autoregressive model} is a function \begin{align}
 			g: \mathbb{R}^D\rightarrow\mathbb{R}^D, \begin{pmatrix}
