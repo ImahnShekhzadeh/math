@@ -1828,6 +1828,22 @@
 		\begin{exmp}[Trivial topology]
 			For every set $X$, the trivial topology is defined as $\tau := \{\emptyset, X\}$.
 		\end{exmp}
+	
+		\begin{theorem}[Subspace topology]
+			Let $(X, \tau)$ be a topological space, then for any $S\subset X$ the set
+			$\tau_S := \{S \cap U \mid U\in \tau\}\subset \mathcal P(S)$ defines a topology on $S$, which we call the \textit{subspace topology}.
+		\end{theorem}
+	
+		\begin{proof}
+			Let $S_1, S_2\in \tau_S$, i.e. there exist $U_1, U_2\in \tau$ s.t. $S_1 = S\cap U_1$ and $S_2 = S\cap U_2$. Then for the intersection, we have 
+			$$S_1 \cap S_2 = S\cap U_1\cap S\cap U_2 = S\cap (U_1\cap U_2) \in \tau_S, $$ since $U_1\cap U_2\in \tau$. 
+			
+			Let $I$ be an index set, and $\{S_i\}_{i\in I}\subset \tau_S$, where for each $S_j\in \{S_i\}_{i\in I}$, there is a $U_j\in \tau$, then by Eq. \eqref{eq:dist_law_set_ops} we have 
+			$$\bigcup_{i\in I}S_i = \bigcup_{i\in I}\left(S\cap U_i\right) = S\cap \left(\bigcup_{i\in I}U_i\right)\in \tau_S,$$
+			since the arbitrary union of members of $\tau$ is in $\tau$ again.
+			
+			Finally, note that clearly, $\emptyset, S\in \tau_S$.
+		\end{proof}
 		
 		\begin{defn}[Basis]
 			A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
@@ -2151,6 +2167,36 @@
 	\begin{remark}
 		The upper bound of every chain $C\subset M$ need not be in $C$, by definition of a chain, but it must be in $M$. 
 	\end{remark}
+
+	\begin{theorem}[Distributive law for set operations \cite{481036}]
+		Let $B$ be a set, and $\{A_i\}$ be a collection of sets, where $I$ is a (finite, countable or uncountable) index set. Then we have
+		\begin{align}\label{eq:dist_law_set_ops}
+			\left(\bigcup_{i\in I} A_i\right) \cap B = \bigcup_{i\in I}(A_i \cap B)
+		\end{align}
+		and 
+		\begin{align}\label{eq:dist_law_set_ops_2}
+			\left(\bigcap_{i\in I}A_i\right) \cup B = \bigcap_{i\in I}(A_i \cup B).
+		\end{align}
+	\end{theorem}
+
+	\begin{proof}
+		We will only show Eq. \eqref{eq:dist_law_set_ops}, since the proof of \eqref{eq:dist_law_set_ops_2} is similar.
+		
+		If 
+		\begin{align*}
+			x&\in \left(\bigcup_{i\in I} A_i\right) \cap B \Rightarrow \left(x\in \bigcup_{i\in I}A_i\right) \wedge \left(x\in B\right)\Rightarrow (\exists j\in I: x\in A_j) \wedge (x\in B)
+			\\ \Rightarrow x&\in A_j\cap B \subset \bigcup_{i\in I}(A_i \cap B),
+		\end{align*}
+		i.e. $$\left(\bigcup_{i\in I} A_i\right) \cap B \subset \bigcup_{i\in I}(A_i \cap B).$$
+		Conversely, if 
+		\begin{align*}
+			x&\in \bigcup_{i\in I}(A_i \cap B) \Rightarrow \exists j\in I: x\in A_j \cap B\Rightarrow \left(x\in A_j\subset \bigcup_{i\in I}A_i\right) \wedge \left(x\in B\right)
+			\\ \Rightarrow x &\in \left(\bigcup_{i\in I}A_i\right) \cap B,
+		\end{align*}
+		i.e. 
+		$$\bigcup_{i\in I}(A_i \cap B) \subset \left(\bigcup_{i\in I} A_i\right) \cap B,$$
+		which completes the proof.
+	\end{proof}
 	
 	\newpage 
 	\section{Differential Geometry}
