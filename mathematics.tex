@@ -1829,6 +1829,12 @@
 			For every set $X$, the trivial topology is defined as $\tau := \{\emptyset, X\}$.
 		\end{exmp}
 	
+		\begin{exmp}[Discrete topology]\label{exmp:discrete_topology}
+			For every set $X$, the discrete topology is defined as $\tau := \mathcal P(X)$, i.e. every subset of $X$ is an open set.
+		\end{exmp}
+	
+		Given a topological space, let us now look at constructing new topological spaces.
+	
 		\begin{theorem}[Subspace topology]
 			Let $(X, \tau)$ be a topological space, then for any $S\subset X$ the set
 			$\tau_S := \{S \cap U \mid U\in \tau\}\subset \mathcal P(S)$ defines a topology on $S$, which we call the \textit{subspace topology}.
@@ -1844,6 +1850,26 @@
 			
 			Finally, note that clearly, $\emptyset, S\in \tau_S$.
 		\end{proof}
+	
+		\begin{theorem}
+			Let $I$ be a (finite, countable or uncountable) index set, then if $(X, \tau_i)$, $i\in I$, is a topological space, so is the intersection of the topologies, i.e. $\left(X, \cap_{i\in I}\tau_i\right)$ is a topological space.
+		\end{theorem}
+	
+		\begin{proof}
+			Let $U, V\in \bigcap_{i\in I}\tau_i \subset \mathcal P(X)$, i.e. for any $i\in I$, $U\in\tau_i$ and $V\in \tau_i$, and since $\tau_i$ is a topology, $U\cap V\in\tau_i$ for all $i$, implying $U\cap V\in\bigcap_{i\in I}\tau_i$.
+			
+			Now let $J$ be another index set, and for any $j\in J$, let $U_j\in \bigcap_{i\in I}\tau_i$, i.e. for any $i\in I$, $U_j\in \tau_i$, and since $\tau_i$ is a topology, $\bigcup_{j\in J}U_j\in \tau_i$ for all $i$, implying $\bigcup_{j\in J}U_j\in \bigcap_{i\in I}\tau_i$.
+			
+			Finally, note that $\emptyset, X\in \tau_i$ for all $i\in I$, and thus $\emptyset, X\in \bigcap_{i\in I}\tau_i$.
+		\end{proof}
+		
+		\begin{remark}
+			The union of topologies does not necessarily yield a topology again.
+		\end{remark}
+		
+		\begin{exmp}
+			Consider $X = \{1, 2, 3\}$, and $\tau_1 = \left\{\emptyset, \{1\}, \{2\}, \{1, 2\}, X\right\}$ and $\tau_2=\{\emptyset, {3}, X\}$, then both $(X, \tau_1)$ and $(X, \tau_2)$ are topological spaces, but $(X, \tau_1\cup\tau_2)$ is not, since $\tau_1\cup \tau_2 = \left\{ \emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, X \right\}$. Note that $\{1\}, \{3\}\in \tau_1\cup \tau_2$, but $\{1\}\cup \{3\}\notin \tau_1\cup\tau_2$.
+		\end{exmp}
 		
 		\begin{defn}[Basis]
 			A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
@@ -1858,6 +1884,10 @@
 		
 		\begin{exmp}\label{basis_metric_space}
 			In a metric space $X$, the collection $$\{ B_{r}(x) \mid x\in X, r > 0 \}$$ of open balls is a basis for the topology given by the metric on $X$. 
+		\end{exmp}
+	
+		\begin{exmp}
+			The discrete metric from Remark \ref{remark:discrete-metric} induces the discrete topology on $X$ from Example \ref{exmp:discrete_topology}.
 		\end{exmp}
 		
 		Let us now look at what topological structure we can endow $X\times Y := \{ (x, y) \mid x\in X, y\in Y \}$ with if $(X, \tau_X)$ and $(Y, \tau_Y)$ are topological spaces.
