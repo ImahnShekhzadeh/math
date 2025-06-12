@@ -556,7 +556,7 @@
 	\end{remark}
 	
 	\newpage 
-	\section{Topology}
+	\section{Metric Spaces}
 	\begin{defn}[Metric Space \cite{fa2019}]\label{defn:metric_space}
 		Let $X$ be a non-empty set. Then the map 
 		\begin{align*}
@@ -582,107 +582,6 @@
 			\\ &= d(x, 0) + d(y, 0) = \norm{x}{} + \norm{y}{}.
 		\end{align*}
 	\end{proof}
-	
-	\begin{defn}[Topological Space \cite{topology-singh}]
-		A topology on a set $X$ is a collection $\tau$ of subsets of $X$ such that 
-		\begin{itemize}
-			\item the intersection of two members of $\tau$ is in $\tau$, 
-			\item the union of any collection of members of $\tau$ is in $\tau$, 
-			\item the empty set $\emptyset$ and $X$ itself are in $\tau$.
-		\end{itemize}
-		A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. 
-	\end{defn} 
-
-	Let us now look at what topological structure we can endow $X\times Y := \{ (x, y) \mid x\in X, y\in Y \}$ with if $(X, \tau_X)$ and $(Y, \tau_Y)$ are topological spaces.
-	
-	\begin{remark}
-		The naive way would be to define the collection of open sets as $\iota := \{ U\times V \mid U\in\tau_X, V\in\tau_Y \}\subset \mathcal P(X\times Y)$. While $\emptyset\in\iota$ (since $\emptyset\in \tau_X$, $Y\in \tau_Y$, and $\emptyset\times Y = \emptyset$), $X\times Y \in \iota$, and if $U_1\times V_1\in \iota$ and $U_2\times V_2\in\iota$, then $(U_1\times V_1) \cap (U_2\times V_2)\in\iota$, i.e. the intersection of two members of $\iota$ is also in $\iota$ again\footnote{This holds because 
-			\begin{align*}
-				(U_1 \times V_1) \cap (U_2\times V_2) &= \{(u, v) \mid (u, v)\in U_1\times V_1 \wedge (u, v)\in U_2\times V_2 \} \\ &= \{(u, v) \mid u\in U_1\wedge v\in V_1\wedge u\in U_2\wedge v\in V_2\}
-				\\ &= \{(u, v)\mid u\in U_1\cap U_2 \wedge v\in V_1\cap V_2\}
-				\\ &= (U_1\cap U_2) \times (V_1\cap V_2),
-			\end{align*}
-			and we have $U_1, U_2\in\tau_X$ and $V_1, V_2\in\tau_Y$, i.e. $U_1\cap U_2\in\tau_X$ and $V_1\cap V_2\in \tau_Y$.
-		}. However, note that the union of two members of $\iota$ is not necessarily in $\iota$ again. For example, consider these two rectangles, then their union is clearly not a rectangle again:
-		\begin{figure}[h!]
-			\centering 
-			\includegraphics[width=0.6\textwidth]{scripts/rectangles.pdf}
-		\end{figure}
-
-		Mathematically, we can describe these two rectangles as $(1, 2) \times (1, 2)$ and $(1.5, 2.5) \times (1.5, 2.5)$, and we consider $X = Y = \mathbb R$ with the standard topology.
-	\end{remark}
-	
-	\begin{defn}[Neighborhood \cite{topology-singh}]
-		Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$.
-	\end{defn}
-	
-	\begin{defn}
-		Let $(X, \tau)$ be a topological space, then a sequence $\seq[\varphi_n]$ is said to converge to a point $\varphi\in X$ if for each neighborhood $U$ of $x$, there exists an $N\in\mathbb N$ s.t. for all $n\geq N$, we have $\varphi_n\in U$ \cite{289740}.
-	\end{defn}
-	
-	\begin{remark}
-		Unlike metric spaces, the limit point of a converging sequence in topological spaces is not guaranteed to be unique.
-	\end{remark}
-	
-	\begin{exmp}
-		Consider $X = \mathbb R$ and the topology $\tau = \left\{\mathbb R, \emptyset\right\}$. Then a sequence $\seq[\varphi_n]$ in $\mathbb R$ converges to any point in $\mathbb R$, since the neighborhood of any $x\in \mathbb R$ is $\mathbb R$.
-	\end{exmp}
-
-	\begin{defn}[Basis]
-		A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
-		\begin{align}
-			\bigcup_{i\in I}B_i = U. 
-		\end{align}
-	\end{defn}
-	
-	\begin{exmp}\label{basis_discrete_metric}
-		Let $(X, d)$ be a metric space, where the metric is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$ is basis of $X$. 
-	\end{exmp}
-	
-	\begin{exmp}\label{basis_metric_space}
-		In a metric space $X$, the collection $$\{ B_{r}(x) \mid x\in X, r > 0 \}$$ of open balls is a basis for the topology given by the metric on $X$. 
-	\end{exmp}
-	
-	\begin{defn}[Hausdorff]
-		A topology $\left(M, \tau\right)$ is called \textbf{Hausdorff} if $\forall p\ne q \in M \ \exists U$, $V\in \tau$ open with $p\in U$, $q\in V$ such that $U\cap V = \emptyset$.  
-	\end{defn} 
-	
-	\begin{lemma}
-		All metric spaces are Hausdorff spaces. 
-	\end{lemma}
-	\noindent\textit{Proof:} 
-	\begin{figure}[h!]		
-		\centering 
-		\includegraphics[trim = {3.8cm 5.8cm 9.7cm 2.8cm}, width=0.5\textwidth, clip]{Figures/metric-spaces-Hausdorff-spaces-v2.png}
-		\caption{Visualization for why a metric space is a Hausdorff space.}
-		\label{metric-space-Hausdorff-space}
-	\end{figure} 
-	A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove this more rigorously, define $U := B_{r}(p)$ and $V:=B_{r}(q)$ with radius $r := \frac{d(p, q)}{2}$, where from Theorem \ref{open-balls-open} we know that $U$ and $V$ are open. Suppose $U\cap V = \emptyset$ would not hold. Then there exists a $z\in U\cap V$ with 
-	\begin{align}
-		d(p, z) < \frac{d(p, q)}{2}
-	\end{align}
-	and 
-	\begin{align}
-		d(q, z) < \frac{d(p, q)}{2}. 
-	\end{align}
-	Therefore, by the triangle inequality for metric spaces, we have: 
-	\begin{align}
-		d(p, q) \leq d(p, z) + d(q, z) < d(p, q), 
-	\end{align}
-	which is clearly a contradiction. 
-	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
-	
-	\begin{defn}
-		Let $(X, \tau)$ be a topological space. Then it is said to be \textit{second countable} if $\tau$ has a countable basis. 
-	\end{defn}
-	
-	\begin{exmp}
-		For any $n > 0$, the topological spaces $\mathbb R^n$ are second countable. 
-	\end{exmp}
-	
-	\begin{remark}
-		Metric spaces are not automatically second countable. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{basis_discrete_metric}, \ref{basis_metric_space},  the topological space $X$ is not second countable, since $X$ is uncountable. 
-	\end{remark}
 	
 	\begin{theorem}\label{thrm:vierecksungleichung}
 		Let $(X, d)$ be a metric space. Then we have the inequality
@@ -1815,16 +1714,6 @@
 		Conversely, $\text{id}: (\mathbb R, d) \to (\mathbb R, d'), x\mapsto x$ is not continuous on $\mathbb R$. To see this, let $\epsilon = 1$, consider arbitrary $\delta > 0$ and define $p := \min\{1, \delta\}\in\mathbb R$ and $z := p/2\ne p$. Then $d(z, p) = \abs{p}/2 < \delta$, but $d'(z, p) = 1 \geq \epsilon$.
 	\end{remark}
 
-	In topological spaces (which are not necessarily metrizable), we define continuity as follows \cite{topology-singh}:
-	
-	\begin{defn}\label{defn:continuity_topological_spaces}
-		Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces. Then a function $f: X \to Y$ is called continuous on $X$ if for every $U\in \tau_Y$, $f^{-1}(U) := \{ x\in X \mid f(x)\in U \} \in \tau_X$.
-	\end{defn}
-
-	\begin{remark}
-		In other words, the preimage of an open set is always open. For topological spaces that are metrizable, the $\epsilon$-$\delta$ definition of continuity as in Def. \ref{defn:continuity} is equivalent to the preceding definition, cf. Theorem \ref{thrm:preimages_continuous_functions}.
-	\end{remark}
-
 	\begin{defn}[Uniform continuity \cite{src:uniform_continuity}]
 		Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{uniformly continuous} on $X$
 		\begin{align}
@@ -1920,34 +1809,143 @@
 		Since $f^{-1}(A)$ is closed by assumption, $f^{-1}(Y\backslash A) = X\backslash f^{-1}(A)$ is open. \cite{preimage-of-closed-sets}
 	\end{proof} 
 	
-	\begin{corollary}
-		Let $(X, \tau_1)$ and $(Y, \tau_2)$ be topological spaces coming from metric spaces. Then $f: X\rightarrow Y$ is continuous if and only if $f^{-1}(G)$ for every open set $G\in Y$. 
-	\end{corollary}
-	
-	\begin{defn}[Homeomorphism] A \textit{homeomorphism} between two topological spaces $X$ and $Y$ is an invertible function $f: X\rightarrow Y$ such that $f$ and $f^{-1}$ are continuous \cite[p. 33]{topology-singh}. 
-	\end{defn}
-
-	\begin{exmp}
-		The Euclidean space $\mathbb R^n$, equipped with the usual topology, is homeomorphic to the open ball $B_{r}(\varphi) =  \{x\in\mathbb R^n \mid \lvert\lvert x-\varphi \rvert\rvert < r \} \subset \mathbb R^n$ (consider the open ball as a metric space with the \textit{induced metric} from the whole space of $\mathbb R^n$ and then equip it with the usual topology on a metric space given by the open sets). 
-	\end{exmp}
-	\noindent\textit{Proof:} Consider the map $$f: \mathbb R^n\rightarrow B_r(\varphi), \ x\mapsto \frac{r\cdot (x-\varphi)}{1+\lvert\lvert x-\varphi\rvert\rvert}.$$ Obviously, $f$ is continuous with inverse $$f^{-1}: B_r(\varphi)\rightarrow \mathbb R^n, \ x \mapsto \frac{x}{r-\lvert\lvert x\rvert\rvert}+\varphi,$$ which is also continuous. One can easily show that $f$ and $f^{-1}$ are inverses to each other. Thus, $f$ describes a homeomorphism. 	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad$\blacksquare$
-	
-	\begin{exmp}[Stereographic projection]
-		The unit sphere $S^n$, embedded in $\mathbb R^{n+1}$, without the north pole, i.e. $S^n\backslash \{p\} \subset \mathbb R^{n+1}$, where $S^n := \{ x\in\mathbb R^{n+1} \mid \norm{x}{2} = 1 \}$ and $p := \{ x\in\mathbb R^{n+1} \mid x_i = 0 \ \forall i\in[1, n], x_{n+1} = 1 \}$, is homeomorphic to $\mathbb R^n$ (consider the unit sphere as a metric space with the \textit{induced metric} from the whole space of $\mathbb R^{n+1}$ and then equip it with the usual topology on a metric space given by the open sets). 
-	\end{exmp}
-	\begin{proof}
-			Consider the map 
+	\newpage
+	\section{Topological Spaces}
+		\begin{defn}[Topological Space \cite{topology-singh}]
+			A topology on a set $X$ is a collection $\tau$ of subsets of $X$ such that 
+			\begin{itemize}
+				\item the intersection of two members of $\tau$ is in $\tau$, 
+				\item the union of any collection of members of $\tau$ is in $\tau$, 
+				\item the empty set $\emptyset$ and $X$ itself are in $\tau$.
+			\end{itemize}
+			A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. 
+		\end{defn} 
+		
+		Let us now look at what topological structure we can endow $X\times Y := \{ (x, y) \mid x\in X, y\in Y \}$ with if $(X, \tau_X)$ and $(Y, \tau_Y)$ are topological spaces.
+		
+		\begin{remark}
+			The naive way would be to define the collection of open sets as $\iota := \{ U\times V \mid U\in\tau_X, V\in\tau_Y \}\subset \mathcal P(X\times Y)$. While $\emptyset\in\iota$ (since $\emptyset\in \tau_X$, $Y\in \tau_Y$, and $\emptyset\times Y = \emptyset$), $X\times Y \in \iota$, and if $U_1\times V_1\in \iota$ and $U_2\times V_2\in\iota$, then $(U_1\times V_1) \cap (U_2\times V_2)\in\iota$, i.e. the intersection of two members of $\iota$ is also in $\iota$ again\footnote{This holds because 
+				\begin{align*}
+					(U_1 \times V_1) \cap (U_2\times V_2) &= \{(u, v) \mid (u, v)\in U_1\times V_1 \wedge (u, v)\in U_2\times V_2 \} \\ &= \{(u, v) \mid u\in U_1\wedge v\in V_1\wedge u\in U_2\wedge v\in V_2\}
+					\\ &= \{(u, v)\mid u\in U_1\cap U_2 \wedge v\in V_1\cap V_2\}
+					\\ &= (U_1\cap U_2) \times (V_1\cap V_2),
+				\end{align*}
+				and we have $U_1, U_2\in\tau_X$ and $V_1, V_2\in\tau_Y$, i.e. $U_1\cap U_2\in\tau_X$ and $V_1\cap V_2\in \tau_Y$.
+			}. However, note that the union of two members of $\iota$ is not necessarily in $\iota$ again. For example, consider these two rectangles, then their union is clearly not a rectangle again:
+			\begin{figure}[h!]
+				\centering 
+				\includegraphics[width=0.6\textwidth]{scripts/rectangles.pdf}
+			\end{figure}
+			
+			Mathematically, we can describe these two rectangles as $(1, 2) \times (1, 2)$ and $(1.5, 2.5) \times (1.5, 2.5)$, and we consider $X = Y = \mathbb R$ with the standard topology.
+		\end{remark}
+		
+		\begin{defn}[Neighborhood \cite{topology-singh}]
+			Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$.
+		\end{defn}
+		
+		\begin{defn}
+			Let $(X, \tau)$ be a topological space, then a sequence $\seq[\varphi_n]$ is said to converge to a point $\varphi\in X$ if for each neighborhood $U$ of $x$, there exists an $N\in\mathbb N$ s.t. for all $n\geq N$, we have $\varphi_n\in U$ \cite{289740}.
+		\end{defn}
+		
+		\begin{remark}
+			Unlike metric spaces, the limit point of a converging sequence in topological spaces is not guaranteed to be unique.
+		\end{remark}
+		
+		\begin{exmp}
+			Consider $X = \mathbb R$ and the topology $\tau = \left\{\mathbb R, \emptyset\right\}$. Then a sequence $\seq[\varphi_n]$ in $\mathbb R$ converges to any point in $\mathbb R$, since the neighborhood of any $x\in \mathbb R$ is $\mathbb R$.
+		\end{exmp}
+		
+		\begin{defn}[Basis]
+			A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
+			\begin{align}
+				\bigcup_{i\in I}B_i = U. 
+			\end{align}
+		\end{defn}
+		
+		\begin{exmp}\label{basis_discrete_metric}
+			Let $(X, d)$ be a metric space, where the metric is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$ is basis of $X$. 
+		\end{exmp}
+		
+		\begin{exmp}\label{basis_metric_space}
+			In a metric space $X$, the collection $$\{ B_{r}(x) \mid x\in X, r > 0 \}$$ of open balls is a basis for the topology given by the metric on $X$. 
+		\end{exmp}
+		
+		\begin{defn}[Hausdorff]
+			A topology $\left(M, \tau\right)$ is called \textbf{Hausdorff} if $\forall p\ne q \in M \ \exists U$, $V\in \tau$ open with $p\in U$, $q\in V$ such that $U\cap V = \emptyset$.  
+		\end{defn} 
+		
+		\begin{lemma}
+			All metric spaces are Hausdorff spaces. 
+		\end{lemma}
+		\noindent\textit{Proof:} 
+		\begin{figure}[h!]		
+			\centering 
+			\includegraphics[trim = {3.8cm 5.8cm 9.7cm 2.8cm}, width=0.5\textwidth, clip]{Figures/metric-spaces-Hausdorff-spaces-v2.png}
+			\caption{Visualization for why a metric space is a Hausdorff space.}
+			\label{metric-space-Hausdorff-space}
+		\end{figure} 
+		A visualization is shown in Fig. \ref{metric-space-Hausdorff-space}. To prove this more rigorously, define $U := B_{r}(p)$ and $V:=B_{r}(q)$ with radius $r := \frac{d(p, q)}{2}$, where from Theorem \ref{open-balls-open} we know that $U$ and $V$ are open. Suppose $U\cap V = \emptyset$ would not hold. Then there exists a $z\in U\cap V$ with 
 		\begin{align}
-			f: S^n\backslash\{p\}\rightarrow \mathbb R^n, \ x\mapsto \frac{1}{1-x_{n+1}}\begin{pmatrix} x_1, \dots, x_n \end{pmatrix}^T. 
+			d(p, z) < \frac{d(p, q)}{2}
 		\end{align}
-		Obviously, $f$ is continuous. Its inverse is given by 
-		\begin{align}\label{stereographic_map_inverse}
-			f^{-1}: \mathbb R^n \rightarrow S^n\backslash\{p\}, \ x\mapsto \begin{pmatrix} 2x_1/ \left(1+\norm{x}{2}^2\right)\\ \vdots\\ 2x_n/\left(1+\norm{x}{2}^2\right) \\[4pt] 1-2/\left(1+\norm{x}{2}^2\right) \end{pmatrix}.  
+		and 
+		\begin{align}
+			d(q, z) < \frac{d(p, q)}{2}. 
 		\end{align}
-		It is trivial to show that $f$ and $f^{-1}$ are inverses to each other. One can also easily show that $\norm{f^{-1}(x)}{2} = 1$; thus, $f^{-1}$ does indeed bring us to the unit ball $S^n$. 
-		To see that $f^{-1}$ is continuous, note that all components are continuous and thus, according to Lemma \ref{continuity_vector_components}, the function itself is continuous. 
-	\end{proof} 
+		Therefore, by the triangle inequality for metric spaces, we have: 
+		\begin{align}
+			d(p, q) \leq d(p, z) + d(q, z) < d(p, q), 
+		\end{align}
+		which is clearly a contradiction. 
+		\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad$\blacksquare$
+		
+		\begin{defn}
+			Let $(X, \tau)$ be a topological space. Then it is said to be \textit{second countable} if $\tau$ has a countable basis. 
+		\end{defn}
+		
+		\begin{exmp}
+			For any $n > 0$, the topological spaces $\mathbb R^n$ are second countable. 
+		\end{exmp}
+		
+		\begin{remark}
+			Metric spaces are not automatically second countable. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{basis_discrete_metric}, \ref{basis_metric_space},  the topological space $X$ is not second countable, since $X$ is uncountable. 
+		\end{remark}	
 	
+		In topological spaces (which are not necessarily metrizable), we define continuity as follows \cite{topology-singh}:
+		
+		\begin{defn}\label{defn:continuity_topological_spaces}
+			Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces. Then a function $f: X \to Y$ is called continuous on $X$ if for every $U\in \tau_Y$, $f^{-1}(U) := \{ x\in X \mid f(x)\in U \} \in \tau_X$.
+		\end{defn}
+		
+		\begin{remark}
+			In other words, the preimage of an open set is always open. For topological spaces that are metr^izable, the $\epsilon$-$\delta$ definition of continuity as in Def. \ref{defn:continuity} is equivalent to the preceding definition, cf. Theorem \ref{thrm:preimages_continuous_functions}.
+		\end{remark}
+	
+		\begin{defn}[Homeomorphism] A \textit{homeomorphism} between two topological spaces $X$ and $Y$ is an invertible function $f: X\rightarrow Y$ such that $f$ and $f^{-1}$ are continuous \cite[p. 33]{topology-singh}. 
+		\end{defn}
+		
+		\begin{exmp}
+			The Euclidean space $\mathbb R^n$, equipped with the usual topology, is homeomorphic to the open ball $B_{r}(\varphi) =  \{x\in\mathbb R^n \mid \lvert\lvert x-\varphi \rvert\rvert < r \} \subset \mathbb R^n$ (consider the open ball as a metric space with the \textit{induced metric} from the whole space of $\mathbb R^n$ and then equip it with the usual topology on a metric space given by the open sets). 
+		\end{exmp}
+		\noindent\textit{Proof:} Consider the map $$f: \mathbb R^n\rightarrow B_r(\varphi), \ x\mapsto \frac{r\cdot (x-\varphi)}{1+\lvert\lvert x-\varphi\rvert\rvert}.$$ Obviously, $f$ is continuous with inverse $$f^{-1}: B_r(\varphi)\rightarrow \mathbb R^n, \ x \mapsto \frac{x}{r-\lvert\lvert x\rvert\rvert}+\varphi,$$ which is also continuous. One can easily show that $f$ and $f^{-1}$ are inverses to each other. Thus, $f$ describes a homeomorphism. 	\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad$\blacksquare$
+		
+		\begin{exmp}[Stereographic projection]
+			The unit sphere $S^n$, embedded in $\mathbb R^{n+1}$, without the north pole, i.e. $S^n\backslash \{p\} \subset \mathbb R^{n+1}$, where $S^n := \{ x\in\mathbb R^{n+1} \mid \norm{x}{2} = 1 \}$ and $p := \{ x\in\mathbb R^{n+1} \mid x_i = 0 \ \forall i\in[1, n], x_{n+1} = 1 \}$, is homeomorphic to $\mathbb R^n$ (consider the unit sphere as a metric space with the \textit{induced metric} from the whole space of $\mathbb R^{n+1}$ and then equip it with the usual topology on a metric space given by the open sets). 
+		\end{exmp}
+		\begin{proof}
+			Consider the map 
+			\begin{align}
+				f: S^n\backslash\{p\}\rightarrow \mathbb R^n, \ x\mapsto \frac{1}{1-x_{n+1}}\begin{pmatrix} x_1, \dots, x_n \end{pmatrix}^T. 
+			\end{align}
+			Obviously, $f$ is continuous. Its inverse is given by 
+			\begin{align}\label{stereographic_map_inverse}
+				f^{-1}: \mathbb R^n \rightarrow S^n\backslash\{p\}, \ x\mapsto \begin{pmatrix} 2x_1/ \left(1+\norm{x}{2}^2\right)\\ \vdots\\ 2x_n/\left(1+\norm{x}{2}^2\right) \\[4pt] 1-2/\left(1+\norm{x}{2}^2\right) \end{pmatrix}.  
+			\end{align}
+			It is trivial to show that $f$ and $f^{-1}$ are inverses to each other. One can also easily show that $\norm{f^{-1}(x)}{2} = 1$; thus, $f^{-1}$ does indeed bring us to the unit ball $S^n$. 
+			To see that $f^{-1}$ is continuous, note that all components are continuous and thus, according to Lemma \ref{continuity_vector_components}, the function itself is continuous. 
+		\end{proof} 
+			
 	\newpage 
 	\section{Linear Functional Analysis}
 
