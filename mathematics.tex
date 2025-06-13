@@ -1927,6 +1927,10 @@
 			In a metric space $X$, the collection of all open balls $$\mathscr B := \{ B_{r}(x) \mid x\in X, r > 0 \}$$ generates the topology $$\tau(\mathscr B) = \{U\subset X\mid \forall x\in U\ \exists B_{r}(x)\in\mathscr B: B_{r}(x)\subset U\},$$ called the \textit{metric topology}, cf. Eq. \eqref{eq:gen_top_by_coll_subsets} and Theorem \ref{thrm:gen_top_by_coll_subsets}, and $\mathscr B$ is a basis for $\tau(\mathscr B)$. This holds because for any fixed $r > 0$, $X = \bigcup_{x\in X}B_{r}(x)$, and for any point in the the intersection of two open balls, there is an open ball containing that point, and the open ball is contained in the intersection, cf. Theorem \ref{thrm:intersection_open_balls}.
 		\end{exmp}
 		
+		\begin{remark}
+			Note that it is important to consider the collection of \textit{all} open balls in Example \ref{exmp:metric_topology}. For if we considered the collection of all open balls with \textit{fixed} radius $r > 0$, it is not guaranteed that for all $B_{r}(x)$ and $B_{r}(x')$ and each point $y\in B_{r}(x)\cap B_{r}(x')$, we can find a $B_{r}(z)$ with $z\in X$ s.t. $y\in B_{r}(z)\subset B_{r}(x)\cap B_{r}(x')$, also cf. Fig. \ref{fig:open_balls_intersection}.
+		\end{remark}
+		
 		\begin{exmp}\label{exmp:basis_discrete_metric}
 			Let $(X, d)$ be a metric space, where $d$ is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection $\mathscr B := \{\varphi\in X\}\cup \{X\}$, which is the colection of all open balls, cf. Example \ref{exmp:open-balls-discrete-metric}, generates a topology $\tau(\mathscr B)$ on $X$ by Example \ref{exmp:metric_topology}, for which $\mathscr B$ is a basis. The generated topology on $X$ is the discrete topology from Example \ref{exmp:discrete_topology}.
 		\end{exmp}
