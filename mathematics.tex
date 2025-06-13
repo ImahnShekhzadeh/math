@@ -3,6 +3,7 @@
 \usepackage{comment, listings, centernot, amssymb, hyperref, graphicx, amsmath, textcomp, breqn, mathtools, csquotes, cancel, enumitem, amsthm, caption, bm, tikz} % amsthm provides `proof`environment
 \usepackage[backend=biber]{biblatex}
 \usepackage[english]{babel}
+\usepackage{mathrsfs}
 \usepackage{array}
 \usepackage{cancel}
 \addbibresource{references.bib}
@@ -1889,6 +1890,32 @@
 		\begin{exmp}
 			The discrete metric from Remark \ref{remark:discrete-metric} induces the discrete topology on $X$ from Example \ref{exmp:discrete_topology}.
 		\end{exmp}
+	
+		Let us look at when a given collection $\mathscr B$ of subsets of $X$ can serve as a basis for a topology on $X$.
+		
+		\begin{remark}
+			Let $\mathscr B$ be a basis for some topology on $X$. Since $X$ is in the topology, there is an index set $I$ s.t. $X = \bigcup_{i\in I}B_i$ with $B_i\in\mathscr B$ for all $i\in I$. And, for any $B_1, B_2\in\mathscr B$, $B_1\cap B_2$ is open (since $B_1$, $B_2$ are open), and thus there exists an index set $J\subset I$ s.t. $x\in B_1\cap B_2$ implies $x\in \bigcup_{j\in J}B_j$, which in turn implies there exists a $j_0 \in J$ (WLOG, let $j_0 = 3$) s.t. $x\in B_3\subset B_1\cap B_2$. In fact, these conditions are also sufficient, as the next Theorem shows.
+		\end{remark}
+	
+		\begin{theorem}
+			Let $\mathscr B$ be a collection of subsets of $X$ s.t. there is an index set $I$ with $X = \bigcup_{i\in I}B_i$, where $B_i\in\mathscr B$ for all $i\in I$, and for every two members $B_1, B_2$ of $\mathscr B$ and for each point $x\in B_1\cap B_2$ there is a $B_3\in\mathscr B$ with $x\in B_3\subset B_1\cap B_2$. Then $$\tau(\mathscr B) := \left\{ U\subset X \mid \forall x\in U\ \exists B_x\in\mathscr B: x\in B_x\subset U\right\}\subset \mathscr P(X)$$ is the unique topology on $X$ for which $\mathscr B$ is a basis.
+		\end{theorem}	
+		
+		\begin{proof}
+			First, we will show that $\tau(\mathscr B)$ is indeed a topology on $X$. 
+			
+			Let $U_1, U_2\in\tau(\mathscr B)$, then for all $x\in U_k$ there exist $B_{x, k}\in\mathscr B$ s.t. $x\in B_{x, k}\subset U_k$ with $k \in\{1, 2\}$. By hypothesis, for all $x\in B_{x, 1}\cap B_{x, 2}$, there exists a $B_{x, 3}\in\mathscr B$ s.t. $x\in B_{x, 3}\subset B_{x, 1}\cap B_{x, 2}\subset U_1\cap U_2$, and thus $U_1\cap U_2\in\tau(\mathscr B)$.
+			
+			Now let $J$ be an index set, and let $U_j\in \tau(\mathscr B)$ for all $j\in J$. Then $x\in \bigcup_{j\in J}U_j$ implies there exists a $j_0\in J$ s.t. $x\in U_{j_0}$. There is a $B_{x}\in\mathscr B$ s.t. $x\in B_x\subset U_{j_0} \subset \bigcup_{j\in J}U_j$, and thus $\bigcup_{j\in J}U_j\in \tau(\mathscr B)$.
+			
+			Also, note that $\emptyset\in\tau(\mathscr B)$ (vacuously) and $X\in \tau(\mathscr B)$, since $x\in X = \bigcup_{i\in I}B_i$ implies there exists a $i_0\in I$ s.t. $x\in B_{x, i_0}\subset X$.
+			
+			Now let us show that $\mathscr B$ is basis for $\tau(\mathscr B)$. For this, note that $\mathscr B\subset \tau(\mathscr B)$, i.e. $\mathscr B$ is a collection of open sets. And for any $U\in\tau(\mathscr B)$, $x\in U$ implies there exists a $B_{x}\in \mathscr B$ with $x\in B_x\subset U$. Thus, $\bigcup_{x\in U}B_x \subset U$. For fixed $x\in U$, we also have $x\in B_x\subset \bigcup_{x\in U}B_x$, and thus $U\subset \bigcup_{x\in U}B_x$, i.e. $U = \bigcup_{x\in U}B_x = \bigcup_{B\in\mathscr B, ´B\subset U}B$.
+			
+			Finally, we will show that $\tau(\mathscr B)$ is the unique topology on $X$ for which $\mathscr B$ is a basis. For this, define $\tilde{\tau}(\mathscr B) := \left\{ \bigcup_{C\in\mathscr C}C \mid \mathscr C\subset \mathscr B \right\}\subset \mathscr P(X)$, and note that $\tau(\mathscr B) = \tilde{\tau}(\mathscr B)$. To see this, let $U\in\tilde{\tau}(\mathscr B)$, i.e. $U = \bigcup_{C\in\mathscr C}C$ for some $\mathscr C\subset \mathscr B$. Thus, $x\in U$ implies there is a $C'\in\mathscr C\subset \mathscr B$ s.t. $x\in C'\subset U$. Conversely, if $U\in\tau(\mathscr B)$, then we have already shown that $U = \bigcup_{x\in U}B_x$, where $x\in B_x\subset U$ and $B_x\in\mathscr B$. Thus, take $\mathscr C := \{ B_x\subset U\mid B_x\in\mathscr B \} \subset \mathscr B$, then $U = \bigcup_{C\in\mathscr C}C$, i.e. $U\in\tilde{\tau}(\mathscr B)$, and thus $\tau(\mathscr B) = \tilde{\tau}(\mathscr B)$. 
+			
+			Now, if $\tau'(\mathscr B)$ is another topology on $X$ that has $\mathscr B$ as a base, then $U\in\tau'(\mathscr B)$ means that we can write $U$ as a union of members of $\mathscr B$, since we assume $\mathscr B$ is a basis for $\tau'(\mathscr B)$, and thus $U\in \tau(\mathscr B)$, i.e. $\tau'(\mathscr B)\subset \tau(\mathscr B)$. Conversely, let $U\in\tau(\mathscr B)$. Note that all members of $\mathscr B$ are in $\tau'$, since a basis is a subset of the topology. Since $U$ is the union of members of $\mathscr B$, and a topology is closed under unions, we have that $U\in\tau'(\mathscr B)$, i.e. $\tau(\mathscr B)\subset\tau'(\mathscr B)$, which in total shows $\tau(\mathscr B) = \tau'(\mathscr B)$ \cite{713096}.
+		\end{proof}
 		
 		Let us now look at what topological structure we can endow $X\times Y := \{ (x, y) \mid x\in X, y\in Y \}$ with if $(X, \tau_X)$ and $(Y, \tau_Y)$ are topological spaces.
 		
