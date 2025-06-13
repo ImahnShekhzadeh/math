@@ -1909,8 +1909,8 @@
 			In a metric space $X$, the collection $$\{ B_{r}(x) \mid x\in X, r > 0 \}$$ of open balls is a basis for the topology given by the metric on $X$. 
 		\end{exmp}
 		
-		\begin{exmp}\label{basis_discrete_metric}
-			Let $(X, d)$ be a metric space, where $d$ is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection of all singletons $\{\varphi\in X\}$, which are open balls, is a basis of $X$ by Example \ref{exmp:metric_topology}. The generated topology on $X$ is the discrete topology from Example \ref{exmp:discrete_topology}.
+		\begin{exmp}\label{exmp:basis_discrete_metric}
+			Let $(X, d)$ be a metric space, where $d$ is the discrete metric from Remark \ref{remark:discrete-metric}. Then the collection $\mathscr B := \{\varphi\in X\}\cup \{X\}$, which is the colection of all open balls, cf. Example \ref{exmp:open-balls-discrete-metric}, generates a topology $\tau(\mathscr B)$ on $X$ by Example \ref{exmp:metric_topology}, for which $\mathscr B$ is a basis. The generated topology on $X$ is the discrete topology from Example \ref{exmp:discrete_topology}.
 		\end{exmp}
 		
 		Let us now look at what topological structure we can endow $X\times Y := \{ (x, y) \mid x\in X, y\in Y \}$ with if $(X, \tau_X)$ and $(Y, \tau_Y)$ are topological spaces.
@@ -1987,7 +1987,7 @@
 		\end{exmp}
 		
 		\begin{remark}
-			Metric spaces are not automatically second countable. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{basis_discrete_metric}, \ref{exmp:metric_topology},  the topological space $X$ is not second countable, since $X$ is uncountable. 
+			Metric spaces are not automatically second countable. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{exmp:basis_discrete_metric}, \ref{exmp:metric_topology},  the topological space $X$ is not second countable, since $X$ is uncountable. 
 		\end{remark}	
 	
 		In topological spaces (which are not necessarily metrizable), we define continuity as follows \cite{topology-singh}:
