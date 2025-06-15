@@ -1753,6 +1753,10 @@
 			For every set $X$, the discrete topology is defined as $\tau := \mathcal P(X)$, i.e. every subset of $X$ is an open set.
 		\end{exmp}
 	
+		\begin{remark}
+			Consider the discrete topological space $(X, \mathscr P(X))$, and note that for every member $U\in \mathscr P(X)$, $X\backslash U\subset X\in \mathscr P(X)$, and thus $X$ is both an open and a closed set. 
+		\end{remark}
+	
 		Given a topological space, let us now look at constructing new topological spaces.
 	
 		\begin{theorem}[Subspace topology]
@@ -1862,12 +1866,16 @@
 		\end{defn}
 	
 		\begin{defn}[Lower limit topology of $\mathbb R$]
-			Let $X = \mathbb R$, and $\mathscr B$ the collection of all right half-open intervals, i.e. $\mathscr B= \left\{ [a, b) \mid a, b\in\mathbb R, a < b \right\}$. Clearly, there is a collection of right half-open intervals s.t. $X$ equals to its union, and the intersection of two right half-open intervals is either empty or itself a right half-open interval. Thus, for all $x$ in the intersection there is a right half-open interval that contains $x$ and is contained in the intersection. Thus, by Theorem \ref{thrm:gen_top_by_coll_subsets}, $\mathscr B$ generates a topology, which is called the \textit{lower limit topology} of $\mathbb R$.
+			Let $X = \mathbb R$, and $\mathscr B$ the collection of all right half-open intervals, i.e. $\mathscr B= \left\{ [a, b) \mid a, b\in\mathbb R, a < b \right\}$. Clearly, there is a collection of right half-open intervals s.t. $\mathbb R$ equals to its union, and the intersection of two right half-open intervals is either empty or itself a right half-open interval. Thus, for all $x$ in the intersection there is a right half-open interval that contains $x$ and is contained in the intersection. Thus, by Theorem \ref{thrm:gen_top_by_coll_subsets}, $\mathscr B$ generates a topology, which is called the \textit{lower limit topology} of $\mathbb R$.
 		\end{defn}
 	
 		\begin{defn}[Upper limit topology of $\mathbb R$]
-			Let $X = \mathbb R$, and $\mathscr B$ the collection of all left half-open intervals, i.e. $\mathscr B= \left\{ (a, b] \mid a, b\in\mathbb R, a < b \right\}$. Clearly, there is a collection of left half-open intervals s.t. $X$ equals to its union, and the intersection of two left half-open intervals is either empty or itself a left half-open interval. Thus, for all $x$ in the intersection there is a left half-open interval that contains $x$ and is contained in the intersection. Thus, by Theorem \ref{thrm:gen_top_by_coll_subsets}, $\mathscr B$ generates a topology, which is called the \textit{upper limit topology} of $\mathbb R$.
+			Let $X = \mathbb R$, and $\mathscr B$ the collection of all left half-open intervals, i.e. $\mathscr B= \left\{ (a, b] \mid a, b\in\mathbb R, a < b \right\}$. Clearly, there is a collection of left half-open intervals s.t. $\mathbb R$ equals to its union, and the intersection of two left half-open intervals is either empty or itself a left half-open interval. Thus, for all $x$ in the intersection there is a left half-open interval that contains $x$ and is contained in the intersection. Thus, by Theorem \ref{thrm:gen_top_by_coll_subsets}, $\mathscr B$ generates a topology, which is called the \textit{upper limit topology} of $\mathbb R$.
 		\end{defn}
+	
+		\begin{remark}
+			Let $X = \mathbb R$, and $\mathscr B$ the collection of all closed intervals, i.e. $\mathscr B = \left\{ [a, b]\mid a, b\in\mathbb R, a \leq b \right\}$. Note that there is a collection of closed intervals s.t. $\mathbb R$ is its union, and the intersection of two closed intervals is either empty or closed. Thus, for all $x$ in the intersection, there is a closed interval that contains $x$ and that is contained in the intersection. Thus, by Theorem \ref{thrm:gen_top_by_coll_subsets}, $\mathscr B$ generates a topology, which is the discrete topology on $\mathbb R$, i.e. $\tau(\mathscr B) = \mathscr P(\mathbb R)$, since for any $x\in \mathbb R$, we have $x\in [x, x]\in \mathscr B$.
+		\end{remark}
 	
 		\begin{remark}
 			The lower and upper limit topologies of $\mathbb R$ are not metrizable \cite{790629}.
