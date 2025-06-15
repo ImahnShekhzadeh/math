@@ -1,12 +1,12 @@
 \section{Construction of $\mathbb R$}\label{app:completion_Q}
 
-We will follow Ref. \cite{src:completion_of_Q} to construct the real numbers $\mathbb R$. There are two possibilities to do so:
+There are two possibilities to construct the real numbers $\mathbb R$:
 \begin{enumerate}
 	\item Dedekind completion: Every non-empty subset has a least upper bound (wrt $\leq$).
 	\item Cauchy completion: Every Cauchy sequence converges wrt $\abs{\cdot}$.
 \end{enumerate}
 
-We will use the second definition of completion.
+We will use the second definition of completion, and follow Ref. \cite{src:completion_of_Q,src:cauchy_construction_R}.
 
 \begin{defn}
 	The (archimedean) absolute value of $\mathbb Q$ is the function 
@@ -180,8 +180,8 @@ The density of $\mathbb Q$ in $\mathbb R$ follows almost immediately from the co
 	The density of $\mathbb Q$ in $\mathbb R$ implies that we could replace $\epsilon\in\mathbb Q_{> 0}$ with $\epsilon\in\mathbb R_{>0}$ throughout.
 \end{remark}
 
-\begin{theorem}
-	$\mathbb R$ has the Archimedean property, i.e. for all $s, t\in\mathbb R$ there exists a natural number $m\in\mathbb N$ s.t. $m\cdot s > t$.
+\begin{theorem}\label{thrm:R_Archimedean_property}
+	$\mathbb R$ has the Archimedean property, i.e. for all $s, t\in\mathbb R$ with $s > 0$, there exists a natural number $m\in\mathbb N$ s.t. $m\cdot s > t$.
 \end{theorem}
 
 \begin{proof}
@@ -224,3 +224,23 @@ We can now prove that $\mathbb R$ is complete.
 	For the proof of the uniqueness of the completion of $\mathbb Q$, we refer to step 5 of the proof of Proposition \ref{prop:completion_of_metric_space_exists}.
 \end{remark}
 
+\begin{theorem}
+	Let $a, b\in\mathbb R$ s.t. $a < b$, then there is a rational number $q\in\mathbb Q$ s.t. $q\in (a, b)$.
+\end{theorem}
+
+\begin{proof}[Proof \cite{421600,3434503}]
+	Since $\mathbb R$ has the Archimedean property, cf. Theorem \ref{thrm:R_Archimedean_property}, there exists an $N\in\mathbb N$ s.t. 
+	\begin{align}\label{eq:between_two_reals_rational}
+		N \cdot (b - a) > 1\Leftrightarrow Nb - Na > 1\Leftrightarrow Nb - 1 > Na.
+	\end{align} 
+	If $Nb\in\mathbb Z$, set $m := Nb - 1$, otherwise set $m := \floor{Nb} \in\mathbb Z$, and we have
+	$$Nb > m \geq Nb - 1 \overset{\tiny\eqref{eq:between_two_reals_rational}}{>} Na\Rightarrow b > \frac{m}{N} > a,$$ where $m/N\in\mathbb Q$.
+\end{proof}
+
+\begin{corollary}
+	Let $a, b\in\mathbb R$ s.t. $a < b$, then there are infinitely many rational numbers that are contained in $(a, b)$.
+\end{corollary}
+
+\begin{proof}
+	Let $q_1\in\mathbb Q$ be s.t. $a < q_1 < b$, then we can construct a $q_2\in\mathbb Q$ s.t. $a < q_1 < q_2 < b$, now repeat this procedure infinitely many times.
+\end{proof}
