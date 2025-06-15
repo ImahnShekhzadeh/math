@@ -1757,6 +1757,18 @@
 			Consider the discrete topological space $(X, \mathscr P(X))$, and note that for every member $U\in \mathscr P(X)$, $X\backslash U\subset X\in \mathscr P(X)$, and thus $X$ is both an open and a closed set. 
 		\end{remark}
 	
+		\begin{defn}\label{defn:comparison_of_topologies}
+			Let $\tau$ and $\tau'$ be topologies on $X$. Then we call $\tau'$ \textit{finer} than $\tau$ if $\tau\subset\tau'$, and we say that $\tau$ is \textit{coarser} than $\tau'$. In either case, we say that $\tau$ and $\tau'$ are \textit{comparable}, otherwise we say they are non-comparable.
+		\end{defn}
+		
+		\begin{remark}
+			The trivial topology on $X$ is the coarsest topology, and the discrete topology the finest on $X$. Thus, for a finite set $X$, the number of topologies $\tau$ on $X$ that we can define is finite, since $\mathscr P(X)$ is the \enquote{biggest} topology on $X$ that we can define, and $\abs{\mathscr P(X)} = 2^{\abs{X}}$.
+		\end{remark}
+		
+		\begin{remark}
+			An example of non-comparable topologies can be easily constructed: Let $X = \{a, b\}$, and consider $\tau_1 = \left\{\emptyset, \{a\}, X\right\}$ and $\tau_2 = \left\{\emptyset, \{b\}, X\right\}$, then these topologies are non-comparable.
+		\end{remark}
+	
 		Given a topological space, let us now look at constructing new topological spaces.
 	
 		\begin{theorem}[Subspace topology]
@@ -1879,18 +1891,6 @@
 	
 		\begin{remark}
 			The lower and upper limit topologies of $\mathbb R$ are not metrizable \cite{790629}.
-		\end{remark}
-
-		\begin{defn}\label{defn:comparison_of_topologies}
-			Let $\tau$ and $\tau'$ be topologies on $X$. Then we call $\tau'$ \textit{finer} than $\tau$ if $\tau\subset\tau'$, and we say that $\tau$ is \textit{coarser} than $\tau'$. In either case, we say that $\tau$ and $\tau'$ are \textit{comparable}, otherwise we say they are non-comparable.
-		\end{defn}
-		
-		\begin{remark}
-			The trivial topology on $X$ is the coarsest topology, and the discrete topology the finest on $X$.
-		\end{remark}
-	
-		\begin{remark}
-			An example of non-comparable topologies can be easily constructed: Let $X = \{a, b\}$, and consider $\tau_1 = \left\{\emptyset, \{a\}, X\right\}$ and $\tau_2 = \left\{\emptyset, \{b\}, X\right\}$, then these topologies are non-comparable.
 		\end{remark}
 	
 		\begin{theorem}\label{thrm:comp_topologies_bases}
