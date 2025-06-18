@@ -1791,7 +1791,7 @@
 			Finally, note that clearly, $\emptyset, S\in \tau_S$.
 		\end{proof}
 	
-		\begin{theorem}
+		\begin{theorem}\label{thrm:arbitrary_intersec_tops_top}
 			Let $I$ be a (finite, countable or uncountable) index set, then if $(X, \tau_i)$, $i\in I$, is a topological space, so is the intersection of the topologies, i.e. $\left(X, \cap_{i\in I}\tau_i\right)$ is a topological space.
 		\end{theorem}
 	
@@ -1802,15 +1802,29 @@
 			
 			Finally, note that $\emptyset, X\in \tau_i$ for all $i\in I$, and thus $\emptyset, X\in \bigcap_{i\in I}\tau_i$.
 		\end{proof}
+	
+		\begin{corollary}
+			Let $X$ be a set, $\mathscr S\subset \mathscr P(X)$ and $I$ an index set. Then if $(X, \tau_i)$ are topologic spaces, $i\in I$, containing $\mathscr S$, i.e. $\mathscr S\subset \tau_i$ for each $i\in I$, their intersection $\bigcap_{i\in I}\tau_i$ is a topology on $X$, denoted by $\tau(\mathscr S)$, which is the smallest topology on $X$ containing $\mathscr S$. Note that this holds even for $\mathscr S = \emptyset$, since $\emptyset$ is the subset of every set. Note that the intersection is guaranteed to be non-empty, since the discrete topology contains any $\mathscr S$. 
+		\end{corollary}
+	
+		This corollary motivates the following definition:
+		
+		\begin{defn}[Subbasis \cite{topology-singh}]
+			Let $(X, \tau)$ be a topological space, then a \textit{subbasis} for $\tau$ is a collection of subsets $\mathscr S\subset \mathscr P(X)$ s.t. $\tau = \tau(\mathscr S)$.
+		\end{defn}
 		
 		\begin{remark}
-			The union of topologies does not necessarily yield a topology again.
+			Let $(X, \tau)$ be a topological space, and $\mathscr S\subset\mathscr P(X)$ a subbasis for $\tau$, i.e. $\tau = \tau(\mathscr S)$, then $\mathscr S\subset \tau(\mathscr S)$, since $\tau(\mathscr S)$ is the smallest topology on $X$ containing $\mathscr S$. Hence, $\tau(\mathscr S)$ consists of $\emptyset$, $X$, all finite intersections of members of $\mathscr S$ and arbitrary unions of these finite intersections, and is thus completely determined by $\mathscr S$.
+		\end{remark}
+		
+		\begin{remark}
+			Theorem \ref{thrm:arbitrary_intersec_tops_top} motivates the following question: Is the union of topologies a topology again? The answer is: The union of topologies does not necessarily yield a topology again.
 		\end{remark}
 		
 		\begin{exmp}
 			Consider $X = \{1, 2, 3\}$, and $\tau_1 = \left\{\emptyset, \{1\}, \{2\}, \{1, 2\}, X\right\}$ and $\tau_2=\{\emptyset, {3}, X\}$, then both $(X, \tau_1)$ and $(X, \tau_2)$ are topological spaces, but $(X, \tau_1\cup\tau_2)$ is not, since $\tau_1\cup \tau_2 = \left\{ \emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, X \right\}$. Note that $\{1\}, \{3\}\in \tau_1\cup \tau_2$, but $\{1\}\cup \{3\}\notin \tau_1\cup\tau_2$.
 		\end{exmp}
-		
+				
 		\begin{defn}[Basis]
 			A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
 			\begin{align}
