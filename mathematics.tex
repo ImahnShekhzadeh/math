@@ -1877,7 +1877,9 @@
 		\begin{exmp}
 			Consider $X = \{1, 2, 3\}$, and $\tau_1 = \left\{\emptyset, \{1\}, \{2\}, \{1, 2\}, X\right\}$ and $\tau_2=\{\emptyset, {3}, X\}$, then both $(X, \tau_1)$ and $(X, \tau_2)$ are topological spaces, but $(X, \tau_1\cup\tau_2)$ is not, since $\tau_1\cup \tau_2 = \left\{ \emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, X \right\}$. Note that $\{1\}, \{3\}\in \tau_1\cup \tau_2$, but $\{1\}\cup \{3\}\notin \tau_1\cup\tau_2$.
 		\end{exmp}
-				
+		
+		Since the operations of union and intersection are both involved in the construction of a topology from a subbasis, an important simplification occurs if the open sets are constructed only by taking unions of members of $\mathscr S$; this situation motivates the following.
+		
 		\begin{defn}[Basis]
 			A \textit{basis} of a topology $\left(M, \tau\right)$ is a collection of open sets $\mathcal B$ such that for all $U\in \tau$ there exists an index set $I$ and corresponding $B_i\in \mathcal B$ s. t. 
 			\begin{align}
@@ -1888,10 +1890,20 @@
 		\begin{exmp}
 			Every topology is a basis for itself.
 		\end{exmp}
-	
+			
 		\begin{remark}
 			The empty set $\emptyset$ does not need to be contained in $\mathscr B$, since it is the union of an empty collection of sets in $\mathscr B$.
 		\end{remark}
+	
+		\begin{theorem}
+			A collection $\mathscr B$ of open subsets of a space $X$ is a basis iff for each open $U\subset X$ and each point $x\in U$, there is a $B\in\mathscr B$ s.t. $x\in B\subset U$.
+		\end{theorem}
+	
+		\begin{proof}
+			\enquote{$\Longrightarrow$} Let $\mathscr B$ be a basis, then there exists an index set $I$ s.t. an open $U\subset X$ can be written as $U = \bigcup_{i\in I}B_i$. Thus, for $x\in U$, there is an $i_0\in I$ s.t. $x\in B_{i_0}\subset U$.
+			
+			\enquote{$\Longleftarrow$} Let $U\subset X$ be open, and fix $x\in U$, then there is a $B_x\in \mathscr B$ s.t. $B_x\subset U$. We claim that $$U = \bigcup_{x'\in U}B_{x'}.$$ For this, note that $B_x\subset \bigcup_{x'\in U}B_{x'}$, and $B_x\subset U$ implies $\bigcup_{x'\in U}B_{x'}\subset U$. Thus, $U$ can be written as a union of a collection of members of $\mathscr B$.
+		\end{proof}
 	
 		Let us look at when a given collection $\mathscr B$ of subsets of $X$ can serve as a basis for a topology on $X$.
 		
