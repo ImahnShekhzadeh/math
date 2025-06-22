@@ -2187,7 +2187,7 @@
 			Mathematically, we can describe these two rectangles as $(1, 2) \times (1, 2)$ and $(1.5, 2.5) \times (1.5, 2.5)$, and we consider $X = Y = \mathbb R$ with the standard topology.
 		\end{remark}
 	
-		\begin{defn}[Product topology \cite{topology-singh}]
+		\begin{defn}[Product topology \cite{topology-singh}]\label{defn:product_topology}
 			Let $\mathscr B$ be defined as in Eq. \ref{eq:basis_product_topology}, then $\mathscr B$ fulfills the requirements of Theorem \ref{thrm:gen_top_by_coll_subsets}, and thus $\mathscr B$ generates a topology $\tau(\mathscr B)$ on $X\times Y$, called the \textit{product topology}. When $X \times Y$ is equipped with the product topology, it is also called the \textit{product space}; $X$ and $Y$ are called the \textit{coordinate spaces}. The maps
 			\begin{equation}
 				\begin{aligned}
@@ -2206,9 +2206,30 @@
 			Let $U\in \tau_X$, then $$p_X^{-1}(U) = \left\{(x, y)\in X\times Y \mid p_X((x, y))\in U\right\} = \left\{(x, y)\in X\times Y \mid x\in U\right\} = U\times Y,$$ and thus $p_X$ is continuous in the product topology on $X\times Y$, cf. Definition \ref{defn:continuity_topological_spaces}. Similarly, we can show the continuity of $p_Y$.
 			
 			Now suppose there is a topology $\mathscr T$ on $X\times Y$ s.t. both $p_X$ and $p_Y$ are continuous. Let $U\in \tau_X$ and $V\in\tau_Y$, then $p_X^{-1}(U) = U\times Y\in \mathscr T$, $p_Y^{-1}(V) = X\times V\in \mathscr T$, and thus
-			$$p_X^{-1}(U) \cap p_Y^{-1}(V) = (U\times Y)\cap (X\times V) = (U\cap X) \times (Y\cap V) = U\times V,$$ i.e. all basis elements of the product topology on $X\times Y$ are contained in $\mathscr T$ (note that $\mathscr T$ is a basis for itself, generating $\mathscr T$, cf. Remark \ref{remark:topology_generated_by_topology}), and thus by Theorem \ref{thrm:comp_topologies_bases}, $\mathscr T$ is finer than the product topology on $X\times Y$, i.e. the product topology is the smallest topology on which $p_X$ and $p_Y$ are continuous.
+			\begin{align}\label{eq:intersection_of_preimage_of_projs}
+				p_X^{-1}(U) \cap p_Y^{-1}(V) = (U\times Y)\cap (X\times V) = (U\cap X) \times (Y\cap V) = U\times V,
+			\end{align}
+			i.e. all basis elements of the product topology on $X\times Y$ are contained in $\mathscr T$ (note that $\mathscr T$ is a basis for itself, generating $\mathscr T$, cf. Remark \ref{remark:topology_generated_by_topology}), and thus by Theorem \ref{thrm:comp_topologies_bases}, $\mathscr T$ is finer than the product topology on $X\times Y$, i.e. the product topology is the smallest topology on which $p_X$ and $p_Y$ are continuous.
 			
 			Finally, note that $p_X$ and $p_Y$ are open maps. To see this, note that if $U\in\tau_X$ and $V\in\tau_Y$, then $U\times V$ is open in the product topology, and $p_X(U\times V) = U\in\tau_X$ and $p_Y(U\times V) = V\in\tau_Y$.
+		\end{proof}
+		
+		\begin{remark}
+			Define $\mathscr S := \left\{ p_X^{-1}(U) \mid U\in\tau_X \right\} \cup \left\{ p_Y^{-1}(V) \mid V\in\tau_Y \right\}$, then $\mathscr S$ is a subbasis for the product topology on $X\times Y$, since $p_X^{-1}(U) \cap p_Y^{-1}(V) = U\times V\in \mathscr B$, cf. Eq. \eqref{eq:intersection_of_preimage_of_projs} and \eqref{eq:basis_product_topology}.
+		\end{remark}
+	
+		If bases of the coordinate spaces are known, then we can construct a smaller basis for the product topology than in Eq. \eqref{eq:basis_product_topology}.
+		
+		\begin{theorem}
+			Let $\mathscr C$ be a basis for $\tau_X$, and $\mathscr D$ be a basis for $\tau_Y$, then
+			$$\mathscr B' := \left\{C\times D \mid C\in \mathscr C, D\in \mathscr D\right\}$$
+			is a basis for the product topology on $X\times Y$.
+		\end{theorem}
+		
+		\begin{proof}
+			By Definition \ref{defn:product_topology}, $\mathscr B = \{ U\times V \mid U\in\tau_X, V\in\tau_Y \}$ is a basis for the product topology on $X\times Y$. Let $U\times V\in \mathscr B$, i.e. $U\in\tau_X$ and $V\in\tau_Y$. Then by Theorem \ref{thrm:collection_of_subsets_basis}, for all $x\in U$ there is a $C_x\in \mathscr C$ s.t. $x\in C_x\subset U$, and for all $y\in V$ there is a $D_y\in\mathscr D$ s.t. $y\in D_y\subset V$. Thus, for all $U\times V\in \mathscr B$ and all $(x, y)\in U\times V$, there is $C_x\times D_y\in \mathscr B'$ s.t. $(x, y)\in C_x\times D_y\subset U\times V$.
+			
+			Conversely, if $C\times D\in \mathscr B'$, i.e. $C\in\mathscr C$ and $D\in\mathscr D$, then $C\times D\in\mathscr B$, and thus by Corollary \ref{corollary:equality_of_topologies}, $\mathscr B'$ generates the product topology on $X\times Y$.
 		\end{proof}
 		
 		\begin{defn}[Neighborhood \cite{topology-singh}]
