@@ -2220,7 +2220,7 @@
 	
 		If bases of the coordinate spaces are known, then we can construct a smaller basis for the product topology than in Eq. \eqref{eq:basis_product_topology}.
 		
-		\begin{theorem}
+		\begin{theorem}\label{thrm:basis_product_topology_coarser}
 			Let $\mathscr C$ be a basis for $\tau_X$, and $\mathscr D$ be a basis for $\tau_Y$, then
 			$$\mathscr B' := \left\{C\times D \mid C\in \mathscr C, D\in \mathscr D\right\}$$
 			is a basis for the product topology on $X\times Y$.
@@ -2232,13 +2232,49 @@
 			Conversely, if $C\times D\in \mathscr B'$, i.e. $C\in\mathscr C$ and $D\in\mathscr D$, then $C\times D\in\mathscr B$, and thus by Corollary \ref{corollary:equality_of_topologies}, $\mathscr B'$ generates the product topology on $X\times Y$.
 		\end{proof}
 	
-		\begin{remark}
-			Let $(X, \tau_X), (Y, \tau_Y)$ and $(Z, \tau_Z)$ be topological spaces. The operation of forming the product of topological spaces is commutative and associative, in the sense that there are obvious canonical homeomorphisms $f: X\times Y\to Y\times X, (x, y)\mapsto (y, x)$, where $X\times Y$ is equipped with the product topology on $X\times Y$, and $Y\times X$ is equipped with the product topology on $Y\times X$, and $g: \left(X\times Y\right)\times Z\to X\times (Y\times Z), ((x, y), z)\mapsto (x, (y, z))$, where $(X\times Y)\times Z$ is equipped with the product topology on $(X\times Y)\times Z$, and $X\times (Y\times Z)$ is equipped with the product topology on $X\times (Y\times Z)$.
+		\begin{remark}\label{remark:op_prod_top_spaces_comm_associat}
+			Let $(X, \tau_X), (Y, \tau_Y)$ and $(Z, \tau_Z)$ be topological spaces. The operation of forming the product of topological spaces is commutative, in the sense that there is an obvious canonical homeomorphism $$f: X\times Y\to Y\times X, (x, y)\mapsto (y, x),$$ where $X\times Y$ is equipped with the product topology on $X\times Y$, and $Y\times X$ is equipped with the product topology on $Y\times X$. 
+			
+			The operation of forming the product of topological spaces is also associative, in the sense that there is an obvious canonical homeomorphism $$g: \left(X\times Y\right)\times Z\to X\times (Y\times Z), ((x, y), z)\mapsto (x, (y, z)),$$ where $(X\times Y)\times Z$ is equipped with the product topology on $(X\times Y)\times Z$, and $X\times (Y\times Z)$ is equipped with the product topology on $X\times (Y\times Z)$.
 		\end{remark}
 		
 		\begin{proof}
-			content...
+			We use Theorem \ref{thrm:continuity_sub_basis} for the proof. 
+			
+			Clearly, $f$ and $g$ are bijective. $f$ is continuous, since a basis for the product topology on $Y\times X$ is the set $\{V\times U \mid V\in\tau_Y, U\in\tau_X \}$, and 
+			\begin{align*}
+				f^{-1}(V\times U) &= \{(x, y)\in X\times Y\mid f((x, y))\in V\times U\} \\ &= \{(x, y)\in X\times Y\mid (y, x)\in V\times U\} = U\times V,
+			\end{align*}
+			and $U\times V$ is a member of the basis for the product topology on $X\times Y$.
+			
+			$f^{-1}: Y\times X\to X\times Y$ is continuous, since a basis for the product topology on $X\times Y$ is $\{U\times V \mid U\in\tau_X, V\in\tau_Y \}$, and
+			\begin{align*}
+				\left(f^{-1}\right)^{-1}(U\times V) = f(U\times V) = \left\{f((u, v))\mid (u, v)\in U\times V\right\} = V\times U,
+			\end{align*}
+			and $V\times U$ is a member of the basis for the product topology on $Y\times X$.
+			Thus, $f$ is a homeomorphism.
+			
+			$g$ is continuous, since a basis for the product topology on $X\times (Y\times Z)$ is $\{ U\times (V\times W) \mid U\in\tau_X, V\in\tau_Y, W\in\tau_Z\}$, and
+			\begin{align*}
+				g^{-1}(U\times (V\times W)) &= \left\{ ((x, y), z) \in (X\times Y)\times Z \mid g((x, y), z) \in U\times(V\times W) \right\}
+				\\ &= \left\{ ((x, y), z) \in (X\times Y)\times Z \mid (x, (y, z)) \in U\times(V\times W) \right\}
+				\\ &= (U\times V)\times W,
+			\end{align*}
+			and $(U\times V)\times W$ is a member of the basis for the product topology on $(X\times Y)\times Z$.
+			
+			Similarly, we can show that $g^{-1}$ is continuous, and thus $g$ is a homeomorphism.
 		\end{proof}
+		
+		\begin{defn}[Product of topological spaces \cite{topology-singh}]
+			Define $I := \{1, \dots, n\}$, for some $n\in\mathbb N$, and let $(X, \tau_i)$ be topological spaces for all $i\in I$, then based on Remark \ref{remark:op_prod_top_spaces_comm_associat}, we can inductively define the product of topological spaces to be 
+			\begin{align}
+				\prod_{i=1}^{n}X_i = X_1 \times \dots\times X_n := (X_1\times \dots\times X_{n-1})\times X_n.
+			\end{align}
+		\end{defn}
+	
+		\begin{remark}
+			The results for the finite product of topological spaces follow by induction from the corresponding results for the product of two topological spaces. For example, if $(X, \tau_i)$ are topological spaces for all $i\in \{1, \dots, n\}$ for some $n\in\mathbb N$, and $\mathscr B_i$ is a basis for $\tau_i$, then Theorem \ref{thrm:basis_product_topology_coarser} implies that $\mathscr B := \left\{\prod_{i=1}^{n}U_i\mid U_i\in \mathscr B_i\right\}$ is a basis for the product topology on $\prod_{i=1}^{n}X_i$.
+		\end{remark}
 		
 		\begin{defn}[Neighborhood \cite{topology-singh}]
 			Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$.
