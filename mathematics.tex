@@ -832,6 +832,11 @@
 		$\varphi_n\in B_{r}[\varphi]$.¸
 	\end{proof}
 	
+	\begin{defn}[Diameter \cite{topology-singh}]\label{defn:diameter_metric_set}
+		Let $(X, d)$ be a metric space and $A\subset X$, then the \textit{diameter} of $A$ is defined as
+		$$\text{diam}(A) := \sup_{a, a'\in A}\{d(a, a')\}$$
+	\end{defn}
+	
 	\begin{defn}[Isometry]
 		Let $(X, d)$ and $(X', d')$ be metric spaces. Then $f: X \rightarrow Y$ is called a distance-preserving map (or \textit{isometry}) if
 		\begin{align}
@@ -2181,6 +2186,25 @@
 			The extended sequence converges to $\varphi$ wrt $d'$, and hence it also converges wrt $d$. The subsequence $(\varphi_n)_{n\in\mathbb N}$ of the extended sequence converges to $\psi$ wrt $d$. Hence, $\varphi = \psi$, and the $d'$-accumulation point $\varphi=\psi$ of $X\backslash U$ lies in $X\backslash U$, i.e. $X\backslash U$ is also $d'$-closed (by Theorem \ref{thm:closed_set_acc_point}). This in turn implies that $U$ is $d'$-open.
 			
 			We have shown that $d$ and $d'$ induce the same topology on $X$, and are hence equivalent.
+		\end{proof}
+	
+		\begin{theorem}\label{thrm:equivalent_metric_finite_diameter}
+			Let $(X, \tau)$ be a metrizable topological space, and $d$ a metric on $X$ inducing $\tau$. Then for each $\lambda > 0$ there exists a metric $d_{\lambda}$ on $X$ s.t. $d_{\lambda}$ is (topologically) equivalent to $d$ and $\text{diam}(X) \leq \lambda$ wrt $d_{\lambda}$ \cite{topology-singh}.
+		\end{theorem}
+	
+		\begin{proof}
+			For all $x, y\in X$, define $d_{\lambda}(x, y) := \min\{\lambda, d(x, y)\}$. Clearly, $d_{\lambda}$ is positive, and $$d_{\lambda}(x, y) = \min\{\lambda, d(x, y)\} = 0\Leftrightarrow d(x, y) = 0\Leftrightarrow x = y,$$ i.e. $d_{\lambda}$ is also definite.
+			Clearly, $d_{\lambda}$ is symmetric, to prove the triangle inequality, let $z\in X$, and note that
+			\begin{align*}
+				d_{\lambda}(x, z) &= \min\{\lambda, d(x, z)\} \leq \min\{ \lambda, d(x, y) + d(y, z) \} \\ &\leq \min\{\lambda, d(x, y)\} + \min\{\lambda, d(y, z)\} = d_{\lambda}(x, y) + d_{\lambda}(y, z).
+			\end{align*}
+			Thus, $d_{\lambda}$ is a metric on $X$, and clearly $\text{diam}(X)\leq\lambda$ wrt $d_{\lambda}$. 
+			
+			For all $x\in X$ and $\epsilon > 0$, we have 
+			$$B^{d}_{\epsilon}(x)  = \left\{y\in X\mid d(x, y) < \epsilon\right\} \subset \{y\in X\mid \min\{\lambda, d(x, y)\} < \epsilon\} = B_{\epsilon}^{d_{\lambda}}(x)$$
+			and for $\delta := \min\{\lambda, \epsilon\}$, we have
+			$$B^{d_{\lambda}}_{\delta}(x) = \left\{y\in X\mid \min\{\lambda, d(x, y)\} < \min\{\lambda, \epsilon\}\right\} \subset B^{d}_{\epsilon}(x),$$
+			since if $d_{\lambda}(x, y) = d(x, y)$, then $d(x, y) < \epsilon$, otherwise $d_{\lambda}(x, y) = \lambda$. In that case, if $\epsilon\leq \lambda$, we have $\min\{\lambda, \epsilon\} = \epsilon$, and thus there is no $y\in X$ fulfilling $\lambda < \epsilon$, i.e. $B_{\delta}^{d_{\lambda}}(x) = \{x\}\subset B_{\epsilon}^{d}(x)$. Otherwise, $\lambda < \epsilon$, but there is no $y\in X$ fulfilling $\lambda < \lambda$, i.e. $B_{\delta}^{d_{\lambda}}(x) = \{x\}\subset B_{\epsilon}^{d}(x)$. Thus, by Theorem \ref{thrm:topological_equivalence}, $d_{\lambda}$ is topologically equivalent to $d$.
 		\end{proof}
 				
 		Let us now look at what topological structure we can endow $X\times Y := \{ (x, y) \mid x\in X, y\in Y \}$ with if $(X, \tau_X)$ and $(Y, \tau_Y)$ are topological spaces.
