@@ -1742,9 +1742,9 @@
 				\item the union of any collection of members of $\tau$ is in $\tau$, 
 				\item the empty set $\emptyset$ and $X$ itself are in $\tau$.
 			\end{itemize}
-			A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. 
+			A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. We also say that members of $\tau$ are \textit{open in} $X$.
 		\end{defn} 
-	
+		
 		\begin{exmp}[Trivial topology]
 			For every set $X$, the trivial topology is defined as $\tau := \{\emptyset, X\}$.
 		\end{exmp}
@@ -2251,6 +2251,12 @@
 			Conversely, if $C\times D\in \mathscr B'$, i.e. $C\in\mathscr C$ and $D\in\mathscr D$, then $C\times D\in\mathscr B$, and thus by Corollary \ref{corollary:equality_of_topologies}, $\mathscr B'$ generates the product topology on $X\times Y$.
 		\end{proof}
 	
+		\begin{remark}
+			Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces, $A\subset X$ and $B\subset Y$. There are two ways in which we can define a topology on $A\times B$. First, notice that $A\times B\subset X\times Y$, and thus we can endow $A\times B$ with the subspace topology, cf. Theorem \ref{thrm:subspace_topology}. According to Theorem \ref{thrm:subspace_basis}, sets of the form $(A\times B) \cap (U\times V)$, where $U\in\tau_X$ and $V\in\tau_Y$, are members of the basis for this topology.
+			
+			Since $A\subset X$, $A$ is endowed with the subspace topology from $X$, similarly for $B\subset Y$, and thus $A\times B$ is the product topology of the subspace topologies on $A$ and $B$, where the basis members are of form $(A\cap U)\times (B\cap V)$ for $U\in\tau_X$ and $V\in\tau_Y$. Note that $(A\cap U)\times (B\cap V) = (A\times B)\cap (U\times V)$, and thus both topologies coincide.
+		\end{remark}
+	
 		\begin{remark}\label{remark:op_prod_top_spaces_comm_associat}
 			Let $(X, \tau_X), (Y, \tau_Y)$ and $(Z, \tau_Z)$ be topological spaces. The operation of forming the product of topological spaces is commutative, in the sense that there is an obvious canonical homeomorphism $$f: X\times Y\to Y\times X, (x, y)\mapsto (y, x),$$ where $X\times Y$ is equipped with the product topology on $X\times Y$, and $Y\times X$ is equipped with the product topology on $Y\times X$. 
 			
@@ -2376,9 +2382,8 @@
 		\end{proof}
 		
 		\begin{exmp}
-			Consider the function $f: [0, 2\pi)\to \mathbb S^1, t\mapsto e^{it}$, where $$\mathbb S^1 := \left\{e^{it} \mid t\in [0, 2\pi)\right\} = \left\{(x, y)\in\mathbb R^2 \mid x^2 + y^2  = 1\right\}$$ is the unit circle in $\mathbb R^2$. Let $[0, 2\pi)\subset\mathbb R$ and $\mathbb S^1\subset\mathbb R^2$ be equipped with the subspace topologies, cf. Theorem \ref{thrm:subspace_topology}, where the topology on $\mathbb R$ and $\mathbb R^2$ is the Euclidean topology.
+			Consider the function $f: [0, 2\pi)\to \mathbb S^1, t\mapsto e^{it}$, where $$\mathbb S^1 := \left\{e^{it} \mid t\in [0, 2\pi)\right\} = \left\{(x, y)\in\mathbb R^2 \mid x^2 + y^2  = 1\right\}$$ is the unit circle in $\mathbb R^2$. Let $[0, 2\pi)$ be equipped with the order topology, cf. Definition \ref{defn:order_topology}, and $\mathbb S^1\subset\mathbb R^2$ be equipped with the subspace topology, cf. Theorem \ref{thrm:subspace_topology}, where $\mathbb R^2$ is equipped with the Euclidean topology.
 		\end{exmp}
-	
 		
 		\begin{proof}
 			By Theorem \ref{thrm:subspace_basis}, the collection of all open arcs of $\mathbb S^1$ is a basis for the subspace topology on $\mathbb S^1$, since any open arc is the intersection of the full circle with an open ball. Figure \ref{fig:open_arc} visualizes this.
@@ -2389,10 +2394,20 @@
 				\label{fig:open_arc}
 			\end{figure}
 			
-			Let $G\subset \mathbb S^1$ be an open arc that does not contain $1\in \mathbb S^1$, then $f^{-1}(G) = (a, b)$, where $0 < a < b < 2\pi$. If $G$ does contain $1\in\mathbb S^1$, then $f^{-1}(G) = [0, a) \cup (b, 2\pi)$, where $0 < a < b < 2\pi$. Thus, regardless of whether $G$ contains $1$, $f^{-1}(G)$ is open in $[0, 2\pi)$ -- note that $f^{-1}(G)$ is open in $\mathbb R$ -- and thus $f$ is continuous by Theorem \ref{thrm:continuity_sub_basis}.
+			Let $G\subset \mathbb S^1$ be an open arc that does not contain $1\in \mathbb S^1$, then $f^{-1}(G) = (a, b)$, where $0 < a < b < 2\pi$. 
+			
+			If $G$ does contain $1\in\mathbb S^1$, then $f^{-1}(G) = [0, a) \cup (b, 2\pi)$, where $0 < a < b < 2\pi$. Thus, regardless of whether $G$ contains $1$, $f^{-1}(G)$ is open in $[0, 2\pi)$ -- note that $f^{-1}(G)$ is open in $\mathbb R$ -- and thus $f$ is continuous by Theorem \ref{thrm:continuity_sub_basis}.
+		\end{proof}
+	
+		\begin{theorem}\label{thrm:composition_continuous_functions}
+			Let $(X, \tau_X)$, $(Y, \tau_Y)$ and $(Z, \tau_Z)$ be topological spaces, and $f: X\to Y$, $g: Y\to Z$ be continuous, then $g\circ f: X\to Z$ is continuous as well.
+		\end{theorem}
+	
+		\begin{proof}
+			Let $W\in\tau_Z$, then $(g\circ f)^{-1}(W) = (f^{-1}\circ g^{-1})(W)$, and since $g^{-1}(W)\in \tau_Y$, this implies that $(f^{-1}\circ g^{-1})(W)\in\tau_X$.
 		\end{proof}
 				
-		\begin{defn}[Homeomorphism] A \textit{homeomorphism} between two topological spaces $X$ and $Y$ is an invertible function $f: X\rightarrow Y$ such that $f$ and $f^{-1}$ are continuous \cite[p. 33]{topology-singh}. 
+		\begin{defn}[Homeomorphism \cite{topology-singh}] A \textit{homeomorphism} between two topological spaces $X$ and $Y$ is an invertible function $f: X\rightarrow Y$ such that $f$ and $f^{-1}$ are continuous. 
 		\end{defn}
 		
 		\begin{exmp}
@@ -2418,6 +2433,14 @@
 			It is trivial to show that $f$ and $f^{-1}$ are inverses to each other. One can also easily show that $\norm{f^{-1}(x)}{2} = 1$; thus, $f^{-1}$ does indeed bring us to the unit ball $S^n$. 
 			To see that $f^{-1}$ is continuous, note that all components are continuous and thus, according to Lemma \ref{continuity_vector_components}, the function itself is continuous. 
 		\end{proof} 
+	
+		\begin{theorem}\label{thrm:composition_homeomorphisms}
+			Let $(X, \tau_X)$, $(Y, \tau_Y)$ and $(Z, \tau_Z)$ be topological spaces, and $f: X\to Y$, $g: Y\to Z$ be homeomorphisms, then $g\circ f: X\to Z$ is a homeomorphism.
+		\end{theorem}
+	
+		\begin{proof}
+			The composition of bijective functions is bijective again. From Theorem \ref{thrm:composition_continuous_functions}, we know that $g\circ f$ is continuous. To show the continuity of $(g\circ f)^{-1}: Z\to X$, note that if $U\in\tau_X$, then $(g\circ f)(U) = g(f(U))$, and since $f$ and $g$ are homeomorphisms, we have $f(U)\in \tau_Y$, and thus $g(f(U))\in\tau_Z$.
+		\end{proof}
 			
 	\newpage 
 	\section{Linear Functional Analysis}
