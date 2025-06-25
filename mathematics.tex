@@ -2324,6 +2324,40 @@
 		\begin{remark}
 			The results for the finite product of topological spaces follow by induction from the corresponding results for the product of two topological spaces. For example, if $(X, \tau_i)$ are topological spaces for all $i\in \{1, \dots, n\}$ for some $n\in\mathbb N$, and $\mathscr B_i$ is a basis for $\tau_i$, then Theorem \ref{thrm:basis_product_topology_coarser} implies that $\mathscr B := \left\{\prod_{i=1}^{n}U_i\mid U_i\in \mathscr B_i\right\}$ is a basis for the product topology on $\prod_{i=1}^{n}X_i$.
 		\end{remark}
+	
+		\begin{theorem}
+			For all $i\in\{1, \dots, n\}$, with $n\in\mathbb N$, let $(X_i, \tau_i)$ be metrizable topological spaces. Then $\prod_{i=1}^{n}X_i$ with the product topology on it is metrizable.
+		\end{theorem}
+	
+		\begin{proof}[Proof \cite{src:product_topology}]
+			First, we construct a metric on $X := \prod_{i=1}^{n}X_i$. Since each $X_i$ is a metrizable topological space, there is a metric $d_i$ on $X_i$ inducing the topology on $X_i$. Define
+			\begin{align}
+				d(x, y) := \max_{1\leq i\leq n}\{d_i(x_i, y_i)\}, \quad x, y\in X.
+			\end{align}
+			Note that $d$ is a metric on $X$: $d$ is positive, since $d_{i}(x_i, y_i) \geq 0$, and thus $d(x, y)\geq 0$ for all $x, y\in X$. Further,
+			$$d(x, y) = 0 \Leftrightarrow \forall i\in \{1, \dots, n\}: d_i(x_i, y_i) = 0 \Leftrightarrow \forall i\in \{1, \dots, n\}: x_i = y_i\Leftrightarrow x = y,$$
+			i.e. $d$ is definite. Clearly, $d$ is also symmetric. Finally, for all $x, y, z\in X$, we have
+			\begin{align*}
+				d(x, z) = &\max_{1\leq i\leq n}\{d_i(x_i, z_i)\} \leq \max_{1\leq i\leq n}\{d_i(x_i, 
+				y_i) + d_i(y_i, z_i)\} 
+				\\ \overset{\tiny\eqref{thrm:max_property}}{\leq} &\max_{1\leq i\leq n}\{d_i(x_i, y_i)\} + \max_{1\leq i\leq n}\{d_i(y_i, z_i)\} = d(x, y) + d(y, z).
+			\end{align*}		
+			We will now prove that the topology generated (induced) by $d$ is the product topology on $X$. 
+			
+			For all $i\in\{1, \dots, n\}$, choose open $U_i\subset X_i$, then $U := \prod_{i=1}^{n}U_i$ is a basis member of the product topology on $X$. Since the $U_i$ are open, by Theorem \ref{thrm:collection_of_subsets_basis}, for all $u_i\in U_i$ there is an open ball $B_{\epsilon_i}(u_i)$ that is contained in $U_i$. Define $\epsilon := \min_{1\leq i\leq n}\epsilon_i > 0$, then for all $u\in U$ we have 
+			\begin{align*}
+				B_{\epsilon}(u) &= \left\{x\in X \mid d(x, u) < \epsilon \right\} = \left\{x\in X\mid \max_{1\leq i\leq n}\{ d_i(x_i, u_i) \} < \min_{1\leq i\leq n}\{\epsilon_i\} \right\} \\ &\overset{(\star)}{\subset} \prod_{i=1}^{n}B_{\epsilon_i}(u_i) \subset \prod_{i=1}^{n}U_i = U,
+			\end{align*}
+			where $(\star)$ holds, since $x\in B_{\epsilon}(u)$ implies that for all $i\in\{1, \dots, n\}$,
+			$$d_i(x_i, u_i) \leq \max_{1\leq i\leq n}\{ d_i(x_i, u_i) \} < \epsilon \leq \epsilon_i,$$
+			and thus for all $i$, $x_i\in B_{\epsilon_i}(u_i)$.
+			
+			Conversely, consider a basis member $B_{\epsilon}(x)$ of the induced topology by $d$ for some $x\in X$ and $\epsilon > 0$. Let $y\in \prod_{i=1}^{n}B_{\epsilon}(x_i)$, then for all $i$, 
+			$$d_i(x_i, y_i) < \epsilon \Rightarrow \max_{1\leq i\leq n}\{d_i(x_i, y_i)\} < \epsilon \Rightarrow y\in B_{\epsilon}(x),$$
+			i.e. $x\in \prod_{i=1}^{n}B_{\epsilon}(x_i)\subset B_{\epsilon}(x)$, where $\prod_{i=1}^{n}B_{\epsilon}(x_i)$ is a basis member of the product topology on $X$, since each $B_{\epsilon}(x_i)$ is a basis member of $X_i$. 
+			
+			By Corollary \ref{corollary:equality_of_topologies}, the induced topology by $d$ on $X$ and the product topology on $X$ coincide.
+		\end{proof}
 		
 		\begin{defn}[Neighborhood \cite{topology-singh}]
 			Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$.
@@ -3091,10 +3125,19 @@
 			\begin{align}
 				\frac{dP}{dQ} = 1\Rightarrow P = Q.
 			\end{align}
-			
 		\end{enumerate}
 	\end{proof}
 
+	\begin{theorem}\label{thrm:max_property}
+		For all $a, b, c, d\in\mathbb R$, we have 
+		\begin{align}\label{eq:max_property}
+			\max\{a + b, c + d\} \leq \max\{a, c\} + \max\{b, d\}.
+		\end{align}
+	\end{theorem}
+	
+	\begin{proof}[Proof \cite{1975962}]
+		We have $a + b \leq \max\{a, c\} + \max\{b, d\}$ and $c + d \leq \max\{a, c\} + \max\{b, d\}$, from which Eq. \eqref{eq:max_property} follows.
+	\end{proof}
 
 \appendix 
 \include{appendix_A.tex}
