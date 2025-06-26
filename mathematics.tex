@@ -2281,6 +2281,21 @@
 			Since $A\subset X$, $A$ is endowed with the subspace topology from $X$, similarly for $B\subset Y$, and thus $A\times B$ is the product topology of the subspace topologies on $A$ and $B$, where the basis members are of form $(A\cap U)\times (B\cap V)$ for $U\in\tau_X$ and $V\in\tau_Y$. Note that $(A\cap U)\times (B\cap V) = (A\times B)\cap (U\times V)$, and thus both topologies coincide.
 		\end{remark}
 	
+		\begin{theorem}
+			Let $X, Y, Z$ be topological spaces. A function $f: Z\to X\times Y$ is continuous iff the compositions $p_X\circ f: Z\to X$ and $p_Y\circ f: Z\to Y$ are continuous.
+		\end{theorem}
+	
+		\begin{proof}
+			\enquote{$\Longrightarrow$} If $f$ is continuous, then $p_X\circ f$ and $p_Y\circ f$ are continuous, since they are the composition of continuous functions.
+			
+			\enquote{$\Longleftarrow$} Let $p_X\circ f$ and $p_Y\circ f$ be continuous. Let $U\subset X$ and $V\subset Y$ be open, then we want to show that $f^{-1}(U\times V) = \{z\in Z\mid f(z)\in U\times V\}$ is open in $Z$. For this, note that $$\left(p_X\circ f\right)^{-1}(U) \cap \left(p_Y\circ f\right)^{-1}(V) = \{z\in Z\mid (p_X\circ f)(z) \in U\} \cap \{z\in Z\mid (p_Y\circ f)(z)\in V\}$$ and
+			\begin{align*}
+				z\in f^{-1}(U\times V) &\Leftrightarrow f(z)\in U\times V \Leftrightarrow (p_X\circ f)(z) \in U \wedge (p_Y\circ f)(z)\in V
+				\\ &\Leftrightarrow z\in (p_X\circ f)^{-1}(U)\cap (p_Y\circ f)^{-1}(V),
+			\end{align*}
+			i.e. $f^{-1}(U\times V) = (p_X\circ f)^{-1}(U)\cap (p_Y\circ f)^{-1}(V)$, and since $p_X\circ f$ and $p_Y\circ f$ are continuous by assumption, $(p_X\circ f)^{-1}(U)$ and $(p_Y\circ f)^{-1}(V)$ are open in $Z$, and so is their intersection.
+		\end{proof}
+	
 		\begin{remark}\label{remark:op_prod_top_spaces_comm_associat}
 			Let $(X, \tau_X), (Y, \tau_Y)$ and $(Z, \tau_Z)$ be topological spaces. The operation of forming the product of topological spaces is commutative, in the sense that there is an obvious canonical homeomorphism $$f: X\times Y\to Y\times X, (x, y)\mapsto (y, x),$$ where $X\times Y$ is equipped with the product topology on $X\times Y$, and $Y\times X$ is equipped with the product topology on $Y\times X$. 
 			
