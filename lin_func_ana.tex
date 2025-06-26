@@ -1,0 +1,100 @@
+\section{Linear Functional Analysis}
+
+\subsection{Bounded Linear Operators}
+
+Let us start by defining the notions of \textit{linearity} and \textit{boundedness} of operators (\mbox{functionals}). 
+
+\begin{defn}\label{defn:linearity_operator}
+	Let $X$, $Y$ be normed linear spaces. Then an operator 
+	$A:X\to Y$ is called \textit{linear} if 
+	\begin{align}
+		A(\alpha \varphi + \beta \psi) = \alpha A(\varphi) + \beta A(\psi) \quad \forall \varphi, \psi\in X, \forall \alpha, \beta\in \mathbb K.
+	\end{align}
+\end{defn}
+
+\begin{theorem}
+	A linear operator $A: X\to Y$ from a normed linear space $(X, \norm{\cdot}{X})$ into another normed linear space $(Y, \norm{\cdot}{Y})$ is continuous on $X$ iff it is continuous at a single point in $X$.
+\end{theorem}
+
+\begin{proof}
+	\enquote{$\Longrightarrow$} By definition. 
+	
+	\enquote{$\Longleftarrow$} Let $A$ be continuous at $\varphi_0\in X$, and let $\seq[\varphi_n]\subset X$ converge to $\varphi\in X$ wrt $\norm{\cdot}{X}$, then
+	\begin{align}
+		A(\varphi_n) = A(\varphi_n + \varphi_0 - \varphi) - A(\varphi_0 - \varphi) \overset{n\to\infty}{\longrightarrow} A(\varphi)
+	\end{align} 
+	wrt $\norm{\cdot}{Y}$.
+\end{proof}
+
+\begin{defn}\label{defn:boundedness_operator}
+	Let $\left(X, \norm{\cdot}{X}\right)$ and $(Y, \norm{\cdot}{Y})$ be normed linear spaces. Then an operator $A: X\to Y$ is called \textit{bounded} if there is a constant $C(A) > 0$ s.t. 
+	\begin{align}
+		\norm{A\varphi}{Y} \leq C \norm{\varphi}{X} \quad\forall \varphi\in X.
+	\end{align}
+	Any such constant $C$ is called an \textit{upper bound} for $A$.
+\end{defn}
+
+\begin{theorem}
+	A linear operator $A: X\to Y$ between normed spaces $(X, \norm{\cdot}{X})$ and $(Y, \norm{\cdot}{Y})$ is bounded iff the operator norm
+	\begin{align}
+		\norm{A}{} := \sup_{\norm{\varphi}{X} = 1}\norm{A\varphi}{Y} = \sup_{\varphi\in X\backslash \{0\}}\frac{\norm{A\varphi}{Y}}{\norm{\varphi}{X}}
+	\end{align}
+	on the linear space $\mathcal L(X, Y)$ of all bounded linear operators between the two normed spaces $(X, \norm{\cdot}{X})$ and $(Y, \norm{\cdot}{Y})$ is finite, i.e. 
+	\begin{align}
+		\norm{A}{} < \infty. 
+	\end{align} 
+	The operator norm is the smallest upper bound for $A$.
+\end{theorem}
+
+\begin{proof}
+	First, let us prove that the operator norm does indeed define a norm on $\mathcal L(X, Y)$. Note that the sum of two operators $A, B\in\mathcal L(X, Y)$ is defined pointwise, i.e. for $\varphi\in X$: $\left(A + B\right)(\varphi) := A\varphi + B\varphi$. Similarly, scalar multiplication is defined for $\alpha \in \mathbb K$ as $\left(\alpha A\right)(\varphi) := \alpha A\varphi$.
+	
+	The positivity, definiteness and homogeneity of $\norm{A}{}$ are trivial to show. For the triangle equality, note that for any $A, B\in\mathcal L(X, Y)$, we have
+	\begin{align}
+		\norm{A + B}{} &= \sup_{\norm{\varphi}{X} = 1}\norm{\left(A + B\right)(\varphi)}{Y} = \sup_{\norm{\varphi}{X} = 1}\norm{A\varphi + B\varphi}{Y}
+		\\ &\leq \sup_{\norm{\varphi}{X} = 1} \left\{\norm{A\varphi}{Y} + \norm{B\varphi}{Y}\right\} 
+		\\ &\leq \sup_{\norm{\varphi}{X} = 1}\{ \norm{A\varphi}{Y} \} + \sup_{\norm{\varphi}{X} = 1}\{ \norm{B\varphi}{Y} \} 
+		\\ &= \norm{A}{} + \norm{B}{}.
+	\end{align}
+	
+	Now to the statement $A$ bounded iff $\norm{A}{} < \infty$.
+	
+	\enquote{$\Longrightarrow$} Let $A$ be upper bounded with bound $C > 0$, then
+	\begin{align}
+		\norm{A}{} = \sup_{\norm{\varphi}{X} = 1}\norm{A\varphi}{Y} \leq C < \infty.
+	\end{align}
+	This also shows that $\norm{A}{}$ is the smallest upper bound for $A$.
+	\\
+	
+	\enquote{$\Longleftarrow$} We have 
+	\begin{align}
+		\norm{A}{} \norm{\varphi}{X} = \sup_{\varphi\in X\backslash \{0\}}\frac{\norm{A\varphi}{Y}}{\norm{\varphi}{X}} \norm{\varphi}{X} = \sup_{\varphi\in X\backslash \{0\}}\norm{A\varphi}{Y} \geq \norm{A\varphi}{Y},
+	\end{align}
+	which shows that $A$ is bounded with upper bound $C = \norm{A}{} < \infty$ (note that for $v = 0$, there is nothing to show).
+\end{proof}
+
+\begin{theorem}\label{thrm:continuous-operator-bounded}
+	A linear operator $A:X\to Y$ for normed linear spaces $\left(X, \norm{\cdot}{X}\right)$ and $\left( Y, \norm{\cdot}{Y}\right)$ is continuous iff it is bounded.
+\end{theorem}
+
+\begin{proof}
+	\enquote{$\Longleftarrow$} Since $A$ is bounded, by definition, we know that for all $\varphi\in X$, there is an upper bound $C > 0$ s.t. 
+	\begin{align}
+		\norm{A\varphi}{Y} \leq C\cdot \norm{\varphi}{X}.
+	\end{align}
+	For an arbitrary $\epsilon > 0$, choose $\delta := \epsilon/C$, then for $\norm{\varphi - \psi}{X} < \delta = \epsilon/C$ (where $\psi\in X$ is arbitary) we have because of the linearity of $A$
+	\begin{align}
+		\norm{A\varphi - A\psi}{Y} = \norm{A(\varphi - \psi)}{Y} \leq C\norm{\varphi - \psi}{X} < \epsilon,
+	\end{align}
+	which proves the continuity of $A$, cf. Def. \ref{defn:continuity} \cite{556667}.
+	\\
+	
+	\enquote{$\Longrightarrow$} Let $A$ be continuous on $X$. Then by Theorem \ref{thrm:preimages_continuous_functions}, we know that $A^{-1}\left(B^{Y}_1(0)\right)$ is open, since $B^{Y}_{1}(0)$ is open. By the linearity of $A$, $0\in A^{-1}\left(B^{Y}_1(0)\right)$, since \\ $A(0) = 0 \in B_1^{Y}(0)$. This means that there is an $r > 0$ s.t. $B^{V}_{r}(0) \subset A^{-1}\left(B^{Y}_1(0)\right)$, i.e. the image of $B^{V}_{r}(0)$ is contained in $B^{Y}_{1}(0)$.
+	
+	Now, for any $a > 1$, choose $C := a/r$, and we will show that $C$ is an upper bound for $A$. For $\varphi\in X\backslash \{0\}$ (for $\varphi =0$, there is nothing to show), note that $$\norm{\frac{r}{a\norm{\varphi}{X}}\varphi}{X} = \frac{r}{a} < r,$$ i.e. 
+	\begin{align}
+		\frac{r}{a\norm{\varphi}{X}}\varphi \in B_{r}^{V}(0) &\Rightarrow A\left(\frac{r}{a\norm{\varphi}{X}}\varphi\right) = \frac{r}{a\norm{\varphi}{X}}A\varphi\in B^{Y}_{1}(0) 
+		\\[6pt] &\Rightarrow \norm{\frac{r}{a\norm{\varphi}{X}}A\varphi}{Y} < 1 \Rightarrow \norm{A\varphi}{Y} \leq \frac{a}{r}\norm{\varphi}{X} = C\norm{\varphi}{X},
+	\end{align}
+	which completes the proof \cite[p. 2]{src:mit_lec}.
+\end{proof}

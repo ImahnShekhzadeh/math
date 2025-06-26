@@ -1,0 +1,85 @@
+\section{Miscellaneous}
+
+\begin{lemma}[Chain rule for KL-divergences]
+	Let $p(x, y)$ and $q(x, y)$ be two arbitrary PDF's. Then the following hods:
+	
+	\begin{align}
+		D_{\text{KL}}(p(x, y) \vert\vert q(x, y)) = D_{\text{KL}}(p(x)\vert\vert q(x)) + D_{\text{KL}}(p(y\vert x) \vert\vert q(y\vert x))
+	\end{align}
+	
+	\begin{proof}
+		Brute-force calculation yields:
+		\begin{align}
+			D_{\text{KL}}(p(x, y) \vert\vert q(x, y)) &= \int\int p(x, y)\log\frac{p(x, y)}{q(x, y)}d\lambda(x)d\lambda(y)
+			\\[4pt] &= \int\int p(x, y)\log\frac{p(x)p(y\vert x)}{q(x)q(y\vert x)}d\lambda(x)d\lambda(y)
+			\\[4pt] &= \int\int p(x, y)\log\frac{p(x)}{q(x)}d\lambda(x)d\lambda(y) + \int\int p(x, y)\log\frac{p(y\vert x)}{q(y\vert x)}d\lambda(x)d\lambda(y)
+			\\[4pt] &= D_{\text{KL}}(p(x) \vert\vert q(x)) + \int p(x)d\lambda(x)\int p(y\vert x)\log\frac{p(y\vert x)}{q(y\vert x)}d\lambda(y)
+			\\[4pt] &= D_{\text{KL}}(p(x) \vert\vert q(x)) + D_{\text{KL}}(p(y\vert x) \vert\vert q(y\vert x))
+		\end{align}
+	\end{proof}
+\end{lemma}
+
+\begin{defn}[Mutual information]
+	Let $(X, Y)\sim P_{\left(X, Y\right)}\in \mathcal P(\mathcal X\times \mathcal Y)$, where $\mathcal P(\mathcal X\times \mathcal Y)$ is the space of all probability measures over the space $\mathcal X\times \mathcal Y$. The mutual information between the random variables $X$ and $Y$ is now defined as 
+	\cite[Def.~10.1]{ece_ece_5630_lectures10}:
+	
+	\begin{align}
+		I(X; Y) := D_{\text{KL}}\left(P_{(X, Y)} \vert\vert P_{X} \otimes P_{Y}\right),
+	\end{align}
+	
+	\noindent where $P_{X}$ and $P_{Y}$ are the marginal measures of the coupling measure $P_{(X, Y)}$ and $P_{X}\otimes P_{Y}$ is the induced \textbf{product measure}.
+\end{defn}
+
+\begin{defn}[Divergence]
+	Let $p$ and $q$ be two probability distributions, then a divergence $D$ must satisfy:~$D(p\vert\vert q) \geq 0$ $\forall p,q$ and $D(p\vert\vert q) = 0 \Leftrightarrow p = q$ a.e. Note that the triangle inequality and the symmetry property need not be satisfied in general.
+\end{defn}
+
+\begin{exmp}[$f$-Divergence]
+	Let $P$ and $Q$ be two probability measures defined on the $\sigma$-algebra over a space $\Omega$ such that $P \ll Q$, i.e.~$P$ is absolutely continuous wrt $Q$. Then, for a convex function $f:[0, \infty)\rightarrow \mathbb R$ s.t.
+	
+	\begin{enumerate}[label=(\roman*)]
+		\item $f(1) = 0$, 
+		\item $f$ is strictly convex at $x = 1$,
+	\end{enumerate}
+	
+	\noindent the $f$-divergence is now defined as \cite{ece_ece_5630_lectures6}, 
+	\begin{align}\label{eq:def__f_divergence}
+		D_{f}(P\vert\vert Q) := \int_{\Omega} f\left( \frac{dP}{dQ} \right)dQ, 
+	\end{align}
+	where $dP/dQ$ is the Radon-Nikodym derivative.
+\end{exmp}
+
+\begin{proof}
+	\begin{enumerate}
+		\item \textbf{Non-negativity}:~We know that 
+		\begin{align}
+			\mathbb E_{Q}\left[ \frac{dP}{dQ} \right] = \int_{\Omega} \frac{dP}{dQ} dQ = 1.
+		\end{align}
+		
+		Since $f$ is a convex function, by Jensen's inequality,
+		\begin{align}
+			0 = f(1) = f\left(\mathbb E_{Q}\left[ \frac{dP}{dQ} \right]\right) \leq \mathbb E_{Q}\left[ f\left( \frac{dP}{dQ} \right) \right] = \int_{\Omega} f\left( \frac{dP}{dQ} \right) dQ \overset{\scriptsize\eqref{eq:def__f_divergence}}{=} D_{f}(P\vert\vert Q).
+		\end{align}
+		
+		\item \textbf{Zero iff equal}:~If $P = Q$ a.e., then $dP / dQ = 1$ a.e., and hence
+		\begin{align}
+			D_{f}(P\vert\vert Q) = \int_{\Omega} f(1)dQ = \int_{\Omega} 0dQ = 0.
+		\end{align}
+		
+		Conversely, if $D_{f}(P\vert\vert Q) = 0$, since $f$ is strictly convex at $1$ and convex everywhere else, this implies that the only minimum point of $f$ is at $f(1) = 0$. Therefore, the integrand of Eq.~\eqref{eq:def__f_divergence}, i.e.~$f\left(\frac{dP}{dQ}\right)$, must be $0$ a.e., implying that 
+		\begin{align}
+			\frac{dP}{dQ} = 1\Rightarrow P = Q.
+		\end{align}
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}\label{thrm:max_property}
+	For all $a, b, c, d\in\mathbb R$, we have 
+	\begin{align}\label{eq:max_property}
+		\max\{a + b, c + d\} \leq \max\{a, c\} + \max\{b, d\}.
+	\end{align}
+\end{theorem}
+
+\begin{proof}[Proof \cite{1975962}]
+	We have $a + b \leq \max\{a, c\} + \max\{b, d\}$ and $c + d \leq \max\{a, c\} + \max\{b, d\}$, from which Eq. \eqref{eq:max_property} follows.
+\end{proof}

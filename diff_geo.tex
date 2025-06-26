@@ -1,0 +1,38 @@
+\section{Differential Geometry}
+\begin{samepage}
+	\begin{defn}[Smooth Atlas \cite{Lindemann-lec1}]
+		Let $M$ be a second countable Hausdorff topological space. An \textit{$n$-dimensional smooth atlas on $M$}  is a collection of maps
+		\begin{align*}
+			\mathcal A = \left\{\left(\varphi_i, U_i\right)\mid i\in I\right\}, \quad \varphi_i: U_i \rightarrow \varphi_i(U_i) \subset \mathbb R^n
+		\end{align*}
+		such that all $U_i \subset M$ are open, all $\varphi_i$ are homeomorphisms, $I$ is an index set and 
+		\begin{itemize}
+			\item $\{U_i \mid i\in I\}$ is an open covering of $M$, 
+			\item $\varphi_i \circ \varphi_j^{-1}: \varphi_j(U_i \cap U_j) \rightarrow \varphi_i(U_i \cap U_j)$ are smooth $\forall i$, $j \in I$. 
+		\end{itemize}
+		The tuples $(\varphi_i, U_i)$, $i\in I$, are so-called \textit{charts} on $M$, the maps $\varphi_i\circ \varphi_j^{-1}$ are called \textit{transition maps} or \textit{changes of coordinates} and $n$ is the \textit{dimension} of $M$.
+	\end{defn}
+\end{samepage}
+
+\begin{remark}
+	To see why the domain of the transition maps $\varphi_i \circ \varphi_j^{-1}$ is $\varphi_j\left(U_i \cap U_j\right)$, note that the expression $\varphi_i\left(\varphi_j^{-1}\left(x\right)\right)$ only makes sense if 
+	\begin{align*}
+		\left(x\in \varphi_j(U_j)\right) \wedge  \left(\varphi_j^{-1}\left(x\right)\in U_i\right) \Rightarrow \left(x\in \varphi_j(U_j)\right) \wedge \left(x\in \varphi_j\left(U_i\right)\right) \Rightarrow x\in \varphi_j(U_j \cap U_i). 
+	\end{align*}
+	Similarly, we can convince ourselves that the codomain of the transition maps $\varphi_i\circ\varphi_j^{-1}$ is given by $\varphi_i(U_i\cap U_j)$. Since $x\in \varphi_j(U_j)$, it follows that $\varphi_j^{-1}(x)\in U_j$. In addition, due to the domain of the homeomorphism $\varphi_i$, it must hold that $\varphi_j^{-1}(x) \in U_i$. Thus: 
+	\begin{align*}
+		\left(\varphi_j^{-1}(x)\in U_j\right) &\wedge \left(\varphi_j^{-1}(x) \in U_i\right) 
+		\\
+		\Rightarrow 			\left(\varphi_i(\varphi_j^{-1}(x))\in \varphi_i(U_j)\right) &\wedge \left(\varphi_i(\varphi_j^{-1}(x))\in \varphi_i(U_i)\right) 
+		\\ 
+		\Rightarrow \varphi_i\left(\varphi_j^{-1}(x)\right) &\in \varphi_i\left(U_i\cap U_j\right). 
+	\end{align*}
+\end{remark}
+
+\begin{defn}[Equivalence of Atlases]
+	Let $M$ be a second countable Hausdorff topological space. Two atlases $\mathcal A$ and $\mathcal B$ on $M$ are called \textit{equivalent} if $\mathcal A\cup \mathcal B$ is an atlas on $M$.  
+\end{defn}
+
+\begin{remark}
+	To see that not all atlases are equivalent to each other, consider $M = \mathbb R$ (which is a second countable Hausdorff topological space). Consider the atlases $\mathcal A = \{ (\varphi, M) \}$ with $\varphi: M\rightarrow M$, $x\mapsto x$ and $\mathcal B = \{(\psi, M)\}$ with $\psi: M\rightarrow M$, $x\mapsto x^3$. The atlases are not equivalent, since $\varphi\circ \psi^{-1}: M \rightarrow M$, $x\mapsto \sqrt[3]{x}$ is not smooth (the derivative is not continuous). 
+\end{remark}

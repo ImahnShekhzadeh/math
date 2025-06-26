@@ -1,0 +1,191 @@
+\section{Set Theory}
+\begin{defn}[Binary Relation \cite{binary_relations}]
+	A \textit{binary relation} over a set $X$ is some relation $R$ where for all $x$, $y\in X$ the statement $xRy$ is either true or false. 
+\end{defn}
+
+\begin{defn}[Equivalence Relation and Class \cite{equivalence_relation}]\label{defn:equivalence_relation}
+	An \textit{equivalence relation} on a set $X$ is a binary relation $\sim$ with the following properties $\forall x$, $y$, $z \in X$: 
+	\begin{itemize}
+		\item \textbf{reflexivity}: $x\sim x$, 
+		\item \textbf{symmetry}: $x \sim y\Leftrightarrow y\sim x$, 
+		\item  \textbf{transitivity}: $\left(x\sim y\right) \wedge \left(y\sim z\right)\Rightarrow x\sim z$.  
+	\end{itemize}
+\end{defn}
+
+\begin{defn}[Equivalence Class]
+	Let $\sim$ be an equivalence relation on $X$. Then the \textit{equivalence class} of an element $x\in X$ is defined as 
+	\begin{align}
+		\left[x\right] := \left\{y\in X \mid x\sim y \right\} = \left\{ y\in X \mid y\sim x \right\} \subset X. 
+	\end{align}
+	
+	The set of all equivalences classes in $X$ wrt an equivalence relation $\sim$ is denoted by $X/\sim$. Note that $X/\sim\ \subset P(X)$, where $\mathcal P(X)$ denotes the power set of $X$ \cite{src:quotient_set_X_by_equivalence_relation}. The surjective map $f: X\rightarrow X/\sim, x\mapsto [x]$ is called the \textit{canoninal surjection}.
+\end{defn}
+
+\begin{theorem}\label{thrm:characterization_equivalence_classes}
+	Let $\sim$ be an equivalence relation on $X$. For any $x, y\in X$, it holds that $[x] = [y]$ iff $x\sim y$.
+\end{theorem}
+
+\begin{proof}
+	\enquote{$\Longrightarrow$} Since $x\in[x] = [y]$ we have $x\sim y$.
+	\\ \\
+	\enquote{$\Longleftarrow$} Let $x\sim y$ for arbitrary $x, y\in X$ hold, and consider $x'\in [x]$, i.e. $x'\sim x$. By transitivity, we have $x' \sim y$, i.e. $[x] \subset [y]$. Similarly, we show $[y]\subset [x]$, and hence $[x] = [y]$.
+\end{proof}
+
+\begin{theorem}
+	Let $\sim$ be an equivalence relation on $X$. Then for $x, y\in X$, we either have $[x] \cap [y] = \emptyset$ or $[x] = [y]$.
+\end{theorem}
+
+\begin{proof}
+	We know that the statement $x\sim y$ is either true or false. If it is true, then by Theorem \ref{thrm:characterization_equivalence_classes}, $[x] = [y]$. If $x\not\sim y$, then no $x'\in [x] = \{z\in X\mid x\sim z\}$ can lie in $[y] = \{z'\in X\mid x\sim z'\}$ (and vice versa), because otherwise, by transitivity, $x\sim y$, which we said is false. Hence, $[x] \cap [y] = \emptyset$.
+\end{proof}
+
+\begin{defn}
+	Every element of an equivalence class characterizes it, and can be used to \textit{represent} it. Such a chosen element is called a \textit{representative}.
+\end{defn}
+
+\begin{defn}[Partially Ordered Set \cite{kuratowski_zorn_lemma}]\label{partially_ordered_set}
+	A \textit{partially ordered set}  $\left(X, \leq\right)$ is a set $X$, equipped with a binary relation $\leq$, that satisfies the following properties $\forall x$, $y$, $z\in X$:
+	\begin{itemize}
+		\item \textbf{reflexivity}: $x\leq x$, 
+		\item \textbf{antisymmetry}: $\left(x\leq y\right) \wedge \left(y\leq x\right) \Rightarrow x = y$, 
+		\item \textbf{transitivity}: $\left(x\leq y\right) \wedge \left(y\leq z\right)\Rightarrow x\leq z$. 
+	\end{itemize}
+\end{defn}
+
+\begin{defn}[Incomparability]
+	In Definition \ref{partially_ordered_set}, the phrasing \enquote{partially ordered} is used to emphasize that there might exist elements $x$, $y\in X$ s.t. both $x\leq y$ and $y\leq x$ are wrong. These pairs are called \textit{incomparable}. If either $x\leq y$ or $y \leq x$ is true, then we say that the pair is \textit{comparable}. 
+\end{defn}
+
+\begin{exmp}
+	Consider $X := \left\{\{1\}, \{2\}, \{1, 2\}\right\}$ with $\subset$ as partial ordering. Obviously, the elements $\{1\}$ and $\{2\}$ are incomparable. 
+\end{exmp}
+
+\begin{defn}[Chain, Upper Bound, Maximal Element]
+	For preparing the Kuratowski-Zorn lemma, the following definitions come in handy: 
+	\begin{enumerate}[label=\alph*)]
+		\item A \textit{chain} $C$ is a partially ordered set where every pair of elements in $C$ is comparable.\ One might also say that $C$ is a \textit{totally ordered set}. 
+		\item An \textit{upper bound} (if existent)  of a subset $S\subset X$, where $X$ is a partially ordered set, is an element $u\in X$ such that 
+		\begin{align}
+			s \leq u \ \forall s\in S. 
+		\end{align}
+		Since $S\subset X$, $S$ itself is a partially ordered set. 
+		\item A \textit{maximal element} (if existent) of a partially ordered set $X$ is an element $m\in X$ such that 
+		\begin{align}
+			\text{if}\ m\leq x \ \text{for some}\ x\in X,\ \text{then}\ x=m.
+		\end{align}
+		This is equivalent to saying that there is no $x\in X$ such that $m\leq x$ and $x\ne m$. 
+	\end{enumerate}
+\end{defn}
+
+\begin{remark}
+	For an arbitrary partially ordered set $X$, a maximal element (if existent) does not have to be unique.\ For example, consider $X := \left\{ \{1\}, \{2\}, \{3\}, \{1, 2\} \right\}$ with $\subset$ as partial ordering. Both $\{3\}$ and $\{1, 2\}$ are maximal elements.\ However, if we consider chains, then maximal elements are indeed unique by definition. 
+\end{remark}
+
+\begin{theorem}[Kuratowski-Zorn Lemma]
+	Let $\left(M, \leq\right)$ be a non-empty partially ordered set.\ If every chain $C\subset M$ has an upper bound, then $M$ has a maximal element. 
+\end{theorem}
+
+\begin{remark}
+	The upper bound of every chain $C\subset M$ need not be in $C$, by definition of a chain, but it must be in $M$. 
+\end{remark}
+
+\begin{theorem}[Distributive law for set operations \cite{481036}]
+	Let $B$ be a set, and $\{A_i\}$ be a collection of sets, where $I$ is a (finite, countable or uncountable) index set. Then we have
+	\begin{align}\label{eq:dist_law_set_ops}
+		\left(\bigcup_{i\in I} A_i\right) \cap B = \bigcup_{i\in I}(A_i \cap B)
+	\end{align}
+	and 
+	\begin{align}\label{eq:dist_law_set_ops_2}
+		\left(\bigcap_{i\in I}A_i\right) \cup B = \bigcap_{i\in I}(A_i \cup B).
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	We will only show Eq. \eqref{eq:dist_law_set_ops}, since the proof of \eqref{eq:dist_law_set_ops_2} is similar.
+	
+	If 
+	\begin{align*}
+		x&\in \left(\bigcup_{i\in I} A_i\right) \cap B \Rightarrow \left(x\in \bigcup_{i\in I}A_i\right) \wedge \left(x\in B\right)\Rightarrow (\exists j\in I: x\in A_j) \wedge (x\in B)
+		\\ \Rightarrow x&\in A_j\cap B \subset \bigcup_{i\in I}(A_i \cap B),
+	\end{align*}
+	i.e. $$\left(\bigcup_{i\in I} A_i\right) \cap B \subset \bigcup_{i\in I}(A_i \cap B).$$
+	Conversely, if 
+	\begin{align*}
+		x&\in \bigcup_{i\in I}(A_i \cap B) \Rightarrow \exists j\in I: x\in A_j \cap B\Rightarrow \left(x\in A_j\subset \bigcup_{i\in I}A_i\right) \wedge \left(x\in B\right)
+		\\ \Rightarrow x &\in \left(\bigcup_{i\in I}A_i\right) \cap B,
+	\end{align*}
+	i.e. 
+	$$\bigcup_{i\in I}(A_i \cap B) \subset \left(\bigcup_{i\in I} A_i\right) \cap B,$$
+	which completes the proof.
+\end{proof}
+
+\begin{theorem}\label{thrm:union_of_union_of_sets}
+	Let $I$ be an index set, and for each $i\in I$, $J_i$ shall be an index set as well. Then we have \cite{878108}
+	\begin{align}
+		\bigcup_{i\in I}\left(\bigcup_{j\in J_i}A_j\right) = \bigcup_{j\in\bigcup_{i\in I}J_i}A_j.
+	\end{align}		
+\end{theorem}
+
+\begin{proof}
+	\enquote{$\subset$} Let $a\in \bigcup_{i\in I}\left(\bigcup_{j\in J_i}A_j\right)$, i.e. there exists a $i_0\in I$ s.t. $$a\in \bigcup_{j\in J_{i_0}}A_j\subset \bigcup_{j\in \bigcup_{i\in I}J_i}A_j.$$ 
+	
+	\enquote{$\supset$} 
+	\begin{align*}
+		a&\in \bigcup_{j\in\bigcup_{i\in I}J_i}A_j 
+		\\ \Rightarrow \exists j_0&\in \bigcup_{i\in I}J_i: a\in A_{j_0}
+		\\ \Rightarrow \exists i_0&\in I: \left(j_0\in J_{i_0}\right) \wedge \left(a\in A_{j_0}\right)
+		\\ \Rightarrow a&\in A_{j_0}\subset \bigcup_{i\in I}\left(\bigcup_{j\in J_i}A_j\right)
+	\end{align*}
+\end{proof}
+
+\begin{theorem}\label{thrm:finite_intersec_of_union_of_sets}
+	Let $I$ be a \textit{finite} index set, i.e. $I = \{1, \dots, n\}$ for some $n\in \mathbb N$, and for each $i\in I$, $J_i$ shall be an index set as well. Then we have
+	\begin{align}\label{eq:finite_intersec_of_union_of_sets}
+		\bigcap_{i\in I}\left(\bigcup_{j\in J_i}A_j\right) = \bigcup_{f\in J}\left(\bigcap_{i\in I}A_{f_i}\right),
+	\end{align}
+	where $J := \prod_{i\in I}J_i = J_1\times \dots\times J_n$, i.e. $f\in J$ is an $n$-tuple, and hence $f = (f_1, \dots, f_n)$ with $f_i\in J_i$ for each $i\in I$.
+\end{theorem}
+
+\begin{proof}
+	Via induction. For $n = 1$, we have $I = \{1\}$ and $f = f_1\in J_1$, and thus
+	$$\bigcap_{i\in I}\left(\bigcup_{j\in J_i}A_j\right) = \bigcup_{j\in J_1} A_j = \bigcup_{f\in J_1}\left(\bigcap_{i\in I}A_{f}\right).$$
+	
+	For the induction step, note that if Eq. \eqref{eq:finite_intersec_of_union_of_sets} holds for an $n\in\mathbb N$, and we define $I' := \{1, \dots, n, n+1\}$ and $J' := J\times\prod J_{n+1} = \prod_{i\in I'}J_i$, then
+	\begin{align*}
+		\bigcap_{i\in I'}\left(\bigcup_{j\in J_i}A_j\right) 
+		&= \left( \bigcup_{j\in J_1}A_j \right) \cap \dots\cap \left(\bigcup_{j\in J_n}A_j\right)\cap \left(\bigcup_{j\in J_{n+1}}A_j\right) 
+		\\ &\overset{\small\text{IA}}{=} \left(\bigcup_{f\in J}\left(\bigcap_{i\in I}A_{f_i}\right)\right) \cap \left(\bigcup_{j\in J_{n+1}}A_j\right) 
+		\\ &\overset{\tiny\eqref{eq:dist_law_set_ops}}{=} \bigcup_{f\in J}\left(\left( \bigcap_{i\in I}A_{f_i}\right) \cap \left( \bigcup_{j\in J_{n+1}}A_j \right)\right)
+		\\[6pt] &\overset{\tiny\eqref{eq:dist_law_set_ops}}{=} \bigcup_{f\in J}\bigcup_{f_{n+1}\in J_{n+1}} \left( \bigcap_{i\in I'}A_{f_i}\right)
+		\\[6pt] &= \bigcup_{f\in J'}\left( \bigcap_{i\in I'}A_{f_i}\right).
+	\end{align*}
+\end{proof}
+
+\begin{theorem}\label{thrm:set_theory_unions_intersects_preimages}
+	Let $X, Y$ be sets, and $f: X\to Y$ a map between them. Further, let $I$ be an index set and $U_i\subset Y$ for all $i\in I$. Then
+	\begin{align}\label{eq:set_theory_unions_preimages}
+		\bigcup_{i\in I}f^{-1}(U_i) = f^{-1}\left(\bigcup_{i\in I}U_i\right)
+	\end{align}
+	and
+	\begin{align}\label{eq:set_theory_intersects_preimages}
+		\bigcap_{i\in I}f^{-1}(U_i) = f^{-1}\left(\bigcap_{i\in I}U_i\right),
+	\end{align}
+	where the preimage $f^{-1}(V) := \{x\in X\mid f(x)\in V\}$ for $V\subset Y$ \cite{141357,2190480}.
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}
+		\item We first prove Eq. \eqref{eq:set_theory_unions_preimages}. 		
+		
+		\enquote{$\subset$} Let $x\in \bigcup_{i\in I}f^{-1}(U_i)$, i.e. there exists an $i_0\in I$ s.t. $$x\in f^{-1}(U_{i_0}) = \{z\in X\mid f(z)\in U_{i_0}\} \subset \left\{ z\in X\mid f(z)\in \bigcup_{i\in I}U_i \right\},$$
+		i.e. $x\in f^{-1}\left(\bigcup_{i\in I}U_i\right)$.
+		
+		\enquote{$\supset$} Let $x\in f^{-1}(\bigcup_{i\in I}U_i) = \{z\in X \mid f(z)\in \bigcup_{i\in I}U_i\}$, i.e. there exists an $i_0\in I$ s.t. $f(x)\in U_{i_0}$, which implies $x\in f^{-1}(U_{i_0}) \subset \bigcup_{i\in I}f^{-1}(U_i)$.
+		
+		\item We now prove Eq. \eqref{eq:set_theory_intersects_preimages}:
+		\begin{align*}
+			x\in \bigcap_{i\in I}f^{-1}(U_i) &\Leftrightarrow \forall i\in I: x\in f^{-1}(U_i) = \{z\in X\mid f(z)\in U_i\}
+			\\ &\Leftrightarrow x\in f^{-1}\left(\bigcap_{i\in I}U_i\right) = \left\{z\in X\mid f(z)\in \bigcap_{i\in I}U_i\right\}.
+		\end{align*}
+	\end{enumerate}
+\end{proof}

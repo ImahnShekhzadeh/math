@@ -1,0 +1,131 @@
+\section{Algebra}
+
+\begin{defn}[Action]\label{defn:algebra__group_action}
+	Let $G$ be a group (where $e$ is the neutral element), and $X$ a set. Then a (left) group action $\alpha$ of $G$ on $X$ is a function
+	\begin{align}
+		\alpha: G\times X \rightarrow X
+	\end{align}
+	satisfying the following two axioms $(\forall g, h\in G) \wedge (\forall x\in X)$:
+	\begin{align*}
+		\alpha(e, x) &= x, 
+		\\ \alpha(g, \alpha(h, x)) &= \alpha(gh, x)
+	\end{align*}
+	The group action is commonly written as $g\cdot x$ s.t.~the axioms become
+	\begin{align}\label{eqn:left__group_action}
+		e\cdot x &= x, 
+		\\ g\cdot \left(h\cdot x\right) &= \left(gh\right)\cdot x
+	\end{align}
+	A right group action of $G$ on $X$ is a function
+	\begin{align}
+		\alpha: X\times G \rightarrow X
+	\end{align}
+	satisfying the following two axioms $(\forall g, h\in G) \wedge (\forall x\in X)$:
+	\begin{align}
+		\alpha(x, e) &= x, 
+		\\ \alpha(\alpha(x, g), h) &= \alpha(x, gh)
+	\end{align}
+\end{defn}
+
+\begin{exmp}
+	Consider $G = \text{SO}(2)$, i.e.~the group of all rotations in $\mathbb R^2$, with the group operation given by the composition of rotations, and let $X = S^1$ be the unit circle in $\mathbb C$. Now consider the group action
+	\begin{align}
+		\Phi:\text{SO}(2) \times S^{1} \rightarrow S^{1}, (R_{\theta}, p) \mapsto R_{\theta}(p)
+	\end{align}
+	This is a group action on $X = S^{1}$, since 
+	\begin{align*}
+		\Phi(R_{\theta_1}, \Phi(R_{\theta_2}, p)) = \Phi(R_{\theta_1 + \theta_2}, p).
+	\end{align*}
+	In the short notation, one would write this as
+	\begin{align*}
+		R_{\theta_1}\cdot \left( R_{\theta_2} \cdot p \right) = R_{\theta_1 + \theta_2} \cdot p.
+	\end{align*}
+\end{exmp}
+
+\begin{defn}[Signals\footnote{\cite[p.~11]{bronstein2021geometric}}] 
+	Let $V$ be a vector space\footnote{In computer vision, its dimensions would be called \textit{channels}.} and $\Omega$ a set, possibly with additional structure. Then the space of $V$-valued signals on $\Omega$,
+	\begin{align}
+		\mathcal X(\Omega, V) = \{ x: \Omega \rightarrow V \}
+	\end{align}
+	is a function space with a vector space structure. (Note that each $x\in \mathcal X(\Omega, V)$ is a signal.)
+	
+	Addition and scalar multiplication of signals are defined as 
+	\begin{align}
+		(\alpha x + \beta y)(u) := \alpha x(u) + \beta y(u) \quad \forall u\in\Omega\ \forall \alpha, \beta\in \mathbb R.
+	\end{align}
+\end{defn}
+
+\begin{lemma}
+	If $V$ is endowed with an inner product $\langle v, w\rangle_{V}$ and a measure $\mu$ on a $\sigma$-algebra defined on the set $\Omega$ (wrt which an integral can be defined), we have the following induced inner product on $\mathcal X(\Omega, V)$
+	\begin{align}
+		\langle x, y\rangle_{\mathcal X(\Omega, V)} := \int_{\Omega}\langle \underbrace{x(u)}_{\in V}, \underbrace{y(u)}_{\in V}\rangle_{V}d\mu(u)
+	\end{align}
+\end{lemma}
+
+\begin{proof}
+	Trivial.
+\end{proof}
+
+\begin{remark}
+	The domain (set) $\Omega$ can be discrete, in which case $\mu$ can be chosen to be the counting measure, in which case the integral becomes a sum.
+\end{remark}
+
+\begin{exmp}
+	Let $\Omega = \mathbb Z_{n}\times Z_{n}$, i.e.~a two-dimensional grid, and $x$ an RGB image, i.e.~a signal $x:\Omega\rightarrow \mathbb R^3$, and $f$ a function (such as a single-layer perceptron) operating on $3n^2$-dimensional inputs.
+\end{exmp}
+
+\begin{defn}[Homomorphism]
+	Let $f:A\rightarrow B$ be a map between two sets $A$ and $B$ that are equipped with the same structure. Also assume that $\bm{\cdot}$ is an operation of the structure. Then $f$ is said to be a homomorphism if $\forall x, y\in A$,
+	\begin{align}
+		f(x\bm{\cdot} y) = f(x) \bm{\cdot} f(y).
+	\end{align}
+\end{defn}
+
+\begin{defn}[Group representation]
+	An $n$-dimensional real \textbf{representation} of a group $G$ is a map $\rho:G\rightarrow \text{GL}(n, \mathbb R)$ (correspondingly, one defines an $n$-dimensional complex representation) \cite[p.~15]{bronstein2021geometric}, where each $g\in G$ is mapped to an invertible matrix, under the \textit{condition} that the map is a homomorphism, i.e.~$\rho(gh) = \rho(g)\rho(h)$.
+\end{defn}
+
+\begin{exmp}[Group representation]
+	Let $G = \mathbb Z_{n}$\footnote{Cyclic group of order $n$, $\mathbb Z_n = \{ 0, 1, \dots, n - 1 \}$.}, where the group operation is addition. The group representation 
+	\begin{align}
+		\rho: \mathbb Z_{n} \rightarrow \text{GL}(1, \mathbb C), g\mapsto \exp\left(\frac{2\pi ig}{n}\right)
+	\end{align}
+	To see that this is indeed a group representation, note that
+	\begin{align}
+		\rho(gh) = \rho(g + h) = \exp\left( \frac{2\pi igh}{n} \right) = \exp\left( \frac{2\pi i\left(g + h\right)}{n} \right) = \exp\left( \frac{2\pi ig}{n} \right)\exp\left( \frac{2\pi ih}{n} \right),
+	\end{align}
+	i.e.~the group representation is a homomorphism.
+\end{exmp}
+
+\begin{defn}[Equivariance]
+	Let $\rho$ be a representation of a group $G$. A function $f:\mathcal X(\Omega, V) \rightarrow \mathcal X(\Omega, V)$ is $G$-equivariant if 
+	\begin{align}\label{eqn:group_action}
+		f(\rho(g)x) = \rho(g)f(x) \quad \forall g\in G.
+	\end{align}
+\end{defn}
+
+\begin{remark}
+	Note that $\rho(g)\in \text{GL}(n, \mathbb K)$, $x\in \mathcal X(\Omega, V)$, and hence $\rho(g)x$ is a group action mediated by the representation $\rho$ on the group element $g$, i.e.~$\rho(g)x\in \mathcal X(\Omega, V)$. Also note that $f(x)\in \mathcal X(\Omega, V)$, i.e.~$\rho(g)f(x)$ is a group action as well, where the group element $g$ -- mediated by the representation $\rho$ -- and hence $\rho(g)f(x) \in \mathcal X(\Omega, V)$.
+	
+	The fact that we have a group action implies according to Def.~\ref{defn:algebra__group_action} and Eq.~\eqref{eqn:group_action},
+	\begin{align}
+		f\left(\rho(g)(\rho(h)x)\right) \overset{\scriptsize \eqref{eqn:left__group_action}}{=} f\left( (\rho(g)\rho(h))x \right) = \left(\rho(g)\rho(h)\right)f(x).
+	\end{align}
+\end{remark}
+
+\begin{defn}[Ring \cite{src:algebra}]\label{defn:ring}
+	Let $R$ be a set equipped with two binary operations, i.e. maps from $R\times R$ to $R$ that are called \textit{addition} and \textit{multiplication} and that are denoted by $+$ and $\cdot$. Further, let there be two elements that are called \textit{zero} and \textit{unity} and that are denoted by $0$ and $1$ respectively. Then $(R, +, \cdot)$ is called a \textit{ring} if 
+	
+	\begin{enumerate}
+		\item $(R, +, 0)$ is an abelian group, where $0$ is the neutral element for the operation $+$,
+		\item $(R, \cdot, 1)$ is a monoid, where $1$ is the neutral element for the operation $\cdot$,
+		\item the \textit{distributive laws} hold in $R$, i.e. for all $a, b, c\in R$, we have
+		\begin{align*}
+			\left((a + b)\cdot c = a\cdot c + b\cdot c\right) \wedge \left(a\cdot (b + c) = a\cdot b + a\cdot c\right),
+		\end{align*}
+		\item we have $0\cdot a = a\cdot 0 = 0$ for all $a\in R$.
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Field \cite{src:algebra}]\label{defn:field}
+	Let $R$ be a commutative ring, then we say it is a \textit{field} if $0\neq 1$ in $R$ and if every non-zero element has a multiplicative inverse.
+\end{defn}

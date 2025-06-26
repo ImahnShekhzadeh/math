@@ -1,0 +1,152 @@
+\section{Normalizing Flows}
+\begin{defn}\label{defn-diffeomorphism}
+	Let $M$, $N$ be two manifolds, $g: M\rightarrow N$ a differentiable map. If $g$ is a bijection and its inverse $g^{-1}: N\rightarrow M$ is differentiable as well, then we call $f$ a \textit{diffeomorphism}. We talk of a $C^k$ \textit{diffeomorphism} if both $g$ and $g^{-1}$ are $k$-times continuously differentiable. 
+\end{defn}
+
+\begin{theorem}[Change of variables \cite{MfPIII}]\label{change-of-variables}
+	Let $U$, $V\subset\mathbb{R}^n$ be open subsets and $T: U\rightarrow V$ a diffeomorphism, cf. Def.  \ref{defn-diffeomorphism}. Then the function $f: V\rightarrow \mathbb{C} \ \cup \{\infty\}$ is integrable over $V$ if and only if the function 
+	\begin{align}
+		\left(f\circ T\right) \cdot \left\vert \det \left( \frac{\partial T_{\mu}}{\partial x_{\nu}} \right)_{\mu\nu} \right\vert 
+	\end{align}
+	is integrable over $U$. In this case, it holds that 
+	\begin{align}\label{change-of-variables-formula}
+		\int_{U} \left(f\circ T\right)(x) \cdot \left\vert \det\left(\frac{\partial T_{\mu}}{\partial x_{\nu}}(x)\right)_{\mu, \nu} \right\vert dx = \int_{V} f(y)dy. 
+	\end{align}
+\end{theorem}
+\begin{remark}\label{diffeomorphism-inverse}
+	If $T$ is a diffeomorphism, then also $T^{-1}$ is a diffeomorphism, thus we could also have chosen $T^{-1}$ in the formulation of Theorem \ref{change-of-variables}.
+\end{remark}
+
+\begin{theorem}[Inverse function theorem \cite{IFT}] Let $g: \mathbb R^n \rightarrow \mathbb R^n$ be continuously differentiable on some open set $V\subset \mathbb R^n$ containing $\mathbf{a}$ and suppose $\det Jg(\mathbf{a}) \ne 0$, where $J$ shall be the Jacobi matrix of $g$. Then there is some open set containing $\mathbf{a}$ and an open set $W\subset \mathbb{R}^n$ containing $g(\mathbf{a})$ such that $g: V\rightarrow W$ has a continuous inverse $g^{-1}: W\rightarrow V$ which is differentiable for all $\mathbf{y}\in W$. 
+	\\ \\	
+	As matrices, we can write this as 
+	\begin{align}
+		J(g^{-1})(\mathbf{y}) = \left[\left(Jg\right)\left(g^{-1}(\mathbf{y})\right)\right] ^{-1}
+	\end{align} 
+\end{theorem}
+
+\begin{remark} An example for a function that is invertible and continuously differentiable but not a diffeomorphism is $g: \mathbb{R}\rightarrow\mathbb{R}$, $x\mapsto x^3$. Its inverse is obviously $g^{-1}: \mathbb{R}\rightarrow\mathbb{R}, x\mapsto \sqrt[3]{x}$, cf. \cite{cube-root} for a nice plot. However, $\frac{dg^{-1}}{dx}|_{x = 0}$ does not exist. The reason is that $\det Jg(0) = 0$ and hence the inverse function theorem does not apply. 
+\end{remark}
+\begin{itemize}
+	\item Let $\mathbf{U}$ be a random variable and let $p(\mathbf{U})$ describe the probability distribution of it, e.g. a uniform distribution between $0$ and $1$. We now make a simple transformation and obtain a new random variable $\mathbf{X}$, where we again denote by $p(\mathbf{X})$ the probability distribution of $\mathbf{X}$. We obtain $\mathbf{X}$ in the following way: 
+	\begin{align}\label{normalizing-flow-forward}
+		p(\mathbf{X}) = p(\mathbf{U})\left\vert \det\left(\frac{\partial\mathbf{f}}{\partial \mathbf{U}}\right)\right\vert^{-1}, 
+	\end{align}
+	where $\mathbf{f}$ denotes an invertible (and hence bijective) mapping. 
+	
+	\item Without proof, it holds that 
+	\begin{align}
+		\left\vert \det\left(\frac{\partial\mathbf{f}}{\partial\mathbf{U}}\right)\right\vert^{-1} = \left\vert \text{det}\left(\frac{\partial\mathbf{f}^{-1}}{\partial\mathbf{U}}\right) \right\vert 
+	\end{align}
+	and thus we can rewrite Eq. \eqref{normalizing-flow-forward} as 
+	\begin{align}\label{normalizing-flow-backward}
+		p(\mathbf{U}) = p(\mathbf{X})\left\vert \det\left(\frac{\partial\mathbf{f^{-1}}}{\partial \mathbf{U}}\right)\right\vert^{-1}. 
+	\end{align}
+	Since we assumed $\mathbf{f}$ to be invertible, $\mathbf{f^{-1}}$ is well-defined. 
+	
+	\item In practice, we will want $\mathbf{f}$ to be both invertible \underline{and} to have a \textbf{tractable} Jacobian, i.e. a Jacobian that we can easily calculate. For $\mathbf{f}$ to have a Jacobian at all, each of its first-order partial derivatives must exist \cite{jacobi-matrix}.
+	So-called \textit{autoregressive flows} have the property that their Jacobian is an \underline{upper triangular matrix}. For an upper triangular matrix, it holds that its determinant is given by the product of its diagonal elements \cite{triangular-matrices}.
+\end{itemize}
+
+\begin{defn}[Determinant]
+	Let $D$ be an $n\times n$ matrix and let $S_n$ denote the symmetric group over $n$. Then the determinant of $D$ is defined as:  
+	\begin{align}
+		\det(D) := \sum_{\sigma\in S_n} \left( \text{sgn}(\sigma) \prod_{i = 1}^{n}a_{i, \sigma(i)} \right),  
+	\end{align}
+	cf. \cite{leibniz-formula}. 
+\end{defn}
+
+\begin{lemma}
+	Let $A$ be a $k\times k$, $0$ an $k\times n$, $C$ an $n\times k$ and $D$ an $n\times n$ matrix; then 
+	\begin{align}
+		\det\left( \begin{pmatrix}	A & 0 \\ C & D \end{pmatrix} \right) = \det(A)\det(D). 
+	\end{align}
+\end{lemma}
+
+\begin{proof}
+	Define 
+	\begin{align}
+		B := \begin{pmatrix} A & 0 \\ C & D
+		\end{pmatrix}. 
+	\end{align}
+	Clearly, 
+	\begin{align}\label{case-diff}
+		b_{i,j} = 
+		\begin{cases}
+			a_{i, j} \qquad &i, j\leq k, \\
+			0 		 \qquad &i\leq k, j \geq k+1, \\
+			c_{i-k, j} \qquad &i\geq k+1, j \leq k, \\
+			d_{i-k, j-k} \qquad &i, j\geq k+1. 
+		\end{cases}
+	\end{align}
+	We can write the determinant of $B$ as 
+	\begin{align}
+		\det(B) = \sum_{\sigma\in S_{n+k}} \text{sgn}(\sigma)\prod_{i = 1}^{n+k}b_{i, \sigma(i)}. 
+	\end{align}
+	From Eq. \eqref{case-diff} we know that all summands of the form $\sigma(i) = j$ with $i\leq k$, $j\geq k+1$ are $0$. Therefore, we can consider all permutations of the form $\sigma(i) = j$ with $i, j \leq k$ or $\sigma(i) = j$ with $i\geq k+1$, $j\leq k$. We can also write this in the form $\sigma(i) = \pi(i)$ for $i\leq k$ and $\sigma(k + i) = k + \tau(i)$ for $1\leq i \leq n$, where $\pi\in S_k$ and $\tau\in S_n$. Denote the set of all such permutations by $\tilde{S}_{k+n}$.  Thus: 
+	\begin{align}
+		\det(B) &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{n+k}b_{i, \sigma(i)}
+		\\ &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}b_{i, \sigma(i)}\prod_{i = k+1}^{n+k}b_{i, \sigma(i)}
+		\\ &\overset{\tiny\eqref{case-diff}}{=} \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}a_{i, \sigma(i)}\prod_{i=k+1}^{n+k}d_{i-k, \sigma(i)-k}
+		\\ &= \sum_{\sigma\in\tilde{S}_{k+n}}\text{sgn}(\sigma)\prod_{i = 1}^{k}a_{i, \sigma(i)}\prod_{i = 1}^{n}d_{i, \sigma(i+k)-k}
+		\\ &= \sum_{\pi\in S_k, \tau\in S_n}\text{sgn}(\pi)\text{sgn}(\tau)\prod_{i = 1}^{k}a_{i, \pi(i)}\prod_{i = 1}^{n}d_{i, \tau(i)}
+		\\ &= \sum_{\pi\in S_k}\text{sgn}(\pi)\prod_{i = 1}^{k}a_{i, \pi(i)}\sum_{\tau\in S_n}\text{sgn}(\tau)\prod_{i = 1}^{n}d_{i, \tau(i)}
+		\\ &= \det(A)\det(D)
+	\end{align}
+	\cite{block-triangular-matrix}
+\end{proof} 
+
+\begin{defn}
+	Let $h(\bm{\cdot}\ ; \theta): \mathbb{R}\rightarrow\mathbb{R}$ be a bijection parametrized by $\theta$. Then an \textit{autoregressive model} is a function \begin{align}
+		g: \mathbb{R}^D\rightarrow\mathbb{R}^D, \begin{pmatrix}
+			x_1 \\ \dots \\ x_D 
+		\end{pmatrix} \mapsto 
+		\begin{pmatrix}
+			h\left(x_1; \Theta_1\right) \\ h\left(x_2; 	\Theta_2\left(x_1\right)\right) \\ \dots \\ h\left(x_D; \Theta_D\left(x_1, \dots, x_{D-1}\right)\right)
+		\end{pmatrix}
+	\end{align}
+	The functions $\Theta_t$ for $t = 2$, $\dots$, $D$ are arbitrary functions whose domain is $\mathbb{R}^{t-1}$, $\Theta_1$ is a constant. 
+\end{defn}
+
+\begin{remark}
+	The Jacobian matrix of an autoregressive flow is given as follows: 
+	\begin{align}
+		Dg &= \begin{pmatrix}
+			\partial g_1/\partial x_1 & \partial g_1/\partial x_2 & \dots & \partial g_1/\partial x_D 
+			\\ 
+			\partial g_2/\partial x_1 & \partial g_2/\partial x_2 & \dots & \partial g_2/\partial x_D
+			\\
+			\vdots & \vdots & \ddots & \vdots 
+			\\ 
+			\partial g_D/\partial x_1 & \partial g_D / \partial x_2 & \dots & \partial g_D / \partial x_D
+		\end{pmatrix} 
+	\end{align}
+	One can easily convince oneself that $Dg$ is a lower triangular matrix. 
+\end{remark}
+
+\begin{theorem}
+	Normalizing flows in $\mathbb{R}^D$ come from the push-forward of a measure. 
+\end{theorem}
+
+\begin{proof}
+	Let $\mathcal Y$, $\mathcal Z\subset\mathbb{R}^D$ be open,  $\Sigma_{\mathcal Y} = \mathcal B(\mathcal Y)$, $\Sigma_{\mathcal Z} = \mathcal B(\mathcal Z)$ and $g: \mathcal Z\rightarrow\mathcal Y$ be a diffeomorphism. The function $g: \mathcal Z \rightarrow \mathcal Y$ is measurable if and only if $g^{-1}(G)\in \Sigma_{\mathcal Z}$ for every set $G$ that is open in $\mathcal Y$, cf. Theorem \ref{generator-and-measurable-function} (Borel $\sigma$-algebras are generated by the open sets). Since for functions between two topological spaces it holds that they are continuous if and only if the inverse image of an open set is again open, we have that $g$ is indeed measurable. 
+	\\ \\ Now define the probability measure $\mu$ on the measurable space $(\mathcal Z, \Sigma_{\mathcal Z})$ as 
+	\begin{align}\label{prob-measure-proof}
+		\mu(I) := \int_{I} p_{\mathbf{Z}}(z)d\lambda(z) \ \forall I\in \Sigma_{\mathcal Z}, 
+	\end{align}
+	where $p_{\mathbf{Z}}: \mathcal Z \rightarrow\mathbb{R}$ shall be a PDF and $\lambda$ the Lebesgue measure. (The Lebesgue measure is defined on the completion of $\mathcal B(\mathbb R^D)$, which is \enquote{larger} than $\mathcal B(\mathbb R^D)$.) By considering the push-forward of $\mu$ under the measurable map $g$, we have $\forall J \in \Sigma_{\mathcal Y}$: 
+	\begin{align}
+		g_{\star}\mu\left(J\right) = \mu(g^{-1}(J))  \overset{\tiny\eqref{prob-measure-proof}}{=} \int_{g^{-1}(J)} p_{\mathbf{Z}}(z)d\lambda(z)
+	\end{align}
+	Since by assumption $g:\mathcal Z\rightarrow \mathcal Y$ and therefore also the inverse $g^{-1}: \mathcal Y \rightarrow \mathcal Z$ are a diffeomorphism, we can use the change of variables formula from Theorem \ref{change-of-variables}, since we assume $p_{\mathbf{Z}}$ to be integrable over $\mathcal Z$. We apply Theorem \ref{change-of-variables} to $g^{-1}$ instead of $g$, cf. Remark \ref{diffeomorphism-inverse}: 
+	\begin{align}
+		g_{\star}\mu(J) = \int_{g^{-1}(J)}p_{\mathbf{Z}}(z)d\lambda(z) = \int_{J} \underbrace{\left(p_{\mathbf{Z}}\circ g^{-1}\right)(y) \cdot \left\vert \det Dg^{-1}(y) \right\vert }_{= p_{\mathbf{Y}}(y)} d\lambda(y) 						
+	\end{align}
+\end{proof}
+
+\begin{defn}
+	A rational-quadratic function takes the form of a quotient of two quadratic polynomials. 
+	\begin{align}
+		\frac{\alpha^{(k)}\left(\xi\right)}{\beta^{(k)}(\xi)} = \frac{a_0\xi^2 + a_1\xi + a_2}{b_0\xi^2 + b_1\xi + b_2} 
+	\end{align}
+\end{defn}	

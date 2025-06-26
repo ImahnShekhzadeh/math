@@ -1,0 +1,240 @@
+\section{Inner Product and Normed Spaces}
+\begin{defn}[Inner Product Space]
+	Let $\mathbb K$ be a field ($\mathbb K = \mathbb R$ or $\mathbb K = \mathbb C$). An inner product space is a vector space $V$ over $\mathbb K$ that allows for an \textbf{inner product} 
+	\begin{align}
+		\left\langle \bm{\cdot}, \bm{\cdot}\right\rangle: V\times V\rightarrow \mathbb K
+	\end{align}
+	satisfying the following properties $\forall \alpha, \beta\in \mathbb K; x, y, z\in V$:
+	\begin{enumerate}
+		\item \textbf{Conjugate symmetry}:
+		\begin{align}
+			\langle x, y\rangle = \overline{\langle y, x\rangle},
+		\end{align}
+		which implies that $\langle x, x\rangle\in \mathbb R$, even if $\mathbb K = \mathbb C$.\footnote{Set $y = x$.} 
+		
+		For $\mathbb K = \mathbb R$, conjugate symmetry is exact symmetry.
+		
+		\item \textbf{Linearity} (in the first argument): 
+		\begin{align}
+			\langle \alpha x + \beta y, z\rangle = \alpha\langle x, z\rangle + \beta\langle y, z\rangle
+		\end{align}
+		From the conjugate symmetry property, this means that we have semi-linearity in the second argument:
+		\begin{align}
+			\langle x, \alpha y + \beta z\rangle = \overline{\langle \alpha y + \beta z, x \rangle} = \overline{\alpha\langle y, x \rangle + \beta\langle z, x \rangle} = \overline{\alpha}\langle x, y\rangle + \overline{\beta}\langle x, z\rangle.
+		\end{align}
+		
+		\item \textbf{Positive-definiteness}:
+		\begin{align}
+			\langle x, x\rangle \geq 0
+		\end{align}
+		and 
+		\begin{align}
+			\langle x, x\rangle = 0 \Leftrightarrow x = 0.
+		\end{align}
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Normed Space]\label{defn:normed_space}
+	Let $\mathbb K$ be a space ($\mathbb{K} = \mathbb{R}$ or $\mathbb{K} = \mathbb{C}$). Then a mapping $\norm{\cdot}{}: X\to\mathbb{R}$ is called a \textbf{norm} if it satisfies the following properties for all $\varphi$, $\psi\in X$ and $\alpha\in \mathbb{K}$:
+	
+	\begin{enumerate}
+		\item \textbf{Positivity}:
+		\begin{align}
+			\norm{\varphi}{} \geq 0
+		\end{align}
+		
+		\item \textbf{Definiteness}:
+		\begin{align}
+			\norm{\varphi}{} = 0 \Leftrightarrow \varphi = 0
+		\end{align}
+		
+		\item \textbf{Homogeneity}:
+		\begin{align}
+			\norm{\alpha\varphi}{} = \abs{\alpha}\norm{\varphi}{}
+		\end{align}
+		
+		\item \textbf{Triangle inequality}:
+		\begin{align}
+			\norm{\varphi + \psi}{} \leq \norm{\varphi}{} + \norm{\psi}{}
+		\end{align}
+		
+		A linear space $X$ with a norm $\norm{\cdot}{}$ is called a \textbf{normed linear space} or \textbf{normed space} for short. For a normed space, we shall use the notation $\left(X, \norm{\cdot}{}\right)$.
+		
+	\end{enumerate}
+\end{defn}
+
+\begin{exmp}\label{exmp:lp-norm-vectors}
+	Let $X = \mathbb{R}^d$. Then for $1 \leq p < \infty$, the $L^p$ norm of a vector $x\in X$ is defined as:
+	
+	\begin{align}\label{eq:L^p_norm}
+		\norm{x}{p} := \left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}
+	\end{align}
+	In the limit $p\to\infty$, we obain the so-called \textit{supremum norm}:
+	\begin{align}\label{eq:sup_norm}
+		\norm{x}{\infty} := \max_{1\leq j\leq d}{\abs{x_j}}.
+	\end{align} 
+	In the special case of $p = 2$, we recover the Euclidean norm.
+\end{exmp}
+
+\begin{proof}
+	First, we show that Eq. \eqref{eq:sup_norm} is indeed the limit of Eq. \eqref{eq:L^p_norm}:
+	
+	\begin{align}
+		\norm{x}{\infty} &= \max_{1\leq j\leq d}{\abs{x_j}} \leq \sum_{j=1}^{d}\abs{x_j} \leq d \cdot \norm{x}{\infty}
+		\\ \Rightarrow \norm{x}{\infty}^p &= \left(\max_{1\leq j\leq d}{\abs{x_j}}\right)^p = \max_{1\leq j\leq d}{\abs{x_j}^p} \leq \sum_{j=1}^{d}\abs{x_j}^p \leq d \cdot \max_{1\leq j\leq d}{\abs{x_j}^p} = d\norm{x}{\infty}^p
+		\\ \Rightarrow \norm{x}{\infty} &\leq \left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}} \leq d^{\frac{1}{p}}\norm{x}{\infty}
+		\\ \Rightarrow \lim\limits_{p\to\infty}\norm{x}{\infty} &= \norm{x}{\infty} \leq \lim\limits_{p\to\infty}\left\{\left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}\right\} \leq \lim\limits_{p\to\infty}\left\{d^{\frac{1}{p}}\norm{x}{\infty}\right\} = \norm{x}{\infty}
+		\\ \Rightarrow \lim\limits_{p\to\infty}\left\{\left(\sum_{j=1}^{d}\abs{x_j}^p\right)^{\frac{1}{p}}\right\} &= \norm{x}{\infty}
+	\end{align}
+	
+	To show the norm property of the $L^p$ norm for $1 \leq p < \infty$, we will explicitly show the fulfilling properties of a norm, cf. Defn. \eqref{defn:normed_space}, for all $x$, $y$, $z\in X$ and $\alpha\in \mathbb{R}$:
+	
+	\begin{enumerate}
+		\item Positivity: $\norm{x}{p} \geq 0 \ \forall x\in X$,
+		\item Definiteness: $\norm{x}{p} = 0\Leftrightarrow x = 0$,
+		\item Homogeneity: $$\norm{\alpha x}{p} = \left(\sum_{j=1}^{d}\abs{\alpha x_j}^p\right)^{\frac{1}{p}} = \left(\sum_{j=1}^{d}\abs{\alpha}^p\abs{x_j}^p\right)^{\frac{1}{p}} = \abs{\alpha}\norm{x}{p},$$
+		\item Triangle inequality: $$\norm{x + y}{p} = \left(\sum_{j=1}^{d}\abs{x_j + y_j}^p\right)^{\frac{1}{p}} \leq \left(\sum_{j=1}^{d}\abs{x_j}^p + \abs{y_j}^p\right)^{\frac{1}{p}} = \norm{x}{p} + \norm{y}{p}.$$	
+	\end{enumerate}
+	
+	In case of $p = \infty$, we will only show the triangle inequality, since the other properties are trivial to prove:
+	
+	$$\norm{x + y}{\infty} = \max_{1\leq j\leq d}{\abs{x_j + y_j}} \leq \max_{1\leq j\leq d}\left\{\abs{x_j} + \abs{y_j}\right\} \leq \max_{1\leq j\leq d}\abs{x_j} + \max_{1\leq j\leq d}\abs{y_j} = \norm{x}{\infty} + \norm{y}{\infty},$$
+	
+	where the last inequality holds since for any $1\leq j \leq d$, it holds that
+	\begin{align*}
+		&\left(\abs{x_j} \leq \max_{1\leq k\leq d}\abs{x_k}\right) \wedge \left(\abs{y_j} \leq \max_{1\leq k\leq d}\abs{y_k}\right) 
+		\\ &\Rightarrow \abs{x_j} + \abs{y_j} \leq \max_{1\leq k\leq d}\abs{x_k} + \max_{1\leq k\leq d}\abs{y_k} 
+		\\ &\Rightarrow \max_{1\leq j\leq d}\left\{\abs{x_j} + \abs{y_j}\right\} \leq \max_{1\leq k\leq d}\abs{x_k} + \max_{1\leq k\leq d}\abs{y_k}
+	\end{align*}
+\end{proof}
+
+
+\begin{theorem}\label{second-triangle-inequality}
+	Let $(X, \norm{\cdot}{})$ be a normed space. Then the \enquote{second triangle inequality} holds: 
+	\begin{align}
+		\abs{\norm{\varphi}{} - \norm{\psi}{}} \leq \norm{\varphi - \psi}{} \quad \forall \varphi, \psi \in X. 
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	For $\varphi$, $\psi \in X$ we have 
+	\begin{align}
+		\norm{\varphi}{} = \norm{\varphi - \psi + \psi}{} \leq \norm{\varphi - \psi}{} + \norm{\psi}{} \Leftrightarrow \norm{\varphi}{} - \norm{\psi}{} \leq \norm{\varphi - \psi}{}. 
+	\end{align}
+	By exchanging the roles of $\varphi$ and $\psi$ we obtain 
+	\begin{align}
+		\norm{\psi}{} - \norm{\varphi}{} \leq \norm{\varphi - \psi}{}
+	\end{align}
+	and thus 
+	\begin{align}
+		\abs{\norm{\varphi}{} - \norm{\psi}{}} \leq \norm{\varphi - \psi}{}. 
+	\end{align}
+\end{proof}
+
+\begin{theorem}\label{norms_continuities}
+	Let $(X, \norm{\cdot}{})$ be a normed space. Then the addition, scalar multiplication and the norm itself are continuous. 
+\end{theorem}
+
+\begin{proof} 
+	\begin{itemize}
+		\item ad continuity of the addition: Let $(\varphi_n)_{n\in\mathbb{N}}$ and $(\psi_n)_{n\in\mathbb{N}}$ be convergent sequences in $X$ with limit elements $\varphi$, $\psi\in X$, i.e. $\varphi_n \longrightarrow \varphi$ and $\psi_n \longrightarrow \psi$ for $n\to\infty$. Thus 
+		\begin{align}
+			0\leq \norm{(\varphi_n + \psi_n) - (\varphi + \psi)}{} \leq \norm{\varphi_n - \varphi}{} + \norm{\psi_n - \psi}{} \longrightarrow 0 \quad\text{for } n\to \infty
+		\end{align}
+		and hence $\varphi_n + \psi_n \rightarrow \varphi + \psi$ for $n\to\infty$. 
+		\item ad continuity of the scalar multiplication: Let $\left(\alpha_n\right)_{n\in\mathbb N} \in \mathbb K$ converge to $\alpha\in \mathbb K$ and \\ $\left(\varphi_n\right)_{n\in\mathbb N}\in X \rightarrow \varphi\in X$ for $n\to\infty$. Then 	
+		\begin{align}
+			0&\leq\norm{\alpha_n\varphi_n-\alpha\varphi}{} = \norm{\alpha_n\left(\varphi_n-\varphi\right) + \left(\alpha_n-\alpha\right)\varphi}{} \leq \norm{\alpha_n(\varphi_n-\varphi)}{} + \norm{\left(\alpha_n - \alpha\right)\varphi}{}
+			\\ &\leq \abs{\alpha_n}\norm{\varphi_n-\varphi}{} + \abs{\alpha_n-\alpha}\norm{\varphi}{} \overset{n\to\infty}{\longrightarrow} 0. 
+		\end{align}
+		This implies $\alpha_n\varphi_n  \rightarrow \alpha\varphi$ for $n\to\infty$. 
+		\item ad continuity of the norm: Let $\varphi_n \rightarrow\varphi$. With Theorem \ref{second-triangle-inequality} we have: 
+		\begin{align}
+			0\leq \abs{\ \norm{\varphi_n}{}-\norm{\varphi}{}\ } \leq \norm{\varphi_n - \varphi}{} \overset{n\to\infty}{\longrightarrow}  
+		\end{align}
+		and hence $\norm{\varphi_n}{} \rightarrow \norm{\varphi}{}$ for $n\to\infty$. 
+	\end{itemize}
+\end{proof} 
+
+
+\begin{defn}
+	Two norms $\left\vert\left\vert \cdot \right\vert\right\vert_{a}$ and $\left\vert\left\vert \cdot \right\vert\right\vert_{b}$ on a linear space $X$ are said to be equivalent if and only if there exist positive constants $0 < c \leq C < \infty$ such that 
+	\begin{align}\label{equivalence_norms}
+		c\norm{\varphi}{b} \leq \norm{\varphi}{a} \leq C\norm{\varphi}{b} \quad \forall \varphi \in X. 
+	\end{align}	
+	(It is also possible to write this as $\tilde{c}\norm{\varphi}{a} \leq \norm{\varphi}{b} \leq \tilde{C}\norm{\varphi}{a}$ with $\tilde{c} := C^{-1}$ and $\tilde{C} := c^{-1}$, where $0 < \tilde{c} \leq \tilde{C}<\infty$.)
+\end{defn}
+
+\begin{lemma}
+	Let $X$ be a linear space and the pairs $\left(\norm{\cdot}{a}, \norm{\cdot}{c}\right)$ and $\left(\norm{\cdot}{b}, \norm{\cdot}{c}\right)$ be equivalent. Then also the pair $\left(\norm{\cdot}{a}, \norm{\cdot}{b}\right)$ is equivalent. 
+\end{lemma}
+
+\begin{proof}
+	By assumption, we know that 
+	\begin{align}
+		c\norm{\varphi}{c} &\leq \norm{\varphi}{a} \leq C\norm{\varphi}{c} \quad \forall \varphi\in X \label{equivalent-norms-lemma-proof}
+	\end{align}
+	and 
+	\begin{align}
+		d\norm{\varphi}{c} &\leq \norm{\varphi}{b} \leq D\norm{\varphi}{c} \quad \forall \varphi\in X
+		\\ 
+		\Leftrightarrow \norm{\varphi}{c} &\leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d}\norm{\varphi}{c}. 
+		\\
+		\overset{\tiny\eqref{equivalent-norms-lemma-proof}}{\Leftrightarrow} \frac{1}{C}\norm{\varphi}{a} &\leq \norm{\varphi}{c} \leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d}\norm{\varphi}{c} \leq \frac{D}{d\cdot c}\norm{\varphi}{a}  
+		\\ 
+		\Leftrightarrow \frac{1}{C}\norm{\varphi}{a} &\leq \frac{1}{d}\norm{\varphi}{b} \leq \frac{D}{d\cdot c}\norm{\varphi}{a}
+		\\ 
+		\Leftrightarrow \frac{d}{C}\norm{\varphi}{a} &\leq \norm{\varphi}{b} \leq \frac{D}{c}\norm{\varphi}{a}. 
+	\end{align}
+	It is clear that $0 < dC^{-1} \leq Dc^{-1} < \infty$ holds. 
+\end{proof} 
+
+\begin{theorem}\label{finite_dimensional_norm_equivalence}
+	On a \textit{finite-dimensional} space $X$ over a field $\mathbb{K}$ all norms are equivalent. 
+\end{theorem}
+
+\begin{proof}[Proof \cite{werner-fa}] Let $\dim(X) = n$, $\{e_1, \dots, e_n\}$ be a basis of $X$ and $\norm{\cdot}{}$ a norm on $X$. We can now show that $\norm{\cdot}{}$ is equivalent to the Euclidean norm $\norm{\sum_{i = 1}^n\alpha_ie_i}{2} = \left( \sum_{i = 1}^{n}\left\vert \alpha_i \right\vert^2 \right)^{1/2}$ as follows: \\[6pt] Set $K:= \max\left\{ \norm{e_1}{}, \dots, \norm{e_n}{}\right\} > 0$. Then from the triangle inequality for $\norm{\cdot}{}$ we have: 
+	\begin{align}\label{equivalence-of-norms}
+		\norm{x}{} = \norm{\sum_{i= 1}^{n}\alpha_ie_i}{} \leq \sum_{i= 1}^n \norm{\alpha_ie_i}{} = \sum_{i= 1}^n \abs{\alpha_i} \norm{e_i}{}
+	\end{align}
+	Since $(\abs{\alpha_1}, \dots, \abs{\alpha_n})^T$, $(\norm{e_1}, \dots, \norm{e_n}{})^T\in \mathbb R^n$ and 
+	\begin{align}
+		\left\langle \left(\abs{\alpha_1}, \dots, \abs{\alpha_n}\right), (\norm{e_1}, \dots, \norm{e_n}{} ) \right\rangle = \sum_{i = 1}^n \abs{\alpha_i}\norm{e_i}{}
+	\end{align}
+	we can use the Cauchy-Schwarz inequality: 
+	\begin{align}
+		\langle (\abs{\alpha_1}, \dots, \abs{\alpha_n}), (\norm{e_1}, \dots, \norm{e_n}{} ) \rangle &\leq \norm{\sum_{i=1}^n \alpha_ie_i}{2}\cdot \norm{\sum_{i= 1}^n e_i}{2} = \sqrt{\sum_{i = 1}^n\abs{\alpha_i}^2} \cdot \sqrt{\sum_{i = 1}^n\norm{e_i}{}^2}
+		\\[8pt] &= \norm{x}{2}\cdot \sqrt{\sum_{i=1}^n K^2} = K\sqrt{n}\norm{x}{2} \quad \forall x\in X, 
+	\end{align}
+	where in the last line we used that $K = \max\{\norm{e_1}, \dots, \norm{e_n}{}\}$ and $x = \sum_{i = 1}^n \alpha_i e_i$. Putting the last Eq. into Eq. \eqref{equivalence-of-norms}, we have: 
+	\begin{align}\label{fa_equiv_norms_intermed_1}
+		\norm{x}{} \leq \sum_{i=1}^{n} \abs{\alpha_i}\norm{e_i}{} \leq K\sqrt{n}\norm{x}{2} \quad \forall x\in X.
+	\end{align}
+	Now define the set 
+	\begin{align}
+		S:= \{ x\in X \mid \norm{x}{2} = 1 \}. 
+	\end{align}
+	This set is closed since it is the preimage of the closed set $\{1\}\subset \mathbb R$ under the continuous function $\norm{\cdot}{2}$, cf. Theorem \ref{norms_continuities}, \ref{thrm:preimages_continuous_functions}. $S$ is also closed since $S\subset B_{r}(0) = \{\psi\in X\mid \norm{\psi}{2} < r\}$ for $r>0$ (here, we take into account that every norm induces a metric). Thus, $S$ is compact according to Heine-Borel (which applies to every finite-dimensional normed vector space). Since every continuous function takes its minimum on a compact set, we know that $\norm{\cdot}{}$ has a minimum $m > 0$ on $S$. Since $x\cdot \norm{x}{2}^{-1}\in S$ for $x\ne 0$, we have ($m$ is the minimum of the function $\norm{\cdot}{}$): 
+	\begin{align}
+		m\norm{x}{2} \leq \norm{x}{} \quad \forall x\in X.
+	\end{align}
+	All in all, we proved: 
+	\begin{align}
+		m\norm{x}{2} \leq \norm{x}{} \leq K\sqrt{n}\norm{x}{2} \quad \forall x\in X. 
+	\end{align}
+\end{proof} 
+
+\begin{defn}[Strongly equivalent metrics \cite{equivalence-metrics}]\label{defn:strong_equivalence}
+	Let $X$ be a linear space equipped with two metrics $d$ and $d'$. Then the metrics are \textit{strongly equivalent} if and only if there exist positive constants $0 < \alpha \leq \beta < \infty$ such that
+	\begin{align}
+		\alpha d(x, y) \leq d'(x, y) \leq \beta d(x, y) \quad\forall x, y\in X. 
+	\end{align}
+\end{defn}
+
+\begin{remark}\label{equivalence_metrics_finite_dimensional}
+	Obviously, Eq. \eqref{equivalence_norms} can also be written as 
+	\begin{align}
+		c\norm{\varphi-\psi}{b} \leq \norm{\varphi-\psi}{a} \leq C\norm{\varphi-\psi}{b} \quad \forall \varphi, \psi\in X. 
+	\end{align} 
+	Thus, Theorem \ref{finite_dimensional_norm_equivalence} holds for metric spaces as well if the metric is defined via $d(\varphi, \psi) := \norm{\varphi- \psi}{}$ for all $\varphi, \psi\in X$.
+\end{remark}
