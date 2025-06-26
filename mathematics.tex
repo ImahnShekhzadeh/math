@@ -1925,7 +1925,7 @@
 			\enquote{$\Longleftarrow$} Let $U\subset X$ be open, and fix $x\in U$, then there is a $B_x\in \mathscr B$ s.t. $B_x\subset U$. We claim that $$U = \bigcup_{x'\in U}B_{x'}.$$ For this, note that $B_x\subset \bigcup_{x'\in U}B_{x'}$, and $B_x\subset U$ implies $\bigcup_{x'\in U}B_{x'}\subset U$. Thus, $U$ can be written as a union of a collection of members of $\mathscr B$.
 		\end{proof}
 	
-		\begin{corollary}
+		\begin{corollary}\label{corollary:open_set_basis_member_containment}
 			Let $(X, \tau)$ be a topological space, and $\mathscr B$ a basis for $\tau$. Then a subset $U\subset X$ is open iff for all $x\in U$, there is a $B\in\mathscr B$ s.t. $x\in B\subset U$.
 		\end{corollary}
 	
@@ -2325,7 +2325,7 @@
 			The results for the finite product of topological spaces follow by induction from the corresponding results for the product of two topological spaces. For example, if $(X, \tau_i)$ are topological spaces for all $i\in \{1, \dots, n\}$ for some $n\in\mathbb N$, and $\mathscr B_i$ is a basis for $\tau_i$, then Theorem \ref{thrm:basis_product_topology_coarser} implies that $\mathscr B := \left\{\prod_{i=1}^{n}U_i\mid U_i\in \mathscr B_i\right\}$ is a basis for the product topology on $\prod_{i=1}^{n}X_i$.
 		\end{remark}
 	
-		\begin{theorem}
+		\begin{theorem}\label{thrm:product_of_metrizable_topologies_is_metrizable}
 			For all $i\in\{1, \dots, n\}$, with $n\in\mathbb N$, let $(X_i, \tau_i)$ be metrizable topological spaces. Then $\prod_{i=1}^{n}X_i$ with the product topology on it is metrizable.
 		\end{theorem}
 	
@@ -2357,6 +2357,32 @@
 			i.e. $x\in \prod_{i=1}^{n}B_{\epsilon}(x_i)\subset B_{\epsilon}(x)$, where $\prod_{i=1}^{n}B_{\epsilon}(x_i)$ is a basis member of the product topology on $X$, since each $B_{\epsilon}(x_i)$ is a basis member of $X_i$. 
 			
 			By Corollary \ref{corollary:equality_of_topologies}, the induced topology by $d$ on $X$ and the product topology on $X$ coincide.
+		\end{proof}
+	
+		\begin{remark}
+			In Theorem \ref{thrm:product_of_metrizable_topologies_is_metrizable}, we constructed the metric $d(x, y) := \max_{1\leq i\leq n}\{d_i(x_i, y_i)\}$ on $X := \prod_{i=1}^{n}X_i$, where $X_i$ is a metrizable topological space, and $d_i$ a metric on $X_i$ inducing the topology on $X_i$, and showed that it induces the product topology on $X$. Note that there are other metrics on $X$ that are strongly -- and thus topologically -- equivalent to $d$ \cite{src:product_topology}, for example the $L^p$ metrics for $p\in \mathbb N\cup \{\infty\}$:
+			$$d_p(x, y) := \left(\sum_{i=1}^{n}d_i(x_i, y_i)^p\right)^{1/p}, \quad x, y\in X,$$
+			where $d_i$ is a metric on $X_i$, also cf. Example \ref{exmp:lp-norm-vectors}. For $p = \infty$, we obtain the maximum metric defined previously.
+		\end{remark}
+	
+		\begin{theorem}
+			Equip $\mathbb R$ with its standard topology, let $X$ be a metrizable topological space, i.e. there is a metric $d$ inducing its topology, then the metric $d: X\times X\to \mathbb R$ is continuous, when considering the product topology on $X\times X$.
+		\end{theorem}
+		
+		\begin{proof}[Proof \cite{287313, 4228334}]
+			A basis for the standard topology of $\mathbb R$ is given by open intervals $(a, b)$, where $a < b$. By Theorem \ref{thrm:continuity_sub_basis}, we need to show that the preimage of $(a, b)$ is open in the product topology; note that
+			$$d^{-1}((a, b)) = \{(x, y)\in X\times X\mid d(x, y)\in (a, b)\} = \{(x, y)\in X\times X\mid a < d(x, y) < b\}.$$
+			By Corollary \ref{corollary:open_set_basis_member_containment}, we only need to show that there is a basis member $B$ of the product topology of $X \times X$ s.t. for all $(x, y)\in d^{-1}((a, b))$, $(x, y)\in B\subset d^{-1}((a, b))$.
+			
+			Let $(x, y)\in d^{-1}((a, b))$ be arbitrary, and define $\epsilon := \min\{d(x, y) - a, b - d(x, y)\}$. Now consider $z\in B_{\epsilon}(d(x, y))$, i.e. $\abs{d(x, y) - z} < \epsilon$. Since for all $r\in\mathbb R$, $r \leq \abs{r}$ and $-r\leq \abs{r}$, we have $z\in (a, b)$, i.e. $B_{\epsilon}(d(x, y))\subset (a, b)$.
+			
+			Now consider $B_{\epsilon/2}(x)\times B_{\epsilon/2}(y)$, which is a basis member for the product topology on $X\times X$, and let $(x', y')\in B_{\epsilon/2}(x)\times B_{\epsilon/2}(y)$, then we have
+			$$d(x', y') \leq d(x', y) + d(y, y') \leq d(x, y) + d(x', x) + d(y, y') < d(x, y) + \epsilon$$
+			and 
+			$$d(x, y) \leq d(x, y') + d(y', y) \leq d(x', y') + d(x', x) + d(y', y) < d(x', y') + \epsilon.$$
+			Thus, $\abs{d(x, y)  - d(x', y')} < \epsilon$, which implies $d(x', y')\in B_{\epsilon}(d(x, y)) \subset (a, b)$, i.e. $(x', y')\in d^{-1}((a, b))$, which shows that $B_{\epsilon/2}(x)\times B_{\epsilon/2}(y) \subset d^{-1}(a, b)$, and we also have $(x, y)\in B_{\epsilon/2}(x)\times B_{\epsilon/2}(y)$.
+			
+			
 		\end{proof}
 		
 		\begin{defn}[Neighborhood \cite{topology-singh}]
