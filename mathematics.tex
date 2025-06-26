@@ -10,10 +10,10 @@
 \usepackage{mathrsfs}
 \usepackage{array}
 \usepackage{cancel}
+\usepackage[margin = 1in]{geometry}
+
 \addbibresource{references.bib}
 
-% NEW (16-04-21, 19p49)
-\usepackage[margin = 1in]{geometry}
 \numberwithin{equation}{section}
 
 \theoremstyle{definition}
@@ -79,68 +79,6 @@
 	
 	\newpage 
 	\include{normalizing_flows.tex}
-
-	\newpage 
-	
-	\section{Diffusion-Based Models}
-		
-		\begin{remark}[ELBO VAEs]
-			One can easily show that the (marginal) log-likelihood of the data is given as
-			\cite{cs_231n_lec_13}
-			\begin{align}\label{eq:elbo__marginal_LL}
-				\log p(x) = \text{ELBO} + D_{\text{KL}}\left[ q_{\phi}(z\vert x) \vert\vert p(z\vert x)\right], 
-			\end{align}
-			
-			\noindent where $p(z\vert x)$ is the true posterior and ELBO is the usual evidence lower bound, i.e.
-			\begin{align}
-				\text{ELBO} = \mathbb E_{q_{\phi}(z\vert x)}\left[ \log p_{\psi}(x\vert z) \right] - D_{\text{KL}}\left[ q_{\phi}(z\vert x) \vert\vert p(z) \right]
-			\end{align}
-			
-			\noindent Eq.~\eqref{eq:elbo__marginal_LL} shows that since the (marginal) log-likelihood is not parameterized by any NN parameters, maximizing the ELBO necessary leads to a lower $D_{\text{KL}}\left[ q_{\phi}(z\vert x) \vert\vert p(z\vert x)\right]$, which is the reverse KLD. 
-			
-		\end{remark}
-	
-	\begin{lemma}[ELBO]
-		Let $q(x_{0})$ denote the true (unknown) distribution of a real image $x_{0}$, and let $p_{\theta}(x_{0})$ be the model's approximation to $q(x_{0})$, then we have the following ELBO-like loss: 
-		\begin{align}\label{elbo_diffusion_models}
-			\mathbb E_{q(x_{0})}\left[\log p_{\theta}(x_{0})\right] \geq -\mathbb E_{q(x_{0}, \dots, x_{T})}\left[\log \frac{q(x_{1}, \dots, x_{T} \mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right].    
-		\end{align}
-	\end{lemma}
-	
-	\begin{proof}
-	\cite{lilian_weng}
-		\begin{align}
-			\log p_{\theta}(x_{0}) &\geq \log p_{\theta}(x_{0}) - D_{\text{KL}}\left[ q(x_{1}, \dots, x_{T}\mid x_{0})\mid\mid p_{\theta}(x_{1}, \dots, x_{T}\mid x_{0}) \right]
-			\\[4pt] &= \log p_{\theta}(x_{0}) - \mathbb E_{q(x_{1}, \dots, x_{T}\mid x_{0})}\left[\log\frac{q(x_{1}, \dots, x_{T}\mid x_{0})}{p_{\theta}(x_{1}, \dots, x_{T} \mid x_{0})}\right]
-			\\[4pt] &= \log p_{\theta}(x_{0}) - \mathbb E_{q(x_{1}, \dots, x_{T}\mid x_{0})}\left[\log\frac{q(x_{1}, \dots, x_{T}\mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})/ p_{\theta}(x_{0})}\right]
-			\\[4pt] &= -\mathbb E_{q(x_{1}, \dots, x_{T}\mid x_{0})}\left[\log\frac{q(x_{1}, \dots, x_{T}\mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right]
-			\\[4pt] \Rightarrow \mathbb E_{q(x_{0})}\left[\log p_{\theta}(x_{0})\right] &\geq -\mathbb E_{q(x_{0})}\mathbb E_{q(x_{1}, \dots, x_{T}\mid x_{0})}\left[\log\frac{q(x_{1}, \dots, x_{T}\mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right]
-		\end{align}
-		Assuming that the assumptions of Fubini's theorem hold and from the monotonicity of the expectation, we have: 
-		\begin{align}\label{diff_elbo_to_be_proved}
-			\mathbb E_{q(x_{0})}\left[ \log p_{\theta}(x_{0}) \right] &\geq \mathbb E_{q(x_{1}, \dots,  x_{T} \mid x_{0})q(x_{0})}\left[\log \frac{q(x_{1}, \dots, x_{T} \mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right] 
-			\\ &= E_{q(x_{0}, \dots,  x_{T} \mid x_{0})}\left[\log \frac{q(x_{1}, \dots, x_{T} \mid x_{0})}{p_{\theta}(x_{0}, \dots, x_{T})}\right].
-		\end{align}
-	\end{proof}
-	
-	\begin{defn}[Wiener process]
-		Let $W_{t}$ be a real-valued continuous-time stochastic process.\ It is said to be a \textit{Wiener process} if the following properties hold: 
-		\begin{itemize}
-			\item $W_{0} = 0$, 
-			\item $W$ has independent increments, i.e.\ $\forall t > 0:$, the terms $W_{t+u} - W_{t}$, $u\geq 0$ are independent of past values $W_{s}$, $s\leq t$, 
-			\item $W$ has Gaussian increments:\ $W_{t+u} - W_{t} \sim \mathcal N(0, u)$, 
-			\item $W$ has continuous paths, i.e.\ $\forall t$, $W_{t}$ is continuous in $t$. 
-		\end{itemize}
-		source:\ \url{https://en.wikipedia.org/wiki/Wiener_process}
-	\end{defn}
-	
-	\begin{remark}
-		If $\xi_{1}$, $\xi_{2}$, $\dots$ be i.i.d random variables with a mean of $0$ and standard deviation of $1$.\ For every $n$, define a continuous time stochastic process 
-		\begin{align}\label{random_walk_Wiener}
-			W_{n}(t) := \frac{1}{\sqrt{n}}\sum_{1\leq k\leq\lfloor nt \rfloor}\xi_{k} 
-		\end{align}
-		This is what makes Wiener processes so powerful (and explains the ubiquity of Brownian motion).\ According to Donsker's theorem, the  above expression becomes a Wiener process.
-	\end{remark}
 
 	\newpage 
 	\include{miscellaneous.tex}
