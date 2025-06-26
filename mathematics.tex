@@ -1,7 +1,11 @@
 \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{comment, listings, centernot, amssymb, hyperref, graphicx, amsmath, textcomp, breqn, mathtools, csquotes, cancel, enumitem, amsthm, caption, bm, tikz} % amsthm provides `proof`environment
-\usepackage[backend=biber]{biblatex}
+
+% https://tex.stackexchange.com/questions/36307/formatting-back-references-in-bibliography
+% https://tex.stackexchange.com/questions/51434/biblatex-citation-order
+% https://stackoverflow.com/questions/3996844/how-do-i-cite-range-of-references-using-latex-and-bibtex
+\usepackage[backend=biber, backref=true, sorting=none, style=numeric-comp]{biblatex}
 \usepackage[english]{babel}
 \usepackage{mathrsfs}
 \usepackage{array}
