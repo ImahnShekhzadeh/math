@@ -189,3 +189,15 @@
 		\end{align*}
 	\end{enumerate}
 \end{proof}
+
+\begin{defn}[Infinite cartesian product \cite{topology-singh}]\label{defn:infinite_cartesian_prods}
+	Let $A$ be a countable or uncountable index set, i.e. $A$ is not finite. Let $\{X_{\alpha}\}_{\alpha\in A}$ be a collection of sets. Then we define the cartesian product
+	\begin{align}
+		\prod_{\alpha\in A}X_{\alpha} := \left\{x: A\to\bigcup_{\alpha\in A}X_{\alpha} \mid x(\alpha)\in X_{\alpha} \ \forall \alpha\in A\right\},
+	\end{align}
+	i.e. the cartesian product is the set of all functions mapping from $A$ to the union of $X_{\alpha}$. We write $x_{\alpha} = x(\alpha)$ and denote the function $x$ by $x = (x_{\alpha})_{\alpha\in A}$. If $X_{\alpha} = X$ for all $\alpha\in A$, then $\prod_{\alpha\in A}X_{\alpha}$ is the set of all functions $A\to X$, which we denote by $X^{A}$.
+\end{defn}
+
+\begin{remark}
+	If any $X_{\alpha} = \emptyset$, then $\prod_{\alpha\in A}X_{\alpha} = \emptyset$, since there is no function $x$ s.t. $x(\alpha) \in X_{\alpha}$.
+\end{remark}

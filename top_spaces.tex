@@ -723,6 +723,14 @@ In topological spaces (which are not necessarily metrizable), we define continui
 	Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces. Then a function $f: X \to Y$ is called continuous on $X$ if for every $U\in \tau_Y$, $f^{-1}(U) := \{ x\in X \mid f(x)\in U \} \in \tau_X$.
 \end{defn}
 
+\begin{exmp}
+	Let $(X, \tau_X)$ be a topological space, then the identity $\text{id}: X\to X$ is continuous.
+\end{exmp}
+
+\begin{proof}
+	Let $U\in \tau_X$, then $f^{-1}(U) = U\in\tau_X$.
+\end{proof}
+
 \begin{remark}
 	In other words, the preimage of an open set is always open. For topological spaces that are metrizable, the $\epsilon$-$\delta$ definition of continuity as in Def. \ref{defn:continuity} is equivalent to the preceding definition, cf. Theorem \ref{thrm:preimages_continuous_functions}.
 \end{remark}
