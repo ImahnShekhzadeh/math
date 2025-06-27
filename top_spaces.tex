@@ -655,9 +655,48 @@ If bases of the coordinate spaces are known, then we can construct a smaller bas
 	and 
 	$$d(x, y) \leq d(x, y') + d(y', y) \leq d(x', y') + d(x', x) + d(y', y) < d(x', y') + \epsilon.$$
 	Thus, $\abs{d(x, y)  - d(x', y')} < \epsilon$, which implies $d(x', y')\in B_{\epsilon}(d(x, y)) \subset (a, b)$, i.e. $(x', y')\in d^{-1}((a, b))$, which shows that $B_{\epsilon/2}(x)\times B_{\epsilon/2}(y) \subset d^{-1}(a, b)$, and we also have $(x, y)\in B_{\epsilon/2}(x)\times B_{\epsilon/2}(y)$.
-	
-	
 \end{proof}
+
+Let us now look at how to define a topology on the infinite Cartesian product of sets.
+
+\begin{theorem}
+	Let $A$ be an index set, and consider the collection $\{X_{\alpha}\}_{\alpha\in A}$, where $X_{\alpha}$ is a topological space for each $\alpha\in A$. Consider the set
+	\begin{align}\label{basis:box_topology}
+		\mathscr B := \left\{ \prod_{\alpha\in A}U_{\alpha}\mid U_{\alpha}\subset X_{\alpha}\ \text{open} \right\},
+	\end{align}
+	then it fulfills the requirements of Theorem \ref{thrm:gen_top_by_coll_subsets}.
+\end{theorem}
+
+\begin{proof}
+	Choose $U_{\alpha} = X_{\alpha}$ for every $\alpha\in A$, then $\prod_{\alpha\in A}X_{\alpha} = \prod_{\alpha\in A}U_{\alpha}$.
+	
+	Now let $U_{\alpha}\subset X_{\alpha}$ and $V_{\alpha}\subset X_{\alpha}$ for all $\alpha\in A$, then $\prod_{\alpha\in A}U_{\alpha}\in \mathscr B$ and $\prod_{\alpha\in A}V_{\alpha}\in \mathscr B$. Since $\left(\prod_{\alpha\in A}U_{\alpha}\right) \cap \left(\prod_{\alpha\in A}V_{\alpha}\right) = \prod_{\alpha\in A}\left(U_{\alpha}\cap V_{\alpha}\right)\in\mathscr B$, we are done.
+\end{proof}
+
+\begin{defn}[Box topology \cite{topology-singh}]
+	Since $\mathscr B$ from Eq. \eqref{basis:box_topology} fulfills the requirements of Theorem \ref{thrm:gen_top_by_coll_subsets}, there is a topology for which $\mathscr B$ is a basis. This topology on $\prod_{\alpha\in A}X_{\alpha}$ is called the \textit{box topology}. For $\beta\in A$, the map 
+	\begin{align}\label{eq:projection_box_topology}
+		p_{\beta}: \prod_{\alpha\in A}X_{\alpha}\to X_{\beta}, (x_\alpha)_{\alpha\in A}\mapsto x_{\beta}
+	\end{align} is the \textit{projection} onto the $\beta$-th factor, also cf. Definition \ref{defn:infinite_cartesian_prods} for the notation.
+\end{defn}
+
+\begin{remark}
+	The projections $p_{\beta}$ are continuous.
+\end{remark}
+
+\begin{proof}
+	Let $U_{\beta}\subset X_{\beta}$ be open, then
+	\begin{align*}
+		p_{\beta}^{-1}(U_\beta) &= \left\{ (x_{\alpha})_{\alpha\in A}\in \prod_{\alpha\in A}X_{\alpha}\mid p_{\beta}\left((x_{\alpha})_{\alpha\in A}\right)\in U_{\beta} \right\} 
+		\\ &= \left\{ (x_{\alpha})_{\alpha\in A}\in \prod_{\alpha\in A}X_{\alpha}\mid x_{\beta}\in U_{\beta} \right\}
+		\\ &= \prod_{\alpha\in A}U_{\alpha}\in \mathscr B,
+	\end{align*}
+	where $U_{\alpha} = X_{\alpha}$ for $\alpha\ne\beta$, and $U_{\alpha} = U_{\beta}$ for $\alpha= \beta$.
+\end{proof}
+
+\begin{remark}
+	If $A$ is a finite index set, then the box topology is the product topology.
+\end{remark}
 
 \begin{defn}[Neighborhood \cite{topology-singh}]
 	Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$.
