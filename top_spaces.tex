@@ -540,7 +540,7 @@ If bases of the coordinate spaces are known, then we can construct a smaller bas
 	Since $A\subset X$, $A$ is endowed with the subspace topology from $X$, similarly for $B\subset Y$, and thus $A\times B$ is the product topology of the subspace topologies on $A$ and $B$, where the basis members are of form $(A\cap U)\times (B\cap V)$ for $U\in\tau_X$ and $V\in\tau_Y$. Note that $(A\cap U)\times (B\cap V) = (A\times B)\cap (U\times V)$, and thus both topologies coincide.
 \end{remark}
 
-\begin{theorem}
+\begin{theorem}\label{thrm:prod_top_continuity_comps_projs}
 	Let $X, Y, Z$ be topological spaces. A function $f: Z\to X\times Y$ is continuous iff the compositions $p_X\circ f: Z\to X$ and $p_Y\circ f: Z\to Y$ are continuous.
 \end{theorem}
 
@@ -697,6 +697,19 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 \begin{remark}
 	If $A$ is a finite index set, then the box topology is the product topology.
 \end{remark}
+
+\begin{remark}
+	Note that if $A$ is an infinite index set and we equip $\prod_{\alpha\in A}X_{\alpha}$ with the box topology, then if $p_{\beta}\circ f$ is continuous for some $\beta\in A$, where $f$ maps from a topological space to $\prod_{\alpha\in A}X_{\alpha}$, this does not imply that $f$ is continuous, unlike where $A$ is finite, cf. Theorem \ref{thrm:prod_top_continuity_comps_projs}.
+\end{remark}
+
+\begin{exmp}[\cite{topology-singh}]
+	Let $A = \mathbb N$ and $X_{\alpha} = \mathbb R$ for all $\alpha\in\mathbb N$. Now consider the box topology on $\prod_{\alpha\in\mathbb N}X_{\alpha} = \mathbb R^{\mathbb N}$. Now define $f: \mathbb R\to \mathbb R^{\mathbb N}, t\mapsto \seq[t]$, where on $\mathbb R$ we consider the standard topology. If for any $n\in\mathbb N$, $p_n: \mathbb R^{\mathbb N}\to \mathbb R$ is the projection map, then $p_n\circ f: \mathbb R\to\mathbb R$ is the identity map on $\mathbb R$, which is continuous. However, $f$ is not continuous. To see this, define $B := \prod_{n\in\mathbb N}U_n$, where $U_n := (-1/n, +1/n)$. Clearly, $B$ is open in $\mathbb R^{\mathbb N}$, yet 
+	\begin{align*}
+		f^{-1}(B) &= \left\{y\in\mathbb R\mid f(y)\in \prod_{n\in\mathbb N}U_n\right\} 
+		\\ &= \left\{ y\in\mathbb R\mid \seq[y]\in \left\{\seq[u_n]\mid u_n\in \left(-\frac{1}{n}, \frac{1}{n}\right)\ \forall n\in\mathbb N\right\} \right\} 
+		\\ &= \bigcap_{n\in\mathbb N}\left(-\frac{1}{n}, \frac{1}{n}\right) = \{0\},
+	\end{align*} which is not an open set in the standard topology of $\mathbb R$.
+\end{exmp}
 
 \begin{defn}[Neighborhood \cite{topology-singh}]
 	Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$.
