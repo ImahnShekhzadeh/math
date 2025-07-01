@@ -26,17 +26,43 @@
 \end{defn}
 
 \begin{defn}[Neighborhood \cite{topology-singh}]
-	Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$. If $N$ is open, then we say that $U$ is an \textit{open neighborhood} of $x$ in $X$. 
+	Let $(X, \tau)$ be a topological space and $x\in X$, then a set $N\subset X$ is called a \textit{neighborhood} of $x$ in $X$ if there is an open set $U\in\tau$ with $x\in U\subset N$. If $N$ is open, then we say that $N$ is an \textit{open neighborhood} of $x$ in $X$. 
 \end{defn}
 
 \begin{theorem}\label{thrm:open_via_nbd}
 	$U\subset X$ is open iff $U$ is a neighborhood of each of its points.
 \end{theorem}
 
-\enquote{$\Rightarrow$} By definition.
+\begin{proof}
+	\enquote{$\Rightarrow$} By definition.
+	
+	\enquote{$\Leftarrow$} If $U$ is a neighborhood of each of its points, then there is an open set $U_x$ in $X$ s.t. $x\in U_x\subset U$. Note that \cite{3964428}
+	$$U = \bigcup_{x\in U}\{x\} \subset \bigcup_{U_x\subset U}U_x\subset U,$$ which shows that $U = \bigcup_{U_x\subset U}U_x$, completing the proof.
+\end{proof}
 
-\enquote{$\Leftarrow$} If $U$ is a neighborhood of each of its points, then there is an open set $U_x$ in $X$ s.t. $x\in U_x\subset U$. Note that \cite{3964428}
-$$U = \bigcup_{x\in U}\{x\} \subset \bigcup_{U_x\subset U}U_x\subset U,$$ which shows that $U = \bigcup_{U_x\subset U}U_x$, completing the proof.
+\begin{defn}[Neighborhood basis \cite{topology-singh}]
+	Let $X$ be a topological space and $x\in X$. A \textit{neighborhood basis} (also called \textit{local basis}) at $x$ is a collection $\mathscr B_x$ of neighborhoods of $x$ s.t. each neighborhood of $x$ contains some member of $\mathscr B_x$.
+\end{defn}
+
+\begin{exmp}
+	The family of all neighborhoods of a point is a neighborhood basis at that point.
+\end{exmp}
+
+\begin{exmp}
+	The family of all open neighborhoods of a point is a neighborhood basis at that point.
+\end{exmp}
+
+\begin{exmp}
+	If $X$ is a topological space, where the topology is the discrete topology, then a neighborhood basis to $x\in X$ is $\mathscr B_x = \{\{x\}\}$.
+\end{exmp}
+
+\begin{exmp}
+	If $X$ is a metric space, then the open $r$-balls at $x$ for all $r > 0$ form a neighborhood basis at $x$.
+\end{exmp}
+
+\begin{exmp}\label{exmp:metrizable_top_space_countable_neighborhood_basis}
+	If $X$ is a metric space, then $\mathscr B_x = \left\{B_{1/n}(x) \mid n\in\mathbb N\right\}$ forms a neighborhood basis at $x$.
+\end{exmp}
 
 \begin{defn}\label{defn:comparison_of_topologies}
 	Let $\tau$ and $\tau'$ be topologies on $X$. Then we call $\tau'$ \textit{finer} than $\tau$ if $\tau\subset\tau'$, and we say that $\tau$ is \textit{coarser} than $\tau'$. In either case, we say that $\tau$ and $\tau'$ are \textit{comparable}, otherwise we say they are non-comparable.
