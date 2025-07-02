@@ -25,6 +25,33 @@
 	\end{align*}
 \end{proof}
 
+\begin{theorem}\label{thrm:new_metric_out_of_given_metric}
+	Let $(X, d)$ be a metric space, then $(X, \rho)$ with 
+	\begin{align}
+		\rho(x, y) := \frac{d(x, y)}{1 + d(x, y)}
+	\end{align}
+	for all $x, y\in X$ is also a metric space.
+\end{theorem}
+
+\begin{proof}[Proof \cite{1860725, 686797}]
+	Clearly, $\rho$ is positive and symmetric. If $\rho(x, y) = 0$, then this is only possible iff $d(x, y) = 0$, which is equivalent to $x = y$, i.e. $\rho$ is also definite. For the triangle inequality, first note that for all $a, b\in\mathbb R_{\geq 0}$ with $a\in [0, b]$, we have
+	\begin{align}\label{eq:inequality_reals_intermed_step}
+		\frac{a}{1 + a} \leq \frac{b}{1 + b}.
+	\end{align} 
+	If $a = 0 = b$ or $a = 0$ and $b > 0$, then the inequality trivially holds. Thus, assume $a, b\ne 0$. Then
+	$$\frac{a}{1 + a} = \frac{1}{\frac{1}{a} + 1} \leq \frac{1}{\frac{1}{b} + 1} = \frac{b}{1 + b},$$ since $b\geq a$. Thus, for any $x, y, z\in X$, we have
+	\begin{align*}
+		\rho(x, y) &= \frac{d(x, y)}{1 + d(x, y)} \overset{\tiny\eqref{eq:inequality_reals_intermed_step}}{\leq} \frac{d(x, z) + d(z, y)}{1 + d(x, z) + d(z, y)} 
+		\\ &= \frac{d(x, z)}{1 + d(x, z) + d(z, y)} + \frac{d(z, y)}{1 + d(x, z) + d(z, y)}
+		\\ &\leq \frac{d(x, z)}{1 + d(x, z)} + \frac{d(z, y)}{1 + d(z, y)} 
+		\\ &= \rho(x, z) + \rho(z, y).
+	\end{align*}
+\end{proof}
+
+\begin{remark}
+	The metric $\rho$ from Theorem \ref{thrm:new_metric_out_of_given_metric} is bounded between $0$ and $1$, $\rho(x, y) \in [0, 1)$ for all $x, y\in X$.
+\end{remark}
+
 \begin{theorem}\label{thrm:vierecksungleichung}
 	Let $(X, d)$ be a metric space. Then we have the inequality
 	\begin{align}
