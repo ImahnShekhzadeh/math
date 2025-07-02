@@ -448,6 +448,22 @@ Let us look at when a given collection $\mathscr B$ of subsets of $X$ can serve 
 	\end{align}
 \end{proof}
 
+\begin{theorem}
+	Let $(X, d)$ be a metric space, and consider the metric $$\rho(x, y) := \frac{d(x, y)}{1 + d(x, y)} $$ for all $x, y\in X$, cf. Theorem \ref{thrm:new_metric_out_of_given_metric}. Then $d$ and $\rho$ are topologically equivalent.
+\end{theorem}
+
+\begin{proof}
+	Choose arbitrary $x\in X$ and $\epsilon > 0$. Choose $\delta_1 := \epsilon/(1 - \epsilon)$, then $B_{\delta_1}^{d}(x) \subset B_{\epsilon}^{\rho}(x)$, since for any $y\in B_{\delta_1}^{d}(x)$, we have 
+	\begin{align*}
+		d(x, y) < \delta_1 &= \frac{\epsilon}{1 - \epsilon} \Leftrightarrow d(x, y) - \epsilon d(x, y) < \epsilon \Leftrightarrow d(x, y) < \epsilon + \epsilon d(x, y) = \epsilon (1 + d(x, y))
+		\\ \Leftrightarrow \frac{d(x, y)}{1 + d(x, y)} &= \rho(x, y) \leq \epsilon,
+	\end{align*}
+	i.e. $y\in B_{\epsilon}^{\rho}(x)$. Conversely, choose $\delta_2 := \epsilon$, then $B_{\delta_2}^{\rho}(x) \subset B_{\epsilon}^{d}(x)$, since for any $y\in B_{\delta_2}^{\rho}(x)$, $\rho(x, y) \leq d(x, y)$.
+	
+	
+	Thus, by Theorem \ref{thrm:topological_equivalence}, $d$ and $\rho$ are topologically equivalent.
+\end{proof}
+
 \begin{remark}
 	There exist metrics $d$ and $d'$ on a set $X$ that are (topologically) equivalent, but not strongly equivalent. \cite{5065146}
 \end{remark}
