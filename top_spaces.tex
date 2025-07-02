@@ -448,7 +448,7 @@ Let us look at when a given collection $\mathscr B$ of subsets of $X$ can serve 
 	\end{align}
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{thrm:new_metric_top_equivalent}
 	Let $(X, d)$ be a metric space, and consider the metric $$\rho(x, y) := \frac{d(x, y)}{1 + d(x, y)} $$ for all $x, y\in X$, cf. Theorem \ref{thrm:new_metric_out_of_given_metric}. Then $d$ and $\rho$ are topologically equivalent.
 \end{theorem}
 
@@ -459,7 +459,6 @@ Let us look at when a given collection $\mathscr B$ of subsets of $X$ can serve 
 		\\ \Leftrightarrow \frac{d(x, y)}{1 + d(x, y)} &= \rho(x, y) \leq \epsilon,
 	\end{align*}
 	i.e. $y\in B_{\epsilon}^{\rho}(x)$. Conversely, choose $\delta_2 := \epsilon$, then $B_{\delta_2}^{\rho}(x) \subset B_{\epsilon}^{d}(x)$, since for any $y\in B_{\delta_2}^{\rho}(x)$, $\rho(x, y) \leq d(x, y)$.
-	
 	
 	Thus, by Theorem \ref{thrm:topological_equivalence}, $d$ and $\rho$ are topologically equivalent.
 \end{proof}
@@ -817,6 +816,56 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	
 	Finally, let $U_{\alpha}$, $\alpha\in A$, be open in $X_{\alpha}$, then $p_{\beta}(\prod_{\alpha\in A}U_{\alpha}) = U_{\beta}$, which is open, and thus the $p_{\beta}$ are open maps.
 \end{proof}
+
+\begin{theorem}
+	For all $n\in\mathbb N$, let $(X_n, \tau_n)$ be metrizable topological spaces. Then $\prod_{i\in\mathbb N}X_i$, endowed with the product topology, is metrizable.
+\end{theorem}
+
+\begin{proof}\cite{361778, 362319}
+	First, we construct a metric on $X := \prod_{i\in\mathbb N}X_i$. Since each $X_i$ is a metrizable topological space, there is a metric $d_i$ on $X_i$ inducing the topology on $X_i$. For all $x, y\in X$, define
+	$$d(x, y) := \sum_{n\in\mathbb N}\frac{d_n(x_n, y_n)}{2^n\left(1 + d_n(x_n, y_n)\right)}.$$
+	From Theorem \ref{thrm:new_metric_out_of_given_metric}, we know that $\rho_n(x_n, y_n) := d_n(x_n, y_n) / (1 + d_n(x_n, y_n))$ is a metric bounded above by $1$, which is topologically equivalent to $d_n$, cf. Theorem \ref{thrm:new_metric_top_equivalent}. 
+	
+	Thus, instead of condidering $d(x, y)$ as defined above, we can consider 
+	\begin{align}\label{eq:metric_inducing_tychonoff_top_on_countable_prod}
+		\rho(x, y) := \sum_{n\in\mathbb N}\frac{\rho_n(x_n, y_n)}{2^n}.
+	\end{align}
+	Clearly, this definition is well-defined, since the series converges absolutely, as $\rho_n < 1$ for all $n$.
+	
+	To see that $\rho$ is a metric, note that $\rho$ is clearly positive, definite and symmetric. For the trinagle inequality, note that for all $x, y, z\in X$, we have
+	\begin{align*}
+		\rho(x, z) &= \sum_{n=1}^{\infty}\frac{\rho_n(x_n, z_n)}{2^n} \leq \sum_{n=1}^{\infty}\frac{\rho_n(x_n, y_n) + \rho_n(y_n, z_n)}{2^n} 
+		\\ &= \sum_{n=1}^{\infty}\frac{\rho_n(x_n, y_n)}{2^n} + \sum_{n=1}^{\infty}\frac{\rho_n(y_n, z_n)}{2^n} = \rho(x, y) + \rho(y, z)
+	\end{align*}
+	cf. Ref. \cite{2163556}, which shows the triangle inequality, and thus $\rho$ is a metric.
+	
+	We will now prove that the topology generated (induced) by $\rho$ is the product topology on $X$. 
+	
+	Let $U$ be a member of the basis of the product topology, i.e. $U = \prod_{n\in\mathbb N}U_n$, where all $U_n\subset X_n$ are open in $X_n$ and where we have a finite set $F\subset\mathbb N$ s.t. $n\notin F$ if $U_n = X_n$. We want to show that for any $x\in U$, there is an open ball $B^{\rho}_{r}(x)$ s.t. $B_r^{\rho}(x)\subset U$. For every $n\in F$, we have $x_n\in U_n$, and so there is $r_n > 0$ s.t. $B^{\rho_n}_{r_n}(x_n) \subset U_n$, since $\rho_n$ induces the topology on $X_n$. As $F$ is finite, we can find an $r\in (0, 1)$ s.t. $r \leq r_n/2^n$ for all $n\in F$.
+	
+	Now take any $y\in B_r^{\rho}(x)$, i.e. $\rho(x, y) < r$. For $n\in F$, we know that $$\frac{\rho_n(x_n, y_n) }{2^n} \overset{\tiny\eqref{eq:metric_inducing_tychonoff_top_on_countable_prod}}{\leq} \rho(x, y) < r \leq \frac{r_n}{2^n}\Rightarrow \rho_n(x_n, y_n) < r_n\Rightarrow y_n\in B_{r_n}^{\rho_n}(x_n) \subset U_n.$$
+	Thus, for all $n\in F$, $y_n\in U_n$, and for all $n\notin F$, $y_n\in X_n$, implying that $y\in U$, i.e. $B_{r}^{\rho}(x)\subset U$.
+	
+	We also want to show that if we consider $B^{\rho}_{r}(x)$ for an arbitrary $r > 0$ and $x\in X$, then there is a basis member $U$ of the product topology on $X$ s.t. $x\in U\subset B^{\rho}_{r}(x)$. For this, choose an $n\in\mathbb N$ s.t. $1/2^N < r/2$. For $1\leq k\leq N$, define $U_k := B^{\rho_k}_{r/(2N)}(x_k) \subset X_k$, and for $k > N$, define $U_k := X_k$. Setting $U := \prod_{k\in \mathbb N}U_k$, we will now show that $x\in U\subset B^{\rho}_{r}(x)$. Clearly, $x\in U$. Now, if $y\in U$, then for $1\leq k\leq N$, we have
+	\begin{align}\label{eq:metric_inducing_tychonoff_top_on_countable_prod_intermed_1}
+		\rho_k(x_k, y_k) < \frac{r}{2N}\Rightarrow \sum_{k=1}^{N}\frac{\rho_k(x_k, y_k)}{2^k} \leq \sum_{k=1}^{N}\rho_k(x_k, y_k) < \frac{Nr}{2N} = \frac{r}{2},
+	\end{align}
+	and for $k > N$, we have 
+	\begin{align}\label{eq:metric_inducing_tychonoff_top_on_countable_prod_intermed_2}
+		\sum_{k = N + 1}^{\infty}\frac{\rho_k(x_k, y_k)}{2^k} < \sum_{k = N + 1}^{\infty}\frac{1}{2^k} = \sum_{k=1}^{\infty}\frac{1}{2^k} - \sum_{k=1}^{N}\frac{1}{2^k} = 1 - \left(1 - \frac{1}{2^N}\right) = \frac{1}{2^N} < \frac{r}{2},
+	\end{align}
+	and thus 
+	\begin{align*}
+		\rho(x, y) = \sum_{k=1}^{\infty}\frac{\rho_k(x_k, y_k)}{2^k} = \sum_{k=1}^{N}\frac{\rho_k(x_k, y_k)}{2^k} + \sum_{k=N+1}^{\infty}\frac{\rho_k(x_k, y_k)}{2^k} \overset{\tiny\eqref{eq:metric_inducing_tychonoff_top_on_countable_prod_intermed_1}, \eqref{eq:metric_inducing_tychonoff_top_on_countable_prod_intermed_2}}{<} \frac{r}{2} + \frac{r}{2} < r,
+	\end{align*}
+	i.e. $y\in B_r^{\rho}(x)$. 
+	
+	Thus, by Corollary \ref{corollary:equality_of_topologies}, $\rho$ induces the product topology on $X$.
+\end{proof}
+
+\begin{remark}
+	The uncountable product of metrizable topological spaces is not metrizable.
+\end{remark}
 
 \begin{defn}
 	Let $(X, \tau)$ be a topological space, then a sequence $\seq[\varphi_n]$ is said to converge to a point $\varphi\in X$ if for each neighborhood $U$ of $x$, there exists an $N\in\mathbb N$ s.t. for all $n\geq N$, we have $\varphi_n\in U$ \cite{289740}.
