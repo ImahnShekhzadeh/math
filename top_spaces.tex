@@ -64,6 +64,18 @@
 	If $X$ is a metric space, then $\mathscr B_x = \left\{B_{1/n}(x) \mid n\in\mathbb N\right\}$ forms a neighborhood basis at $x$.
 \end{exmp}
 
+\begin{defn}[\cite{topology-singh}]
+	A topological space is \textit{first-countable} if it has a countable neighborhood basis at each point.
+\end{defn}
+
+\begin{exmp}
+	Every metric space is first-countable.
+\end{exmp}
+
+\begin{proof}
+	For any point $x$, the local basis at $x$ given by the collection $\mathscr B_x = \left\{ B_{1/n}^{d}(x) \mid n\in\mathbb N\right\}$ is countable.
+\end{proof}
+
 \begin{defn}\label{defn:comparison_of_topologies}
 	Let $\tau$ and $\tau'$ be topologies on $X$. Then we call $\tau'$ \textit{finer} than $\tau$ if $\tau\subset\tau'$, and we say that $\tau$ is \textit{coarser} than $\tau'$. In either case, we say that $\tau$ and $\tau'$ are \textit{comparable}, otherwise we say they are non-comparable.
 \end{defn}
@@ -864,7 +876,7 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 \end{proof}
 
 \begin{remark}
-	The uncountable product of metrizable topological spaces is not metrizable.
+	The uncountable product of metrizable topological spaces is not necessarily metrizable, since \Huge\color{red}TODO\color{black}.
 \end{remark}
 
 \begin{defn}
