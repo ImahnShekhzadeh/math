@@ -767,7 +767,7 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	\end{align} is the \textit{projection} onto the $\beta$-th factor, also cf. Definition \ref{defn:infinite_cartesian_prods} for the notation.
 \end{defn}
 
-\begin{remark}
+\begin{remark}\label{remark:projections_inf_Cart_prod_continuous}
 	The projections $p_{\beta}$ are continuous.
 \end{remark}
 
@@ -837,6 +837,25 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	From Remark \ref{remark:basis_tychonoff_topology}, we know that the collection $\mathscr B$ of sets of the form $\prod_{\alpha\in A}U_{\alpha}$, where $U_{\alpha} = X_{\alpha}$ for all but finitely many $\alpha$'s, and $U_{\alpha}$ being open in $X_{\alpha}$ for all $\alpha$, is a basis for the product topology on $\prod_{\alpha\in A}X_{\alpha}$. Since $\mathscr B_a$ is a basis for $X_{\alpha}$, by Theorem \ref{thrm:collection_of_subsets_basis}, for all $x_{\alpha}\in U_{\alpha}$, there exists a $B_{\alpha}\in \mathscr B_{\alpha}$ s.t. $x_{\alpha}\in B_{\alpha}\subset U_{\alpha}$. Thus, for all $x = \left(x_{\alpha}\right)_{\alpha\in A}\in \prod_{\alpha \in A}U_{\alpha}$, there exists a $\prod_{\alpha\in A} B_{\alpha}\in\mathscr B'$ s.t. $x\in \prod_{\alpha\in A}B_{\alpha}\subset \prod_{\alpha\in A}U_{\alpha}$. 
 	
 	Conversely, it is obvious that members of $\mathscr B'$ are open in the product topology on $\prod_{\alpha\in A}X_{\alpha}$. Thus, by Corollary \ref{corollary:equality_of_topologies}, $\mathscr B'$ is also a basis for the product topology on $\prod_{\alpha\in A}X_{\alpha}$.
+\end{proof}
+
+\begin{theorem}
+	Let $X_\alpha$, $\alpha\in A$, be a family of topological spaces, and let $Y$ be a topological space. A function $f: Y\to \prod_{\alpha\in A}X_{\alpha}$, where $\prod_{\alpha\in A}X_{\alpha}$ is equipped with the product topology, is continuous iff $p_{\alpha}\circ f: Y\to X_{\alpha}$ is continuous, where $p_{\alpha}$ is the projection onto the $\alpha$-th factor, cf. Eq. \eqref{eq:projection_box_topology}. This property characterizes the product topology for $\prod_{\alpha\in A}X_{\alpha}$.
+\end{theorem}
+
+\begin{proof}
+	If $f$ is continous, so is $p_{\alpha}\circ f$, since $p_{\alpha}$ is continuous, cf. Remark \ref{remark:projections_inf_Cart_prod_continuous}. 
+	
+	Conversely, assume that $p_{\alpha}\circ f$ is continous, then for any open $U_{\alpha}\subset X_{\alpha}$, $(p_{\alpha}\circ f)^{-1}(U_{\alpha})$ is open in $Y$. Since $(p_{\alpha}\circ f)^{-1}(U_{\alpha}) = f^{-1}(p_{\alpha}^{-1}(U_{\alpha}))$, and $p_{\alpha}$ is continuous, i.e. $p_{\alpha}^{-1}(U_{\alpha})$ is open in $\prod_{\alpha\in A}X_{\alpha}$, this implies that $f$ is continuous, as $p_{\alpha}^{-1}(U_{\alpha})$ is a subbasis for the product topology on $\prod_{\alpha\in A}X_{\alpha}$, also cf. Theorem \ref{thrm:set_theory_unions_intersects_preimages}.
+	
+	To see that $p_{\alpha}\circ f$ continuous iff $f$ is continuous characterizes the product topology for $\prod_{\alpha\in A}X_{\alpha}$, define $X := \prod_{\alpha\in A}X_{\alpha}$ and denote the product topology on $X$ by $\mathscr T$. Let $\mathscr T'$ be another topology on $X$ s.t. $f: Y\to (X, \mathscr T')$ is continuous iff $p_{\alpha}\circ f: Y\to X_{\alpha}$ is continuous. Since the identity $\iota: (X, \mathscr T') \to (X, \mathscr T')$ is continuous, $p_{\alpha}\circ i = p_{\alpha}: (X, \mathscr T')\to X_{\alpha}$ is continuous. 
+	
+	Let $i: (X, \mathscr T)\to (X, \mathscr T')$ be the identity map, which is bijective, then the compositions
+	$$(X, \mathscr T)\overset{i}{\to} (X, \mathscr T') \overset{p_{\alpha}}{\to}X_{\alpha} \quad \text{and}\quad (X, \mathscr T') \overset{i^{-1}}{\to} (X, \mathscr T)\overset{p_{\alpha}}{\to} X_{\alpha}$$
+	are continuous. To see this, let $U_{\alpha}$ be open in $X_{\alpha}$, then
+	$$(p_{\alpha} \circ i)^{-1}(U_{\alpha}) = i^{-1}\left(p_{\alpha}^{-1}(U_{\alpha})\right) = p_{\alpha}^{-1}(U_{\alpha})\in \mathscr T.$$ 
+	Also, $$\left(p_{\alpha}\circ i^{-1}\right)^{-1}(U_{\alpha}) = i(p_{\alpha}(U_{\alpha})) = p_{\alpha}(U_{\alpha})\in \mathscr T'.$$
+	Thus, $i$ and $i^{-1}$ are continuous, i.e. $i$ is a homeomorphism. By Theorem \ref{thrm:identity_homeomorphism_topologies_coincide}, this implies that $\mathscr T = \mathscr T'$.
 \end{proof}
 
 \begin{theorem}
@@ -1032,4 +1051,14 @@ In topological spaces (which are not necessarily metrizable), we define continui
 
 \begin{proof}
 	The composition of bijective functions is bijective again. From Theorem \ref{thrm:composition_continuous_functions}, we know that $g\circ f$ is continuous. To show the continuity of $(g\circ f)^{-1}: Z\to X$, note that if $U\in\tau_X$, then $(g\circ f)(U) = g(f(U))$, and since $f$ and $g$ are homeomorphisms, we have $f(U)\in \tau_Y$, and thus $g(f(U))\in\tau_Z$.
+\end{proof}
+
+\begin{theorem}\label{thrm:identity_homeomorphism_topologies_coincide}
+	Let $(X, \tau_1)$ and $(X, \tau_2)$ be topological spaces. The identity map $\iota: (X, \tau_1)\to (X, \tau_2), x\mapsto x$ is a homeomorphism iff $\tau_1 = \tau_2$.
+\end{theorem}
+
+\begin{proof}[Proof \cite{3164142}]
+	Let $\iota: (X, \tau_1)\to (X, \tau_2), x\mapsto x$ be a homeomorphism. We know that $\tau_1$ is a base generating itself, as is $\tau_2$ a base generating itself. Consider $U\in \tau_2$, then for all $x\in U$, $x\in \iota^{-1}(U) = U\in \tau_1$, since $\iota$ is continuous. Also, for any $U\in \tau_1$ and $x\in U$, $x\in \iota(U) = U\in \tau_2$, since $\iota^{-1}$ is continuous. Thus, by Corollary \ref{corollary:equality_of_topologies}, $\tau_1 = \tau_2$.
+	
+	Conversely, let $\tau_1 = \tau_2$, and consider $\iota: (X, \tau_1)\to (X, \tau_2), x\mapsto x$. Let $U\in \tau_2$, then $\iota^{-1}(U) = U\in \tau_1 = \tau_2$, and thus $\iota$ is continuous. Let $U\in\tau_1$, then $\iota(U) = U\in \tau_2 = \tau_1$, and thus also $\iota^{-1}$ is continuous. Further, $\iota$ is bijective, implying that $\iota$ is a homeomorphism.
 \end{proof}
