@@ -106,6 +106,16 @@ Given a topological space, let us now look at constructing new topological space
 	Finally, note that clearly, $\emptyset, S\in \tau_S$.
 \end{proof}
 
+\begin{theorem}
+	Let $X$ be a first-countable topological space, and consider $S \subset X$ with the subspace topology. Then $S$ is also first-countable.
+\end{theorem}
+
+\begin{proof}[Proof \cite{4548419}]
+	Let $p\in S$, and let $\seq[V_n]$ be a collection of neighborhoods of $p$ in $X$ s.t. each neighborhood of $p$ contains some $V_n$, $n\in\mathbb N$.
+	
+	Note that $N\subset X$ is a neighborhood of $p$ if there is an open $U$ in $X$ s.t. $p\in U\subset N$. This implies that $p\in U\cap S\subset N\cap S$, i.e. $N\cap S$ is a neighborhood of $p$ in $S$. Thus, $\seq[V_n\cap S]$ is a collection of neighborhoods of $p$ in $S$ s.t. each neighborhood of $p$ in $S$ contains some $V_n\cap S$, $n\in\mathbb N$.
+\end{proof}
+
 \begin{theorem}\label{thrm:arbitrary_intersec_tops_top}
 	Let $I$ be a (finite, countable or uncountable) index set, then if $(X, \tau_i)$, $i\in I$, is a topological space, so is the intersection of the topologies, i.e. $\left(X, \cap_{i\in I}\tau_i\right)$ is a topological space.
 \end{theorem}
