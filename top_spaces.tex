@@ -21,6 +21,33 @@
 	Consider the discrete topological space $(X, \mathscr P(X))$, and note that for every member $U\in \mathscr P(X)$, $X\backslash U\subset X\in \mathscr P(X)$, and thus $X$ is both an open and a closed set. 
 \end{remark}
 
+\begin{exmp}[Co-finite topology]
+	For every set $X$, the collection of all subsets of $X$ whose complements are finite forms a topology $\tau$ on $X$:
+	$$\tau := \{ U\subset X\mid U = \emptyset \lor X\setminus U \ \text{finite} \}$$
+\end{exmp}
+
+\begin{proof}
+	Clearly, $\emptyset\in\tau$. Also, $X\in\tau$, since $X\setminus X = \emptyset$. Let $U_1$, $U_2\in \tau$, then if $U_1 = \emptyset$ or $U_2 = \emptyset$, we have $U_1 \cap U_2 = \emptyset\in \tau$. Otherwise, assume that $U_1\ne\emptyset$ and $U_2\ne\emptyset$, then by de Morgan's law, cf. Theorem \ref{thrm:de_morgans_law}, $X\setminus (U_1 \cap U_2) = (X\setminus U_1) \cup (X\setminus U_2)$, and since the union of two finite sets is finite again, $U_1\cap U_2\in\tau$ follows. Now let $\left\{U_i\right\}_{i\in I}\subset \tau$, where $I$ is an arbitrary index set. Then $X\setminus \bigcup_{i\in I}U_i = \bigcap_{i\in I}X\setminus U_i\in \tau$, cf. Theorem \ref{thrm:de_morgans_law}, since the arbitrary union of countable sets is finite again. Thus, the arbitrary union of members of $\tau$ is a member of $\tau$ again.
+\end{proof}
+
+\begin{remark}
+	Note that if $X$ is already finite, then $X\setminus U$ for any $U\subset X$ is always finite, and thus the co-finite toplogy is the discrete topology in that case.
+\end{remark}
+
+\begin{exmp}[Co-countable topology]
+	For every set $X$, the collection of all subsets of $X$ whose complements are countable forms a topology $\tau$ on $X$:
+	
+	$$\tau := \left\{ U\subset X\mid U = \emptyset \lor X\setminus U \ \text{countable} \right\}$$
+\end{exmp}
+
+\begin{proof}
+	Clearly, $\emptyset\in \tau$. Also, $X\in \tau$, since $X\setminus X = \emptyset$ is countable. Let $U_1, U_2\in \tau$, then if $U_1 = \emptyset$ or $U_2 = \emptyset$, we have $U_1 \cap U_2 = \emptyset\in \tau$. Otherwise, assume that $U_1 \ne \emptyset$ and $U_2\ne\emptyset$, then by de Morgan's law, cf. Theorem \ref{thrm:de_morgans_law}, $X\setminus (U_1\cap U_2) = (X\setminus U_1)\cup (X\setminus U_2)$, and since the union of two countable sets is countable again, $U_1\cap U_2\in \tau$ follows. Now let $\left\{U_i\right\}_{i\in I}\subset \tau$, where $I$ is an arbitrary index set. Then $X\setminus \bigcup_{i\in I}U_i = \bigcap_{i\in I}X\setminus U_i\in \tau$, cf. Theorem \ref{thrm:de_morgans_law}, since the arbitrary union of countable sets is countable again. Thus, the arbitrary union of members of $\tau$ is a member of $\tau$ again.
+\end{proof}
+
+\begin{remark}
+	Note that if $X$ is already finite, then $X\setminus U$ for any $U\subset X$ is always countable, and thus the co-countable toplogy is the discrete topology in that case.
+\end{remark}
+
 \begin{defn}[Open map]\label{defn:open_map}
 	Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces, then $f: X \to Y$ is called an \textit{open map} if $f$ maps open sets in $\tau_X$ to open sets in $\tau_Y$.
 \end{defn}

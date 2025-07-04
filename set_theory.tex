@@ -201,3 +201,41 @@
 \begin{remark}
 	If any $X_{\alpha} = \emptyset$, then $\prod_{\alpha\in A}X_{\alpha} = \emptyset$, since there is no function $x$ s.t. $x(\alpha) \in X_{\alpha}$.
 \end{remark}
+
+\begin{theorem}\label{thrm:de_morgans_law}
+	Let $X$ be a set, $I$ an arbitrary index set, and $U_i\subset X$ for all $i\in I$. Then 
+	\begin{align}\label{eq:de_morgan_comp_union}
+		X\setminus\bigcup_{i\in I}U_i = \bigcap_{i\in I}\left(X\setminus U_i\right).
+	\end{align}
+	Similarly, 
+	\begin{align}\label{eq:de_morgan_comp_intersec}
+		X\setminus \bigcap_{i\in I}U_i = \bigcup_{i\in I}\left(X\setminus U_i\right).
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	Eq. \eqref{eq:de_morgan_comp_union}: 
+	
+	\enquote{$\subset$} 
+	\begin{align*}
+		x\in X\setminus\bigcup_{i\in I}U_i\Rightarrow x\in X \wedge x\notin \bigcup_{i\in I}U_i\Rightarrow x\in X \wedge (x\notin U_i\forall i\in I)\Rightarrow x\in \bigcap_{i\in I}X\setminus U_i.
+	\end{align*}
+
+	\enquote{$\supset$}
+	\begin{align*}
+		x\in \bigcap_{i\in I}\left(X\setminus U_i\right) \Rightarrow \left(x\in X \wedge x\notin U_i\right) \forall i\in I\Rightarrow x\in X\wedge x\notin \bigcup_{i\in I}U_i\Rightarrow x\in X\setminus \bigcup_{i\in I}U_i.
+	\end{align*}
+
+	\noindent Eq. \eqref{eq:de_morgan_comp_intersec}:
+	
+	\enquote{$\subset$} 
+	\begin{align*}
+		x\in X\setminus \bigcap_{i\in I}U_i &\Rightarrow x\in X \wedge x\notin \bigcap_{i\in I}U_i \Rightarrow x\in X \wedge (\exists i\in I: x\notin U_i)\Rightarrow \exists i\in I: x\in X \wedge x\notin U_i \\ &\Rightarrow \exists i\in I: x\in X\setminus U_i\Rightarrow x\in \bigcup_{i\in I}X\setminus U_i
+	\end{align*}
+
+	\enquote{$\supset$}
+	\begin{align*}
+		x\in \bigcup_{i\in I}X\setminus U_i\Rightarrow \exists i\in I: x\in X\wedge x\notin U_i\Rightarrow x\in X\wedge x\notin \bigcap_{i\in I}U_i\Rightarrow x\in X\setminus \bigcap_{i\in I}U_i.
+	\end{align*}
+	
+\end{proof}
