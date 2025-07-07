@@ -1067,6 +1067,16 @@ In topological spaces (which are not necessarily metrizable), we define continui
 	Let $W\in\tau_Z$, then $(g\circ f)^{-1}(W) = (f^{-1}\circ g^{-1})(W)$, and since $g^{-1}(W)\in \tau_Y$, this implies that $(f^{-1}\circ g^{-1})(W)\in\tau_X$.
 \end{proof}
 
+\begin{theorem}\label{thrm:image_of_cont_func_on_comp_top_space_is_compact}
+	Let $X$ be a compact topological space, $Y$ a topological space and $f: X\to Y$ a continuous function, then $f(X)$ is a compact subspace of $Y$.
+\end{theorem}
+
+\begin{proof}[Proof \cite{226328}]
+	Let $\{U_i\}_{i\in I}$ be an open cover of $f(X)$. Since $f$ is continuous, $f^{-1}(U_i)$ is open in $X$ for every $i\in I$. Note that $\{f^{-1}(U_i)\}_{i\in I}$ is an open cover of $X$, since  $$f(X)\subset \bigcup_{i\in I}U_i\Rightarrow X\subset f^{-1}(f(X))\subset f^{-1}\left(\bigcup_{i\in I}U_i\right) = \bigcup_{i\in I}f^{-1}(U_i),$$ cf. Eq. \eqref{eq:preimage_image_of_set}. Since $X$ is compact, there is a finite subcover $\left\{f^{-1}(U_j)\right\}_{j\in J}$ of $X$, where $J\subset I$ is finite. Thus,
+	$$X = \bigcup_{j\in J}f^{-1}(U_j)\Rightarrow f(X) = f\left(\bigcup_{j\in J}f^{-1}(U_j)\right) = \bigcup_{j\in J}f(f^{-1}(U_j))\subset \bigcup_{j\in J}U_j,$$
+	cf. Eq. \eqref{eq:image_preimage_of_set}, which shows that every open cover of $f(X)$ has a finite subcover.
+\end{proof}
+
 \begin{defn}[Homeomorphism \cite{topology-singh}] A \textit{homeomorphism} between two topological spaces $X$ and $Y$ is an invertible function $f: X\rightarrow Y$ such that $f$ and $f^{-1}$ are continuous. 
 \end{defn}
 

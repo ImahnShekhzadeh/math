@@ -237,5 +237,27 @@
 	\begin{align*}
 		x\in \bigcup_{i\in I}X\setminus U_i\Rightarrow \exists i\in I: x\in X\wedge x\notin U_i\Rightarrow x\in X\wedge x\notin \bigcap_{i\in I}U_i\Rightarrow x\in X\setminus \bigcap_{i\in I}U_i.
 	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	Let $X$, $Y$ be sets and $f: X\to Y$ a map between them. Then 
+	\begin{align}\label{eq:image_preimage_of_set}
+		\forall E\subset Y: f(f^{-1}(E))\subset E.
+	\end{align}
+	and 
+	\begin{align}\label{eq:preimage_image_of_set}
+		\forall A\subset X: A\subset f^{-1}(f(A)).
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		f(f^{-1}(E)) &= f(\{x\in X\mid f(x)\in E\}) \\ &= \{f(x)\in Y\mid x\in X\wedge f(x)\in E\} \\ &= \{ f(x)\in E\mid x\in X \}\subset E.
+	\end{align*}
+	Also, 
+	\begin{align*}
+		x\in A&\Rightarrow f(x)\in f(A) = \{f(x)\mid x\in A\}\Leftrightarrow x\in f^{-1}(f(A)) = \{x\in X\mid f(x)\in f(A)\}
+		\\ &\Rightarrow A\subset f^{-1}(f(A)).
+	\end{align*}
 	
 \end{proof}

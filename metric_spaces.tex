@@ -1142,14 +1142,6 @@
 	\enquote{$\Longleftarrow$} Let $\seq[p_n]$ be a sequence in $X$ converging to $p\in X$ wrt $d$, and $\seq[f(p_n)]$ converging to $f(p)$ wrt $d'$. Assume that $f$ is not continuous at $p$, i.e. there exists an $\epsilon > 0$ s.t. for all $\delta > 0$ there exists a $z\in X$ s.t. $d(z, p) < \delta$, but $d'(f(z), f(p)) \geq \epsilon$. Fix this $\epsilon > 0$, and consider an arbitrary $\delta > 0$. Since $\seq[p_n]$ converges to $p$, there exists an $N(\delta)\in\mathbb N$ s.t. for all $n\geq N$, $d(p_n, p) < \delta$, but $d'(f(p_n), f(p)) \geq \epsilon$. But this is a contradiction to $\seq[f(p_n)]$ converging to $f(p)$ wrt $d'$.
 \end{proof}
 
-\begin{theorem}\label{thrm:continuous_functions_bounded_on_compact_interval}
-	Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$ (where on $\mathbb R$ we consider the usual metric) that is continuous is bounded, in the sense that $\{ f(x) \mid x\in [a, b] \} \subset \mathbb R$ is bounded, cf. Defn. \ref{defn:bounded_set}, 
-\end{theorem}
-
-\begin{proof}
-	\cite[p. 161]{MfPI}.
-\end{proof}
-
 \begin{lemma}\label{continuity_vector_components}
 	Consider the map $f: \mathbb R^m\rightarrow\mathbb R^n$. Then $f$ is continuous if all the $f_i: \mathbb R^m\rightarrow\mathbb R$, $i\in\{1, \dots, n\}$ are continuous. 
 \end{lemma}
@@ -1207,4 +1199,16 @@
 	Since $f$ is continuous, for all $\epsilon > 0$ and all $x\in X$, there exists a $\delta_x > 0$ s.t. $\{f(y)\mid y\in X, d(x, y) < \delta_x\} = f\left(B^{d}_{\delta_x}(x)\right) \subset B^{\rho}_{\epsilon/2}(f(x)) = \{z\in Y\mid \rho(z, f(x)) < \epsilon/2\}$. Note that the family $\left\{B_{\delta_x/2}^{d}(x)\right\}_{x\in X}$ is an open cover of $X$, and since $X$ is compact, there exists a finite subcover of $X$, which we denote by $\left\{B_{\delta_{x_i/2}}(x_i)\right\}_{i=1}^{n}$, where $n\in\mathbb N$. Now define $\delta := \min_{1 \leq i \leq n}\delta_{x_i}/2$.
 	
 	Now suppose that for arbitrary $x, y\in X$, $d(x, y) < \delta$. Note that there is a $j \in \{1, \dots, n\}$ s.t. $x\in B_{\delta_{x_{j}}/2}(x_{j})$. Thus, $$d(y, x_j)\leq d(y, x) + d(x, x_j) < \delta + \frac{\delta_{x_j}}{2} \leq \delta_{x_j},$$ i.e. $y\in B_{\delta_{x_j}}(x_j)$, which implies that $f(y)\in f\left(B^{d}_{\delta_{x_j}}(x_j)\right) \subset B_{\epsilon/2}^{\rho}(f(x_j))$. Also, $x\in B^{d}_{\delta_{x_j/2}}(x_j)$ implies that $f(x)\in f\left(B^{d}_{\delta_{x_j/2}}(x_j)\right) \subset B_{\epsilon/2}^{\rho}(f(x_j))$. Thus, $$\rho(f(x), f(y)) \leq \rho(f(x), f(x_j)) + \rho(f(x_j), f(y)) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.$$ Since $\delta$ only depends on $\epsilon$, this shows that $f$ is uniformly continuous on $X$.
+\end{proof}
+
+\begin{remark}
+	Note that for the preceding theorem, it is vital that $X$ is compact.
+\end{remark}
+
+\begin{exmp}
+	Take the function $f: \mathbb R\to \mathbb R, x\mapsto x^2$, which is not uniformly continuous, where on $\mathbb R$, we consider the usual metric.
+\end{exmp}
+
+\begin{proof}[Proof \cite{503101}]
+	Choose $\epsilon = 1$, and let $\delta > 0$ be arbitrary. Choose $x := \frac{1}{\delta}\in\mathbb R$ and let $y = x + \delta/2$; clearly, $d(x, y) < \delta$. However, $$d(f(x), f(y)) = \abs{x^2 - \left(x + \frac{\delta}{2}\right)^2} = \abs{x\delta + \frac{\delta^2}{4}} = 1 + \frac{\delta^2}{4} \geq 1 = \epsilon.$$
 \end{proof}
