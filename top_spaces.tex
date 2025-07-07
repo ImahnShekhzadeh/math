@@ -48,6 +48,18 @@
 	Note that if $X$ is already finite, then $X\setminus U$ for any $U\subset X$ is always countable, and thus the co-countable toplogy is the discrete topology in that case.
 \end{remark}
 
+\begin{defn}[Quotient topology]
+	Let $X$ be a topological space, and let $\sim$ be an equivalence relation on $X$. Denote the set of all equivalence classes by $X/\sim$. We denote the canonical surjection, cf. Definition \ref{defn:equivalence_class}, by $\pi: X\to X/\sim$, which maps each $x\in X$ to its equivalence class $[x]$. The set $\{U \subset X/\sim\ \mid \pi^{-1}(U) \text{ is open in } X\}$ is called the \textit{quotient topology} on $X/\sim$.
+\end{defn}
+
+\begin{remark}
+	The quotient topology is indeed a topology.
+\end{remark}
+
+\begin{proof}
+	Clearly, $X = \pi^{-1}(X/\sim)$, and $X$ is open, thus $X/\sim$ is a member of the quotient topology. Also, $\emptyset = \pi^{-1}(\emptyset)$, and $\emptyset$ is open in $X$, thus $\emptyset$ is a member of the quotient topology. With Eq. \eqref{eq:set_theory_unions_preimages} and \eqref{eq:set_theory_intersects_preimages}, one can easily show that the finite intersection and arbitrary union of members of the quotient topology is in the quotient topology again. Thus, the quotient topology forms a topology on $X/\sim$.
+\end{proof}
+
 \begin{defn}[Open map]\label{defn:open_map}
 	Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces, then $f: X \to Y$ is called an \textit{open map} if $f$ maps open sets in $\tau_X$ to open sets in $\tau_Y$.
 \end{defn}
