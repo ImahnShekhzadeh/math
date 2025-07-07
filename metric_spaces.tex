@@ -1142,14 +1142,6 @@
 	\enquote{$\Longleftarrow$} Let $\seq[p_n]$ be a sequence in $X$ converging to $p\in X$ wrt $d$, and $\seq[f(p_n)]$ converging to $f(p)$ wrt $d'$. Assume that $f$ is not continuous at $p$, i.e. there exists an $\epsilon > 0$ s.t. for all $\delta > 0$ there exists a $z\in X$ s.t. $d(z, p) < \delta$, but $d'(f(z), f(p)) \geq \epsilon$. Fix this $\epsilon > 0$, and consider an arbitrary $\delta > 0$. Since $\seq[p_n]$ converges to $p$, there exists an $N(\delta)\in\mathbb N$ s.t. for all $n\geq N$, $d(p_n, p) < \delta$, but $d'(f(p_n), f(p)) \geq \epsilon$. But this is a contradiction to $\seq[f(p_n)]$ converging to $f(p)$ wrt $d'$.
 \end{proof}
 
-\begin{theorem}\label{thrm:uniform_continuity}
-	Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$, where on $\mathbb R$ we consider the usual metric, that is continuous on $[a, b]$, is uniformly continuous on  $[a, b]$.
-\end{theorem}
-
-\begin{proof}
-	\cite[p. 285]{MfPI}.
-\end{proof}
-
 \begin{theorem}\label{thrm:continuous_functions_bounded_on_compact_interval}
 	Any function $f: [a, b]\to\mathbb R$ defined on the compact interval \\ $[a, b] \subset \mathbb R$ (where on $\mathbb R$ we consider the usual metric) that is continuous is bounded, in the sense that $\{ f(x) \mid x\in [a, b] \} \subset \mathbb R$ is bounded, cf. Defn. \ref{defn:bounded_set}, 
 \end{theorem}
@@ -1207,7 +1199,7 @@
 	Since $f^{-1}(A)$ is closed by assumption, $f^{-1}(Y\backslash A) = X\backslash f^{-1}(A)$ is open. \cite{preimage-of-closed-sets}
 \end{proof} 
 
-\begin{theorem}
+\begin{theorem}\label{thrm:cont_func_on_comp_metric_space_uniformly_continuous}
 	Let $(X, d)$ be a compact metric space and $(Y, \rho)$ a metric space. A continuous function $f: X\to Y$ is uniformly continuous. 
 \end{theorem}
 
