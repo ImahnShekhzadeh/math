@@ -540,14 +540,28 @@
 
 \begin{exmp}\label{exmp:space-continuous-functions-complete}
 	Let $\mathcal C[a, b]$ be the space of all continuous functions $\chi: [a, b]\to\mathbb{R}$ with the metric 
-	\begin{align}
-		d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} :=  \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(y)} \right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
+	\begin{align}\label{eq:metric_C[a,b]_real_valued}
+		d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} := \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
 	\end{align}
 	The metric space $(\mathcal C[a, b], d_{\infty})$ is complete.
 \end{exmp}
 
 \begin{proof}
-	Let $(\varphi_n)_{n\in\mathbb N}$ be a Cauchy sequence in $\mathcal C[a, b]$, then for any $x\in [a, b]$:
+	Note that for any continuous function defined on a compact interval, its image is compact, cf. Theorem \ref{thrm:image_of_cont_func_on_comp_top_space_is_compact}, and thus for $\varphi\psi\in \mathcal C[a, b]$, $\abs{\varphi(x) - \psi(x)}\in\mathbb R$ for all $x\in [a, b]$. This implies that the supremum in Eq. \eqref{eq:metric_C[a,b]_real_valued} exists.
+
+	We first show that $(\mathcal C[a, b], d_{\infty})$ is indeed a metric space:
+	\begin{enumerate}
+		\item positivity: $d_{\infty}(\varphi, \psi) = \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\}\geq 0$ for all $\varphi, \psi\in\mathcal C[a, b]$,
+		\item symmetry: $d_{\infty}(\varphi, \psi) = d_{\infty}(\psi, \varphi)$,
+		\item definiteness: $d_{\infty}(\varphi, \psi) = \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} = 0 \Leftrightarrow \abs{\varphi(x) - \psi(x)} = 0$ for all $x\in[a, b]\Leftrightarrow\varphi = \psi$,
+		\item triangle inequality: Let $\varphi, \psi, \chi\in \mathcal C[a, b]$, then by Theorem \ref{thrm:sup_inequality}, \begin{align*}
+			d_{\infty}(\varphi, \psi) &= \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} \leq \sup_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x)}\} 
+			+ \sup_{x\in[a, b]}\{\abs{\chi(x) - \psi(x)}\} \\ &= d_{\infty}(\varphi, \chi) + d_{\infty}(\chi, \psi),
+		\end{align*}
+		since for any $f\leq g$, $\sup f\leq \sup g$.
+	\end{enumerate}
+	
+	We now show that $(\mathcal C[a, b], d_{\infty})$ is complete. Let $(\varphi_n)_{n\in\mathbb N}$ be a Cauchy sequence in $\mathcal C[a, b]$, then for any $x\in [a, b]$:
 	\begin{align}
 		\abs{\varphi_n(x) - \varphi_m(x)} \leq \sup_{x\in [a, b]}\left\{ \abs{\varphi_{n}(x) - \varphi_{m}(y)} \right\} < \epsilon. \quad\forall m, n\geq N
 	\end{align} 

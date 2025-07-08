@@ -83,3 +83,22 @@
 \begin{proof}[Proof \cite{1975962}]
 	We have $a + b \leq \max\{a, c\} + \max\{b, d\}$ and $c + d \leq \max\{a, c\} + \max\{b, d\}$, from which Eq. \eqref{eq:max_property} follows.
 \end{proof}
+
+\begin{theorem}\label{thrm:sup_inequality}
+	Let $f: D\to \mathbb R$ be a real-valued function, where $D$ is a bounded subset of $\mathbb R$, then 
+	\begin{align}
+		\sup_{x\in D}\{(f + g)(x)\} \leq \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}.
+	\end{align}
+\end{theorem}
+
+\begin{proof}[Proof \cite{207335, 207339}]
+	Clearly, for all $x\in D$, $f(x) \leq \sup_{x\in D}\{f(x)\}$ and $g(x) \leq \sup_{x\in D}\{g(x)\}$, implying that $(f+g)(x) \leq \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}$, which shows that $\sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}$ is an upper bound for $f+g$, yet the smallest upper bound of $f+g$ may be smaller, so $\sup_{x\in D}\{(f + g)(x)\} \leq \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}$.
+\end{proof}
+
+\begin{remark}
+	Note that there are cases where $$\sup_{x\in D}\{(f + g)(x)\} < \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}.$$
+\end{remark}
+
+\begin{exmp}
+	Define $f: \mathbb [a, b]\to\mathbb R, x\mapsto x$ and $g: [a, b]\to\mathbb R, x\mapsto -x$ with $b > a\geq 0$. Clearly, $\sup_{x\in [a, b]}\{(f+g)(x)\} = 0 < \sup_{x\in [a, b]}\{f(x)\} + \sup_{x\in [a, b]}\{g(x)\} = b - a$. 
+\end{exmp}
