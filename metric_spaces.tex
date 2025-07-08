@@ -510,6 +510,23 @@
 	Let $(X, d)$ be a metric space. Then $(X, d)$ is called \textit{complete} if every Cauchy sequence in $X$ converges to a $\varphi\in X$ wrt $d$.
 \end{defn}
 
+\begin{exmp}\label{exmp:complex_numbers_complete}
+	$(\mathbb C, d)$ with $d(z_1, z_2) := \abs{z_1 - z_2}$ is a complete metric space. 
+\end{exmp}
+
+\begin{proof}
+	Let $\seq[z_n]$ be a Cauchy sequence in $\mathbb C$, i.e. for all $\epsilon > 0$ there exists an $N\in\mathbb N$ s.t. $\abs{z_n - z_m} < \epsilon$ for all $m, n\geq N$. Since $z_n = x_n + iy_n$ and $z_m = x_m + iy_m$ with $x_n, y_n, x_m, y_m\in\mathbb R$, we have 
+	\begin{align*}
+		\epsilon > \abs{z_n - z_m} = \abs{x_n + iy_n - x_m - iy_m} = \abs{x_n - x_m + i(y_n - y_m)} \geq \abs{x_n - x_m},
+	\end{align*}
+	since for any $w\in\mathbb C$ we have $\abs{w} \geq \abs{\text{Re}(w)}$. Also, 
+	\begin{align*}
+		\epsilon > \abs{z_n - z_m} = \abs{x_n + iy_n - x_m - iy_m} = \abs{x_n - x_m + i(y_n - y_m)} \geq \abs{y_n - y_m},
+	\end{align*}
+	since for any $w\in\mathbb C$ we have $\abs{w} \geq \abs{\text{Im}(w)}$. For all $n, m\geq N$, $\epsilon > \abs{x_n - x_m}$ and $\epsilon > \abs{y_n - y_m}$ implies that $\seq[x_n]$ and $\seq[y_n]$ are Cauchy sequences in $\mathbb R$, and since $(\mathbb R, d)$ is complete, cf. Proposition \ref{prop:R_is_complete}, $\seq[x_n]$ converges to an $x\in\mathbb R$ and $\seq[y_n]$ converges to a $y\in\mathbb R$. Thus, $\seq[z_n]$ converges to $z = x + iy\in\mathbb C$. 
+	
+\end{proof}
+
 \begin{theorem}
 	Let $(X, d)$ be a metric space and consider the set $Y$. If $f: X\to Y$ is a bijection, then we can endow $Y$ with the following metric $d'$:
 	\begin{align}\label{eq:metrics_completion}
@@ -541,39 +558,39 @@
 \begin{exmp}\label{exmp:space-continuous-functions-complete}
 	Let $\mathcal C[a, b]$ be the space of all continuous functions $\chi: [a, b]\to\mathbb{R}$ with the metric 
 	\begin{align}\label{eq:metric_C[a,b]_real_valued}
-		d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} := \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
+		d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} := \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} = \max_{x\in [a, b]}\left\{\abs{\varphi(x) - \psi(x)}\right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
 	\end{align}
 	The metric space $(\mathcal C[a, b], d_{\infty})$ is complete.
 \end{exmp}
 
 \begin{proof}
-	Note that for any continuous function defined on a compact interval, its image is compact, cf. Theorem \ref{thrm:image_of_cont_func_on_comp_top_space_is_compact}, and thus for $\varphi\psi\in \mathcal C[a, b]$, $\abs{\varphi(x) - \psi(x)}\in\mathbb R$ for all $x\in [a, b]$. This implies that the supremum in Eq. \eqref{eq:metric_C[a,b]_real_valued} exists.
+	Note that for any continuous function defined on a compact interval, its image is compact, cf. Theorem \ref{thrm:image_of_cont_func_on_comp_top_space_is_compact}, and thus for $\varphi, \psi\in \mathcal C[a, b]$, $\abs{\varphi(x) - \psi(x)}\in\mathbb R$ for all $x\in [a, b]$. This implies that the supremum equals the maximum in Eq. \eqref{eq:metric_C[a,b]_real_valued}, and thus $d_{\infty}$ is well-defined.
 
-	We first show that $(\mathcal C[a, b], d_{\infty})$ is indeed a metric space:
+	We now show that $(\mathcal C[a, b], d_{\infty})$ is indeed a metric space:
 	\begin{enumerate}
 		\item positivity: $d_{\infty}(\varphi, \psi) = \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\}\geq 0$ for all $\varphi, \psi\in\mathcal C[a, b]$,
 		\item symmetry: $d_{\infty}(\varphi, \psi) = d_{\infty}(\psi, \varphi)$,
 		\item definiteness: $d_{\infty}(\varphi, \psi) = \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} = 0 \Leftrightarrow \abs{\varphi(x) - \psi(x)} = 0$ for all $x\in[a, b]\Leftrightarrow\varphi = \psi$,
 		\item triangle inequality: Let $\varphi, \psi, \chi\in \mathcal C[a, b]$, then by Theorem \ref{thrm:sup_inequality}, \begin{align*}
-			d_{\infty}(\varphi, \psi) &= \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} \leq \sup_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x)}\} 
-			+ \sup_{x\in[a, b]}\{\abs{\chi(x) - \psi(x)}\} \\ &= d_{\infty}(\varphi, \chi) + d_{\infty}(\chi, \psi),
+			d_{\infty}(\varphi, \psi) &= \max_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} 
+			\\ &= \max_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x) + \chi(x) - \psi(x)}\}
+			\\ &\leq \max_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x)} + \abs{\chi(x) - \psi(x)}\}
+			\\ &\leq \max_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x)}\} 
+			+ \max_{x\in[a, b]}\{\abs{\chi(x) - \psi(x)}\} \\ &= d_{\infty}(\varphi, \chi) + d_{\infty}(\chi, \psi).
 		\end{align*}
-		since for any $f\leq g$, $\sup f\leq \sup g$.
 	\end{enumerate}
 	
-	We now show that $(\mathcal C[a, b], d_{\infty})$ is complete. Let $(\varphi_n)_{n\in\mathbb N}$ be a Cauchy sequence in $\mathcal C[a, b]$, then for any $x\in [a, b]$:
+	Finally, we show that $(\mathcal C[a, b], d_{\infty})$ is complete. Let $(\varphi_n)_{n\in\mathbb N}$ be a Cauchy sequence in $\mathcal C[a, b]$, i. e. for all $\epsilon > 0$ there exists an $N\in\mathbb N$ s.t. for all $m, n\geq N$, $d_{\infty}(\varphi_n, \varphi_m) < \epsilon$. Let $\epsilon > 0$ be arbitrary, then for any $x\in [a, b]$ we have
 	\begin{align}
-		\abs{\varphi_n(x) - \varphi_m(x)} \leq \sup_{x\in [a, b]}\left\{ \abs{\varphi_{n}(x) - \varphi_{m}(y)} \right\} < \epsilon. \quad\forall m, n\geq N
+		\abs{\varphi_n(x) - \varphi_m(x)} \leq \sup_{x\in [a, b]}\left\{ \abs{\varphi_{n}(x) - \varphi_{m}(x)} \right\} = d_{\infty}(\varphi_n, \varphi_m) < \epsilon \quad\forall m, n\geq N.
 	\end{align} 
-	Hence, $(\varphi_n)_{n\in\mathbb N}(x)$ is a Cauchy sequence in $\mathbb R$ for any $x\in[a, b]$ wrt the metric $d(x, y) := \abs{x - y}$. Since $\left(\mathbb R, d\right)$ is complete, we know that $\varphi(x) := \lim\limits_{n\to\infty}\varphi_n(x)$ exists. 
+	Hence, $\left(\varphi_n(x)\right)_{n\in\mathbb N}$ is a Cauchy sequence in $\mathbb R$ for any $x\in[a, b]$ wrt the metric $d(x, y) := \abs{x - y}$. Since $\left(\mathbb R, d\right)$ is complete, we know that $\varphi(x) := \lim\limits_{n\to\infty}\varphi_n(x)$ exists. 
 	
-	Finally, let us show that $\varphi\in\mathcal C[a, b]$. Since $\left(\varphi_n(x)\right)_{n\in\mathbb N}$ converges in $(\mathbb R, d)$, we can choose an $N\in\mathbb N$ s.t. $\abs{\varphi_n(x) - \varphi(x)} < \epsilon/3$ for all $n\geq N$ and all $x\in[a, b]$. And since $\left(\varphi_n\right)_{n\in\mathbb N}$ is a Cauchy sequence in $(\mathcal C[a, b], d_{\infty})$ (by assumption), i.e. the $\varphi_n$ are continuous, there exists a $\delta > 0$ s.t. $\abs{\varphi_N(x) - \varphi_{N}(y)} < \epsilon/3$ with $\abs{x - y} < \delta$. If $\abs{x-y} < \delta$, we get by applying the triangle inequality
+	Finally, let us show that $\varphi\in\mathcal C[a, b]$. Since $\left(\varphi_n(x)\right)_{n\in\mathbb N}$ converges in $(\mathbb R, d)$, we can choose an $N\in\mathbb N$ s.t. $\abs{\varphi_n(x) - \varphi(x)} < \epsilon/3$ for all $n\geq N$ and all $x\in[a, b]$. And since $\left(\varphi_n\right)_{n\in\mathbb N}$ is a Cauchy sequence in $(\mathcal C[a, b], d_{\infty})$ (by assumption), i.e. the $\varphi_n$ are continuous, there exists a $\delta > 0$ s.t. $\abs{\varphi_N(x) - \varphi_{N}(y)} < \epsilon/3$ with $\abs{x - y} < \delta$. Let $x, y\in [a, b]$ be arbitrary, then if $\abs{x-y} < \delta$, we get by applying the triangle inequality
 	\begin{align}
 		\abs{\varphi(x) - \varphi(y)} \leq \abs{\varphi(x) - \varphi_N(x)} + \abs{\varphi_N(x) - \varphi_N(y)} + \abs{\varphi_N(y) - \varphi(y)} < \epsilon,
 	\end{align}
-	which shows the continuity of $\varphi$, cf. Def. \ref{defn:continuity}.
-	
-	Thus, we have shown that $\varphi\in\mathcal C[a, b]$.
+	which shows the continuity of $\varphi$, cf. Def. \ref{defn:continuity}, i.e. $\varphi\in\mathcal C[a, b]$.
 \end{proof}
 
 \begin{remark}
@@ -1108,6 +1125,17 @@
 	$$d(\psi, \varphi_j) \leq d(\psi, \varphi) + d(\varphi, \varphi_j) < 2\epsilon,$$
 	i.e. $\overline{U}$ can be covered as follows:
 	$$\overline{U}\subset \bigcup_{i=1}^{n_{\epsilon}}B_{2\epsilon}(\varphi_i),$$ implying that $\overline{U}$ is totally bounded. Since $\overline{U}$ is closed and by Theorem \ref{thrm:complete_subsets_properties}, closed subsets of complete metric spaces are also complete, by Theorem \ref{thrm:compact_seq_totally_bound_compl}, $\overline{U}$ is compact.
+\end{proof}
+
+We now generalize Example \ref{exmp:space-continuous-functions-complete} by considering functions that are defined on arbitrary compact metric spaces $X$.
+
+\begin{theorem}
+	Let $X$ be a compact metric space and denote by $\mathcal C[X]$ the space of all continuous functions $\chi: X\to\mathbb K$, where $\mathbb K \in \{\mathbb R, \mathbb C\}$. Then $(\mathcal C[X], d_{\infty}$) with $$d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} := \sup_{x\in X}\left\{ \abs{\varphi(x) - \psi(x)} \right\} = \max_{x\in X}\left\{\abs{\varphi(x) - \psi(x)}\right\}\quad \forall \varphi, \psi\in\mathcal C[a, b]$$
+	is a complete metric space.
+\end{theorem}
+
+\begin{proof}
+	Replace $[a, b]$ in the proof of Example \ref{exmp:space-continuous-functions-complete} by $X$ and $\mathbb R$ by $\mathbb K$, and note that $(\mathbb C, d)$ with $d(z_1, z_2) := \abs{z_1 - z_2}$ is also a complete metric space, cf. Example \ref{exmp:complex_numbers_complete}.
 \end{proof}
 
 \newpage 
