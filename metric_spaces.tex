@@ -903,10 +903,16 @@
 \end{proof}
 
 \subsection{Compactness}
-\begin{defn}[Compact]
-	Let $U$ be a subset of a metric space. Then it is called 
+
+\begin{defn}[Open Covering]
+	A \textit{covering} of a set $X$ is a family $\mathscr G$ of subsets of $X$ s.t. $$X \subset \bigcup\{G\mid G\in\mathscr G\}.$$
+	We also say that $\mathscr G$ covers $X$. If $X$ is a topological space, cf. Definition \ref{defn:topological_space}, and every member of $\mathscr G$ is open, then $\mathscr G$ is called an \textit{open covering} of $X$.
+\end{defn}
+
+\begin{defn}[Compact \cite{topology-singh}]
+	Let $X$ be a topological space and $U\subset X$. Then $U$ is called 
 	\begin{itemize}
-		\item \textit{compact} if every open covering of $U$ contains a finite sub-covering, i.e. if to every family $\{V_j\}_{j\in J}$ of open sets with $U \subset \bigcup_{j\in\mathbb N} V_j$ there are finitely many $V_{j_1}$, $\dots$, $V_{j_n}$ s.t. 
+		\item \textit{compact} if every open covering of $U$ contains a finite sub-covering, i.e. if to every family $\{V_j\}_{j\in J}$ of open sets with $U \subset \bigcup_{j\in J} V_j$ there are finitely many $V_{j_1}$, $\dots$, $V_{j_n}$, $n\in\mathbb N$, s.t. 
 		\begin{align*}
 			U \subset \bigcup_{k = 1}^{n}V_{j_k},
 		\end{align*}
@@ -915,7 +921,7 @@
 \end{defn}
 
 \begin{exmp}
-	Consider $U := (0, 1]$, which is a subset of the metric space $(\mathbb R, \abs{\cdot})$. Then $V_j := (1/j, 1 + 1/j)$, $j\in\mathbb N$, are an open covering of $U$, but $U$ is not compact, since there is no \textit{finite} covering of $U$ with open sets from from $\{V_j\}_{j\in\mathbb N}$.
+	Consider $U := (0, 1]$, which is a subset of the topological space $R$ with the standard topology on $\mathbb R$. Then $V_j := (1/j, 1 + 1/j)$, $j\in\mathbb N$, are an open covering of $U$, but $U$ is not compact, since there is no \textit{finite} covering of $U$ with open sets from from $\{V_j\}_{j\in\mathbb N}$.
 	
 	$U$ is also not sequentially compact, since the sequence $\seq[1/n]$ does not contain a convergent subsequence in $U$ ($0\notin U$).
 \end{exmp}

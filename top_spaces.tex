@@ -1,5 +1,5 @@
 \section{Topological Spaces}
-\begin{defn}[Topological Space \cite{topology-singh}]
+\begin{defn}[Topological Space \cite{topology-singh}]\label{defn:topological_space}
 	A topology on a set $X$ is a collection $\tau$ of subsets of $X$ such that 
 	\begin{itemize}
 		\item the intersection of two members of $\tau$ is in $\tau$, 
@@ -969,13 +969,19 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	Consider $X = \mathbb R$ and the topology $\tau = \left\{\mathbb R, \emptyset\right\}$. Then a sequence $\seq[\varphi_n]$ in $\mathbb R$ converges to any point in $\mathbb R$, since the neighborhood of any $x\in \mathbb R$ is $\mathbb R$.
 \end{exmp}
 
+\subsection{Hausdorff Spaces}
+
 \begin{defn}[Hausdorff]
-	A topology $\left(M, \tau\right)$ is called \textbf{Hausdorff} if $\forall p\ne q \in M \ \exists U$, $V\in \tau$ open with $p\in U$, $q\in V$ such that $U\cap V = \emptyset$.  
+	A topological space $\left(X, \tau\right)$ is called \textit{Hausdorff} if for all $p, q\in X$ there exist $U, V\in \tau$ s.t. $p\in U$, $q\in V$ and $U\cap V = \emptyset$.  
 \end{defn} 
 
-\begin{lemma}
+\begin{remark}
+	Note that $U$ is an open neighborhood of $p\in X$ and $V$ an open neighborhood of $q\in X$.
+\end{remark}
+
+\begin{theorem}
 	All metric spaces are Hausdorff spaces. 
-\end{lemma}
+\end{theorem}
 
 \begin{proof}
 	\begin{figure}[h!]		
@@ -999,6 +1005,18 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	which is clearly a contradiction. 
 \end{proof}
 
+\begin{theorem}
+	Let $X$ be a Hausdorff space, and $K\subset X$ compact, then $K$ is closed.
+\end{theorem}
+
+\begin{proof}[Proof \cite{topology-singh, 1329787}]
+	Fix $x\in X\setminus K$, then for each $y\in K$, there exist open sets $U_y, V_y\subset X$ s.t. $x\in U_y$ and $y\in V_y$ with $U_y\cap V_y = \emptyset$, since $x\ne y$. Clearly, the family $\{V_{y}\mid y\in K\}$ of subsets of $X$ is an open covering of $K$, and since $K$ is compact, there exist finitely many points $y_1, \dots, y_n$ with $n\in\mathbb N$ and $y_k\in K$ for all $k\in \{1, \dots, n\}$ s.t. $K \subset \bigcup_{k=1}^{n}V_{y_k} =: V$. Define $U := \bigcap_{k=1}^{n}U_{y_k}$ and note that $x\in U$.
+	
+	We now show that $U \cap V \ne \emptyset$ via contradiction. Assume there is a $z\in U\cap V$, i.e. $z\in U$ and $z\in V$. This implies that $z\in U_{y_k}$ for all $k\in \{1, \dots, n\}$ and that there is a $k'\in\{1, \dots, n\}$ s.t. $z\in V_{y_{k'}}$. However, this is a contradiction to $U_{y_{k'}} \cap V_{y_{k'}} = \emptyset$. 
+	
+	Since $U\cap V\ne\emptyset$, $x\in U\subset X\setminus V\subset X\setminus K$, and since $x\in X\setminus K$ was arbitrary, by Theorem \ref{thrm:open_via_nbd}, $X\setminus K$ is open, implying that $K$ is closed.
+\end{proof}
+
 \begin{defn}
 	Let $(X, \tau)$ be a topological space. Then it is said to be \textit{second countable} if $\tau$ has a countable basis. 
 \end{defn}
@@ -1010,6 +1028,8 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 \begin{remark}
 	Metric spaces are not automatically second countable. For example, take an uncountable set $X$, endow it with the discrete metric and because of Example \ref{exmp:basis_discrete_metric}, \ref{exmp:metric_topology},  the topological space $X$ is not second countable, since $X$ is uncountable. 
 \end{remark}	
+
+\subsection{Continuity and Homeomorphisms}
 
 In topological spaces (which are not necessarily metrizable), we define continuity as follows \cite{topology-singh}:
 
