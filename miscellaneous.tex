@@ -85,20 +85,70 @@
 \end{proof}
 
 \begin{theorem}\label{thrm:sup_inequality}
-	Let $f: D\to \mathbb R$ be a real-valued function, where $D$ is a bounded subset of $\mathbb R$, then 
+	Let $D$ be a set and $f, g: D\to \mathbb R$ real-valued, bounded functions, then 
 	\begin{align}
 		\sup_{x\in D}\{(f + g)(x)\} \leq \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}.
+	\end{align}
+	and
+	\begin{align}
+		\inf_{x\in D}\{(f+g)(x)\} \geq \inf_{x\in D}\{f(x)\} + \inf_{x\in D}\{g(x)\}.
 	\end{align}
 \end{theorem}
 
 \begin{proof}[Proof \cite{207335, 207339}]
 	Clearly, for all $x\in D$, $f(x) \leq \sup_{x\in D}\{f(x)\}$ and $g(x) \leq \sup_{x\in D}\{g(x)\}$, implying that $(f+g)(x) \leq \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}$, which shows that $\sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}$ is an upper bound for $f+g$, yet the smallest upper bound of $f+g$ may be smaller, so $\sup_{x\in D}\{(f + g)(x)\} \leq \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}$.
+	
+	Also, for all $x\in D$, $f(x)\geq \inf_{x\in D}\{f(x)\}$ and $g(x) \geq \inf_{x\in D}\{g(x)\}$, and thus $(f+g)(x) \geq \inf_{x\in D}\{f(x)\} + \inf_{x\in D}\{g(x)\})$, which shows that $\inf_{x\in D}\{f(x)\} + \inf_{x\in D}\{g(x)\})$ is a lower bound for $f + g$. Since the biggest lower bound for $f + g$ may be bigger, we have $\inf_{x\in D}\{(f+g)(x)\} \geq \inf_{x\in D}\{f(x)\} + \inf_{x\in D}\{g(x)\}$.
 \end{proof}
 
 \begin{remark}
-	Note that there are cases where $$\sup_{x\in D}\{(f + g)(x)\} < \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}.$$
+	Note that there are cases where $$\sup_{x\in D}\{(f + g)(x)\} < \sup_{x\in D}\{f(x)\} + \sup_{x\in D}\{g(x)\}$$ and $$\inf_{x\in D}\{(f + g)(x)\} > \inf_{x\in D}\{f(x)\} + \inf_{x\in D}\{g(x)\}.$$
 \end{remark}
 
 \begin{exmp}
-	Define $f: \mathbb [a, b]\to\mathbb R, x\mapsto x$ and $g: [a, b]\to\mathbb R, x\mapsto -x$ with $b > a\geq 0$. Clearly, $\sup_{x\in [a, b]}\{(f+g)(x)\} = 0 < \sup_{x\in [a, b]}\{f(x)\} + \sup_{x\in [a, b]}\{g(x)\} = b - a$. 
+	Define $f: \mathbb [a, b]\to\mathbb R, x\mapsto x$ and $g: [a, b]\to\mathbb R, x\mapsto -x$ with $b > a\geq 0$. Clearly, $$\sup_{x\in [a, b]}\{(f+g)(x)\} = 0 < \sup_{x\in [a, b]}\{f(x)\} + \sup_{x\in [a, b]}\{g(x)\} = b - a$$ and $$\inf_{x\in [a, b]}\{(f + g)(x)\} = 0 > \inf_{x\in [a, b]}\{f(x)\} + \inf_{x\in [a, b]}\{g(x)\} = a - b.$$
 \end{exmp}
+
+\begin{corollary}
+	Let $D$ be a set and $f, g: D\to \mathbb C$ complex-valued functions s.t. $\abs{f}$ and $\abs{g}$ are bounded, then 
+	\begin{align}
+		\sup_{x\in D}\{(\abs{f} + \abs{g})(x)\} \leq \sup_{x\in D}\{\abs{f}(x)\} + \sup_{x\in D}\{\abs{g}(x)\}
+	\end{align}
+	and
+	\begin{align}
+		\inf_{x\in D}\{(\abs{f}+\abs{g})(x)\} \geq \inf_{x\in D}\{\abs{f}(x)\} + \inf_{x\in D}\{\abs{g}(x)\}.
+	\end{align}
+\end{corollary}
+
+\begin{theorem}\label{thrm:sup_inequality_2}
+	Let $D$ be a set and $f, g: D\to\mathbb R$, where $f \leq g$. If $g$ is bounded from above, then 
+	\begin{align}
+		\sup_{x\in D}f(x)\leq \sup_{x\in D}g(x)
+	\end{align}
+	and if $f$ is bounded from below, then 
+	\begin{align}
+		\inf_{x\in D}f(x) \leq \inf_{x\in D}g(x).
+	\end{align}
+\end{theorem}
+
+\begin{proof}[Proof \cite{src:supremum_and_infimum}]
+	For all $x\in[a, b]$, if $f\leq g$ and $g$ is bounded from above, then
+	$$f(x)\leq g(x)\leq \sup_{x\in D}g(x),$$
+	i.e. $\sup_{x\in D}g(x)$ is an upper bound for $f(x)$. Since there may be a smaller upper bound, we have
+	$$\sup_{x\in D}f(x) \leq \sup_{x\in D}g(x).$$
+	If $g$ is bounded from below, then 
+	$$\inf_{x\in D}f(x) \leq f(x) \leq g(x),$$
+	i.e. $\inf_{x\in D}f(x)$ is a lower bound for $g(x)$. Since there may be a bigger lower bound, we have
+	$$\inf_{x\in D}f(x)\leq \inf_{x\in D}g(x).$$	
+\end{proof}
+
+\begin{corollary}
+	Let $D$ be a set and $f, g: D\to\mathbb C$ s.t. $\abs{f}\leq\abs{g}$. If $\abs{g}$ is bounded from above, then 
+	\begin{align}
+		\sup_{x\in D}\abs{f}(x) \leq \sup_{x\in D}\abs{g}(x)
+	\end{align}
+	and if $\abs{f}$ is bounded from below, then 
+	\begin{align}
+		\inf_{x\in D}\abs{f}(x) \leq \inf_{x\in D}\abs{g}(x).
+	\end{align}
+\end{corollary}
