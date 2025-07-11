@@ -259,5 +259,17 @@
 		x\in A&\Rightarrow f(x)\in f(A) = \{f(x)\mid x\in A\}\Leftrightarrow x\in f^{-1}(f(A)) = \{x\in X\mid f(x)\in f(A)\}
 		\\ &\Rightarrow A\subset f^{-1}(f(A)).
 	\end{align*}
-	
+\end{proof}
+
+\begin{theorem}\label{thrm:cartesian_product_union}
+	Let $\left\{B_i\right\}_{i\in I}$ be a family of sets, where $I$ is an arbitrary index set. Also, let $A$ be a set. Then 
+	\begin{align}\label{eq:cartesian_product_union}
+		\bigcup_{i\in I}(A\times B_i) = A\times \bigcup_{i\in I}B_i.
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		\bigcup_{i\in I}(A\times B_i) &= \bigcup_{i\in I}\left\{(a, x) \mid a\in A \ \wedge x\in B_i \right\} \\ &= \left\{ (a, x)\mid a\in A\ \wedge\ x\in \bigcup_{i\in I}B_i \right\} \\ &= A\times \bigcup_{i\in I}B_i
+	\end{align*}
 \end{proof}

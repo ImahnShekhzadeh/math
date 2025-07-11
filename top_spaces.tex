@@ -957,6 +957,31 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	The uncountable product of metrizable topological spaces is not necessarily metrizable, since every metrizable topological space is first-countable, yet $\mathbb R^{\mathbb R}$, equipped with the product topology, and where we consider $\mathbb R$ with the standard topology, is not first-countable, since $\{0, 1\}^{\mathbb R}$, where we consider $\{0, 1\}\subset \mathbb R$ with the subspace topology, is not first-countable.
 \end{remark}
 
+\begin{theorem}
+	Let $X$ and $Y$ be compact topological spaces, then so is $X\times Y$.
+\end{theorem}
+
+\begin{proof}[Proof \cite{topology-singh}]
+	Let $\mathscr G$ be an open cover of $X\times Y$. Fix an arbitrary $x\in X$, then for any $y\in Y$, there is an open set $G\in \mathscr G$ s.t. $(x, y)\in G$. Since $G$ is open, there are open sets $U_y\subset X$ and $V_y\subset Y$ s.t. $(x, y)\in U_y\times V_y\subset G$, cf. Corollary \ref{corollary:open_set_basis_member_containment}. Note that $U_y$ and $V_y$ also depend on $x$, yet since $x$ is fixed, we only denote the dependence on $y$.
+	
+	Since $Y$ is compact, the open covering $\left\{V_y\mid y\in Y\right\}$ has a finite subcovering of $Y$, i.e. there are finitely many points $y_1, \dots, y_{n(x)}$ in $Y$ s.t. $Y = \bigcup_{i=1}^{n(x)}V_{y_i}$, where $n(x)\in\mathbb N$. Define $U_x := \bigcap_{i=1}^{n(x)}U_{y_i}$ and note that $U_x$ is an open neighborhood of $x$, since it is the intersection of finitely many open sets, and each $U_{y_i}$ contains $x$. 
+	
+	For $(x, y_i)\in U_{y_i}\times V_{y_i}$, there exists a $G_{x}^{i}\in \mathscr G$ s.t. $(x, y_i)\in U_{y_i}\times V_{y_i}\subset G_{x}^{i}$. Note that 
+	\begin{align}\label{eq:prod_comp_spaces_comp_intermed}
+		U_x\times V_{y_i} \subset U_{y_i}\times V_{y_i}\subset G_{x}^{i}\Rightarrow \bigcup_{i=1}^{n(x)}\left(U_{x}\times V_{y_i}\right) \overset{\tiny\eqref{eq:cartesian_product_union}}{=} U_{x}\times \bigcup_{i=1}^{n(x)}V_{y_i} = U_{x}\times Y\subset \bigcup_{i=1}^{n(x)}G_x^i.
+	\end{align}
+	Now consider the open covering $\{U_x\mid x\in X\}$ of $X$. Since $X$ is compact, there are finitely many points $x_1, \dots, x_m$ in $X$ s.t. $X = \bigcup_{j=1}^{m}U_{x_j}$, where $m\in\mathbb N$. Thus,
+	$$X\times Y = \left(\bigcup_{j=1}^{m}U_{x_j}\right)\times Y \overset{\tiny\eqref{eq:cartesian_product_union}}{=} \bigcup_{j=1}^{m}\left(U_{x_j}\times Y\right)\overset{\tiny\eqref{eq:prod_comp_spaces_comp_intermed}}{=} \bigcup_{j=1}^{m}\bigcup_{i=1}^{n(x)}G_{x_j}^{i},$$ where equality holds, since $G_{x_j}^{i}\subset X\times Y$ and their union can thus not be a superset of $X\times Y$. We have thus shown that each open cover of $X\times Y$ has a finite sub-covering.
+\end{proof}
+
+\begin{corollary}
+	By induction, it follows that a finite product of compact topological spaces is also a compact topological space.
+\end{corollary}
+
+\begin{remark}
+	A visual animation for the proof of the preceding Theorem is given in Ref. \cite{5082194}.
+\end{remark}
+
 \begin{defn}
 	Let $(X, \tau)$ be a topological space, then a sequence $\seq[\varphi_n]$ is said to converge to a point $\varphi\in X$ if for each neighborhood $U$ of $x$, there exists an $N\in\mathbb N$ s.t. for all $n\geq N$, we have $\varphi_n\in U$ \cite{289740}.
 \end{defn}
