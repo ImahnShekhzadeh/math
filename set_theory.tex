@@ -202,6 +202,25 @@
 	If any $X_{\alpha} = \emptyset$, then $\prod_{\alpha\in A}X_{\alpha} = \emptyset$, since there is no function $x$ s.t. $x(\alpha) \in X_{\alpha}$.
 \end{remark}
 
+\begin{theorem}\label{thrm:intersection_inf_Cart_prod}
+	Let $\left\{U_{\alpha}\right\}_{\alpha\in A}$ and $\left\{V_{\alpha}\right\}_{\alpha\in A}$ be families of sets, where $A$ is an index set, then 
+	\begin{align}\label{eq:intersection_inf_Cart_prod}
+		\left(\prod_{\alpha\in A}U_{\alpha}\right) \cap \left(\prod_{\alpha\in A}V_{\alpha}\right) = \prod_{\alpha\in A}\left(U_{\alpha}\cap V_{\alpha}\right).
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	When looking at the definition of the infinite Cartesian product, we notice that the codomain of the functions are only relevant to indicate that $x(\alpha)\in X_{\alpha}$, i.e. two functions $x: A\to B$ and $x': A\to B'$ are identical as long as $\text{ran}(x) = \text{ran}(x') \subset B$ and $\text{ran}(x) = \text{ran}(x') \subset B'$. Thus, defining $$\Omega := \left(\bigcup_{\alpha\in A}U_{\alpha}\right)\cup \left(\bigcup_{\alpha\in A}V_{\alpha}\right),$$ we have
+	\begin{align*}
+		&\left(\prod_{\alpha\in A}U_{\alpha}\right) \cap \left(\prod_{\alpha\in A}V_{\alpha}\right) 
+		\\ &= \left\{ u: A\to \bigcup_{\alpha\in A}U_{\alpha} \mid u(\alpha)\in U_{\alpha} \ \forall \alpha\in A\right\} \cap \left\{ v: A\to \bigcup_{\alpha\in A}V_{\alpha} \mid v(\alpha)\in V_{\alpha} \ \forall \alpha\in A\right\}
+		\\ &= \left\{ u: A\to \Omega \mid u(\alpha)\in U_{\alpha}\ \forall\alpha\in A\right\} \cap \left\{ v: A\to \Omega \mid v(\alpha)\in V_{\alpha}\ \forall\alpha\in A\right\}
+		\\ &= \left\{ w: A\to\Omega \mid w(\alpha)\in U_{\alpha}\cap V_{\alpha}\ \forall\alpha\in A 
+		\right\}
+		\\ &= \prod_{\alpha\in A}(U_{\alpha}\cap V_{\alpha}).
+	\end{align*}
+\end{proof}
+
 \begin{theorem}\label{thrm:de_morgans_law}
 	Let $X$ be a set, $I$ an arbitrary index set, and $U_i\subset X$ for all $i\in I$. Then 
 	\begin{align}\label{eq:de_morgan_comp_union}
