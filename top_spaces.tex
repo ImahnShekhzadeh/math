@@ -989,7 +989,21 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 \begin{proof}[Proof \cite{877547}] Let $\mathscr G := \{U_{\alpha}\}_{\alpha\in A}$ be an open cover of $U$, where $A$ is an index set and $U_{\alpha}\subset X$ for every $\alpha$. Since $\mathscr G$ is an open cover of $U$, $\mathscr G \cup \{X\setminus U\}$ is an open cover of $X$ (note that $X\setminus U$ is open, since $U$ is closed by assumption). Since $X$ is compact, there exist finitely many indices $\alpha_{1}, \dots, \alpha_{n}\in A$ with $n\in \mathbb N$ s.t. $\left\{U_{\alpha_1}, \dots, U_{\alpha_n}, X\setminus U\right\}$ covers $X$, which implies that $\{U_{\alpha_1}, \dots, U_{\alpha_n}\}$ is a cover of $U$.
 \end{proof}
 
+\begin{theorem}[Heine-Borel Theorem]\label{thrm:heine-borel}
+	Let $\mathbb R$ be equipped with the standard topology. Then a closed interval $J = [a, b]\subset\mathbb R$ with $a\leq b$ is compact.
+\end{theorem}
 
+\begin{proof}[Proof \cite{4561719,4561736,4203835}]
+	Let $\mathscr G$ be a family of open subsets of $\mathbb R$ covering $J$, and consider the set
+	$$X := \left\{ x\in J\mid [a, x] \text{ is covered by a finite subfamily of } \mathscr G \right\}.$$
+	We want to show that $b\in X´$. 
+	
+	First, note that $a\in X$, as $[a, a] = \{a\}$, which can be covered by a single member of $\mathscr G$. Thus, $X$ is non-empty. $X$ is bounded above by $b$, hence $c := \sup X$ exists. As $a \leq c\leq b$, there exists a set $G_0\in \mathscr G$ s.t. $c\in G_{0}$. Since $G_0$ is open in $\mathbb R$, there is a $\delta > 0$ s.t. $(c - \delta, c + \delta)\subset G_{0}$.
+	
+	Since $c = \sup X$, by Theorem \ref{thrm:supremum_characterization}, there exists an $x\in X$ s.t. $c\geq x > c - \delta$. Thus, $[a, c + \delta) = [a, x] \cup (c - \delta, c + \delta)$ can be covered by a finite subfamily of $\mathscr G$, as $[a, x]$ can and $(c - \delta, c + \delta) \subset G_0\in\mathscr G$. Thus, for any $x'\in [a, c + \delta)\cap [a, b]$, we have $x'\in X$. 
+	
+	It holds that $c = b$, which we will prove via contradiction. It is clear that the possibility $c > b$ is excluded, as $b$ is an upper bound of $X$ and $c$ is the lowest upper bound of $X$. Assume that $a \leq c < b$. Then we can find a $t\in \mathbb R$ s.t. $c < t < b$ and $t < c + \delta$, i.e. $t$ is one of the $x'$ values, implying that $t\in X$. This is a contradiction, as $t > \sup A = c$. This shows that $c = b$, i.e. $c = b$ is one of the $x'$ values, hence $b\in X$.
+\end{proof}
 
 \begin{defn}
 	Let $(X, \tau)$ be a topological space, then a sequence $\seq[\varphi_n]$ is said to converge to a point $\varphi\in X$ if for each neighborhood $U$ of $x$, there exists an $N\in\mathbb N$ s.t. for all $n\geq N$, we have $\varphi_n\in U$ \cite{289740}.
