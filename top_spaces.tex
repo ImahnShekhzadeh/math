@@ -957,7 +957,23 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	The uncountable product of metrizable topological spaces is not necessarily metrizable, since every metrizable topological space is first-countable, yet $\mathbb R^{\mathbb R}$, equipped with the product topology, and where we consider $\mathbb R$ with the standard topology, is not first-countable, since $\{0, 1\}^{\mathbb R}$, where we consider $\{0, 1\}\subset \mathbb R$ with the subspace topology, is not first-countable.
 \end{remark}
 
-\begin{theorem}
+\begin{theorem}[Heine-Borel Theorem]\label{thrm:heine-borel}
+	Let $\mathbb R$ be equipped with the standard topology. Then a closed interval $J = [a, b]\subset\mathbb R$ with $a\leq b$ is compact.
+\end{theorem}
+
+\begin{proof}[Proof \cite{4561719,4561736,4203835}]
+	Let $\mathscr G$ be a family of open subsets of $\mathbb R$ covering $J$, and consider the set
+	$$X := \left\{ x\in J\mid [a, x] \text{ is covered by a finite subfamily of } \mathscr G \right\}.$$
+	We want to show that $b\in X´$. 
+	
+	First, note that $a\in X$, as $[a, a] = \{a\}$, which can be covered by a single member of $\mathscr G$. Thus, $X$ is non-empty. $X$ is bounded above by $b$, hence $c := \sup X$ exists. As $a \leq c\leq b$, there exists a set $G_0\in \mathscr G$ s.t. $c\in G_{0}$. Since $G_0$ is open in $\mathbb R$, there is a $\delta > 0$ s.t. $(c - \delta, c + \delta)\subset G_{0}$.
+	
+	Since $c = \sup X$, by Theorem \ref{thrm:supremum_characterization}, there exists an $x\in X$ s.t. $c\geq x > c - \delta$. Thus, $[a, c + \delta) = [a, x] \cup (c - \delta, c + \delta)$ can be covered by a finite subfamily of $\mathscr G$, as $[a, x]$ can and $(c - \delta, c + \delta) \subset G_0\in\mathscr G$. Thus, for any $x'\in [a, c + \delta)\cap [a, b]$, we have $x'\in X$. 
+	
+	It holds that $c = b$, which we will prove via contradiction. It is clear that the possibility $c > b$ is excluded, as $b$ is an upper bound of $X$ and $c$ is the lowest upper bound of $X$. Assume that $a \leq c < b$. Then we can find a $t\in \mathbb R$ s.t. $c < t < b$ and $t < c + \delta$, i.e. $t$ is one of the $x'$ values, implying that $t\in X$. This is a contradiction, as $t > \sup A = c$. This shows that $c = b$, i.e. $c = b$ is one of the $x'$ values, hence $b\in X$.
+\end{proof}
+
+\begin{theorem}\label{thrm:product_comp_spaces}
 	Let $X$ and $Y$ be compact topological spaces, then so is $X\times Y$.
 \end{theorem}
 
@@ -982,27 +998,37 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	A visual animation for the proof of the preceding Theorem is given in Ref. \cite{5082194}.
 \end{remark}
 
-\begin{theorem}
+\begin{exmp}
+	From the Heine-Borel Theorem \ref{thrm:heine-borel}, we already know that $I^1 = [0, 1]$ is compact. The preceding corollary implies that for any $n\in\mathbb N$, the unit $n$-cube $I^n := \prod_{i=1}^{n}I^1$ is also compact.
+\end{exmp}
+
+\begin{theorem}\label{thrm:closed_subset_comp_top_space}
 	Let $X$ be a compact topological space and $U\subset X$ closed. Then $U$ is also compact.
 \end{theorem}
 
 \begin{proof}[Proof \cite{877547}] Let $\mathscr G := \{U_{\alpha}\}_{\alpha\in A}$ be an open cover of $U$, where $A$ is an index set and $U_{\alpha}\subset X$ for every $\alpha$. Since $\mathscr G$ is an open cover of $U$, $\mathscr G \cup \{X\setminus U\}$ is an open cover of $X$ (note that $X\setminus U$ is open, since $U$ is closed by assumption). Since $X$ is compact, there exist finitely many indices $\alpha_{1}, \dots, \alpha_{n}\in A$ with $n\in \mathbb N$ s.t. $\left\{U_{\alpha_1}, \dots, U_{\alpha_n}, X\setminus U\right\}$ covers $X$, which implies that $\{U_{\alpha_1}, \dots, U_{\alpha_n}\}$ is a cover of $U$.
 \end{proof}
 
-\begin{theorem}[Heine-Borel Theorem]\label{thrm:heine-borel}
-	Let $\mathbb R$ be equipped with the standard topology. Then a closed interval $J = [a, b]\subset\mathbb R$ with $a\leq b$ is compact.
+\begin{theorem}[Generalized Heine-Borel Theorem]\label{thrm:generalized_heine_borel}
+	A subset $A\subset \mathbb R^n$ is compact iff it is closed and bounded.
 \end{theorem}
 
-\begin{proof}[Proof \cite{4561719,4561736,4203835}]
-	Let $\mathscr G$ be a family of open subsets of $\mathbb R$ covering $J$, and consider the set
-	$$X := \left\{ x\in J\mid [a, x] \text{ is covered by a finite subfamily of } \mathscr G \right\}.$$
-	We want to show that $b\in X´$. 
+\begin{proof}[Proof \cite{topology-singh}]
+	\enquote{$\Longleftarrow$} Let $A\subset\mathbb R^n$ be closed and bounded. For each $i\in \{1, \dots, n\}$, let $p_i: \mathbb R^n\to\mathbb R$ denote the projection onto the $i$th factor. Then $p_i(A)\subset\mathbb R$ is bounded. To see this, note that since $A$ is bounded, there is an $r > 0$ and a $\varphi = (\varphi_1, \dots, \varphi_n)\in\mathbb R^n$ s.t. $A\subset B_{r}[\varphi] = \left\{\psi = (\psi_1, \dots, \psi_n)\in\mathbb R^n\mid \sqrt{\sum_{i=1}^{n}(\varphi_i - \psi_i)^2} \leq r\right\}$, where we used the fact that the product topology on $\mathbb R^n$ is induced by the Euclidean metric. Also, for each $i\in \{1, \dots, n\}$,
+	\begin{align*}
+		p_i(A) &= \{p_i(x) \mid x = (x_1, \dots, x_n)\in A\}
+		\\ & = \{x_i \mid x\in A\} 
+		\\ &\subset \left\{x_i \mid x\in B_{r}[\varphi]\right\} 
+		\\ &= \left\{x_i \mid \sqrt{\sum_{i=1}^{n}(\varphi_i - x_i)^2}\leq r\right\}
+		\\ &\subset B_{r}[\varphi_i] = \{y\in \mathbb R \mid \abs{y - \varphi_i} \leq r\},
+	\end{align*}
+	since $\abs{x - \varphi_i} = (x - \varphi_i)^2 \leq \sqrt{\sum_{i=1}^{n}(\varphi_i - x)^2} \leq r$. Thus, $p_{i}(A)$ is bounded as well. Defining $a_i := \varphi_i - r$ and $b_i := \varphi_i + r$, we have $p_i(A) \subset [a_i, b_i]$. It now holds that $A\subset \prod_{i=1}^{n}p_i(A)$, since for any $x = (x_1, \dots, x_n)\in A$, we have $x_i\in p_i(A)$ for each $i$ in $\{1, \dots, n\}$. Thus, $A \subset \prod_{i=1}^{n}p_i(A) \subset \prod_{i=1}^{n}[a_i, b_i] =: X$. By Theorem \ref{thrm:heine-borel} and \ref{thrm:product_comp_spaces}, $X$ is compact.
 	
-	First, note that $a\in X$, as $[a, a] = \{a\}$, which can be covered by a single member of $\mathscr G$. Thus, $X$ is non-empty. $X$ is bounded above by $b$, hence $c := \sup X$ exists. As $a \leq c\leq b$, there exists a set $G_0\in \mathscr G$ s.t. $c\in G_{0}$. Since $G_0$ is open in $\mathbb R$, there is a $\delta > 0$ s.t. $(c - \delta, c + \delta)\subset G_{0}$.
+	We now show that $A$ is also closed in $X$, equipped with the subspace topology. Since $A\subset\mathbb R^n$ is closed, $\mathbb R^n\setminus A$ is open. Thus, $X\cap (\mathbb R^n\setminus A)$ is open in the subspace topology of $X$. Since $X \cap (\mathbb R^n\setminus A) = X\setminus A$, $A\subset X$ is closed. To see why $X \cap (\mathbb R^n\setminus A) = X\setminus A$, let $x\in X \cap (\mathbb R^n\setminus A)$, i.e. $x\in X$ and $x\in\mathbb R^n$ and $x\notin A$, which implies $x\in X\setminus A$.
 	
-	Since $c = \sup X$, by Theorem \ref{thrm:supremum_characterization}, there exists an $x\in X$ s.t. $c\geq x > c - \delta$. Thus, $[a, c + \delta) = [a, x] \cup (c - \delta, c + \delta)$ can be covered by a finite subfamily of $\mathscr G$, as $[a, x]$ can and $(c - \delta, c + \delta) \subset G_0\in\mathscr G$. Thus, for any $x'\in [a, c + \delta)\cap [a, b]$, we have $x'\in X$. 
+	Since $A\subset X$ is closed and $X$ is compact, by Theorem \ref{thrm:closed_subset_comp_top_space}, $A$ is compact. 
 	
-	It holds that $c = b$, which we will prove via contradiction. It is clear that the possibility $c > b$ is excluded, as $b$ is an upper bound of $X$ and $c$ is the lowest upper bound of $X$. Assume that $a \leq c < b$. Then we can find a $t\in \mathbb R$ s.t. $c < t < b$ and $t < c + \delta$, i.e. $t$ is one of the $x'$ values, implying that $t\in X$. This is a contradiction, as $t > \sup A = c$. This shows that $c = b$, i.e. $c = b$ is one of the $x'$ values, hence $b\in X$.
+	\enquote{$\Longrightarrow$} Let $A\subset\mathbb R^n$ be compact. Since $\mathbb R^n$ is a Hausdorff space, $A$ is closed, cf. Theorem \ref{thrm:compact_subspace_Hausdorff_closed}. Since $A$ is compact, every open cover of $A$ contains a finite sub-covering. Fix an $a\in A$ and consider the open covering $\{B_{m}(a) \mid m\in\mathbb N\}$ of $A$, i.e. the open covering consists of open balls around $a$ with varying radii $m\in\mathbb N$. Since $A$ is compact, there is a finite sub-covering, and since $B_{m}(a) \cup B_{n}(a) = B_{n}(a)$ if $n \geq m$, there is an $N\in\mathbb N$ s.t. $A\subset B_{N}(a)\subset B_{N}[a]$, showing that $A$ is bounded. 
 \end{proof}
 
 \begin{defn}
@@ -1053,7 +1079,7 @@ Let us now look at how to define a topology on the infinite Cartesian product of
 	which is clearly a contradiction. 
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{thrm:compact_subspace_Hausdorff_closed}
 	Let $X$ be a Hausdorff space, and $K\subset X$ compact, then $K$ is closed.
 \end{theorem}
 
