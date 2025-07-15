@@ -89,6 +89,16 @@
 	The upper bound of every chain $C\subset M$ need not be in $C$, by definition of a chain, but it must be in $M$. 
 \end{remark}
 
+\begin{theorem}\label{thrm:supremum_characterization}
+	If $A\subset \mathbb R$, then $M = \sup A$ iff $M$ is an upper bound of $A$ and for every $M' < M$ there exists an $x\in A$ s.t. $x > M'$. 
+\end{theorem}
+
+\begin{proof}[Proof \cite{src:supremum_and_infimum}]
+	\enquote{$\Longleftarrow$} $M$ is an upper bound and for any $M' < M$ there is a bigger element in $A$, hence $M$ is the lowest upper bound of $A$.
+	
+	\enquote{$\Longrightarrow$} Since $M = \sup A$, $M$ is an upper bound of $A$ and if $M' < M$, then $M'$ is not an upper bound of $A$, since $M$ is the lowest upper bound of $A$, and thus there exists an $x\in A$ s.t. $x > M'$.
+\end{proof}
+
 \begin{theorem}[Distributive law for set operations \cite{481036}]
 	Let $B$ be a set, and $\{A_i\}$ be a collection of sets, where $I$ is a (finite, countable or uncountable) index set. Then we have
 	\begin{align}\label{eq:dist_law_set_ops}
@@ -161,8 +171,24 @@
 	\end{align*}
 \end{proof}
 
+\begin{theorem}\label{thrm:set_theory_unions_intersects_images}
+	Let $X, Y$ be sets and $f: X\to Y$ a map between them. Further, let $I$ be an index set and $\left\{S_i\right\}_{i\in I}$ be a family of subsets of $X$, then \cite{1132766}
+	\begin{align}\label{eq:set_theory_unions_images}
+		f\left(\bigcup_{i\in I}S_i\right) = \bigcup_{i\in I}f(S_i).
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	We have
+	\begin{align*} 
+	f\left(\bigcup_{i\in I}S_i\right) &= f\left( \{x\mid \exists i_0\in I: x\in S_i\} \right) 
+	\\ &= \left\{ f(x) \mid \exists i_0\in I: x\in S_i \right\} 
+	\\ &= \bigcup_{i\in I}f(S_i).
+	\end{align*} 
+\end{proof}
+
 \begin{theorem}\label{thrm:set_theory_unions_intersects_preimages}
-	Let $X, Y$ be sets, and $f: X\to Y$ a map between them. Further, let $I$ be an index set and $U_i\subset Y$ for all $i\in I$. Then
+	Let $X, Y$ be sets and $f: X\to Y$ a map between them. Further, let $I$ be an index set and $U_i\subset Y$ for all $i\in I$. Then
 	\begin{align}\label{eq:set_theory_unions_preimages}
 		\bigcup_{i\in I}f^{-1}(U_i) = f^{-1}\left(\bigcup_{i\in I}U_i\right)
 	\end{align}
