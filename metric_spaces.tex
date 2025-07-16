@@ -1152,12 +1152,26 @@
 We now generalize Example \ref{exmp:space-continuous-functions-complete} by considering functions that are defined on arbitrary compact metric spaces $X$.
 
 \begin{theorem}
-	Let $X$ be a compact metric space and denote by $\mathcal C[X]$ the space of all continuous functions $\chi: X\to\mathbb K$, where $\mathbb K \in \{\mathbb R, \mathbb C\}$. Then $(\mathcal C[X], d_{\infty}$) with $$d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} := \sup_{x\in X}\left\{ \abs{\varphi(x) - \psi(x)} \right\} = \max_{x\in X}\left\{\abs{\varphi(x) - \psi(x)}\right\}\quad \forall \varphi, \psi\in\mathcal C[a, b]$$
+	Let $X$ be a compact metric space and denote by $\mathcal C[X]$ the space of all continuous functions $\chi: X\to\mathbb K$, where $\mathbb K \in \{\mathbb R, \mathbb C\}$. Then $(\mathcal C[X], d_{\infty}$) with $$d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} := \sup_{x\in X}\left\{ \abs{\varphi(x) - \psi(x)} \right\} \quad \forall \varphi, \psi\in\mathcal C[a, b]$$
 	is a complete metric space.
 \end{theorem}
 
 \begin{proof}
 	Replace $[a, b]$ in the proof of Example \ref{exmp:space-continuous-functions-complete} by $X$ and $\mathbb R$ by $\mathbb K$, and note that $(\mathbb C, d)$ with $d(z_1, z_2) := \abs{z_1 - z_2}$ is also a complete metric space, cf. Example \ref{exmp:complex_numbers_complete}.
+\end{proof}
+
+We generalize Example \ref{exmp:space-continuous-functions-complete} once more.
+
+\begin{theorem}
+	Let $X$ be a compact metric space and $(Y, d)$ a complete metric space. Denote the space of all continuous functions $\chi: X\to Y$ by $\mathcal C[X, Y]$, then $(\mathcal C[X, Y], d_{\infty})$ with 
+	\begin{align}
+		d_{\infty}(\varphi, \psi) := \sup_{x\in X}\left\{ d(\varphi(x), \psi(x)) \right\} \quad \forall\varphi, \psi\in C[X, Y]
+	\end{align}
+	is a complete metric space.
+\end{theorem}
+
+\begin{proof}
+	Replace $\mathbb K$ by $Y$ in the proof of the preceding Theorem, $\abs{\cdot - \cdot}$ by $d(\cdot, \cdot)$ and note that $(Y, d)$ is complete by assumption.
 \end{proof}
 
 \newpage 
