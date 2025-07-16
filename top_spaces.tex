@@ -1171,6 +1171,14 @@ In topological spaces (which are not necessarily metrizable), we define continui
 	cf. Eq. \eqref{eq:image_preimage_of_set}, which shows that every open cover of $f(X)$ has a finite subcover.
 \end{proof}
 
+\begin{corollary}
+	Let $X$ be a compact topological space, equip $\mathbb R$ with the standard topology and let $f: X\to\mathbb R$ be continuous. Then $f$ attains its minimum and maximum on $X$.
+\end{corollary}
+
+\begin{proof}[Proof \cite{109552}]
+	Since $f$ is continuous and $X$ compact, $f(X)\subset \mathbb R$ is compact, and thus by Theorem \ref{thrm:generalized_heine_borel} closed and bounded. Corollary \ref{corollary:closed_bounded_subsets_contain_inf_sup} now implies that $\sup(f(X)), \inf(f(x))\in f(X)$ and $\sup(f(X)) = \max(f(X))$ as well as $\inf(f(X)) = \min(f(X))$. Thus, there exist $x_0, x_1\in X$ s.t. $\min(f(X)) = f(x_0)$ and $\max(f(X)) = f(x_1)$.
+\end{proof}
+
 \begin{defn}[Homeomorphism \cite{topology-singh}] A \textit{homeomorphism} between two topological spaces $X$ and $Y$ is an invertible function $f: X\rightarrow Y$ such that $f$ and $f^{-1}$ are continuous. 
 \end{defn}
 

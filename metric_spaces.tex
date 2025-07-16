@@ -238,6 +238,18 @@
 	\enquote{$\Longrightarrow$}: Let $U$ be closed, i.e. $X\backslash U$ is open. Further, let $\varphi\in X$ be an accumulation point of $U$, i.e. there is a sequence $(\varphi_n)_{n\in\mathbb N}$ in $U$ such that $\lim\limits_{n\to\infty}\varphi_n = \varphi$. Hence, by definition of convergence, for all $\epsilon > 0$ there exists an $n\in\mathbb N$ such that $\varphi_n\in B(\varphi, \epsilon) \cap U$, implying that $\varphi\in U$. Thus, $U$ contains all its accumulation points.
 \end{proof}
 
+\begin{corollary}\label{corollary:closed_bounded_subsets_contain_inf_sup}
+	Let $U\subset \mathbb R$ be closed and bounded, where on $\mathbb R$ we consider the standard metric, then $\sup(U), \inf(U) \in U$, i.e. $\sup(U) = \max(U)$ and $\inf(U) = \min(U)$.
+\end{corollary}
+
+\begin{proof}[Proof \cite{2752236}]
+	Since $U$ is bounded, $\inf(U)$ and $\sup(U)$ exist. 
+	
+	By Theorem \ref{thrm:supremum_characterization}, there exists a sequence $\seq[x_n]$ in $U$ s.t. $\sup(U) - \frac{1}{n} < x_n \leq \sup(U)$ for all $n\in\mathbb N$. Thus, $\lim\limits_{n\to\infty}x_n = \sup(U)$, i.e. $\sup(U)$ is an accumulation point of $U$ and since $U$ is closed, $\sup(U)\in U$.
+	
+	Similarly, one can show that $\inf(U)\in U$.
+\end{proof}
+
 \begin{defn}[Closure of set]\label{defn:closure_set}
 	The set 
 	\begin{align}
@@ -924,7 +936,7 @@
 \end{defn}
 
 \begin{exmp}
-	Consider $U := (0, 1]$, which is a subset of the topological space $R$ with the standard topology on $\mathbb R$. Then $V_j := (1/j, 1 + 1/j)$, $j\in\mathbb N$, are an open covering of $U$, but $U$ is not compact, since there is no \textit{finite} covering of $U$ with open sets from from $\{V_j\}_{j\in\mathbb N}$.
+	Consider $U := (0, 1]$, which is a subset of the topological space $\mathbb R$, where we equip $\mathbb R$ with the standard topology. Then $V_j := (1/j, 1 + 1/j)$, $j\in\mathbb N$, are an open covering of $U$, but $U$ is not compact, since there is no \textit{finite} covering of $U$ with open sets from from $\{V_j\}_{j\in\mathbb N}$.
 	
 	$U$ is also not sequentially compact, since the sequence $\seq[1/n]$ does not contain a convergent subsequence in $U$ ($0\notin U$).
 \end{exmp}
