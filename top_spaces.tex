@@ -1123,6 +1123,16 @@ In topological spaces (which are not necessarily metrizable), we define continui
 	In other words, the preimage of an open set is always open. For topological spaces that are metrizable, the $\epsilon$-$\delta$ definition of continuity as in Def. \ref{defn:continuity} is equivalent to the preceding definition, cf. Theorem \ref{thrm:preimages_continuous_functions}.
 \end{remark}
 
+\begin{theorem}
+	Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces and let $A\subset X$ be equipped with the subspace topology. If $f: X\to Y$ is continuous, then so is $f\vert_{A}: A\to Y$.
+\end{theorem}
+
+\begin{proof}[Proof \cite{1826827}]
+	Let $U\in \tau_Y$, then 
+	$$f\vert_{A}^{-1}(U) = \{a\in A \mid f(a)\in U\} = \{x\in X\mid f(x)\in U\} \cap A = f^{-1}(U) \cap A.$$ 
+	Since $f: X\to Y$ is continuous, this implies that $f^{-1}(U)$ is open in $X$ and thus $f^{-1}(U) \cap A$ is open in the subspace topology of $A$.
+\end{proof}
+
 \begin{theorem}\label{thrm:continuity_sub_basis}
 	Let $(X, \tau_X)$ and $(Y, \tau_Y)$ be topological spaces, and $\mathscr B$ a basis or a subbasis for $\tau_Y$, then $f: X\to Y$ is continuous iff the inverse image under $f$ of every member of $\mathscr B$ is open in $\tau_X$ \cite{topology-singh}. 
 \end{theorem}
