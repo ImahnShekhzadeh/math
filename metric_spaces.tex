@@ -570,25 +570,26 @@
 \begin{exmp}\label{exmp:space-continuous-functions-complete}
 	Let $\mathcal C[a, b]$ be the space of all continuous functions $\chi: [a, b]\to\mathbb{R}$ with the metric 
 	\begin{align}\label{eq:metric_C[a,b]_real_valued}
-		d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} := \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} = \max_{x\in [a, b]}\left\{\abs{\varphi(x) - \psi(x)}\right\}\quad \forall \varphi, \psi\in\mathcal C[a, b].
+		d_{\infty}(\varphi, \psi) = \norm{\varphi - \psi}{\infty} := \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} \quad\forall \varphi, \psi\in\mathcal C[a, b].
 	\end{align}
 	The metric space $(\mathcal C[a, b], d_{\infty})$ is complete.
 \end{exmp}
 
 \begin{proof}
-	Note that for any continuous function defined on a compact interval, its image is compact, cf. Theorem \ref{thrm:image_of_cont_func_on_comp_top_space_is_compact}, and thus for $\varphi, \psi\in \mathcal C[a, b]$, $\abs{\varphi(x) - \psi(x)}\in\mathbb R$ for all $x\in [a, b]$. This implies that the supremum equals the maximum in Eq. \eqref{eq:metric_C[a,b]_real_valued}, and thus $d_{\infty}$ is well-defined.
+	We first show that $d_{\infty}$ is well-defined. Let $\varphi, \psi\in \mathcal C[a, b]$, then by Theorem \ref{thrm:image_of_cont_func_on_comp_top_space_is_compact}, $\varphi([a, b])\subset\mathbb R$ and $\psi([a, b])\subset\mathbb R$ are compact. Thus, by Theorem \ref{thrm:product_comp_spaces}, $\varphi([a, b])\times \psi([a, b])$ is also compact. The function $\abs{ \varphi(x) - \psi(x) }: \varphi([a, b])\times \psi([a, b]) \to\mathbb R$ is continuous, since the Euclidean metric is, cf. Theorem \ref{thrm:metric_is_continuous_function}. Thus, by Corollary \ref{corollary:continuous_real_valued_function_attains_min_max}, the function $\abs{ \varphi(x) - \psi(x) }$ attains its maximum on $\varphi([a, b])\times \psi([a, b])$, i.e. $d_{\infty}$ is well-defined.
 
 	We now show that $(\mathcal C[a, b], d_{\infty})$ is indeed a metric space:
 	\begin{enumerate}
 		\item positivity: $d_{\infty}(\varphi, \psi) = \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\}\geq 0$ for all $\varphi, \psi\in\mathcal C[a, b]$,
 		\item symmetry: $d_{\infty}(\varphi, \psi) = d_{\infty}(\psi, \varphi)$,
 		\item definiteness: $d_{\infty}(\varphi, \psi) = \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} = 0 \Leftrightarrow \abs{\varphi(x) - \psi(x)} = 0$ for all $x\in[a, b]\Leftrightarrow\varphi = \psi$,
-		\item triangle inequality: Let $\varphi, \psi, \chi\in \mathcal C[a, b]$, then by Theorem \ref{thrm:sup_inequality}, \begin{align*}
-			d_{\infty}(\varphi, \psi) &= \max_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} 
-			\\ &= \max_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x) + \chi(x) - \psi(x)}\}
-			\\ &\leq \max_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x)} + \abs{\chi(x) - \psi(x)}\}
-			\\ &\leq \max_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x)}\} 
-			+ \max_{x\in[a, b]}\{\abs{\chi(x) - \psi(x)}\} \\ &= d_{\infty}(\varphi, \chi) + d_{\infty}(\chi, \psi).
+		\item triangle inequality: Let $\varphi, \psi, \chi\in \mathcal C[a, b]$, then 
+		\begin{align*}
+			d_{\infty}(\varphi, \psi) &= \sup_{x\in [a, b]}\left\{ \abs{\varphi(x) - \psi(x)} \right\} 
+			\\ &= \sup_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x) + \chi(x) - \psi(x)}\}
+			\\ &\overset{\tiny\eqref{eq:sup_inequality_2}}{\leq} \sup_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x)} + \abs{\chi(x) - \psi(x)}\}
+			\\ &\overset{\tiny\eqref{eq:sup_inequality}}{\leq} \sup_{x\in [a, b]}\{\abs{\varphi(x) - \chi(x)}\} + \sup_{x\in[a, b]}\{\abs{\chi(x) - \psi(x)}\} 
+			\\ &= d_{\infty}(\varphi, \chi) + d_{\infty}(\chi, \psi).
 		\end{align*}
 	\end{enumerate}
 	
