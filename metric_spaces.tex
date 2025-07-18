@@ -212,6 +212,53 @@
 	which is a contradiction.
 \end{proof}
 
+Definition \ref{defn:convergence_sequence} defines what the convergence of a sequence $\seq[x_n]$ in a metric space means. For functions, it turns out that there are different plausible notions of convergence. 
+
+\begin{defn}[Pointwise convergence \cite{src:pointwise_uniform_convergence}]
+	Let $E$ be a set, $(Y, d)$ a metric space and $\seq[f_n]$ a sequence of functions mapping from $E$ to $Y$. We say that $\seq[f_n]$ converges \textit{pointwisely} to an $f: E\to Y$ if for all $\epsilon > 0$ and all $x\in E$ there exists an $N = N(\epsilon, x)$ s.t. 
+	\[
+		d(f_n(x), f(x)) < \epsilon\quad\forall n\geq N.
+	\] 
+\end{defn}
+
+\begin{exmp}
+	For $n\in\mathbb N$, let 
+	\[
+		f_n: \mathbb R\to\mathbb R, x\mapsto \begin{cases}
+			   -1 & x \leq -\frac{1}{2^n},
+			\\ 2^{n}x & -\frac{1}{2^n} < x < \frac{1}{2^n},
+			\\ 1 & x \geq \frac{1}{2^n},
+		\end{cases}
+	\] 
+	where we consider $\mathbb R$ with the standard metric \cite{src:uniform_continuity_convergence}. The sequence $\seq[f_n]$ converges pointwisely to the function
+	\[
+		f: \mathbb R\to\mathbb R, x\mapsto \begin{cases}
+			   -1 & x < 0,
+			 \\ 0 & x = 0,
+			 \\ 1 & x > 0.
+		\end{cases}
+	\]
+\end{exmp}
+
+\begin{proof}
+	For $x < 0$, there exists an $N$ s.t. $x\leq -1/2^n$ for all $n\geq N$, as $\seq[-1/2^n]$ converges to $0$. Then, $f_n(x) = f(x)$. Similarly, for $x > 0$, there exists an $N\in\mathbb N$ s.t. $x \geq 1/2^n$ for all $n\geq N$, as $\seq[1/2^n]$ converges to $0$. Then, $f_n(x) = f(x)$. Also, for $x = 0$, $f_n(x) = 0 = f(x)$ for all $n\in\mathbb N$.
+\end{proof}
+
+\begin{remark}
+	Note that in the preceding example, every $f_n$ is continuous, yet the pointwise limit $f$ is not. This is one drawback of the notion of pointwise convergence. To mitigate this, we need a stronger notion of convergence.
+\end{remark}
+
+\begin{defn}[Uniform convergence \cite{src:pointwise_uniform_convergence}]
+	Let $E$ be a set, $(Y, d)$ a metric space and $\seq[f_n]$ a sequence of functions mapping from $E$ to $Y$. We say that $\seq[f_n]$ converges \textit{uniformly} to an $f: E\to Y$ if for all $\epsilon > 0$ there exists an $N = N(\epsilon)$ such that for all $x\in E$, 
+	\[
+		d(f_n(x), f(x)) < \epsilon \quad\forall n\geq N.
+	\]  
+\end{defn}
+
+\begin{remark}
+	Clearly, uniform convergence implies pointwise convergence.
+\end{remark}
+
 \begin{theorem}\label{thrm:seq_convergence_subsequences}
 	A sequence is convergent iff every subsequence converges to the same limit.
 \end{theorem}
