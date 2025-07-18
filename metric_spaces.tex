@@ -393,7 +393,7 @@
 \end{remark}
 
 \begin{theorem}\label{thrm:mono_inc_seq_Cauchy}
-	Any sequence $(a_n)_{n\in\mathbb N}$ with $a_n\in \mathbb R$ for any $n\in \mathbb N$ that is monotonically increasing and upper bounded for any $n\in\mathbb N$ is a Cauchy sequence in ($\mathbb R$, $d$) with $d(x, y):= \abs{x - y}$ for any $x$, $y\in \mathbb R$.		
+	A real sequence $(a_n)_{n\in\mathbb N}$ that is monotonically increasing and upper bounded is a Cauchy sequence in ($\mathbb R$, $d$) with the standard metric.
 \end{theorem}
 
 \begin{proof}(\cite{2169936})
@@ -404,6 +404,14 @@
 		M - \epsilon < a_N \leq a_n \leq a_m \leq M, \quad \forall (m, n\geq N) \wedge (m > n)
 	\end{align}
 	from which $a_m - a_n < \epsilon$ follows. Similarly, we can show that $a_n - a_m < \epsilon$ for $n > m$. Hence, $d(a_m, a_n) < \epsilon$ for any $m$, $n\geq N$.
+\end{proof}
+
+\begin{corollary}\label{corollary:mono_inc_real_seq_convergence}
+	A real sequence $(a_n)_{n\in\mathbb N}$ that is monotonically increasing and upper bounded converges in ($\mathbb R$, $d$) wrt the standard metric.
+\end{corollary}
+
+\begin{proof}
+	This follows from the fact that $(\mathbb R, d)$ is complete, cf. Proposition \ref{prop:R_is_complete}, i.e. every Cauchy sequence in $\mathbb R$ converges.
 \end{proof}
 
 \begin{theorem}\label{thrm:AM-GM}
