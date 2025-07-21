@@ -1058,14 +1058,14 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 \end{proof}
 
 \begin{defn}
-	A set $U$ of a metric space is called separable, if $U$ contains a countable dense subset.
+	A set $U$ of a metric space is called \textit{separable} if $U$ contains a countable dense subset.
 \end{defn}
 
 \begin{exmp}
 	Consider the metric space $(\mathbb R, d)$, where $d$ is the usual metric. Then $\mathbb Q\subset\mathbb R$ is separable wrt $d$.
 \end{exmp}
 
-\begin{theorem}
+\begin{theorem}\label{thrm:totally_bounded_set_separable}
 	Every totally bounded set is separable.
 \end{theorem}
 
@@ -1220,13 +1220,74 @@ We generalize Example \ref{exmp:space-continuous-functions-complete} once more.
 \begin{theorem}
 	Let $X$ be a compact metric space and $(Y, d)$ a complete metric space. Denote the space of all continuous functions $\chi: X\to Y$ by $\mathcal C[X, Y]$, then $(\mathcal C[X, Y], d_{\infty})$ with 
 	\begin{align}
-		d_{\infty}(\varphi, \psi) := \sup_{x\in X}\left\{ d(\varphi(x), \psi(x)) \right\} \quad \forall\varphi, \psi\in C[X, Y]
+		d_{\infty}(\varphi, \psi) := \sup_{x\in X}\left\{ d(\varphi(x), \psi(x)) \right\} \quad \forall\varphi, \psi\in \mathcal C[X, Y]
 	\end{align}
 	is a complete metric space.
 \end{theorem}
 
 \begin{proof}
 	Replace $\mathbb K$ by $Y$ in the proof of the preceding Theorem, $\abs{\cdot - \cdot}$ by $d(\cdot, \cdot)$ and note that $(Y, d)$ is complete by assumption.
+\end{proof}
+
+\begin{theorem}[Arzel\`a\footnote{\textsc{Cesare Arzel\`a} (1847 -- 1912), Italian mathematician.}-Ascoli\footnote{\textsc{Giulio Ascoli} (1843 -- 1896), Jewish-Italian mathematician.}]
+	Let $(X, d)$ be a compact metric space. Then $U\subset \mathcal C[X]$ is relatively compact iff $U$ is bounded in $(\mathcal C[X], d_{\infty})$ and uniformly equicontinuous.
+\end{theorem}
+
+\begin{proof}
+	\enquote{$\Longleftarrow$} Let $U\subset \mathcal C[X]$ be bounded and uniformly equicontinuous. 
+	
+	Since $X$ is compact, by Theorems \ref{thrm:seq_compact_set_tot_bound}, \ref{thrm:totally_bounded_set_separable} and \ref{thrm:compact_seq_totally_bound_compl}, $X$ is separable, i.e. there is a set $S\subset X$ that is dense and countable. We denote the (countably many) points of $S$ by $\seq[x_n]$.
+	
+	Let $\seq[\varphi_n]$ be a sequence in $U$. We now show that $\seq[\varphi_n]$ contains a uniformly convergent subsequence, which we do via a standard diagonal argument. Since $U\subset \mathcal C[X]$ is bounded, there exists a $C > 0$ s.t. for all $f\in U$ and $x\in X$, $\abs{f(x)} \leq C$. Thus, the sequence $\seq[\varphi_n(x_1)]$ (of real or complex values) is bounded. The Bolzano-Weierstrass Theorem \ref{thrm:bolzano_weierstrass} now implies that $\seq[\varphi_n(x_1)]$ has a convergent subsequence $\left(\varphi_{n_{1, l}}(x_1)\right)_{l\in\mathbb N}$ in the real or complex numbers. Further, the sequence $\left(\varphi_{n_{1, l}}(x_2)\right)_{l\in\mathbb N}$ is bounded and has a convergent subsequence, which we denote by $\left(\varphi_{n_{2, l}}(x_2)\right)_{l\in\mathbb N}$. Note that the sequence of functions $\left(\varphi_{n_{2, l}}\right)_{l\in\mathbb N}$ converges at both $x_1$ and $x_2$, as $\left(\varphi_{n_{2, l}}\right)_{l\in\mathbb N}$ is a subsequence of $\left(\varphi_{n_{1, l}}\right)_{l\in\mathbb N}$. This way, through repeated selection, we inductively obtain a countable collection of subsequences $\left(\varphi_{n_{k, l}}\right)_{l\in\mathbb N}$ of the original sequence $\seq[\varphi_n]$
+	\begin{align*}
+		\begin{matrix}
+			   \varphi_{n_{1, 1}} & \varphi_{n_{1, 2}} & \varphi_{n_{1, 3}} & \cdots 
+			\\ \varphi_{n_{2, 1}} & \varphi_{n_{2, 2}} & \varphi_{n_{2, 3}} & \cdots 
+			\\ \varphi_{n_{3, 1}} & \varphi_{n_{3, 2}} & \varphi_{n_{3, 3}} & \cdots 
+			\\ \vdots             & \vdots             & \vdots             & \ddots
+		\end{matrix}
+	\end{align*}
+	where the sequence in the $n$-th row converges at $x_1, \dots, x_n$, and each row is a subsequence of the one above it. 
+	
+	For every $l$, the sequence $\left(\varphi_{n_{k, k}}\right)_{k\geq l}$ is a subsequence of $\left(\varphi_{n_{l, k}}\right)_{k\in\mathbb N}$. Thus, for any $l$, the sequence $\left(\varphi_{n_{k, k}}(x_l)\right)_{k\in\mathbb N}$ converges, i.e. the sequence $\left(\varphi_{n_{k, k}}\right)_{k\in\mathbb N}$ converges pointwisely on $S$.
+	
+	We will now show that $\left(\varphi_{n_{k, k}}\right)_{k\in\mathbb N}$ converges uniformly on $X$ and that it is uniformly Cauchy. Let $\delta > 0$ (we choose the same $\delta$ as the $\delta$ for which $U$ is uniformly equicontinuous). Since $S$ is dense in $X$, i.e. for every $x\in X$ there exists an $x_k\in S$ s.t. $d(x, x_k) < \delta$, we have that the collection of open balls $\left\{B_{\delta}(x_k)\right\}_{k\in\mathbb N}$ forms an open cover of $X$, i.e. 
+	\[
+		X = \bigcup_{k\in\mathbb N}B_{\delta}(x_k).
+	\]
+	Since $X$ is compact, there exists a $j\in\mathbb N$ s.t. 
+	\[
+		X = \bigcup_{1\leq k\leq j}B_{\delta}(x_k).
+	\]
+	As $\left(\varphi_{n_{k, k}}\right)_{k\in\mathbb N}$ converges pointwisely on $S$, for all $\epsilon > 0$ and all $x_{k}\in \{x_1, \dots, x_{j}\}$, there exists an $N_k = N_k(\epsilon)$ s.t. $\abs{\varphi_{n_{l, l}}(x_k) - \varphi_{n_{m, m}}(x_k)} < \epsilon$ for all $n_{l, l}, n_{m, m}\geq N$, cf. Theorem \ref{thrm:convergent_sequence_cauchy_sequence}. Setting $N := \max_{1\leq k\leq j}\{N_k\}$, we have that for all $\epsilon > 0$ there exists an $N \in\mathbb N$ s.t. for all $x_{k}\in \{x_1, \dots, x_j\}$, 
+	\[
+		\abs{\varphi_{n_{l, l}}(x_k) - \varphi_{n_{m, m}}(x_k)} < \epsilon\quad\forall n_{l, l}, n_{m, m}\geq N,
+	\]
+	which implies that $\left(\varphi_{n_{k, k}}\right)_{k\in\mathbb N}$ converges uniformly on $S$. Since $S$ is dense, i.e. for all $x\in X$ there is an $x_{k}$ with $1\leq k\leq j$ s.t. $d(x, x_k) < \delta$, we have
+	\begin{align*}
+		&\abs{\varphi_{n_{l, l}}(x) - \varphi_{n_{m, m}}(x)} 
+		\\ &\leq \abs{\varphi_{n_{l, l}}(x) - \varphi_{n_{l, l}}(x_k)} + \abs{\varphi_{n_{l, l}}(x_k) - \varphi_{n_{m, m}}(x_k)} + \abs{\varphi_{n_{m, m}}(x_k) - \varphi_{n_{m, m}}(x)}
+		\\ &< 3\epsilon 
+	\end{align*}
+	for all $n_{l, l}, n_{m, m}\geq N$, where we used that $U$ is uniformly equicontinuous twice. Our estimate shows that $\left(\varphi_{n_{k, k}}\right)_{k\in\mathbb N}$ is uniformly Cauchy in $\mathcal C[X]$, and thus uniformly convergent on $X$. As $\mathbb R$ and $\mathbb C$ are complete, this implies that $\left(\varphi_{n_{k, k}}\right)_{k\in\mathbb N}$ converges to a $\varphi\in \mathcal C[X]$, i.e. $\varphi$ is an accumulation point of $U$. Thus, $\overline{U}$ is sequentially compact, and by Theorem \ref{thrm:compact_seq_totally_bound_compl} also compact, i.e. $U$ is relatively compact.
+	
+	\enquote{$\Longrightarrow$} Let $U\subset \mathcal C[X]$ be relatively compact, i.e. $\overline{U}$ is compact and by Theorem \ref{thrm:compact_seq_totally_bound_compl} also totally bounded. Thus, for every $\epsilon > 0$, there exist $\varphi_1, \dots, \varphi_n\in\overline{U}$ s.t. 
+	\[
+		U \subset \overline{U} \subset \bigcup_{i=1}^{n}B_{\epsilon}(\varphi_i),
+	\]
+	i.e. for every $\varphi\in U$ there exists a $\varphi_i\in \{\varphi_1, \dots, \varphi_n\}$ s.t. $d_{\infty}(\varphi, \varphi_i) < \epsilon$. The inclusion shows that $U$ is bounded. 
+	
+	Since $X$ is compact, the functions $\varphi_1, \dots, \varphi_n\in\overline{U}\subset \mathcal C[X]$ are uniformly continuous on $X$, i.e. for every $\epsilon > 0$ there is a $\delta_i= \delta_i(\epsilon)$ s.t. for all $x, y\in X$ with $d(x, y) < \delta_i$, 
+	\[
+		\abs{\varphi_i(x) - \varphi_i(y)} < \epsilon.
+	\]
+	Now define $\delta := \min_{1\leq i\leq n}\{\delta_i\}$, then for all $\epsilon > 0$, $\delta$ satisfies the condition that for all $\varphi_i\in \overline{U}$ and all $x, y\in X$ with $d(x, y) < \delta$, 
+	\begin{align*}
+		\abs{\varphi(x) - \varphi(y)} &\leq \abs{\varphi(x) - \varphi_i(x)} + \abs{\varphi_i(x) - \varphi_i(y)} + \abs{\varphi_i(y) - \varphi(y)} 
+		\\ &< d_{\infty}(\varphi, \varphi_i) + \epsilon + d_{\infty}(\varphi_i, \varphi)
+		\\ &< 3\epsilon,
+	\end{align*}
+	which shows that $U$ is also uniformly equicontinuous.
 \end{proof}
 
 \newpage 
@@ -1280,7 +1341,7 @@ We generalize Example \ref{exmp:space-continuous-functions-complete} once more.
 	\[
 		\mathscr F := \left\{ f_n: [0, 1]\to\mathbb R, x\mapsto \frac{x^2}{x^2 + (1 - nx)^2}\ \middle|\ n\in\mathbb N \right\}.
 	\]
-	Clearly, each $f_n\in\mathscr F$ is uniformly continuous, since the domain $[0, 1]$ is compact and $f_n$ is continuous on $[0, 1]$, as it is the product of two continuous functions on $[0, 1]$ and the denominator is bigger than $0$ for all $n\in\mathbb N$ and $x\in [0, 1]$. However, $\mathscr F$ is not uniformly equicontinuous. Let $\epsilon = 0$, then for all $\delta > 0$, take $p = 0$ and $z = 1/n$. There exists an $n\in\mathbb N$ s.t. $\abs{p - z} = \frac{1}{n} < \delta$, yet
+	Clearly, each $f_n\in\mathscr F$ is uniformly continuous, since the domain $[0, 1]$ is compact and $f_n$ is continuous on $[0, 1]$, as it is the product of two continuous functions on $[0, 1]$ and the denominator is bigger than $0$ for all $n\in\mathbb N$ and $x\in [0, 1]$. However, $\mathscr F$ is not uniformly equicontinuous. Let $\epsilon = 1$, then for all $\delta > 0$, take $p = 0$ and $z = 1/n$. There exists an $n\in\mathbb N$ s.t. $\abs{p - z} = \frac{1}{n} < \delta$, yet
 	\[
 		\abs{f_n(z) - f_n(p)} = \abs{1 - 0} = 1 \geq \epsilon.
 	\]
