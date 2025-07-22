@@ -98,3 +98,41 @@ Let us start by defining the notions of \textit{linearity} and \textit{boundedne
 	\end{align}
 	which completes the proof \cite[p. 2]{src:mit_lec}.
 \end{proof}
+
+\begin{defn}[\cite{werner-fa}]\label{defn:compact_operator}
+	Let $X$ and $Y$ be normed linear spaces and $T: X\to Y$ a linear operator between them. Then $T$ is called \textit{compact} if $T\left(B^{\norm{\cdot}{X}}_{1}[0]\right) \subset Y$ is relatively compact, where $B_{1}^{\norm{\cdot}{X}}[0]$ is the closed unit ball in $X$, i.e. the image of the unit ball must be relatively compact.
+\end{defn}
+
+\begin{exmp}\label{exmp:compact-operator}
+	Let $k: [0, 1]\times [0, 1]\to\mathbb K$, where $\mathbb K\in \{\mathbb R, \mathbb C\}$, be continuous and let $f\in \mathcal C[0, 1]$. Now define the operator
+	\[
+		T_k: \mathcal C[0, 1]\to\mathcal C[0, 1], (T_{k}f)(x) := \int_{0}^{1}k(x, t)f(t)dt,
+	\]
+	which is known as the \textit{Fredholm integral equation of first kind}. The operator $T_k$ is compact.
+\end{exmp}
+
+\begin{proof}
+	We need to show that 
+	\[
+		M := T_k\left(B^{d_{\infty}}_{1}[0]\right) = \left\{ T_kf \mid f\in C[0, 1], \norm{f}{\infty} \leq 1 \right\} \subset \mathcal C[0, 1]
+	\]
+	is relatively compact. 
+	
+	We will first show that $M$ is bounded. For all $f\in M$ and all $x\in [0, 1]$, we have
+	\begin{align*}
+		\abs{(T_kf)(x)} = \abs{\int_{0}^{1} k(x, t)f(t)dt} \leq \int_{0}^{1}\abs{k(x, t)}\cdot\abs{f(t)}dt \leq \norm{k}{\infty}\norm{f}{\infty}\int_{0}^{1}dt \leq \norm{k}{\infty},
+	\end{align*}
+	which shows that $M$ is bounded.
+	
+	We will now show that $M$ is uniformly equicontinuous. Since the continuous function $k$ is defined on a compact set, $k$ is uniformly continuous on $[0, 1]\times [0, 1]$, i.e. for all $\epsilon > 0$ there exists a $\delta > 0$ s.t. for all $(x, t)\in [0, 1]\times [0, 1]$ and $(x', t')\in [0, 1]\times [0, 1]$, $d_{\text{Euclid}}((x, t), (x', t')) < \delta$ implies $\abs{k(x, t) - k(x', t')} < \epsilon$. For all $\epsilon > 0$, we take this same $\delta$. Then for all $T_kf\in M$ and $x, x'\in [0, 1]$, with $\abs{x - x'} = d_{\text{Euclid}}((x, t), (x', t)) < \delta$, we have
+	\begin{align*}
+		\abs{(T_kf)(x) - (T_kf)(x')} &= \abs{\int_{0}^{1}k(x, t)f(t)dt - \int_{0}^{1}k(x', t)f(t)dt} 
+		\\ &= \abs{\int_{0}^{1}\left(k(x, t) - k(x', t)\right)f(t)dt}
+		\\ &\leq \int_{0}^{1}\abs{k(x, t) - k(x', t)}\cdot \abs{f(t)}dt
+		\\ &\overset{f \in B_{1}^{d_{\infty}}[0]}{\leq} \int_{0}^{1}\abs{k(x, t) - k(x', t)}dt
+		\\ &< \epsilon, 
+	\end{align*}
+	since $k$ is uniformly continuous. This shows that $M$ is uniformly equicontinuous. 
+	
+	Thus, by the Arzel\`a-Ascoli Theorem \ref{thrm:arzela-ascoli}, $M$ is relatively compact, and thus $T_k$ is a compact operator. 
+\end{proof}

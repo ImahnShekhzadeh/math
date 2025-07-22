@@ -1162,12 +1162,12 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 	A subset $U$ of a metric space $(X, d)$ is called \textit{relatively compact} in $X$ if its closure $\overline{U}\subset X$ is compact.
 \end{defn}
 
-\begin{theorem}
+\begin{theorem}\label{thrm:seq_compact_equiv_rel_compact_closed}
 	$U\subset X$ is sequentially compact iff $U$ is relatively compact and closed.
 \end{theorem}
 
 \begin{proof}
-	\enquote{$\Longrightarrow$} Since $U$ is sequentially compact, it is compact, and thus closed. Since it is closed, we have that $U = \overline{U}$, and thus $\overline{U}$ is compact.
+	\enquote{$\Longrightarrow$} Since $U$ is sequentially compact, it is compact, and thus closed, cf. Theorem \ref{thrm:compact_subspace_Hausdorff_closed}. Since it is closed, we have that $U = \overline{U}$, and thus $\overline{U}$ is compact.
 	
 	\enquote{$\Longleftarrow$} Since $U$ is closed, we have that $U = \overline{U}$, and since $U$ is relatively compact in $X$, $U = \overline{U}$ is compact, and hence also sequentially compact.
 \end{proof}
@@ -1229,7 +1229,7 @@ We generalize Example \ref{exmp:space-continuous-functions-complete} once more.
 	Replace $\mathbb K$ by $Y$ in the proof of the preceding Theorem, $\abs{\cdot - \cdot}$ by $d(\cdot, \cdot)$ and note that $(Y, d)$ is complete by assumption.
 \end{proof}
 
-\begin{theorem}[Arzel\`a\footnote{\textsc{Cesare Arzel\`a} (1847 -- 1912), Italian mathematician.}-Ascoli\footnote{\textsc{Giulio Ascoli} (1843 -- 1896), Jewish-Italian mathematician.}]
+\begin{theorem}[Arzel\`a\footnote{\textsc{Cesare Arzel\`a} (1847 -- 1912), Italian mathematician.}-Ascoli\footnote{\textsc{Giulio Ascoli} (1843 -- 1896), Jewish-Italian mathematician.}]\label{thrm:arzela-ascoli}
 	Let $(X, d)$ be a compact metric space. Then $U\subset \mathcal C[X]$ is relatively compact iff $U$ is bounded in $(\mathcal C[X], d_{\infty})$ and uniformly equicontinuous.
 \end{theorem}
 
@@ -1281,14 +1281,26 @@ We generalize Example \ref{exmp:space-continuous-functions-complete} once more.
 	\[
 		\abs{\varphi_i(x) - \varphi_i(y)} < \epsilon.
 	\]
-	Now define $\delta := \min_{1\leq i\leq n}\{\delta_i\}$, then for all $\epsilon > 0$, $\delta$ satisfies the condition that for all $\varphi_i\in \overline{U}$ and all $x, y\in X$ with $d(x, y) < \delta$, 
+	Now define $\delta := \min_{1\leq i\leq n}\{\delta_i\}$. Then for all $\epsilon > 0$, $\delta$ satisfies the condition that for all $\varphi\in U$ and all $x, y\in X$ with $d(x, y) < \delta$, 
 	\begin{align*}
 		\abs{\varphi(x) - \varphi(y)} &\leq \abs{\varphi(x) - \varphi_i(x)} + \abs{\varphi_i(x) - \varphi_i(y)} + \abs{\varphi_i(y) - \varphi(y)} 
 		\\ &< d_{\infty}(\varphi, \varphi_i) + \epsilon + d_{\infty}(\varphi_i, \varphi)
 		\\ &< 3\epsilon,
 	\end{align*}
-	which shows that $U$ is also uniformly equicontinuous.
+	where we chose $\varphi_i$ s.t. $d_{\infty}(\varphi, \varphi_i) < \epsilon$. This shows that $U$ is also uniformly equicontinuous.
 \end{proof}
+
+Sometimes, the following version is called the Arzel\`a-Ascoli Theorem in the literature.
+
+\begin{corollary}
+	Let $(X, d)$ be a compact metric space. Then $U\subset \mathcal C[X]$ is compact iff $U$ is bounded in $(\mathcal C[X], d_{\infty})$, uniformly equicontinuous and closed.
+\end{corollary}
+
+\begin{proof}
+	The statement directly follows from Theorem \ref{thrm:seq_compact_equiv_rel_compact_closed}.
+\end{proof}
+
+An application of the Arzel\`a-Ascoli Theorem is given in Example \ref{exmp:compact-operator}.
 
 \newpage 
 \subsection{Continuity}
