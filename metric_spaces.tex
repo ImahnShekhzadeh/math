@@ -343,6 +343,38 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 	From Remark \ref{remark:closure_superset}, we know that $U\subset \overline{U}$, and from Theorem \ref{thrm:closure_closed}, we know that $\overline{U}$ is closed. To prove that $\overline{U}$ is the smallest \textit{closed} set in $X$ containing $U$, let $V\subset X$ be another closed set that contains $U$, i.e. $U\subset V$. Every sequence in $U$ is also a sequence in $V$, i.e. every accumulation point of $U$ is in $V$, i.e. $\overline{U}\subset V$.
 \end{proof}
 
+\begin{corollary}
+	Let $X$ be a metric space and $A, B\subset X$. If $A\subset B$, then $\overline{A}\subset \overline{B}$.
+\end{corollary}
+
+\begin{proof}[Proof \cite{121238}]\label{corollary:closure_subset_property}
+	$\overline{B}$ is the smallest closed set containing $B$, and since $A\subset B$, this implies $A\subset \overline{B}$. Since $\overline{A}$ is the smallest closed set containing $A$, we have $\overline{A}\subset\overline{B}$.
+\end{proof}
+
+\begin{defn}[Interior \cite{topology-singh}]
+	Let $X$ be a metric space and $U\subset X$. Then 
+	\begin{align}
+		\inte{U} := \bigcup \left\{ G\mid G \text{ is open in } X \text{ and } G \subset U \right\}
+	\end{align}
+	is the largest open set contained in $U$; it is called the \textit{interior} of $U$ in $X$. A point $x\in \inte{U}$ is called an \textit{interior point} of $U$.
+\end{defn}
+
+\begin{exmp}
+	Equip $\mathbb R$ with the standard metric, then $\inte{\mathbb Q} = \inte{\mathbb R \setminus \mathbb Q} = \emptyset$.
+\end{exmp}
+
+\begin{exmp}
+	Equip $[a, b]$ with the subspace metric, then $\inte{[a, b]} = (a, b)$.
+\end{exmp}
+
+\begin{exmp}
+	Equip $\mathbb R^2$ with the Euclidean metric. Then $\inte{\mathbb S^1} = \emptyset$ and $\inte{\mathbb D^2} = B_{1}(0)$, where $\mathbb D^2 := \left\{ x\in\mathbb R^2\mid \norm{x}{} \leq 1 \right\} \subset \mathbb R^2$ is the unit disc.
+\end{exmp}
+
+\begin{remark}
+	Clearly, $U\subset X$ is open iff $\inte{U} = U$. Also, $x\in X$ is an interior point of $U$, i.e. $x\in U$, iff $U$ is a neighborhood of $x$.
+\end{remark}
+
 \begin{defn}[Bounded set]\label{defn:bounded_set}
 	A subset $U\subset X$ is called \textit{bounded} in $X$ if it is contained in a closed ball in $X$, i.e. there exists $r > 0$ and $\varphi \in X$ s.t. $U\subset B_{r}[\varphi]$.
 \end{defn}
@@ -1233,7 +1265,7 @@ We generalize Example \ref{exmp:space-continuous-functions-complete} once more.
 	Let $(X, d)$ be a compact metric space. Then $U\subset \mathcal C[X]$ is relatively compact iff $U$ is bounded in $(\mathcal C[X], d_{\infty})$ and uniformly equicontinuous.
 \end{theorem}
 
-\begin{proof}
+\begin{proof}[Proof \cite{src:arzela_ascoli_theorem}]
 	\enquote{$\Longleftarrow$} Let $U\subset \mathcal C[X]$ be bounded and uniformly equicontinuous. 
 	
 	Since $X$ is compact, by Theorems \ref{thrm:seq_compact_set_tot_bound}, \ref{thrm:totally_bounded_set_separable} and \ref{thrm:compact_seq_totally_bound_compl}, $X$ is separable, i.e. there is a set $S\subset X$ that is dense and countable. We denote the (countably many) points of $S$ by $\seq[x_n]$.

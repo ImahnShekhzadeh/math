@@ -17,22 +17,23 @@
 \numberwithin{equation}{section}
 
 \theoremstyle{definition}
-\newtheorem{thm}{Theorem}[section] % reset theorem numbering for each chapter
+\newtheorem{thm}{Theorem}[section]          % reset theorem numbering for each chapter
 
 \theoremstyle{definition}
-\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
-\newtheorem{exmp}[thm]{Example} % same for example numbers
-\newtheorem{lemma}[thm]{Lemma} % same for example numbers
-\newtheorem{remark}[thm]{Remark} % same for example numbers
-\newtheorem{theorem}[thm]{Theorem} 
-\newtheorem{corollary}[thm]{Corollary}
-\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition} 			% definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[thm]{Example}    			% same for example numbers
+\newtheorem{lemma}[thm]{Lemma}     			% same for lemma numbers
+\newtheorem{remark}[thm]{Remark}   			% same for remark numbers
+\newtheorem{theorem}[thm]{Theorem} 			% same for theorem numbers
+\newtheorem{corollary}[thm]{Corollary}  	% same for corollary numbers
+\newtheorem{proposition}[thm]{Proposition}  % same for proposition numbers
 \newcommand{\norm}[2]{\left\vert\left\vert #1 \right\vert\right\vert_{#2}}
 \newcommand{\abs}[1]{\left\vert #1 \right\vert}
 \newcommand{\inner}[1]{\left\langle #1 \right\rangle}
 \newcommand{\epi}[1]{\text{epi($ #1 $) } }
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\seq}[1][\varphi]{\left( #1 \right)_{n \in \mathbb{N}}}
+\newcommand{\inte}[1]{\text{int}\left( #1 \right)}     % only used in math mode
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 \title{Mathematics}
