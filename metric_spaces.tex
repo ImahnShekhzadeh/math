@@ -343,15 +343,15 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 	From Remark \ref{remark:closure_superset}, we know that $U\subset \overline{U}$, and from Theorem \ref{thrm:closure_closed}, we know that $\overline{U}$ is closed. To prove that $\overline{U}$ is the smallest \textit{closed} set in $X$ containing $U$, let $V\subset X$ be another closed set that contains $U$, i.e. $U\subset V$. Every sequence in $U$ is also a sequence in $V$, i.e. every accumulation point of $U$ is in $V$, i.e. $\overline{U}\subset V$.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{corollary:closure_subset_property}
 	Let $X$ be a metric space and $A, B\subset X$. If $A\subset B$, then $\overline{A}\subset \overline{B}$.
 \end{corollary}
 
-\begin{proof}[Proof \cite{121238}]\label{corollary:closure_subset_property}
+\begin{proof}[Proof \cite{121238}]
 	$\overline{B}$ is the smallest closed set containing $B$, and since $A\subset B$, this implies $A\subset \overline{B}$. Since $\overline{A}$ is the smallest closed set containing $A$, we have $\overline{A}\subset\overline{B}$.
 \end{proof}
 
-\begin{defn}[Interior \cite{topology-singh}]
+\begin{defn}[Interior \cite{topology-singh}]\label{defn:interior}
 	Let $X$ be a metric space and $U\subset X$. Then 
 	\begin{align}
 		\inte{U} := \bigcup \left\{ G\mid G \text{ is open in } X \text{ and } G \subset U \right\}
@@ -375,6 +375,23 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 	Clearly, $U\subset X$ is open iff $\inte{U} = U$. Also, $x\in X$ is an interior point of $U$, i.e. $x\in U$, iff $U$ is a neighborhood of $x$.
 \end{remark}
 
+\begin{theorem}\label{thrm:interior_complement}
+	Let $X$ be a metric space and $U\subset X$, then 
+	\begin{align}\label{eq:interior_complement}
+		\inte{U} = X\setminus \overline{X\setminus U}.
+	\end{align}
+\end{theorem}
+
+\begin{proof}[Proof \cite{872424}]
+	According to Definition \ref{defn:interior}, $\inte{U}$ is the largest open set contained in $U$. 
+	Thus, we need to show that a) $M := X\setminus \overline{X\setminus U}$ is open in $X$, b) $M\subset U$ and c) $O\subset M$ for any other open set $O \subset U$ in $X$.
+	\begin{enumerate}[label=\alph*)]
+		\item Since $\overline{X\setminus U}$ is closed in $X$, $M = X\setminus \overline{X\setminus U}$ is open in $X$.
+		\item Since $X\setminus U\subset \overline{X\setminus U}$, this implies $M = X\setminus \overline{X\setminus U} \subset X\setminus \left( X\setminus U \right) = U$.
+		\item Let $O\subset U$ be open, then $X\setminus O$ is closed and $X\setminus U\subset X\setminus O$. Corollary \ref{corollary:closure_subset_property} now implies that $\overline{X\setminus U}\subset \overline{X\setminus O} = X\setminus O$. Thus, $X\setminus(X\setminus O) = O\subset  X\setminus\overline{X\setminus U} = M$.
+	\end{enumerate}
+\end{proof}
+
 \begin{defn}[Bounded set]\label{defn:bounded_set}
 	A subset $U\subset X$ is called \textit{bounded} in $X$ if it is contained in a closed ball in $X$, i.e. there exists $r > 0$ and $\varphi \in X$ s.t. $U\subset B_{r}[\varphi]$.
 \end{defn}
@@ -389,7 +406,7 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 		r := \max \left\{ \epsilon, \max_{n \leq N}\{d(\varphi, \varphi_n)\} \right\},
 	\end{align}
 	we have $d(\varphi, \varphi_n) \leq r$ for all $n\in\mathbb N$. Hence, for any $n\in\mathbb N$, 
-	$\varphi_n\in B_{r}[\varphi]$.¸
+	$\varphi_n\in B_{r}[\varphi]$.
 \end{proof}
 
 \begin{defn}[Diameter \cite{topology-singh}]\label{defn:diameter_metric_set}
@@ -807,7 +824,7 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 \end{exmp}
 
 \begin{proof}
-	We need to show that to every $\varphi\in \mathbb R$ there exists a sequence $\left(\varphi_n\right)_{n\in\mathbb N}\in \mathbb R\backslash \mathbb Q$ s.t. $\varphi_n\overset{n\to\infty}{\longrightarrow}\varphi$ wrt $d$. We already know that $\mathbb Q$ lies dense in $\mathbb R$ wrt $d$, i.e. there exists a sequence $\left(\psi_n\right)_{n\in\mathbb N}$ s.t. $\psi_n\overset{n\to\infty}{\longrightarrow}\varphi$. Now define the sequence $\seq[\varphi_n] := \seq[\psi_n + \frac{a}{n}]$, where $a\in\mathbb R\backslash \mathbb Q$. Each sequence element lies in $\mathbb R\backslash \mathbb Q$, since the sum of a rational and an irrational number is irrational, cf. Remark \ref{remark:sum-rational-irrational}, and converges to $\varphi$ wrt $d$.
+	We need to show that to every $\varphi\in \mathbb R$ there exists a sequence $\left(\varphi_n\right)_{n\in\mathbb N}\in \mathbb R\backslash \mathbb Q$ s.t. $\varphi_n\overset{n\to\infty}{\longrightarrow}\varphi$ wrt $d$. We already know that $\mathbb Q$ lies dense in $\mathbb R$ wrt $d$, i.e. there exists a sequence $\left(\psi_n\right)_{n\in\mathbb N}$ s.t. $\psi_n\overset{n\to\infty}{\longrightarrow}\varphi$. Now define the sequence $\seq[\varphi_n] := \seq[\psi_n + \frac{a}{n}]$, where $a\in\mathbb R\backslash \mathbb Q$. Each sequence element lies in $\mathbb R\backslash \mathbb Q$, since the sum of a rational and an irrational number is irrational, cf. Theorem \ref{remark:sum-rational-irrational}, and converges to $\varphi$ wrt $d$.
 \end{proof}
 
 \begin{exmp}[Weierstrass Approximation Theorem]\label{exmp:weierstrass-approx-thrm}
@@ -823,7 +840,7 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 \end{exmp}
 
 \begin{theorem}\label{thrm:characterization-dense-subsets}
-	Let $(X, d)$ be a metric space. $U\subset X$ dense iff every non-empty open set $O\subset X$ intersects $U$, i.e. $U\cap O\ne\emptyset$.
+	Let $(X, d)$ be a metric space. Then $U\subset X$ is dense iff every non-empty open set $O\subset X$ intersects $U$, i.e. $U\cap O\ne\emptyset$.
 \end{theorem}
 
 \begin{proof}
@@ -833,8 +850,16 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 	Note that according to Theorem \ref{thrm:property_metric_space}, if $\varphi\in\overline{U}$ for $U\subset X$, then for every open set $O\subset X$ containing $\varphi$, $U\cap O\ne\emptyset$. The contraposition of this statement is what we want to prove.
 \end{proof}
 
+\begin{theorem}
+	Let $X$ be a metric space. Then $U\subset X$ is dense iff $\inte{X\setminus U} = \emptyset$.
+\end{theorem}
+
+\begin{proof}[Proof \cite{937581}]
+	$U\subset X$ is dense $\Leftrightarrow X = \overline{U}\Leftrightarrow \inte{X\setminus U} \overset{\tiny\eqref{eq:interior_complement}}{=} X\setminus \overline{U} = X\setminus X = \emptyset$
+\end{proof}
+
 \begin{remark}
-	Let $d$ and $d'$ be two metrics on $X$. If $U\subset X$ is dense wrt $d$, it is not necessarily dense wrt $d'$.
+	Let $d$ and $d'$ be two metrics on $X$. If $U\subset X$ is dense wrt $d$, $U$ is not necessarily dense wrt $d'$.
 \end{remark}
 
 \begin{exmp}
