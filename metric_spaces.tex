@@ -122,15 +122,25 @@
 	Let $(X, d)$ be a metric space. Then a subset $A\subset X$ is called \textit{closed} in $X$ if the complement $X\backslash A$ is open according to Definition \ref{defn-open-set}. 
 \end{defn}
 
+\begin{exmp}\label{exmp:closed-set-singleton-R}
+	Let $X = \mathbb R$ with the standard metric. Then for each $x\in \mathbb R$, the singleton $\{x\}\subset\mathbb R$ is closed.
+\end{exmp}
+
+\begin{proof}
+	Note that $\mathbb R\setminus \{x\} = (-\infty, x) \cup (x, \infty)$ is open.
+\end{proof}
+
 \begin{theorem}\label{open-balls-open}
 	Open balls are open. 
 \end{theorem}
 
 \begin{proof}
-	An illustration of the idea of the proof is shown in Figure. 
+	An illustration of the idea of the proof is shown in Figure \ref{fig:open-ball-contains-open-ball}.
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.35\textwidth]{Figures/open-balls-open.png}
+		\caption{In a metric space, each open ball contains another open ball of smaller radius.}
+		\label{fig:open-ball-contains-open-ball}
 	\end{figure}
 	
 	Let $f\in X$ and for $r > 0$ consider the open ball $U:= B_{r}(f) \subset X$. By definition, for every $\varphi \in U$ it holds that $d\left(\varphi, f\right) < r$. Now we show that 
@@ -207,7 +217,7 @@
 	$$d(\varphi_n, \varphi) < \frac{d(\varphi, \psi)}{2} = \epsilon$$ 
 	and an $\tilde{N}$ s.t. for all $n\geq \tilde{N}$, we have
 	$$d(\varphi_n, \psi) < \frac{d(\varphi, \psi)}{2} = \epsilon.$$
-	Define $N := \max\{N', \tilde{N}\}$, then for all $n\geq N$, we have
+	Define $N := \max\left\{N', \tilde{N}\right\}$, then for all $n\geq N$, we have
 	$$d(\varphi, \psi) \leq d(\varphi, \varphi_n) + d(\varphi_n, \psi) < d(\varphi, \psi),$$
 	which is a contradiction.
 \end{proof}
@@ -336,7 +346,10 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 \end{proof}
 
 \begin{theorem}
-	Let $U\subset X$. Then its closure, $\overline{U}$, is the \textit{smallest} closed set in $X$ containing $U$.
+	Let $U\subset X$. Then its closure, $\overline{U}$, is the \textit{smallest} closed set in $X$ containing $U$, i.e. 
+	\begin{align}\label{eq:closure}
+		\overline{U} = \bigcap \left\{ G \mid G \text{ is closed in } X \text{ and } U\subset G \right\}.
+	\end{align} 
 \end{theorem}
 
 \begin{proof}
@@ -353,7 +366,7 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 
 \begin{defn}[Interior \cite{topology-singh}]\label{defn:interior}
 	Let $X$ be a metric space and $U\subset X$. Then 
-	\begin{align}
+	\begin{align}\label{eq:interior}
 		\inte{U} := \bigcup \left\{ G\mid G \text{ is open in } X \text{ and } G \subset U \right\}
 	\end{align}
 	is the largest open set contained in $U$; it is called the \textit{interior} of $U$ in $X$. A point $x\in \inte{U}$ is called an \textit{interior point} of $U$.
@@ -390,6 +403,21 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 		\item Since $X\setminus U\subset \overline{X\setminus U}$, this implies $M = X\setminus \overline{X\setminus U} \subset X\setminus \left( X\setminus U \right) = U$.
 		\item Let $O\subset U$ be open, then $X\setminus O$ is closed and $X\setminus U\subset X\setminus O$. Corollary \ref{corollary:closure_subset_property} now implies that $\overline{X\setminus U}\subset \overline{X\setminus O} = X\setminus O$. Thus, $X\setminus(X\setminus O) = O\subset  X\setminus\overline{X\setminus U} = M$.
 	\end{enumerate}
+\end{proof}
+
+\begin{theorem}\label{thrm:closure_interior_relation}
+	Let $X$ be a metric space and $U\subset X$. Then
+	\begin{align}
+		X\setminus\inte{U} = \overline{X\setminus U}.
+	\end{align}
+\end{theorem}
+
+\begin{proof}[Proof \cite{970841}]
+	We use the definitions and make use of de Morgan's law.
+	\begin{align*}
+		X\setminus \inte{U} &\overset{\tiny\eqref{eq:interior_complement}}{=} X\setminus \bigcup \left\{G\mid G \text{ is open in } X \text{ and } G\subset U\right\} \\ &\overset{\tiny\eqref{eq:de_morgan_comp_union}}{=} \bigcap \left\{ X\setminus G \mid X\setminus G \text{ is closed in } X \text{ and } X\setminus U\subset X\setminus G \right\}
+		\\ &\overset{\tiny\eqref{eq:closure}}{=} \overline{X\setminus U}.
+	\end{align*}
 \end{proof}
 
 \begin{defn}[Bounded set]\label{defn:bounded_set}
@@ -819,7 +847,7 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 	which is a contradiction to the assumption $\varphi\in\mathbb R\backslash\mathbb Q$. This proves that the sum of a rational and irrational number is always irrational.
 \end{theorem}
 
-\begin{exmp}[Dense subsets]
+\begin{exmp}[Dense subsets]\label{exmp:irrationals-dense}
 	$\mathbb R\backslash \mathbb Q$ lies dense in $\mathbb R$ wrt $d(x, y) := \abs{x - y}$ for all $x$, $y\in\mathbb R$.
 \end{exmp}
 
@@ -843,11 +871,10 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 	Let $(X, d)$ be a metric space. Then $U\subset X$ is dense iff every non-empty open set $O\subset X$ intersects $U$, i.e. $U\cap O\ne\emptyset$.
 \end{theorem}
 
-\begin{proof}
+\begin{proof}[Proof \cite{2497036}]
 	\enquote{$\Longrightarrow$} Use Theorem \ref{thrm:property_metric_space} and note that $U\subset X$ is dense, i.e. $\overline{U} = X$.
-	\newline\newline\enquote{$\Longleftarrow$} We want to prove $U\subset X$ dense $\Rightarrow U\cap O\ne\emptyset$ for all non-empty open sets $O\subset X$. We will prove this via its contraposition, i.e. if there exists a non-empty open set $O\subset X$ with $U\cap O=\emptyset$, then $U\subset X$ is not complete.
 	
-	Note that according to Theorem \ref{thrm:property_metric_space}, if $\varphi\in\overline{U}$ for $U\subset X$, then for every open set $O\subset X$ containing $\varphi$, $U\cap O\ne\emptyset$. The contraposition of this statement is what we want to prove.
+	\enquote{$\Longleftarrow$} We will prove the contraposition, i.e. assume $U\subset X$ is not dense, then $\overline{U}\ne X$, which implies $O := X\setminus\overline{U} \ne \emptyset$, i.e. $O \cap \overline{U} = \emptyset$. Since $U\subset\overline{U}$, $O\cap U = \emptyset$. Clearly, $O$ is open, since it is the complement of a closed set. 
 \end{proof}
 
 \begin{theorem}
@@ -857,6 +884,22 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 \begin{proof}[Proof \cite{937581}]
 	$U\subset X$ is dense $\Leftrightarrow X = \overline{U}\Leftrightarrow \inte{X\setminus U} \overset{\tiny\eqref{eq:interior_complement}}{=} X\setminus \overline{U} = X\setminus X = \emptyset$
 \end{proof}
+
+\begin{theorem}\label{thrm:finite_intersec_open_dense}
+	Let $X$ be a metric space and let $U_1, U_2\subset X$ be open and dense. Then $U_1\cap U_2$ is also open and dense.
+\end{theorem}
+
+\begin{proof}[Proof \cite{1143218}]
+	Since $U_1$ is dense, by Theorem \ref{thrm:characterization-dense-subsets}, for every non-empty open set $O\subset X$, we have $U_1\cap O\ne \emptyset$. Since both $U_1$ and $O$ are open, so is $U_1\cap O$. Thus, since $U_2$ is also dense, $U_2\cap U_1\cap O\ne \emptyset$, which shows that $U_1\cap U_2$ intersects every non-empty open set $O\subset X$. Finally, $U_1\cap U_2$ is also open, as it is the finite intersection of two open sets.
+\end{proof}
+
+\begin{remark}
+	Let $U_1, U_2\subset X$ be dense. As the proof in the preceding Theorem shows, it is only necessary that either $U_1$ or $U_2$ is open for $U_1 \cap U_2$ to be dense. However, it is necessary that either $U_1$ or $U_2$ is open. If neither $U_1$ or $U_2$ is open, the resulting intersection may not be dense.
+\end{remark}
+
+\begin{exmp}[Proof \cite{1506081}]
+	Let $X = \mathbb R$ with the standard metric. Consider the rationals $\mathbb Q$ and irrationals $\mathbb R\setminus \mathbb Q$. Neither set is open in $\mathbb R$. Their intersection is the empty set, which is clearly not dense in $\mathbb R$.
+\end{exmp}
 
 \begin{remark}
 	Let $d$ and $d'$ be two metrics on $X$. If $U\subset X$ is dense wrt $d$, $U$ is not necessarily dense wrt $d'$.
@@ -1359,7 +1402,35 @@ Sometimes, the following version is called the Arzel\`a-Ascoli Theorem in the li
 
 An application of the Arzel\`a-Ascoli Theorem is given in Example \ref{exmp:compact-operator}.
 
-\newpage 
+\subsection{Baire Category Theorem}
+In Theorem \ref{thrm:finite_intersec_open_dense}, we have already established that the finite intersection of open dense sets yields an open dense set again. While in the case of infinite intersections, it is inevitable that we lose the openness property of the resulting intersection, in case of countable intersections, it turns out that we still have a dense set, as long as we assume that the underlying metric space is complete.
+
+\begin{theorem}[Baire Category Theorem]
+	Let 
+\end{theorem}
+
+There are many applications of the Baire Category Theorem, cf. Ref. \cite{165696} for some. One application is to show that the irrationals $\mathbb R\setminus\mathbb Q$ are dense. In Example \ref{exmp:irrationals-dense}, another proof of this statement can be found.
+
+\begin{exmp}
+	Let $X=\mathbb R$ with the standard metric. According to Example \ref{exmp:closed-set-singleton-R}, for any $q\in\mathbb Q$, the singleton $\{q\}$ is closed in $\mathbb R$, i.e. $\mathbb R\setminus \{q\}$ is open. $\mathbb R\setminus \{q\}$ is also dense. Thus, by Eq. \eqref{eq:de_morgan_comp_union}, $\bigcap_{q\in\mathbb Q}\mathbb R\setminus \{q\} = \mathbb R\setminus \bigcup_{q\in\mathbb Q}\{q\} = \mathbb R\setminus \mathbb Q$. By the Baire Category Theorem, we know that $\mathbb R\setminus \mathbb Q$ is dense.
+\end{exmp}
+
+For uncountable intersections of open and dense sets of a complete metric space, the resulting set is not dense, as the following example shows \cite{1070418}. 
+
+\begin{exmp}
+	Let $X = \mathbb R$ with the standard metric. For any $x\in\mathbb R$, the singleton $\{x\}$ is closed, i.e. $\mathbb R\setminus \{x\}$ is open. $\mathbb R\setminus \{x\}$ is also dense. However, by Eq. \eqref{eq:de_morgan_comp_union}, $\bigcap_{x\in \mathbb R}\mathbb R\setminus \{x\} = \mathbb R \setminus \bigcup_{x\in\mathbb R}\{x\} = \emptyset$, which is not dense in $\mathbb R$.
+\end{exmp}
+
+Note that in the formulation of the Baire Category Theorem, it is vital that the underlying metric space is complete. Otherwise, the Baire Category Theorem may not hold, as the following example shows \cite{2369429}.
+
+\begin{exmp}
+	Let $X = \mathbb Q$ with its metric inherited from $\mathbb R$. Then for any $q\in\mathbb Q$, $\mathbb Q\setminus \{q\}$ is open and dense, since $\{q\}$ is closed and by Theorem \ref{thrm:closure_interior_relation}, $\overline{\mathbb Q\setminus \{q\}} = \mathbb Q\setminus\inte{\{q\}} = \mathbb Q\setminus \emptyset = \mathbb Q$. However, 
+	\[
+		\bigcap_{q\in\mathbb Q}\mathbb Q\setminus \{q\} = \mathbb Q\setminus \bigcup_{q\in\mathbb Q}\{q\} = \emptyset,
+	\]
+	which is clearly not dense in $\mathbb Q$.
+\end{exmp}
+
 \subsection{Continuity}
 \begin{defn}[$\epsilon$-$\delta$ definition of continuity \cite{MfPI}]\label{defn:continuity}
 	Let $(X, d)$ and $(Y, d')$ be metric spaces. A function $f: X\rightarrow Y$ is called \textit{continuous} at $p\in X$ if 

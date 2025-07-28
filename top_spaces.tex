@@ -4,10 +4,35 @@
 	\begin{itemize}
 		\item the intersection of two members of $\tau$ is in $\tau$, 
 		\item the union of any collection of members of $\tau$ is in $\tau$, 
-		\item the empty set $\emptyset$ and $X$ itself are in $\tau$.
+		\item $\emptyset, X\in\tau$.
 	\end{itemize}
 	A set $X$ endowed with a topological structure $\tau$ on it is called a \textit{topological space}. The elements of $X$ are called \textit{points}, and the members of $\tau$ are called the \textit{open sets}. We also say that members of $\tau$ are \textit{open in} $X$.
 \end{defn} 
+
+\begin{remark}
+	Instead of defining a topology via open sets, it is alternatively possible to use closed sets. Then the above axioms become: 
+	\begin{itemize}
+		\item the union of two closed sets in $\tau$ is closed,
+		\item the intersection of any collection of closed sets in $\tau$ is closed,
+		\item $\emptyset, X\in \tau$.
+	\end{itemize}
+\end{remark}
+
+\begin{proof}
+	Let $I$ be an index set and $\{U_i\}_{i\in I}$ a family of open subsets of $X$, i.e. $\{X\setminus U_i\}_{i\in I}$ is a family of closed subsets of $X$. Then
+	\[
+		\bigcap_{i\in I} X\setminus U_i \overset{\tiny\eqref{eq:de_morgan_comp_union}}{=} X\setminus \bigcup_{i\in I} U_i,
+	\]
+	is closed, as $\bigcup_{i\in I}U_i$ is open. 
+	
+	Let $U_1, U_2$ be open sets, then
+	\[
+		\bigcup_{i\in \{1, 2\}}X\setminus U_i \overset{\tiny\eqref{eq:de_morgan_comp_intersec}}{=} X\setminus\bigcap_{i\in \{1, 2\}}U_i 
+	\]
+	is closed, as $\bigcap_{i\in \{1, 2\}}U_i$ is open.
+	
+	Since $\emptyset$ and $X$ are open, $X\setminus \emptyset = X$ and $X\setminus X = \emptyset$ are closed. 
+\end{proof}
 
 \begin{exmp}[Trivial topology]
 	For every set $X$, the trivial topology is defined as $\tau := \{\emptyset, X\}$.
