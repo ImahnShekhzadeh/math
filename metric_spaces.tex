@@ -877,7 +877,7 @@ Definition \ref{defn:convergence_sequence} defines what the convergence of a seq
 	\enquote{$\Longleftarrow$} We will prove the contraposition, i.e. assume $U\subset X$ is not dense, then $\overline{U}\ne X$, which implies $O := X\setminus\overline{U} \ne \emptyset$, i.e. $O \cap \overline{U} = \emptyset$. Since $U\subset\overline{U}$, $O\cap U = \emptyset$. Clearly, $O$ is open, since it is the complement of a closed set. 
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{thrm:dense_interior}
 	Let $X$ be a metric space. Then $U\subset X$ is dense iff $\inte{X\setminus U} = \emptyset$.
 \end{theorem}
 
@@ -1405,14 +1405,37 @@ An application of the Arzel\`a-Ascoli Theorem is given in Example \ref{exmp:comp
 \subsection{Baire Category Theorem}
 In Theorem \ref{thrm:finite_intersec_open_dense}, we have already established that the finite intersection of open dense sets yields an open dense set again. While in the case of infinite intersections, it is inevitable that we lose the openness property of the resulting intersection, in case of countable intersections, it turns out that we still have a dense set, as long as we assume that the underlying metric space is complete.
 
-\begin{theorem}[Baire Category Theorem]
-	Let 
+\begin{theorem}[Baire Category Theorem]\label{thrm:baire_category_theorem_v1}
+	Let $X$ be a metric space and $\seq[U_n]$ a sequence of open and dense subsets of $X$. Then $\bigcap_{n\in\mathbb N}U_n$ is also dense in $X$.
 \end{theorem}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+In the literature, one often finds the following version stated as the Baire Category Theorem.
+
+\begin{theorem}[Baire Category Theorem]\label{thrm:baire_category_theorem_v2}
+	Let $X$ be a metric space and $\seq[U_n]$ a sequence of closed subsets of $X$ such that their union $\bigcup_{n\in\mathbb N}U_n$ contains an open ball. Then there is a $U_n$ that contains an open ball.
+\end{theorem}
+
+\begin{remark}
+	The versions of the Baire Category Theorem stated in the preceding two theorems are equivalent.
+\end{remark}
+
+\begin{proof}[Proof \cite{3558397, 5085233}]
+	\enquote{$\Longrightarrow$} Let $\seq[U_n]$ be a sequence of closed subsets of $X$ s.t. their union contains an open ball. We now want to show that there is a $U_n$ containing an open ball. Assume that no $U_n$ contains an open ball, then the interior of every $U_n$ is empty, i.e. by Theorem \ref{thrm:dense_interior}, every $X\setminus U_n$ is dense. Since $\seq[X\setminus U_n]$ is a sequence of open and dense subsets of $X$, by Theorem \ref{thrm:baire_category_theorem_v1}, $\bigcap_{n\in\mathbb N}X\setminus U_n = X\setminus\bigcup_{n\in\mathbb N}U_n$ is dense, implying that $\inte{\bigcup_{n\in\mathbb N}U_n} = \emptyset$, see Theorem \ref{thrm:dense_interior}. This is a contradiction to $\bigcup_{n\in\mathbb N}U_n$ containing an open ball.
+	
+	\enquote{$\Longleftarrow$} Let $\seq[U_n]$ be a sequence of open and dense subsets of $X$. We want to show that $\bigcap_{n\in\mathbb N}U_n$ is dense, which we will do via contradiction. So let us assume that $\bigcap_{n\in\mathbb N}U_n$ is not dense. Then by Theorem \ref{thrm:dense_interior}, \[
+		\inte{X\setminus \bigcap_{n\in\mathbb N}U_n} = \inte{\bigcup_{n\in\mathbb N}X\setminus U_n} \ne\emptyset. 
+	\]
+	Thus, by definition, $\bigcup_{n\in\mathbb N}X\setminus U_n$ contains an open set in $X$ and hence an open ball. Since $\seq[X\setminus U_n]$ is a sequence of closed sets whose union contains an open ball, by Theorem \ref{thrm:baire_category_theorem_v2}, there is an $n_0\in\mathbb N$ s.t. $X\setminus U_{n_0}$ contains an open ball, which implies that $\inte{X\setminus U_{n_0}}\ne\emptyset$, and by Theorem \ref{thrm:dense_interior} that $U_{n_0}$ is not dense, which is a contradiction to the assumption that all $U_n$ are dense. 
+\end{proof}
 
 There are many applications of the Baire Category Theorem, cf. Ref. \cite{165696} for some. One application is to show that the irrationals $\mathbb R\setminus\mathbb Q$ are dense. In Example \ref{exmp:irrationals-dense}, another proof of this statement can be found.
 
 \begin{exmp}
-	Let $X=\mathbb R$ with the standard metric. According to Example \ref{exmp:closed-set-singleton-R}, for any $q\in\mathbb Q$, the singleton $\{q\}$ is closed in $\mathbb R$, i.e. $\mathbb R\setminus \{q\}$ is open. $\mathbb R\setminus \{q\}$ is also dense. Thus, by Eq. \eqref{eq:de_morgan_comp_union}, $\bigcap_{q\in\mathbb Q}\mathbb R\setminus \{q\} = \mathbb R\setminus \bigcup_{q\in\mathbb Q}\{q\} = \mathbb R\setminus \mathbb Q$. By the Baire Category Theorem, we know that $\mathbb R\setminus \mathbb Q$ is dense.
+	Let $X=\mathbb R$ with the standard metric. According to Example \ref{exmp:closed-set-singleton-R}, for any $q\in\mathbb Q$, the singleton $\{q\}$ is closed in $\mathbb R$, i.e. $\mathbb R\setminus \{q\}$ is open. $\mathbb R\setminus \{q\}$ is also dense, as by Theorem \ref{thrm:closure_interior_relation}, $\overline{\mathbb R\setminus\{q\}} = \mathbb R\setminus \inte{\{q\}} = \mathbb R\setminus\emptyset = \mathbb R$. Thus, by Eq. \eqref{eq:de_morgan_comp_union}, $\bigcap_{q\in\mathbb Q}\mathbb R\setminus \{q\} = \mathbb R\setminus \bigcup_{q\in\mathbb Q}\{q\} = \mathbb R\setminus \mathbb Q$. By the Baire Category Theorem, we know that $\mathbb R\setminus \mathbb Q$ is dense.
 \end{exmp}
 
 For uncountable intersections of open and dense sets of a complete metric space, the resulting set is not dense, as the following example shows \cite{1070418}. 
@@ -1430,6 +1453,20 @@ Note that in the formulation of the Baire Category Theorem, it is vital that the
 	\]
 	which is clearly not dense in $\mathbb Q$.
 \end{exmp}
+
+When it comes to the unions of open and dense sets, the requirements for the union to be dense are much weaker, as the following Theorem shows. 
+
+\begin{theorem}
+	Let $X$ be a metric space, $I$ an index set and $\left\{U_{i}\right\}_{i\in I}$ a family of subsets of $X$. If one $U_i$ is dense, then their union $\bigcup_{i\in I}U_i$ is dense in $X$. If all $U_i$ are open, then their union is open as well.
+\end{theorem}
+
+\begin{proof}[Proof \cite{2704447}]
+	Let $i_0\in I$ be such that $U_{i_0}\subset X$ is dense, i.e. $\overline{U_{i_0}} = X$. Since $U_{i_0}\subset\bigcup_{i\in I}U_i$, this implies that 
+	\[
+		\overline{U_{i_0}} = X \subset \overline{\bigcup_{i\in I}U_{i}}\subset X,
+	\]
+	see Corollary \ref{corollary:closure_subset_property}. Thus, $\bigcup_{i\in I}U_{i}$ is dense.
+\end{proof}
 
 \subsection{Continuity}
 \begin{defn}[$\epsilon$-$\delta$ definition of continuity \cite{MfPI}]\label{defn:continuity}
