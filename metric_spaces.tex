@@ -1405,15 +1405,75 @@ An application of the Arzel\`a-Ascoli Theorem is given in Example \ref{exmp:comp
 \subsection{Baire Category Theorem}
 In Theorem \ref{thrm:finite_intersec_open_dense}, we have already established that the finite intersection of open dense sets yields an open dense set again. While in the case of infinite intersections, it is inevitable that we lose the openness property of the resulting intersection, in case of countable intersections, it turns out that we still have a dense set, as long as we assume that the underlying metric space is complete.
 
+Before stating and proving the Baire Category Theorem, we will prove Cantor's intersection theorem, which we will use for the proof of the Baire Category Theorem.
+
+\begin{theorem}[Cantor's intersection theorem]\label{thrm:Cantor_intersection_theorem}
+	Let $X$ be a complete metric space, and let $\seq[V_n]$ be a decreasing nested sequence of non-empty closed subsets of $X$, i.e. $V_{n + 1}\subset V_n$ for all $n\geq 1$, with vanishing diameter, i.e. $\text{diam}(V_n)\to 0$ for $n\to\infty$. Then there is an $x\in X$ s.t. 
+	\[
+		\{x\} = \bigcap_{n\in\mathbb N}V_n.
+	\]
+\end{theorem}
+
+\begin{proof}[Proof \cite{src:baire_category_theorem}]
+	In each set $V_n$, choose an $x_n$. Note that the sequence $\seq[x_n]$ is Cauchy, since for arbitrary $N\in\mathbb N$, if $m, n\geq N$, we have $d(x_m, x_n) \leq \text{diam}(V_N)$, as $x_m\in V_m\subset V_N$ and $x_n\in V_n\subset V_N$. By assumption, $\seq[\text{diam}(V_n)]$ converges to $0$, i.e. for all $\epsilon > 0$ there exists an $N = N(\epsilon)$ s.t. $\abs{\text{diam}(V_n)} = \text{diam}(V_n) < \epsilon$ for all $n\geq N$. Now, for an $\epsilon > 0$, choose the same $N$ as given by the convergence of $\seq[\text{diam}(V_n)]$, then $d(x_m, x_n) \leq \text{diam}(V_{N}) < \epsilon$ for all $m, n\geq N$. Since $X$ is complete, the Cauchy sequence $\seq[x_n]$ converges to an $x\in X$.
+	
+	Now fix $M\in\mathbb N$. Then for all $n\geq M$, $x_n\in V_n\subset V_M$. This implies that $x$ is an accumulation point of $V_M$. As $V_M$ is closed, $x\in V_M$. Since $M\in\mathbb N$ was arbitrary, this implies that $x\in \bigcap_{M\in\mathbb N}V_M$. 
+	
+	Assume that for $y\in X$, $y\in \bigcap_{M\in\mathbb N}V_M$, i.e. $x, y\in V_n$ for all $n\in\mathbb N$. For all $n$,
+	\[
+		d(x, y) \leq d(x, x_n) + d(x_n, y) \leq 2\cdot\text{diam}(V_n)\overset{n\to\infty}{\to}0,
+	\]
+	i.e. $x = y$. Thus, 
+	\[
+		\{x\} = \bigcap_{n\in\mathbb N}V_n.
+	\]
+\end{proof}
+
 \begin{theorem}[Baire Category Theorem]\label{thrm:baire_category_theorem_v1}
 	Let $X$ be a metric space and $\seq[U_n]$ a sequence of open and dense subsets of $X$. Then $\bigcap_{n\in\mathbb N}U_n$ is also dense in $X$.
 \end{theorem}
 
-\begin{proof}
-	TODO
+\begin{proof}[Proof \cite{src:baire_category_theorem}]
+	Let $\seq[U_n]$ be a sequence of open and dense subsets of $X$ and let $V\subset X$ be open and non-empty. Define the sequence $\seq[a_n] := \seq[1/n]$. We now inductively construct sequences $\seq[\varphi_n]$ in $X$ and $\seq[r_n]$ in $\mathbb R$ s.t. 
+	\begin{enumerate}[label=\alph*)]
+		\item $r_n < a_n$ for all $n\in\mathbb N$ and
+		\item $B_{r_{n}}[\varphi_{n}] \subset B_{r_{n - 1}}(\varphi_{n - 1}) \cap U_{n}$ for all $n\in\mathbb N\setminus \{1\}$.
+	\end{enumerate}
+	{ \small
+		\textbf{Base case}: For $n = 1$, by Theorem \ref{thrm:characterization-dense-subsets}, we know that $V\cap U_1$ is non-empty. Let $\varphi_1\in V\cap U_1$. Then there exists an $\tilde{r}_1 > 0$ s.t. $B_{\tilde{r}_1}(\varphi_1)\subset V\cap U_1$. Now define $r_1 := \frac{1}{2}\min\{a_1, \tilde{r}_1\} < a_1$.
+		
+		$n = 2$: Since $B_{r_1}(\varphi_1)$ is open and non-empty, by Theorem \ref{thrm:characterization-dense-subsets}, $B_{r_1}(\varphi_1)\cap U_2$ is non-empty. Let $\varphi_2\in B_{r_1}(\varphi_1)\cap U_2$. Then there exists an $\tilde{r}_2 > 0$ s.t. $B_{\tilde{r}_2}(\varphi_2)\subset B_{r_1}(\varphi_1)\cap U_2$. Now define $r_2 := \frac{1}{2}\min\{a_2, \tilde{r}_2\} < a_2$ and note that 
+		\[
+			B_{r_2}[\varphi_2] \subset B_{2r_2}(\varphi_2) \subset B_{\tilde{r}_2}(\varphi_2)\subset B_{r_1}(\varphi_1)\cap U_2. {\quad\color{green}\Large\checkmark}
+		\]
+		\textbf{Induction hypothesis}: Assume that for an $n\in\mathbb N\setminus\{1\}$, there exists an $r_{n}\in\mathbb R$ s.t. $ 0 < r_{n} < a_{n}$ and a $\varphi_{n}\in X$ s.t. $B_{r_{n}}[\varphi_{n}] \subset B_{r_{n - 1}}(\varphi_{n - 1}) \cap U_{n}$. 
+		\\[5pt]
+		\textbf{Induction step}: Since $B_{r_n}(\varphi_n)$ is open and non-empty, by Theorem \ref{thrm:characterization-dense-subsets}, $B_{r_n}(\varphi_n) \cap U_{n + 1}$ is non-empty. Let $\varphi_{n + 1}\in B_{r_n}(\varphi_n) \cap U_{n + 1}$. Then there exists an $\tilde{r}_{n + 1} > 0$ s.t. $B_{\tilde{r}_{n + 1}}(\varphi_{n + 1}) \subset B_{r_n}(\varphi_n) \cap U_{n + 1}$. Now define $r_{n + 1} := \frac{1}{2}\min\{a_{n + 1}, \tilde{r}_{n + 1}\} < a_{n + 1}$ and note that 
+		\[
+			B_{r_{n + 1}}[\varphi_{n + 1}] \subset B_{2r_{n + 1}}(\varphi_{n + 1}) \subset B_{\tilde{r}_{n + 1}}(\varphi_{n + 1}) \subset B_{r_n}(\varphi_n) \cap U_{n + 1}. {\quad\color{green}\Large\checkmark}
+		\]
+	}
+	This way, we have constructed a decreasing nested sequence $\left(B_{r_n}[\varphi_n]\right)_{n\in\mathbb N}$ of non-empty closed subsets of $X$. The sequence is nested, as for all $n\in\mathbb N\setminus\{1\}$,
+	\[
+		B_{r_n}[\varphi_n] \subset B_{r_{n - 1}}(\varphi_{n - 1}) \cap U_n \subset B_{r_{n - 1}}(\varphi_{n - 1}) \subset B_{r_{n - 1}}[\varphi_{n - 1}].
+	\]
+	Thus, by Theorem \ref{thrm:Cantor_intersection_theorem}, $\bigcap_{n\in\mathbb N}B_{r_n}[\varphi_n]$ is non-empty. Since for any $n\in\mathbb N\setminus\{1\}$,
+	\begin{align*}
+		B_{r_n}[\varphi_n] &\subset B_{r_{n - 1}}(\varphi_{n - 1}) \cap U_n 
+		\\ &\subset B_{r_{n - 1}}[\varphi_{n - 1}]\cap U_n 
+		\\ &\subset \cdots \subset B_{r_{1}}(\varphi_1) \cap U_n 
+		\\ &\subset 
+		B_{\tilde{r}_1}(\varphi_1) \cap U_n 
+		\\ &\subset V\cap U_n.
+	\end{align*} 
+	For $n = 1$, note that $B_{r_1}[\varphi_1] \subset B_{\tilde{r}_1}(\varphi_1) \subset V \cap U_1$. Thus, 
+	\[
+		\{x\} = \bigcap_{n\in\mathbb N}B_{r_n}[\varphi_n] \subset \bigcap_{n\in\mathbb N}V\cap U_n = V\cap \bigcap_{n\in\mathbb N}U_n,
+	\]
+	As $V$ is an arbitrary, non-empty open subset of $X$, by Theorem \ref{thrm:characterization-dense-subsets}, $\bigcap_{n\in\mathbb N}U_n$ is dense.
 \end{proof}
 
-In the literature, one often finds the following version stated as the Baire Category Theorem.
+In the literature, one often finds the following version stated as the Baire Category Theorem 
 
 \begin{theorem}[Baire Category Theorem]\label{thrm:baire_category_theorem_v2}
 	Let $X$ be a metric space and $\seq[U_n]$ a sequence of closed subsets of $X$ such that their union $\bigcup_{n\in\mathbb N}U_n$ contains an open ball. Then there is a $U_n$ that contains an open ball.
